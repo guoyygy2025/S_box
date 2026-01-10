@@ -7,19 +7,20 @@ import re
 import dns.resolver
 from urllib.parse import urlparse, parse_qs, unquote
 
-# --- 配置区 ---
+# --- 配置区 (已修正为 Raw 原始链接) ---
 SOURCES = [
-    "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt", 
-    "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",                           
-    "https://github.com/ermaozi/get_subscribe/blob/main/subscribe/v2ray.txt",                                             
-    "https://github.com/free18/v2ray/blob/main/v.txt",
+    "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
+    "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
+    "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt", # 修正
+    "https://raw.githubusercontent.com/free18/v2ray/main/v.txt",                     # 修正
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-TIMEOUT = 3
-MAX_WORKERS = 50
+TIMEOUT = 3       # 测速超时
+MAX_WORKERS = 50  # 并发数
 ALI_DNS = "223.5.5.5"
 
+# --- sing-box 基础模板 ---
 SB_TEMPLATE = {
     "dns": {
         "servers": [
@@ -63,6 +64,7 @@ def decode_base64(data):
     except: return ""
 
 def check_node(node_link):
+    """阿里DNS解析与TCP连通性校验"""
     try:
         if "vmess://" in node_link:
             data = json.loads(base64.b64decode(node_link[8:]).decode())
@@ -71,9 +73,11 @@ def check_node(node_link):
             u = urlparse(node_link)
             host, port = u.hostname, u.port
         
-        # 阿里 DNS 校验
-        if not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
-            resolver = dns.resolver.Resolver(); resolver.nameservers = [ALI_DNS]
+        # 针对域名节点进行阿里 DNS 校验
+        if host and not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
+            resolver = dns.resolver.Resolver()
+            resolver.nameservers = [ALI_DNS]
+            resolver.timeout = 2
             resolver.resolve(host, 'A')
             
         with socket.create_connection((host, port), timeout=TIMEOUT):
@@ -92,15 +96,27 @@ def parse_to_outbound(link):
 
 def main():
     nodes = []
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+    
+    print("正在拉取节点...")
     for url in SOURCES:
         try:
-            r = requests.get(url, timeout=10).text
-            decoded = decode_base64(r) or r
-            nodes.extend([l.strip() for l in decoded.splitlines() if "://" in l])
+            r = requests.get(url, headers=headers, timeout=10)
+            if r.status_code == 200:
+                content = r.text.strip()
+                decoded = decode_base64(content) or content
+                found = [l.strip() for l in decoded.splitlines() if "://" in l]
+                nodes.extend(found)
         except: continue
+
     nodes = list(set(nodes))
+    print(f"原始获取 {len(nodes)} 个节点，开始测速...")
+    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, nodes)) if r]
+    
+    print(f"有效节点: {len(alive)}")
+
     outbounds, tags = [], []
     for l in alive:
         o = parse_to_outbound(l)
@@ -109,11 +125,15 @@ def main():
             t = o['tag']; i = 1
             while t in tags: t = f"{o['tag']} {i}"; i += 1
             o['tag'] = t; outbounds.append(o); tags.append(t)
-    config = SB_TEMPLATE.copy(); config['outbounds'].extend(outbounds)
+
+    config = SB_TEMPLATE.copy()
+    config['outbounds'].extend(outbounds)
     config['outbounds'][0]['outbounds'].extend(tags)
     config['outbounds'][1]['outbounds'].extend(tags)
-    with open("config.json", "w", encoding="utf-8") as f: json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"成功筛选 {len(alive)} 个可用节点并生成 config.json")
+
+    with open("config.json", "w", encoding="utf-8") as f:
+        json.dump(config, f, indent=2, ensure_ascii=False)
+    print("已生成 config.json")
 
 if __name__ == "__main__":
     main()
