@@ -7,21 +7,22 @@ import re
 import dns.resolver
 from urllib.parse import urlparse, parse_qs, unquote
 
-# --- 配置区 (已修正为 Raw 原始链接) ---
+# --- 配置区 (确保为 Raw 原始链接) ---
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
-    "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt", # 修正
-    "https://raw.githubusercontent.com/free18/v2ray/main/v.txt",                     # 修正
+    "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
+    "https://raw.githubusercontent.com/free18/v2ray/main/v.txt",
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-TIMEOUT = 3       # 测速超时
-MAX_WORKERS = 50  # 并发数
+TIMEOUT = 3
+MAX_WORKERS = 50
 ALI_DNS = "223.5.5.5"
 
-# --- sing-box 基础模板 ---
+# --- sing-box 1.12.x 现代配置模板 ---
 SB_TEMPLATE = {
+    "log": {"level": "info", "timestamp": True},
     "dns": {
         "servers": [
             {"tag": "dns_proxy", "address": "https://8.8.8.8/dns-query", "address_resolver": "dns_direct", "detour": "proxy"},
@@ -35,7 +36,13 @@ SB_TEMPLATE = {
         ],
         "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
     },
-    "inbounds": [{"type": "tun", "inet4_address": "172.19.0.1/30", "auto_route": True, "strict_route": True, "sniff": True}],
+    "inbounds": [{
+        "type": "tun",
+        "inet4_address": "172.19.0.1/30",
+        "auto_route": True,
+        "strict_route": True,
+        "sniff": True
+    }],
     "outbounds": [
         {"type": "selector", "tag": "proxy", "outbounds": ["auto-test"]},
         {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
@@ -60,11 +67,10 @@ def decode_base64(data):
         data = data.replace('-', '+').replace('_', '/')
         missing_padding = len(data) % 4
         if missing_padding: data += '=' * (4 - missing_padding)
-        return base64.b64decode(data).decode('utf-8')
+        return base64.b64decode(data).decode('utf-8', errors='ignore')
     except: return ""
 
 def check_node(node_link):
-    """阿里DNS解析与TCP连通性校验"""
     try:
         if "vmess://" in node_link:
             data = json.loads(base64.b64decode(node_link[8:]).decode())
@@ -72,59 +78,81 @@ def check_node(node_link):
         else:
             u = urlparse(node_link)
             host, port = u.hostname, u.port
-        
-        # 针对域名节点进行阿里 DNS 校验
-        if host and not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
-            resolver = dns.resolver.Resolver()
-            resolver.nameservers = [ALI_DNS]
-            resolver.timeout = 2
+        if not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
+            resolver = dns.resolver.Resolver(); resolver.nameservers = [ALI_DNS]
             resolver.resolve(host, 'A')
-            
         with socket.create_connection((host, port), timeout=TIMEOUT):
             return node_link
     except: return None
 
 def parse_to_outbound(link):
+    """适配 sing-box 1.12.x 的出站配置格式"""
     try:
         if link.startswith("vmess://"):
             data = json.loads(base64.b64decode(link[8:]).decode())
-            return {"type": "vmess", "tag": data.get('ps', 'Node'), "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto"}
+            node = {
+                "type": "vmess",
+                "tag": data.get('ps', 'Node'),
+                "server": data['add'],
+                "server_port": int(data['port']),
+                "uuid": data['id'],
+                "security": "auto",
+                "alter_id": 0
+            }
+            # 1.12.x 现代传输配置
+            if data.get('net') and data['net'] != "tcp":
+                node["transport"] = {"type": data['net']}
+            if data.get('tls') == "tls":
+                node["tls"] = {"enabled": True, "server_name": data.get('sni', data['add'])}
+            return node
+            
         elif link.startswith(("vless://", "trojan://")):
             u = urlparse(link); q = parse_qs(u.query)
-            return {"type": u.scheme, "tag": unquote(u.fragment) or "Node", "server": u.hostname, "server_port": int(u.port), "uuid": u.username if u.scheme == "vless" else None, "password": u.username if u.scheme == "trojan" else None, "tls": {"enabled": True} if "tls" in link else None}
+            protocol = u.scheme
+            node = {
+                "type": protocol,
+                "tag": unquote(u.fragment) or "Node",
+                "server": u.hostname,
+                "server_port": int(u.port),
+            }
+            if protocol == "vless": node["uuid"] = u.username
+            else: node["password"] = u.username
+            
+            # 1.12.x 现代 TLS 配置
+            if "tls" in link or q.get('security', [''])[0] == 'tls':
+                node["tls"] = {
+                    "enabled": True, 
+                    "server_name": q.get('sni', [u.hostname])[0],
+                    "utls": {"enabled": True, "fingerprint": "chrome"}
+                }
+            return node
     except: return None
 
 def main():
     nodes = []
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-    
-    print("正在拉取节点...")
     for url in SOURCES:
         try:
             r = requests.get(url, headers=headers, timeout=10)
             if r.status_code == 200:
                 content = r.text.strip()
                 decoded = decode_base64(content) or content
-                found = [l.strip() for l in decoded.splitlines() if "://" in l]
-                nodes.extend(found)
+                nodes.extend([l.strip() for l in decoded.splitlines() if "://" in l])
         except: continue
-
+        
     nodes = list(set(nodes))
-    print(f"原始获取 {len(nodes)} 个节点，开始测速...")
-    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, nodes)) if r]
-    
-    print(f"有效节点: {len(alive)}")
 
     outbounds, tags = [], []
     for l in alive:
         o = parse_to_outbound(l)
         if o:
-            o = {k: v for k, v in o.items() if v is not None}
             t = o['tag']; i = 1
             while t in tags: t = f"{o['tag']} {i}"; i += 1
-            o['tag'] = t; outbounds.append(o); tags.append(t)
+            o['tag'] = t
+            outbounds.append(o)
+            tags.append(t)
 
     config = SB_TEMPLATE.copy()
     config['outbounds'].extend(outbounds)
@@ -133,7 +161,6 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print("已生成 config.json")
 
 if __name__ == "__main__":
     main()
