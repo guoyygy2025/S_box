@@ -22,7 +22,7 @@ GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/
 GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
 # 严格过滤参数
-MAX_LATENCY = 0.5  # 500ms
+MAX_LATENCY = 0.2  # 200ms
 TIMEOUT = 1.0      # 1秒超时
 MAX_WORKERS = 60
 
