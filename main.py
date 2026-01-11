@@ -17,21 +17,22 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 资源与 DNS 链接 (使用镜像加速下载)
-AD_RULES_URL = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-GEOIP_CN_URL = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-GEOSITE_CN_URL = "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+# 资源链接 (已替换为 v6.gh-proxy.org 镜像)
+AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
+GEOIP_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
+# DNS 配置
 ALI_DOH = "https://dns.alidns.com/dns-query"
 CF_DOH = "https://1.1.1.1/dns-query"
 ALI_IP = "223.5.5.5"
 
 # 测速配置
 TIMEOUT = 0.5      # 握手超时
-MAX_LATENCY = 500  # 严选 500ms
+MAX_LATENCY = 500  # 严选阈值
 MAX_WORKERS = 50   
 
-# 地区过滤 (美、日、韩)
+# 地区过滤
 REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States", re.I)
 
 # --- sing-box 1.12.x 配置模板 ---
@@ -73,9 +74,9 @@ SB_TEMPLATE = {
             {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
         ],
         "rule_set": [
-            {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
-            {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
-            {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
+            {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"}, # 走国内
+            {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"}, # 走国内
+            {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"} # 走国内
         ],
         "auto_detect_interface": True
     }
@@ -112,7 +113,6 @@ def check_node(node_link):
 
 def parse_to_outbound(link):
     try:
-        # 1. VMess 解析
         if link.startswith("vmess://"):
             data = json.loads(base64.b64decode(link[8:]).decode())
             tag = data.get('ps', 'Node')
@@ -120,8 +120,6 @@ def parse_to_outbound(link):
             node = {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto"}
             if data.get('tls') == "tls": node["tls"] = {"enabled": True, "server_name": data.get('sni', data['add'])}
             return node
-
-        # 2. SS 解析 (简化版)
         elif link.startswith("ss://"):
             u = urlparse(link)
             tag = unquote(u.fragment) or "SS-Node"
@@ -129,8 +127,6 @@ def parse_to_outbound(link):
             user_info = decode_base64(u.username) if ":" not in u.username else u.username
             method, password = user_info.split(":", 1)
             return {"type": "shadowsocks", "tag": tag, "server": u.hostname, "server_port": u.port, "method": method, "password": password}
-
-        # 3. VLESS / Trojan 解析
         elif link.startswith(("vless://", "trojan://")):
             u = urlparse(link); q = parse_qs(u.query); protocol = u.scheme
             tag = unquote(u.fragment) or f"{protocol.upper()}-Node"
@@ -147,7 +143,6 @@ def main():
     all_nodes = []
     headers = {'User-Agent': 'Mozilla/5.0'}
     
-    print("正在抓取订阅源...")
     for url in SOURCES:
         try:
             r = requests.get(url, headers=headers, timeout=10)
@@ -158,8 +153,6 @@ def main():
         except: continue
     
     all_nodes = list(set(all_nodes))
-    print(f"原始节点总数: {len(all_nodes)}，开始 500ms 测速...")
-    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, all_nodes)) if r]
 
@@ -178,7 +171,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"筛选完成！包含 {len(tags)} 个美/日/韩节点。")
+    print(f"筛选完成！包含 {len(tags)} 个美/日/韩节点。资源下载已设置为直连。")
 
 if __name__ == "__main__":
     main()
