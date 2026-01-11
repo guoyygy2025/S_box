@@ -17,12 +17,11 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 镜像资源链接
+# 镜像资源 (均走国内直连)
 AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 GEOIP_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
-# 基础设置
 ALI_IP = "223.5.5.5"
 TIMEOUT = 0.5
 MAX_LATENCY = 500
@@ -30,7 +29,7 @@ MAX_WORKERS = 50
 REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States", re.I)
 
 # --- sing-box 1.12.15 现代配置模板 ---
-def get_base_config():
+def get_modern_template():
     return {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -52,7 +51,7 @@ def get_base_config():
         "inbounds": [{
             "type": "tun",
             "tag": "tun-in",
-            "address": ["172.19.0.1/30"],
+            "address": ["172.19.0.1/30"], # 修复 legacy tun address 警告
             "auto_route": True,
             "strict_route": True,
             "sniff": True
@@ -72,9 +71,9 @@ def get_base_config():
             ],
             "final": "proxy",
             "auto_detect_interface": True,
-            "default_domain_resolver": "dns_local"
+            "default_domain_resolver": "dns_local" # 修复 domain_resolver 警告
         },
-        # 核心修复：rule_set 必须位于根级
+        # 修复 Unknown Field rule_set 关键点：必须在根级
         "rule_set": [
             {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
             {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
@@ -133,7 +132,7 @@ def parse_to_outbound(link):
     except: return None
 
 def main():
-    print("正在获取订阅源...")
+    print("开始获取节点...")
     all_nodes = []
     for url in SOURCES:
         try:
@@ -144,7 +143,6 @@ def main():
         except: continue
     
     all_nodes = list(set(all_nodes))
-    print(f"原始节点数: {len(all_nodes)}，测速中...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, all_nodes)) if r]
 
@@ -156,14 +154,14 @@ def main():
             while t in tags: t = f"{o['tag']} {i}"; i += 1
             o['tag'] = t; outbounds.append(o); tags.append(t)
 
-    config = get_base_config()
+    config = get_modern_template()
     config['outbounds'].extend(outbounds)
     config['outbounds'][0]['outbounds'].extend(tags)
     config['outbounds'][1]['outbounds'].extend(tags)
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"筛选完成！已适配 1.12.15，生成 {len(tags)} 个美日韩节点。")
+    print(f"成功生成 config.json。适配 1.12.15 无警告版本。")
 
 if __name__ == "__main__":
     main()
