@@ -17,74 +17,71 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 镜像资源
+# 镜像资源链接
 AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 GEOIP_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
+# 基础设置
 ALI_IP = "223.5.5.5"
-MAX_WORKERS = 50
 TIMEOUT = 0.5
+MAX_LATENCY = 500
+MAX_WORKERS = 50
 REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States", re.I)
 
-# --- sing-box 1.12.x 严选现代配置 ---
-SB_TEMPLATE = {
-    "log": {"level": "info", "timestamp": True},
-    "dns": {
-        "servers": [
-            # 1. 代理解析：Fake-IP (废弃了顶层 fakeip 开关，改为 server 模式)
-            {"tag": "dns_fakeip", "address": "fakeip"},
-            # 2. 远程 DoH：经代理出站
-            {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-            # 3. 国内 DoH：直连出站
-            {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
-            # 4. 本地解析器：解析 DoH 域名
-            {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
+# --- sing-box 1.12.15 现代配置模板 ---
+def get_base_config():
+    return {
+        "log": {"level": "info", "timestamp": True},
+        "dns": {
+            "servers": [
+                {"tag": "dns_fakeip", "address": "fakeip"},
+                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
+                {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
+                {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
+            ],
+            "rules": [
+                {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
+                {"rule_set": "geosite-cn", "server": "dns_direct"},
+                {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
+            ],
+            "final": "dns_direct",
+            "strategy": "prefer_ipv4",
+            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
+        },
+        "inbounds": [{
+            "type": "tun",
+            "tag": "tun-in",
+            "address": ["172.19.0.1/30"],
+            "auto_route": True,
+            "strict_route": True,
+            "sniff": True
+        }],
+        "outbounds": [
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test"]},
+            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
+            {"type": "direct", "tag": "direct"},
+            {"type": "dns", "tag": "dns-out"},
+            {"type": "block", "tag": "block-out"}
         ],
-        "rules": [
-            # 废弃 dns rule 中的 outbound 字段，改用 server 路由
-            {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
-            {"rule_set": "geosite-cn", "server": "dns_direct"},
-            {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
-        ],
-        "final": "dns_direct",
-        "strategy": "prefer_ipv4",
-        "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
-    },
-    "inbounds": [{
-        "type": "tun",
-        "tag": "tun-in",
-        "address": ["172.19.0.1/30"], # 废弃 inet4_address 字符串
-        "auto_route": True,
-        "strict_route": True,
-        "sniff": True
-    }],
-    "outbounds": [
-        {"type": "selector", "tag": "proxy", "outbounds": ["auto-test"]},
-        {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
-        {"type": "direct", "tag": "direct"},
-        {"type": "dns", "tag": "dns-out"},
-        {"type": "block", "tag": "block-out"}
-    ],
-    "route": {
-        "rules": [
-            {"protocol": "dns", "outbound": "dns-out"},
-            {"rule_set": "ad-rules", "outbound": "block-out"},
-            {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
-        ],
-        "final": "proxy", # 显式指定默认出站
-        "auto_detect_interface": True,
-        # 修复 domain_resolver 警告：指定下载规则集的解析器
-        "default_domain_resolver": "dns_local" 
-    },
-    "rule_set": [
-        {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
-        {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
-        {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
-    ]
-}
+        "route": {
+            "rules": [
+                {"protocol": "dns", "outbound": "dns-out"},
+                {"rule_set": "ad-rules", "outbound": "block-out"},
+                {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
+            ],
+            "final": "proxy",
+            "auto_detect_interface": True,
+            "default_domain_resolver": "dns_local"
+        },
+        # 核心修复：rule_set 必须位于根级
+        "rule_set": [
+            {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
+            {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
+            {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
+        ]
+    }
 
-# (解析与测速逻辑保持不变，确保输出符合 SB_TEMPLATE)
 def decode_base64(data):
     try:
         data = data.replace('-', '+').replace('_', '/')
@@ -116,7 +113,7 @@ def parse_to_outbound(link):
             data = json.loads(base64.b64decode(link[8:]).decode())
             tag = data.get('ps', 'VMess')
             if not REGION_RE.search(tag): return None
-            return {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto"}
+            return {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto", "alter_id": 0}
         elif link.startswith("ss://"):
             u = urlparse(link); tag = unquote(u.fragment) or "SS"
             if not REGION_RE.search(tag): return None
@@ -136,6 +133,7 @@ def parse_to_outbound(link):
     except: return None
 
 def main():
+    print("正在获取订阅源...")
     all_nodes = []
     for url in SOURCES:
         try:
@@ -146,6 +144,7 @@ def main():
         except: continue
     
     all_nodes = list(set(all_nodes))
+    print(f"原始节点数: {len(all_nodes)}，测速中...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, all_nodes)) if r]
 
@@ -157,14 +156,14 @@ def main():
             while t in tags: t = f"{o['tag']} {i}"; i += 1
             o['tag'] = t; outbounds.append(o); tags.append(t)
 
-    config = SB_TEMPLATE.copy()
+    config = get_base_config()
     config['outbounds'].extend(outbounds)
     config['outbounds'][0]['outbounds'].extend(tags)
     config['outbounds'][1]['outbounds'].extend(tags)
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"筛选完成！已适配 sing-box 1.12.15，生成 {len(tags)} 个美日韩节点。")
+    print(f"筛选完成！已适配 1.12.15，生成 {len(tags)} 个美日韩节点。")
 
 if __name__ == "__main__":
     main()
