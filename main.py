@@ -21,10 +21,13 @@ AD_RULES_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai
 GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
-TIMEOUT = 1.0  
-MAX_WORKERS = 50
-# 筛选区域
-REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States|新加坡|SG|Singapore|香港|HK|HongKong", re.I)
+# 严格过滤参数
+MAX_LATENCY = 0.5  # 500ms
+TIMEOUT = 1.0      # 1秒超时
+MAX_WORKERS = 60
+
+# 仅保留：日本、美国、香港、韩国
+REGION_RE = re.compile(r"日本|JP|Japan|美国|US|United States|香港|HK|HongKong|韩国|KR|Korea", re.I)
 
 def get_modern_template():
     return {
@@ -32,8 +35,9 @@ def get_modern_template():
         "dns": {
             "servers": [
                 {"tag": "dns_fakeip", "address": "fakeip"},
-                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
+                # 阿里 DNS Over HTTPS
+                {"tag": "dns_proxy", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
+                {"tag": "dns_direct", "address": "https://223.6.6.6/dns-query", "address_resolver": "dns_local", "detour": "direct"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
@@ -85,33 +89,35 @@ def decode_base64(data):
     except: return ""
 
 def check_node(node_link):
+    """
+    检测节点存活并返回延迟，剔除 > 500ms 的节点
+    """
     try:
         u = urlparse(node_link)
         host, port = u.hostname, u.port
         if not host or not port: return None
-        # 简单存活检测 (UDP协议由于无连接特性，此处仅能探测端口是否开放或主机是否可达)
+        
+        start_time = time.time()
         with socket.create_connection((host, int(port)), timeout=TIMEOUT):
-            return node_link
+            latency = time.time() - start_time
+            if latency <= MAX_LATENCY:
+                return (node_link, latency)
+        return None
     except: return None
 
 def parse_to_outbound(link):
-    """
-    处理 VLESS, Trojan 和 Hysteria2
-    """
     try:
         u = urlparse(link)
         q = parse_qs(u.query)
         protocol = u.scheme
-        
-        # 过滤协议
         if protocol not in ["vless", "trojan", "hysteria2", "hy2"]:
             return None
 
         tag = unquote(u.fragment) or f"{protocol}_{u.hostname}"
+        # 严格地区过滤
         if not REGION_RE.search(tag): 
             return None
 
-        # 基础结构
         node = {
             "type": "hysteria2" if protocol in ["hysteria2", "hy2"] else protocol,
             "tag": tag,
@@ -119,13 +125,11 @@ def parse_to_outbound(link):
             "server_port": int(u.port)
         }
 
-        # 凭据处理
         if protocol == "vless":
             node["uuid"] = u.username
         else:
             node["password"] = u.username
 
-        # Hysteria2 特有逻辑
         if protocol in ["hysteria2", "hy2"]:
             node["tls"] = {
                 "enabled": True,
@@ -136,7 +140,6 @@ def parse_to_outbound(link):
                 node["obfs"] = {"type": "password", "password": q.get('obfs-password', [''])[0]}
             return node
 
-        # VLESS / Trojan 的 TLS / Reality 逻辑
         security = q.get('security', [''])[0]
         if "tls" in link or security in ['tls', 'reality']:
             node["tls"] = {
@@ -151,7 +154,6 @@ def parse_to_outbound(link):
                     "short_id": q.get('sid', [''])[0]
                 }
 
-        # 传输层处理 (WS / gRPC)
         transport_type = q.get('type', [''])[0]
         if transport_type == 'ws':
             node["transport"] = {
@@ -160,17 +162,14 @@ def parse_to_outbound(link):
                 "headers": {"Host": q.get('host', [''])[0]}
             }
         elif transport_type == 'grpc':
-            node["transport"] = {
-                "type": "grpc",
-                "service_name": q.get('serviceName', [''])[0]
-            }
+            node["transport"] = {"type": "grpc", "service_name": q.get('serviceName', [''])[0]}
 
         return node
     except:
         return None
 
 def main():
-    print("正在抓取并检测 VLESS/Trojan/Hysteria2 节点...")
+    print(f"开始工作：仅保留日/美/港/韩 且延迟 < 500ms 的节点...")
     all_raw_links = []
     for url in SOURCES:
         try:
@@ -179,29 +178,35 @@ def main():
                 content = r.text.strip()
                 decoded = decode_base64(content)
                 final_text = decoded if decoded else content
-                # 过滤包含所需协议的行
                 all_raw_links.extend([
                     l.strip() for l in final_text.splitlines() 
                     if any(p in l for p in ["vless://", "trojan://", "hysteria2://", "hy2://"])
                 ])
         except Exception as e:
-            print(f"源 {url} 失败: {e}")
+            print(f"源 {url} 获取失败")
 
     all_raw_links = list(set(all_raw_links))
-    print(f"初步发现 {len(all_raw_links)} 个潜在节点，开始检测...")
+    print(f"初步抓取 {len(all_raw_links)} 个节点，正在进行严格测速与过滤...")
     
+    valid_nodes_with_latency = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        alive_links = [r for r in list(ex.map(check_node, all_raw_links)) if r]
+        results = list(ex.map(check_node, all_raw_links))
+        valid_nodes_with_latency = [r for r in results if r]
 
     outbounds, final_tags = [], []
-    for l in alive_links:
-        o = parse_to_outbound(l)
+    # 按延迟排序，优先放置低延迟节点
+    valid_nodes_with_latency.sort(key=lambda x: x[1])
+
+    for link, lat in valid_nodes_with_latency:
+        o = parse_to_outbound(link)
         if o:
-            base_tag = o['tag'].replace(':', '-').strip()
+            # 标记延迟在名称上方便查看
+            ms = int(lat * 1000)
+            base_tag = f"[{ms}ms] {o['tag']}".replace(':', '-')
             t = base_tag
             counter = 1
             while t in final_tags:
-                t = f"{base_tag} ({counter})"
+                t = f"{base_tag}_{counter}"
                 counter += 1
             o['tag'] = t
             outbounds.append(o)
@@ -209,7 +214,7 @@ def main():
 
     config = get_modern_template()
     if not final_tags:
-        print("未发现匹配的有效节点。")
+        print("未发现符合条件的低延迟节点。")
         return
 
     config['outbounds'].extend(outbounds)
@@ -219,7 +224,7 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
     
-    print(f"完成！config.json 已生成，共包含 {len(outbounds)} 个节点。")
+    print(f"成功！保存了 {len(outbounds)} 个优质节点至 config.json")
 
 if __name__ == "__main__":
     main()
