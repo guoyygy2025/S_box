@@ -17,18 +17,17 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 镜像资源 (均走国内直连)
-AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-GEOIP_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+# 使用 gh-proxy 确保国内下载成功
+AD_RULES_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
+GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
 ALI_IP = "223.5.5.5"
-TIMEOUT = 0.5
-MAX_LATENCY = 500
-MAX_WORKERS = 50
-REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States", re.I)
+TIMEOUT = 1.0  # 稍微放宽一点点，防止误杀
+MAX_WORKERS = 60
+# 筛选你感兴趣的区域
+REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States|新加坡|SG|Singapore|香港|HK|HongKong", re.I)
 
-# --- sing-box 1.12.15 现代配置模板 ---
 def get_modern_template():
     return {
         "log": {"level": "info", "timestamp": True},
@@ -51,13 +50,13 @@ def get_modern_template():
         "inbounds": [{
             "type": "tun",
             "tag": "tun-in",
-            "address": ["172.19.0.1/30"], # 修复 legacy tun address 警告
+            "address": ["172.19.0.1/30"],
             "auto_route": True,
             "strict_route": True,
             "sniff": True
         }],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test"]},
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
             {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
             {"type": "direct", "tag": "direct"},
             {"type": "dns", "tag": "dns-out"},
@@ -70,10 +69,8 @@ def get_modern_template():
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
             ],
             "final": "proxy",
-            "auto_detect_interface": True,
-            "default_domain_resolver": "dns_local" # 修复 domain_resolver 警告
+            "auto_detect_interface": True
         },
-        # 修复 Unknown Field rule_set 关键点：必须在根级
         "rule_set": [
             {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
             {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
@@ -91,34 +88,48 @@ def decode_base64(data):
 
 def check_node(node_link):
     try:
+        host, port = None, None
         if "vmess://" in node_link:
-            data = json.loads(base64.b64decode(node_link[8:]).decode())
-            host, port = data['add'], int(data['port'])
+            data = json.loads(decode_base64(node_link[8:]))
+            host, port = data.get('add'), data.get('port')
         else:
-            u = urlparse(node_link); host, port = u.hostname, u.port
+            u = urlparse(node_link)
+            host, port = u.hostname, u.port
+        
         if not host or not port: return None
-        ip = host
-        if not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
-            resolver = dns.resolver.Resolver(); resolver.nameservers = [ALI_IP]; resolver.timeout = 0.5
-            answer = resolver.resolve(host, 'A'); ip = str(answer[0])
-        start_time = time.time()
-        with socket.create_connection((ip, port), timeout=TIMEOUT):
+        
+        # 简单端口扫描，确认服务器存活
+        with socket.create_connection((host, int(port)), timeout=TIMEOUT):
             return node_link
     except: return None
 
 def parse_to_outbound(link):
     try:
         if link.startswith("vmess://"):
-            data = json.loads(base64.b64decode(link[8:]).decode())
-            tag = data.get('ps', 'VMess')
+            data = json.loads(decode_base64(link[8:]))
+            tag = data.get('ps', 'VMess').strip()
             if not REGION_RE.search(tag): return None
-            return {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto", "alter_id": 0}
+            node = {
+                "type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']),
+                "uuid": data['id'], "security": "auto", "alter_id": 0
+            }
+            if data.get('net') == 'ws':
+                node["transport"] = {"type": "ws", "path": data.get('path', '/'), "headers": {"Host": data.get('host', '')}}
+            if data.get('tls') == 'tls':
+                node["tls"] = {"enabled": True, "server_name": data.get('sni', data.get('host', '')), "insecure": True}
+            return node
+
         elif link.startswith("ss://"):
-            u = urlparse(link); tag = unquote(u.fragment) or "SS"
+            u = urlparse(link)
+            tag = unquote(u.fragment) or "SS"
             if not REGION_RE.search(tag): return None
-            user_info = decode_base64(u.username) if ":" not in (u.username or "") else u.username
-            m, p = user_info.split(":", 1)
-            return {"type": "shadowsocks", "tag": tag, "server": u.hostname, "server_port": u.port, "method": m, "password": p}
+            # 处理 SS 新旧格式
+            if "@" in u.netloc:
+                user_part = u.netloc.split("@")[0]
+                user_info = decode_base64(user_part) if ":" not in user_part else user_part
+                m, p = user_info.split(":", 1)
+                return {"type": "shadowsocks", "tag": tag, "server": u.hostname, "server_port": u.port, "method": m, "password": p}
+            
         elif link.startswith(("vless://", "trojan://")):
             u = urlparse(link); q = parse_qs(u.query); protocol = u.scheme
             tag = unquote(u.fragment) or protocol
@@ -126,42 +137,77 @@ def parse_to_outbound(link):
             node = {"type": protocol, "tag": tag, "server": u.hostname, "server_port": int(u.port)}
             if protocol == "vless": node["uuid"] = u.username
             else: node["password"] = u.username
-            if "tls" in link or q.get('security', [''])[0] == 'tls':
-                node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0], "utls": {"enabled": True, "fingerprint": "chrome"}}
+            
+            # 这里的 TLS 和传输层逻辑对现代节点很重要
+            if "tls" in link or q.get('security', [''])[0] in ['tls', 'reality']:
+                node["tls"] = {
+                    "enabled": True, 
+                    "server_name": q.get('sni', [u.hostname])[0], 
+                    "utls": {"enabled": True, "fingerprint": "chrome"}
+                }
+                if q.get('security', [''])[0] == 'reality':
+                    node["tls"]["reality"] = {"enabled": True, "public_key": q.get('pbk', [''])[0], "short_id": q.get('sid', [''])[0]}
+            
+            # 处理 WS/gRPC 传输层
+            transport_type = q.get('type', [''])[0]
+            if transport_type == 'ws':
+                node["transport"] = {"type": "ws", "path": q.get('path', ['/'])[0]}
+            elif transport_type == 'grpc':
+                node["transport"] = {"type": "grpc", "service_name": q.get('serviceName', [''])[0]}
+                
             return node
     except: return None
 
 def main():
-    print("开始获取节点...")
-    all_nodes = []
+    print("正在抓取并检测节点中，请稍候...")
+    all_raw_links = []
     for url in SOURCES:
         try:
             r = requests.get(url, timeout=10)
             if r.status_code == 200:
-                content = r.text.strip(); decoded = decode_base64(content) or content
-                all_nodes.extend([l.strip() for l in decoded.splitlines() if "://" in l])
-        except: continue
-    
-    all_nodes = list(set(all_nodes))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        alive = [r for r in list(ex.map(check_node, all_nodes)) if r]
+                content = r.text.strip()
+                # 尝试解密 base64，如果失败则直接使用原文本
+                decoded = decode_base64(content)
+                final_text = decoded if decoded else content
+                all_raw_links.extend([l.strip() for l in final_text.splitlines() if "://" in l])
+        except Exception as e:
+            print(f"源 {url} 获取失败: {e}")
 
-    outbounds, tags = [], []
-    for l in alive:
+    # 去重并多线程检测存活
+    all_raw_links = list(set(all_raw_links))
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
+        alive_links = [r for r in list(ex.map(check_node, all_raw_links)) if r]
+
+    outbounds, final_tags = [], []
+    for l in alive_links:
         o = parse_to_outbound(l)
         if o:
-            t = o['tag']; i = 1
-            while t in tags: t = f"{o['tag']} {i}"; i += 1
-            o['tag'] = t; outbounds.append(o); tags.append(t)
+            # 解决名称冲突
+            base_tag = o['tag'].replace(':', '-').strip()
+            t = base_tag
+            counter = 1
+            while t in final_tags:
+                t = f"{base_tag} ({counter})"
+                counter += 1
+            o['tag'] = t
+            outbounds.append(o)
+            final_tags.append(t)
 
+    # 填充模板
     config = get_modern_template()
+    if not final_tags:
+        print("未发现有效节点，请检查订阅源或网络。")
+        return
+
     config['outbounds'].extend(outbounds)
-    config['outbounds'][0]['outbounds'].extend(tags)
-    config['outbounds'][1]['outbounds'].extend(tags)
+    # 将节点加入选择器和测速组
+    config['outbounds'][0]['outbounds'] = ["auto-test"] + final_tags + ["direct"]
+    config['outbounds'][1]['outbounds'] = final_tags
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"成功生成 config.json。适配 1.12.15 无警告版本。")
+    
+    print(f"成功！保存了 {len(outbounds)} 个节点到 config.json。")
 
 if __name__ == "__main__":
     main()
