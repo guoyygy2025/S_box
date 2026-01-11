@@ -1,8 +1,8 @@
-name: Node Update Service
+name: 4 hours Update Service
 
 on:
   schedule:
-    - cron: '0 0,4,8,12,16,20 * * *' # 每 4 小时执行一次
+    - cron: '0 0,4,8,12,16,20 * * *'
   workflow_dispatch:
 
 jobs:
