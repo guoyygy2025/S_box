@@ -70,200 +70,527 @@
       "tag": "proxy",
       "outbounds": [
         "auto-test",
-        "🇺🇸US²_1|5.3MB/s|46%|GPT⁺|GM|YT|X|History|[原生|机房]",
-        "US62｜机房｜低风险",
-        "🇺🇸US_7|2.2MB/s",
-        "🇭🇰HK¹-US⁰_1|14.1MB/s|3%|GPT⁺|YT|NF|D+|X|Succeed|[广播|机房]",
-        "🇯🇵_日本",
         "🇺🇸_美国",
-        "🇺🇸_美国 1",
-        "🇻🇳VN²_9|1.1MB/s|GPT⁺|GM|YT-US|X|[原生|机房]",
-        "🇻🇳VN²_5|1.0MB/s|GPT⁺|GM|YT-US|X",
-        "🇺🇸_美国 2",
-        "🇺🇸US_8|2.9MB/s",
-        "US64｜机房｜低风险",
-        "🇺🇸_美国 3",
-        "US61｜机房｜低风险",
-        "🇰🇷_KR_韩国",
-        "🇺🇸_US_美国",
-        "🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-        "🇺🇸_美国 4",
-        "🇺🇸_美国 5",
-        "美国|@ripaojiedian",
-        "US27｜机房｜低风险",
-        "日本|@ripaojiedian",
-        "🇺🇸_美国 6",
-        "🇺🇸_美国 7",
-        "美国2|@ripaojiedian",
-        "US3｜家宽｜非常安全",
-        "日本3|@ripaojiedian",
-        "🇭🇰HK¹-US⁰_2|1.2MB/s|3%|GPT⁺|GM|YT|TK-US|D+|X|History|[原生|机房]",
-        "🇺🇸US¹⁺_1|0.5MB/s|3%|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
-        "🇺🇸_美国 8",
-        "🇺🇸US_2|2.9MB/s",
-        "🇺🇸US²_2|2.9MB/s|46%|GPT⁺|YT|NF|X|Succeed|[原生|机房]",
-        "🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-        "🇺🇸US_10|2.3MB/s",
-        "🇰🇷_KR_韩国 1",
-        "US55｜机房｜低风险",
-        "🇫🇮FI²_3|7.1MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
-        "KR12｜机房｜低风险",
-        "🇰🇷KR²_4|4.9MB/s|0%|GPT⁺|YT-CN|TK|NF|D+|X|History|[原生|住宅]",
-        "美国3|@ripaojiedian",
-        "🇰🇷KR_3|2.7MB/s",
-        "🇯🇵JP_1|5.0MB/s",
-        "🇺🇸_美国 9",
-        "US19｜家宽｜非常安全",
-        "韩国|@ripaojiedian",
-        "🇺🇸_美国 10",
-        "US_speednode_0029",
-        "🇰🇷_韩国",
-        "🇺🇸_美国 11",
-        "US59｜机房｜低风险",
-        "US60｜机房｜低风险",
-        "🇺🇸_美国 12",
-        "🇺🇸_美国 13",
-        "US17｜家宽｜非常安全",
-        "🇺🇸_美国 14",
-        "日本2|@ripaojiedian",
-        "🇺🇸_美国 15",
-        "🇺🇸US_9|1.4MB/s",
-        "🇯🇵JP_5|2.6MB/s",
+        "🇭🇰HK²_14|4.7MB/s|YT-CN|D+|X|History|[原生|住宅]",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 15",
+        "🇭🇰 HK²_53|1.8MB/s|0%|YT|NF|X|[原生|住宅]",
         "🇰🇷KR_1|3.4MB/s",
-        "🇺🇸_美国 16",
+        "🇭🇰HK²_15|14.5MB/s|1%|GPT⁺|YT|D+|X|[原生|住宅]",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 36",
+        "🇺🇸_美国 (1)",
+        "🇭🇰_香港",
+        "HK29｜家宽｜非常安全",
+        "🇭🇰HK²_9|3.6MB/s|1%|YT-CN|D+|X|History|[原生|住宅]",
+        "HK23｜家宽｜非常安全",
         "US58｜机房｜低风险",
-        "🇺🇸US¹⁺_3|5.5MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
-        "🇰🇷KR_2|1.0MB/s",
-        "US57｜机房｜低风险",
-        "🇯🇵JP_3|4.5MB/s",
+        "HK2｜家宽｜非常安全",
+        "🇭🇰HK²_18|15.8MB/s|1%|GPT⁺|YT|NF|D+|X|History|[原生|住宅]",
+        "🇺🇸US_7|2.2MB/s",
+        "HK53｜原生/疑似家宽｜非常安全",
+        "HK80｜家宽｜非常安全",
+        "HK35｜家宽｜非常安全",
+        "🇭🇰_香港 (1)",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 24",
+        "HK17｜家宽｜非常安全",
+        "🇭🇰HK²_17|3.8MB/s|1%|X|Succeed|[原生|住宅]",
+        "🇰🇷KR²_4|4.9MB/s|0%|GPT⁺|YT-CN|TK|NF|D+|X|History|[原生|住宅]",
         "🇯🇵JP²_2|3.6MB/s|4%|GPT⁺|GM|YT|TK|NF|X|[广播|机房]",
-        "🇺🇸_美国 17",
-        "🇺🇸_US_美国 1",
-        "🇰🇷KR_5|1.7MB/s",
-        "🇺🇸US_6|1.3MB/s",
-        "🇺🇸_美国 18",
-        "🇺🇸US_4|1.6MB/s",
-        "🇺🇸_美国 19",
-        "🇺🇸US_3|2.0MB/s",
-        "US4｜家宽｜非常安全",
-        "🇺🇸_US_美国 2",
-        "🇺🇸_美国 20",
-        "🇯🇵JP²_1|6.5MB/s|0%|GPT⁺|YT-CN|X|History",
-        "US18｜家宽｜非常安全",
+        "🇭🇰HK²_26|4.5MB/s|1%|NF|D+|X|History|[原生|住宅]",
+        "🇯🇵_日本",
+        "🇺🇸US²_1|5.3MB/s|46%|GPT⁺|GM|YT|X|History|[原生|机房]",
+        "🇺🇸US_10|2.3MB/s",
+        "🇰🇷KR_2|1.0MB/s",
+        "🇭🇰_香港 (2)",
+        "KR12｜机房｜低风险",
+        "🇭🇰HK¹-US⁰_1|14.1MB/s|3%|GPT⁺|YT|NF|D+|X|Succeed|[广播|机房]",
+        "🇺🇸US¹⁺_3|5.5MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
+        "🇰🇷_韩国",
+        "HK79｜家宽｜非常安全",
+        "🇺🇸_美国 (2)",
+        "🇺🇸_US_美国",
+        "🇰🇷_韩国 (1)",
+        "HK28｜家宽｜非常安全",
+        "HK15｜家宽｜非常安全",
+        "🇭🇰HK²_2|1.1MB/s|1%|YT-CN|D+|X|History|[原生|住宅]",
+        "HK77｜家宽｜非常安全",
+        "🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "🇭🇰HK²_24|5.7MB/s|1%|D+|X|History|[原生|住宅]",
+        "🇭🇰HK²_5|13.8MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "🇭🇰_香港 (3)",
+        "🇺🇸_美国 (3)",
+        "🇭🇰_香港 (4)",
+        "🇭🇰_香港 (5)",
+        "HK3｜家宽｜非常安全",
+        "US27｜机房｜低风险",
+        "🇺🇸US²_2|2.9MB/s|46%|GPT⁺|YT|NF|X|Succeed|[原生|机房]",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 38",
+        "🇻🇳VN²_5|1.0MB/s|GPT⁺|GM|YT-US|X",
+        "香港2|@ripaojiedian",
+        "🇭🇰HK²_3|1.8MB/s|D+|X|[原生|住宅]",
+        "HK9｜原生/疑似家宽｜非常安全",
+        "HK25｜家宽｜非常安全",
+        "HK47｜家宽｜非常安全",
+        "美国|@ripaojiedian",
+        "🇭🇰HK²_30|4.0MB/s|1%|D+|X|[原生|住宅]",
+        "🇭🇰_香港 (6)",
+        "HK81｜家宽｜非常安全",
+        "HK93｜机房｜低风险",
+        "HK71｜原生/疑似家宽｜非常安全",
+        "HK97｜机房｜低风险",
+        "US_speednode_0029",
+        "🇭🇰HK¹-US⁰_2|1.2MB/s|3%|GPT⁺|GM|YT|TK-US|D+|X|History|[原生|机房]",
+        "HK26｜家宽｜非常安全",
+        "HK82｜家宽｜非常安全",
+        "HK62｜家宽｜非常安全",
         "🇺🇸US¹⁺_2|2.7MB/s|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
-        "🇺🇸_美国 21",
-        "🇺🇸_美国 22",
-        "US56｜机房｜低风险",
-        "🇺🇸US_11|2.6MB/s",
-        "🇯🇵JP_4|1.1MB/s",
-        "🇰🇷_韩国 1",
-        "US_speednode_0028",
-        "🇯🇵JP_2|4.8MB/s",
-        "US1｜家宽｜非常安全",
-        "US54｜机房｜低风险",
+        "🇭🇰HK²_22|6.5MB/s|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "HK43｜家宽｜非常安全",
+        "🇺🇸_美国 (4)",
+        "日本|@ripaojiedian",
+        "🇭🇰_香港 (7)",
+        "HK41｜家宽｜非常安全",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 39",
         "US2｜家宽｜非常安全",
+        "日本3|@ripaojiedian",
+        "🇭🇰_香港 (8)",
+        "🇺🇸_US_美国 (1)",
+        "🇭🇰_香港 (9)",
+        "HK13｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK²_11|0.8MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "HK85｜家宽｜非常安全",
+        "🇰🇷_KR_韩国",
+        "香港|@ripaojiedian",
+        "🇭🇰HK²_12|13.7MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "🇭🇰HK²_6|5.2MB/s|1%|D+|X|History|[原生|住宅]",
+        "HK1｜家宽｜非常安全",
+        "🇺🇸_美国 (5)",
+        "🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "🇺🇸_美国 (6)",
+        "US3｜家宽｜非常安全",
+        "🇭🇰_香港 (10)",
+        "🇭🇰HK²_27|7.5MB/s|1%|D+|X|History|[原生|住宅]",
+        "美国3|@ripaojiedian",
+        "HK72｜原生/疑似家宽｜非常安全",
+        "🇺🇸_美国 (7)",
+        "🇭🇰_香港 (11)",
+        "🇭🇰_香港 (12)",
+        "🇭🇰HK²_4|1.2MB/s|1%|D+|X|Succeed|[原生|住宅]",
+        "🇭🇰_香港 (13)",
+        "🇺🇸US_8|2.9MB/s",
+        "🇭🇰HK²_20|9.0MB/s|1%|D+|X|History|[原生|住宅]",
+        "🇺🇸_US_美国 (2)",
+        "HK33｜家宽｜非常安全",
+        "HK52｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK²_7|14.7MB/s|1%|YT|D+|X|[原生|住宅]",
+        "🇭🇰HK²_10|5.4MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "🇺🇸US_11|2.6MB/s",
+        "🇭🇰_香港 (14)",
+        "US19｜家宽｜非常安全",
+        "HK40｜家宽｜非常安全",
+        "HK6｜原生/疑似家宽｜非常安全",
+        "🇰🇷KR²_2|6.0MB/s|0%|GPT⁺|GM|YT|TK|NF|D+|X|History|[原生|住宅]",
+        "香港3|@ripaojiedian",
+        "🇺🇸_美国 (8)",
+        "US54｜机房｜低风险",
+        "HK31｜家宽｜非常安全",
+        "HK36｜家宽｜非常安全",
+        "US18｜家宽｜非常安全",
+        "🇸🇬SG_1|4.4MB/s",
+        "美国2|@ripaojiedian",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 9",
+        "🇭🇰_香港 (15)",
+        "🇺🇸US_4|1.6MB/s",
+        "🇭🇰_香港 (16)",
+        "🇺🇸_美国 (9)",
+        "🇺🇸US_2|2.9MB/s",
+        "🇺🇸_美国 (10)",
+        "HK95｜机房｜低风险",
+        "HK92｜机房｜低风险",
+        "新加坡3|@ripaojiedian",
+        "🇭🇰HK_3|1.1MB/s",
+        "🇸🇬SG_2|4.2MB/s",
+        "🇭🇰HK²_25|6.0MB/s|YT-CN|D+|X",
+        "🇭🇰_香港 (17)",
+        "🇺🇸US¹⁺_1|0.5MB/s|3%|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
+        "🇯🇵JP_3|4.5MB/s",
+        "HK51｜家宽｜非常安全",
+        "HK70｜原生/疑似家宽｜非常安全",
+        "HK32｜家宽｜非常安全",
+        "新加坡|@ripaojiedian",
+        "🇰🇷KR_3|2.7MB/s",
+        "🇺🇸_美国 (11)",
+        "🇭🇰HK²_13|2.2MB/s|YT-CN|X|Succeed|[原生|住宅]",
+        "🇭🇰HK²_21|13.8MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "🇭🇰_香港 (18)",
+        "🇸🇬SG²_1|11.9MB/s|GPT⁺|GM|YT|TK|X|History|[广播|机房]",
+        "🇭🇰_香港 (19)",
+        "HK11｜原生/疑似家宽｜非常安全",
+        "🇯🇵JP_4|1.1MB/s",
+        "🇭🇰_香港 (20)",
+        "🇺🇸_美国 (12)",
+        "US62｜机房｜低风险",
+        "HK7｜原生/疑似家宽｜非常安全",
+        "HK55｜原生/疑似家宽｜非常安全",
+        "🇺🇸_美国 (13)",
+        "🇭🇰HK²_8|6.2MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "HK63｜原生/疑似家宽｜非常安全",
+        "HK73｜原生/疑似家宽｜非常安全",
+        "HK42｜家宽｜非常安全",
+        "🇺🇸US_3|2.0MB/s",
+        "HK59｜原生/疑似家宽｜非常安全",
+        "HK34｜家宽｜非常安全",
+        "HK19｜家宽｜非常安全",
+        "HK57｜原生/疑似家宽｜非常安全",
+        "HK90｜机房｜低风险",
+        "US61｜机房｜低风险",
+        "🇺🇸_美国 (14)",
+        "🇭🇰_香港 (21)",
+        "HK66｜机房｜低风险",
+        "HK78｜家宽｜非常安全",
+        "🇭🇰_香港 (22)",
+        "🇯🇵JP_2|4.8MB/s",
+        "🇺🇸US_6|1.3MB/s",
+        "🇺🇸_美国 (15)",
+        "香港5|@ripaojiedian",
+        "US17｜家宽｜非常安全",
+        "🇭🇰_香港 (23)",
+        "HK96｜机房｜低风险",
+        "🇺🇸_美国 (16)",
+        "日本2|@ripaojiedian",
+        "🇭🇰HK_1|1.0MB/s",
         "🇺🇸US_1|3.1MB/s",
-        "US63｜机房｜低风险"
+        "HK76｜家宽｜非常安全",
+        "HK45｜家宽｜非常安全",
+        "🇺🇸_美国 (17)",
+        "🇭🇰_香港 (24)",
+        "🇭🇰HK²_19|2.8MB/s|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "🇭🇰_香港 (25)",
+        "HK46｜家宽｜非常安全",
+        "新加坡2|@ripaojiedian",
+        "🇰🇷_KR_韩国 (1)",
+        "HK54｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK_4|2.0MB/s",
+        "HK18｜家宽｜非常安全",
+        "HK39｜家宽｜非常安全",
+        "US4｜家宽｜非常安全",
+        "🇭🇰_香港 (26)",
+        "US55｜机房｜低风险",
+        "🇭🇰_香港 (27)",
+        "HK10｜原生/疑似家宽｜非常安全",
+        "HK50｜家宽｜非常安全",
+        "🇭🇰_香港 (28)",
+        "🇭🇰_香港 (29)",
+        "HK67｜原生/疑似家宽｜非常安全",
+        "HK58｜原生/疑似家宽｜非常安全",
+        "🇯🇵JP²_1|6.5MB/s|0%|GPT⁺|YT-CN|X|History",
+        "HK49｜家宽｜非常安全",
+        "HK14｜原生/疑似家宽｜非常安全",
+        "US63｜机房｜低风险",
+        "US59｜机房｜低风险",
+        "HK8｜原生/疑似家宽｜非常安全",
+        "HK4｜家宽｜非常安全",
+        "US_speednode_0028",
+        "🇭🇰HK²_29|2.2MB/s|1%|YT-CN|X|History|[原生|住宅]",
+        "HK16｜家宽｜非常安全",
+        "HK21｜家宽｜非常安全",
+        "🇸🇬SG_3|1.7MB/s",
+        "US57｜机房｜低风险",
+        "🇰🇷 韩国|@ripaojiedian",
+        "🇺🇸US_9|1.4MB/s",
+        "US1｜家宽｜非常安全",
+        "HK65｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK²_23|12.0MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "HK68｜原生/疑似家宽｜非常安全",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 22",
+        "🇭🇰_香港 (30)",
+        "US60｜机房｜低风险",
+        "US64｜机房｜低风险",
+        "🇺🇸_美国 (18)",
+        "HK30｜家宽｜非常安全",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 14",
+        "🇺🇸_美国 (19)",
+        "🇭🇰_香港 (31)",
+        "🇫🇮FI²_3|7.1MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+        "🇺🇸_美国 (20)",
+        "🇰🇷KR_5|1.7MB/s",
+        "韩国|@ripaojiedian",
+        "🇭🇰_香港 (32)",
+        "US56｜机房｜低风险",
+        "🇭🇰_香港 (33)",
+        "🇻🇳VN²_9|1.1MB/s|GPT⁺|GM|YT-US|X|[原生|机房]",
+        "HK64｜原生/疑似家宽｜非常安全",
+        "🇭🇰 HK²_30|4.3MB/s|0%|YT|X|[原生|住宅]",
+        "🇺🇸_美国 (21)",
+        "HK22｜家宽｜非常安全",
+        "🇯🇵JP_1|5.0MB/s",
+        "🇺🇸_美国 (22)",
+        "HK69｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK_2|1.6MB/s",
+        "🇭🇰 香港|@ripaojiedian",
+        "direct"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto-test",
       "outbounds": [
-        "🇺🇸US²_1|5.3MB/s|46%|GPT⁺|GM|YT|X|History|[原生|机房]",
-        "US62｜机房｜低风险",
-        "🇺🇸US_7|2.2MB/s",
-        "🇭🇰HK¹-US⁰_1|14.1MB/s|3%|GPT⁺|YT|NF|D+|X|Succeed|[广播|机房]",
-        "🇯🇵_日本",
         "🇺🇸_美国",
-        "🇺🇸_美国 1",
-        "🇻🇳VN²_9|1.1MB/s|GPT⁺|GM|YT-US|X|[原生|机房]",
-        "🇻🇳VN²_5|1.0MB/s|GPT⁺|GM|YT-US|X",
-        "🇺🇸_美国 2",
-        "🇺🇸US_8|2.9MB/s",
-        "US64｜机房｜低风险",
-        "🇺🇸_美国 3",
-        "US61｜机房｜低风险",
-        "🇰🇷_KR_韩国",
-        "🇺🇸_US_美国",
-        "🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-        "🇺🇸_美国 4",
-        "🇺🇸_美国 5",
-        "美国|@ripaojiedian",
-        "US27｜机房｜低风险",
-        "日本|@ripaojiedian",
-        "🇺🇸_美国 6",
-        "🇺🇸_美国 7",
-        "美国2|@ripaojiedian",
-        "US3｜家宽｜非常安全",
-        "日本3|@ripaojiedian",
-        "🇭🇰HK¹-US⁰_2|1.2MB/s|3%|GPT⁺|GM|YT|TK-US|D+|X|History|[原生|机房]",
-        "🇺🇸US¹⁺_1|0.5MB/s|3%|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
-        "🇺🇸_美国 8",
-        "🇺🇸US_2|2.9MB/s",
-        "🇺🇸US²_2|2.9MB/s|46%|GPT⁺|YT|NF|X|Succeed|[原生|机房]",
-        "🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-        "🇺🇸US_10|2.3MB/s",
-        "🇰🇷_KR_韩国 1",
-        "US55｜机房｜低风险",
-        "🇫🇮FI²_3|7.1MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
-        "KR12｜机房｜低风险",
-        "🇰🇷KR²_4|4.9MB/s|0%|GPT⁺|YT-CN|TK|NF|D+|X|History|[原生|住宅]",
-        "美国3|@ripaojiedian",
-        "🇰🇷KR_3|2.7MB/s",
-        "🇯🇵JP_1|5.0MB/s",
-        "🇺🇸_美国 9",
-        "US19｜家宽｜非常安全",
-        "韩国|@ripaojiedian",
-        "🇺🇸_美国 10",
-        "US_speednode_0029",
-        "🇰🇷_韩国",
-        "🇺🇸_美国 11",
-        "US59｜机房｜低风险",
-        "US60｜机房｜低风险",
-        "🇺🇸_美国 12",
-        "🇺🇸_美国 13",
-        "US17｜家宽｜非常安全",
-        "🇺🇸_美国 14",
-        "日本2|@ripaojiedian",
-        "🇺🇸_美国 15",
-        "🇺🇸US_9|1.4MB/s",
-        "🇯🇵JP_5|2.6MB/s",
+        "🇭🇰HK²_14|4.7MB/s|YT-CN|D+|X|History|[原生|住宅]",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 15",
+        "🇭🇰 HK²_53|1.8MB/s|0%|YT|NF|X|[原生|住宅]",
         "🇰🇷KR_1|3.4MB/s",
-        "🇺🇸_美国 16",
+        "🇭🇰HK²_15|14.5MB/s|1%|GPT⁺|YT|D+|X|[原生|住宅]",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 36",
+        "🇺🇸_美国 (1)",
+        "🇭🇰_香港",
+        "HK29｜家宽｜非常安全",
+        "🇭🇰HK²_9|3.6MB/s|1%|YT-CN|D+|X|History|[原生|住宅]",
+        "HK23｜家宽｜非常安全",
         "US58｜机房｜低风险",
-        "🇺🇸US¹⁺_3|5.5MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
-        "🇰🇷KR_2|1.0MB/s",
-        "US57｜机房｜低风险",
-        "🇯🇵JP_3|4.5MB/s",
+        "HK2｜家宽｜非常安全",
+        "🇭🇰HK²_18|15.8MB/s|1%|GPT⁺|YT|NF|D+|X|History|[原生|住宅]",
+        "🇺🇸US_7|2.2MB/s",
+        "HK53｜原生/疑似家宽｜非常安全",
+        "HK80｜家宽｜非常安全",
+        "HK35｜家宽｜非常安全",
+        "🇭🇰_香港 (1)",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 24",
+        "HK17｜家宽｜非常安全",
+        "🇭🇰HK²_17|3.8MB/s|1%|X|Succeed|[原生|住宅]",
+        "🇰🇷KR²_4|4.9MB/s|0%|GPT⁺|YT-CN|TK|NF|D+|X|History|[原生|住宅]",
         "🇯🇵JP²_2|3.6MB/s|4%|GPT⁺|GM|YT|TK|NF|X|[广播|机房]",
-        "🇺🇸_美国 17",
-        "🇺🇸_US_美国 1",
-        "🇰🇷KR_5|1.7MB/s",
-        "🇺🇸US_6|1.3MB/s",
-        "🇺🇸_美国 18",
-        "🇺🇸US_4|1.6MB/s",
-        "🇺🇸_美国 19",
-        "🇺🇸US_3|2.0MB/s",
-        "US4｜家宽｜非常安全",
-        "🇺🇸_US_美国 2",
-        "🇺🇸_美国 20",
-        "🇯🇵JP²_1|6.5MB/s|0%|GPT⁺|YT-CN|X|History",
-        "US18｜家宽｜非常安全",
+        "🇭🇰HK²_26|4.5MB/s|1%|NF|D+|X|History|[原生|住宅]",
+        "🇯🇵_日本",
+        "🇺🇸US²_1|5.3MB/s|46%|GPT⁺|GM|YT|X|History|[原生|机房]",
+        "🇺🇸US_10|2.3MB/s",
+        "🇰🇷KR_2|1.0MB/s",
+        "🇭🇰_香港 (2)",
+        "KR12｜机房｜低风险",
+        "🇭🇰HK¹-US⁰_1|14.1MB/s|3%|GPT⁺|YT|NF|D+|X|Succeed|[广播|机房]",
+        "🇺🇸US¹⁺_3|5.5MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
+        "🇰🇷_韩国",
+        "HK79｜家宽｜非常安全",
+        "🇺🇸_美国 (2)",
+        "🇺🇸_US_美国",
+        "🇰🇷_韩国 (1)",
+        "HK28｜家宽｜非常安全",
+        "HK15｜家宽｜非常安全",
+        "🇭🇰HK²_2|1.1MB/s|1%|YT-CN|D+|X|History|[原生|住宅]",
+        "HK77｜家宽｜非常安全",
+        "🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "🇭🇰HK²_24|5.7MB/s|1%|D+|X|History|[原生|住宅]",
+        "🇭🇰HK²_5|13.8MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "🇭🇰_香港 (3)",
+        "🇺🇸_美国 (3)",
+        "🇭🇰_香港 (4)",
+        "🇭🇰_香港 (5)",
+        "HK3｜家宽｜非常安全",
+        "US27｜机房｜低风险",
+        "🇺🇸US²_2|2.9MB/s|46%|GPT⁺|YT|NF|X|Succeed|[原生|机房]",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 38",
+        "🇻🇳VN²_5|1.0MB/s|GPT⁺|GM|YT-US|X",
+        "香港2|@ripaojiedian",
+        "🇭🇰HK²_3|1.8MB/s|D+|X|[原生|住宅]",
+        "HK9｜原生/疑似家宽｜非常安全",
+        "HK25｜家宽｜非常安全",
+        "HK47｜家宽｜非常安全",
+        "美国|@ripaojiedian",
+        "🇭🇰HK²_30|4.0MB/s|1%|D+|X|[原生|住宅]",
+        "🇭🇰_香港 (6)",
+        "HK81｜家宽｜非常安全",
+        "HK93｜机房｜低风险",
+        "HK71｜原生/疑似家宽｜非常安全",
+        "HK97｜机房｜低风险",
+        "US_speednode_0029",
+        "🇭🇰HK¹-US⁰_2|1.2MB/s|3%|GPT⁺|GM|YT|TK-US|D+|X|History|[原生|机房]",
+        "HK26｜家宽｜非常安全",
+        "HK82｜家宽｜非常安全",
+        "HK62｜家宽｜非常安全",
         "🇺🇸US¹⁺_2|2.7MB/s|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
-        "🇺🇸_美国 21",
-        "🇺🇸_美国 22",
-        "US56｜机房｜低风险",
-        "🇺🇸US_11|2.6MB/s",
-        "🇯🇵JP_4|1.1MB/s",
-        "🇰🇷_韩国 1",
-        "US_speednode_0028",
-        "🇯🇵JP_2|4.8MB/s",
-        "US1｜家宽｜非常安全",
-        "US54｜机房｜低风险",
+        "🇭🇰HK²_22|6.5MB/s|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "HK43｜家宽｜非常安全",
+        "🇺🇸_美国 (4)",
+        "日本|@ripaojiedian",
+        "🇭🇰_香港 (7)",
+        "HK41｜家宽｜非常安全",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 39",
         "US2｜家宽｜非常安全",
+        "日本3|@ripaojiedian",
+        "🇭🇰_香港 (8)",
+        "🇺🇸_US_美国 (1)",
+        "🇭🇰_香港 (9)",
+        "HK13｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK²_11|0.8MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "HK85｜家宽｜非常安全",
+        "🇰🇷_KR_韩国",
+        "香港|@ripaojiedian",
+        "🇭🇰HK²_12|13.7MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "🇭🇰HK²_6|5.2MB/s|1%|D+|X|History|[原生|住宅]",
+        "HK1｜家宽｜非常安全",
+        "🇺🇸_美国 (5)",
+        "🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "🇺🇸_美国 (6)",
+        "US3｜家宽｜非常安全",
+        "🇭🇰_香港 (10)",
+        "🇭🇰HK²_27|7.5MB/s|1%|D+|X|History|[原生|住宅]",
+        "美国3|@ripaojiedian",
+        "HK72｜原生/疑似家宽｜非常安全",
+        "🇺🇸_美国 (7)",
+        "🇭🇰_香港 (11)",
+        "🇭🇰_香港 (12)",
+        "🇭🇰HK²_4|1.2MB/s|1%|D+|X|Succeed|[原生|住宅]",
+        "🇭🇰_香港 (13)",
+        "🇺🇸US_8|2.9MB/s",
+        "🇭🇰HK²_20|9.0MB/s|1%|D+|X|History|[原生|住宅]",
+        "🇺🇸_US_美国 (2)",
+        "HK33｜家宽｜非常安全",
+        "HK52｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK²_7|14.7MB/s|1%|YT|D+|X|[原生|住宅]",
+        "🇭🇰HK²_10|5.4MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "🇺🇸US_11|2.6MB/s",
+        "🇭🇰_香港 (14)",
+        "US19｜家宽｜非常安全",
+        "HK40｜家宽｜非常安全",
+        "HK6｜原生/疑似家宽｜非常安全",
+        "🇰🇷KR²_2|6.0MB/s|0%|GPT⁺|GM|YT|TK|NF|D+|X|History|[原生|住宅]",
+        "香港3|@ripaojiedian",
+        "🇺🇸_美国 (8)",
+        "US54｜机房｜低风险",
+        "HK31｜家宽｜非常安全",
+        "HK36｜家宽｜非常安全",
+        "US18｜家宽｜非常安全",
+        "🇸🇬SG_1|4.4MB/s",
+        "美国2|@ripaojiedian",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 9",
+        "🇭🇰_香港 (15)",
+        "🇺🇸US_4|1.6MB/s",
+        "🇭🇰_香港 (16)",
+        "🇺🇸_美国 (9)",
+        "🇺🇸US_2|2.9MB/s",
+        "🇺🇸_美国 (10)",
+        "HK95｜机房｜低风险",
+        "HK92｜机房｜低风险",
+        "新加坡3|@ripaojiedian",
+        "🇭🇰HK_3|1.1MB/s",
+        "🇸🇬SG_2|4.2MB/s",
+        "🇭🇰HK²_25|6.0MB/s|YT-CN|D+|X",
+        "🇭🇰_香港 (17)",
+        "🇺🇸US¹⁺_1|0.5MB/s|3%|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
+        "🇯🇵JP_3|4.5MB/s",
+        "HK51｜家宽｜非常安全",
+        "HK70｜原生/疑似家宽｜非常安全",
+        "HK32｜家宽｜非常安全",
+        "新加坡|@ripaojiedian",
+        "🇰🇷KR_3|2.7MB/s",
+        "🇺🇸_美国 (11)",
+        "🇭🇰HK²_13|2.2MB/s|YT-CN|X|Succeed|[原生|住宅]",
+        "🇭🇰HK²_21|13.8MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "🇭🇰_香港 (18)",
+        "🇸🇬SG²_1|11.9MB/s|GPT⁺|GM|YT|TK|X|History|[广播|机房]",
+        "🇭🇰_香港 (19)",
+        "HK11｜原生/疑似家宽｜非常安全",
+        "🇯🇵JP_4|1.1MB/s",
+        "🇭🇰_香港 (20)",
+        "🇺🇸_美国 (12)",
+        "US62｜机房｜低风险",
+        "HK7｜原生/疑似家宽｜非常安全",
+        "HK55｜原生/疑似家宽｜非常安全",
+        "🇺🇸_美国 (13)",
+        "🇭🇰HK²_8|6.2MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "HK63｜原生/疑似家宽｜非常安全",
+        "HK73｜原生/疑似家宽｜非常安全",
+        "HK42｜家宽｜非常安全",
+        "🇺🇸US_3|2.0MB/s",
+        "HK59｜原生/疑似家宽｜非常安全",
+        "HK34｜家宽｜非常安全",
+        "HK19｜家宽｜非常安全",
+        "HK57｜原生/疑似家宽｜非常安全",
+        "HK90｜机房｜低风险",
+        "US61｜机房｜低风险",
+        "🇺🇸_美国 (14)",
+        "🇭🇰_香港 (21)",
+        "HK66｜机房｜低风险",
+        "HK78｜家宽｜非常安全",
+        "🇭🇰_香港 (22)",
+        "🇯🇵JP_2|4.8MB/s",
+        "🇺🇸US_6|1.3MB/s",
+        "🇺🇸_美国 (15)",
+        "香港5|@ripaojiedian",
+        "US17｜家宽｜非常安全",
+        "🇭🇰_香港 (23)",
+        "HK96｜机房｜低风险",
+        "🇺🇸_美国 (16)",
+        "日本2|@ripaojiedian",
+        "🇭🇰HK_1|1.0MB/s",
         "🇺🇸US_1|3.1MB/s",
-        "US63｜机房｜低风险"
+        "HK76｜家宽｜非常安全",
+        "HK45｜家宽｜非常安全",
+        "🇺🇸_美国 (17)",
+        "🇭🇰_香港 (24)",
+        "🇭🇰HK²_19|2.8MB/s|YT-CN|D+|X|Succeed|[原生|住宅]",
+        "🇭🇰_香港 (25)",
+        "HK46｜家宽｜非常安全",
+        "新加坡2|@ripaojiedian",
+        "🇰🇷_KR_韩国 (1)",
+        "HK54｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK_4|2.0MB/s",
+        "HK18｜家宽｜非常安全",
+        "HK39｜家宽｜非常安全",
+        "US4｜家宽｜非常安全",
+        "🇭🇰_香港 (26)",
+        "US55｜机房｜低风险",
+        "🇭🇰_香港 (27)",
+        "HK10｜原生/疑似家宽｜非常安全",
+        "HK50｜家宽｜非常安全",
+        "🇭🇰_香港 (28)",
+        "🇭🇰_香港 (29)",
+        "HK67｜原生/疑似家宽｜非常安全",
+        "HK58｜原生/疑似家宽｜非常安全",
+        "🇯🇵JP²_1|6.5MB/s|0%|GPT⁺|YT-CN|X|History",
+        "HK49｜家宽｜非常安全",
+        "HK14｜原生/疑似家宽｜非常安全",
+        "US63｜机房｜低风险",
+        "US59｜机房｜低风险",
+        "HK8｜原生/疑似家宽｜非常安全",
+        "HK4｜家宽｜非常安全",
+        "US_speednode_0028",
+        "🇭🇰HK²_29|2.2MB/s|1%|YT-CN|X|History|[原生|住宅]",
+        "HK16｜家宽｜非常安全",
+        "HK21｜家宽｜非常安全",
+        "🇸🇬SG_3|1.7MB/s",
+        "US57｜机房｜低风险",
+        "🇰🇷 韩国|@ripaojiedian",
+        "🇺🇸US_9|1.4MB/s",
+        "US1｜家宽｜非常安全",
+        "HK65｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK²_23|12.0MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+        "HK68｜原生/疑似家宽｜非常安全",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 22",
+        "🇭🇰_香港 (30)",
+        "US60｜机房｜低风险",
+        "US64｜机房｜低风险",
+        "🇺🇸_美国 (18)",
+        "HK30｜家宽｜非常安全",
+        "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 14",
+        "🇺🇸_美国 (19)",
+        "🇭🇰_香港 (31)",
+        "🇫🇮FI²_3|7.1MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+        "🇺🇸_美国 (20)",
+        "🇰🇷KR_5|1.7MB/s",
+        "韩国|@ripaojiedian",
+        "🇭🇰_香港 (32)",
+        "US56｜机房｜低风险",
+        "🇭🇰_香港 (33)",
+        "🇻🇳VN²_9|1.1MB/s|GPT⁺|GM|YT-US|X|[原生|机房]",
+        "HK64｜原生/疑似家宽｜非常安全",
+        "🇭🇰 HK²_30|4.3MB/s|0%|YT|X|[原生|住宅]",
+        "🇺🇸_美国 (21)",
+        "HK22｜家宽｜非常安全",
+        "🇯🇵JP_1|5.0MB/s",
+        "🇺🇸_美国 (22)",
+        "HK69｜原生/疑似家宽｜非常安全",
+        "🇭🇰HK_2|1.6MB/s",
+        "🇭🇰 香港|@ripaojiedian"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "10m"
@@ -281,20 +608,182 @@
       "tag": "block-out"
     },
     {
+      "type": "vless",
+      "tag": "🇺🇸_美国",
+      "server": "103.219.193.54",
+      "server_port": 47365,
+      "uuid": "2c503f75-1dc8-4c0c-ba07-a11a9d085840",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "OS3kmYquxfONWW-d97YxQU_kH-Vc-sy2ehpvtS02LTI",
+          "short_id": "ee95bdc46f0b8e14"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_14|4.7MB/s|YT-CN|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
       "type": "vmess",
-      "tag": "🇺🇸US²_1|5.3MB/s|46%|GPT⁺|GM|YT|X|History|[原生|机房]",
-      "server": "v8.hdacd.com",
-      "server_port": 30808,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 15",
+      "server": "3ef1531d-t70f40-t6z0et-1t60o.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "ce481c6e-f4c8-11ef-bbb0-f23c91cfbbc9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "3ef1531d-t70f40-t6z0et-1t60o.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰 HK²_53|1.8MB/s|0%|YT|NF|X|[原生|住宅]",
+      "server": "6fdda999-t70f40-tlm64c-xm0q.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "3437f34e-1b77-11eb-8684-f23c913c8d2b",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "6fdda999-t70f40-tlm64c-xm0q.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷KR_1|3.4MB/s",
+      "server": "121.170.203.148",
+      "server_port": 11815,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_15|14.5MB/s|1%|GPT⁺|YT|D+|X|[原生|住宅]",
+      "server": "dc759071-t8nog0-thiwul-1gcq2.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "759bf004-6137-11ec-bd7c-f23c913c8d2b",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "dc759071-t8nog0-thiwul-1gcq2.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 36",
+      "server": "03199e4c-t6r5s0-tbnucr-1thfv.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "0a4d1c88-fb3a-11ef-8c3f-f23c913c8d2b",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "03199e4c-t6r5s0-tbnucr-1thfv.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇺🇸_美国 (1)",
+      "server": "ncgddx.gdsxrk.com",
+      "server_port": 25210,
+      "uuid": "623787ef-7786-4572-abf5-0180892558aa",
       "security": "auto",
       "alter_id": 0
     },
     {
       "type": "trojan",
-      "tag": "US62｜机房｜低风险",
-      "server": "bestcdn1.868863.xyz",
-      "server_port": 2087,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
+      "tag": "🇭🇰_香港",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+160+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK29｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_9|3.6MB/s|1%|YT-CN|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK23｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "US58｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2096,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK2｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_18|15.8MB/s|1%|GPT⁺|YT|NF|D+|X|History|[原生|住宅]",
+      "server": "d3cc8573-t70f40-tm3dx0-1r9dt.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "de003c72-0157-11ef-86da-f23c91cfbbc9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "d3cc8573-t70f40-tm3dx0-1r9dt.hkt.gotochinatown.net"
+        }
+      }
     },
     {
       "type": "vless",
@@ -309,22 +798,99 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
       }
     },
     {
-      "type": "vless",
-      "tag": "🇭🇰HK¹-US⁰_1|14.1MB/s|3%|GPT⁺|YT|NF|D+|X|Succeed|[广播|机房]",
-      "server": "104.16.250.22",
+      "type": "trojan",
+      "tag": "HK53｜原生/疑似家宽｜非常安全",
+      "server": "cdnfire.xiaomispeed.com",
+      "server_port": 21101,
+      "password": "ac65d6fb-e8da-4b01-a1bf-7323f1309003"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK80｜家宽｜非常安全",
+      "server": "58.152.46.60",
       "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK35｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (1)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
+        "server_name": "🔒+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+945+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
         }
       }
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 24",
+      "server": "84146e14-t6r5s0-tiuovf-v3c2.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "5f091cbe-fb34-11ea-9777-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "84146e14-t6r5s0-tiuovf-v3c2.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK17｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_17|3.8MB/s|1%|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷KR²_4|4.9MB/s|0%|GPT⁺|YT-CN|TK|NF|D+|X|History|[原生|住宅]",
+      "server": "168.126.234.247",
+      "server_port": 51978,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇯🇵JP²_2|3.6MB/s|4%|GPT⁺|GM|YT|TK|NF|X|[广播|机房]",
+      "server": "tuntro003.instconn.com",
+      "server_port": 443,
+      "password": "469c8135-8aea-4c7f-8ec2-c5fdfa980b48"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_26|4.5MB/s|1%|NF|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
     },
     {
       "type": "trojan",
@@ -342,299 +908,13 @@
       }
     },
     {
-      "type": "vless",
-      "tag": "🇺🇸_美国",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-jp2.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 1",
-      "server": "173.245.59.254",
-      "server_port": 8080,
-      "uuid": "5583f734-f94c-45f8-9339-21d1eed95da7"
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇻🇳VN²_9|1.1MB/s|GPT⁺|GM|YT-US|X|[原生|机房]",
-      "server": "103.186.155.215",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇻🇳VN²_5|1.0MB/s|GPT⁺|GM|YT-US|X",
-      "server": "103.186.155.58",
-      "server_port": 38388,
-      "method": "aes-256-cfb",
-      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 2",
-      "server": "129.153.71.226",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "iosapps.itunes.apple.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US_8|2.9MB/s",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "US64｜机房｜低风险",
-      "server": "bestcdn5.868863.xyz",
-      "server_port": 8443,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 3",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-us1.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "US61｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2053,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇰🇷_KR_韩国",
-      "server": "121.170.203.148",
-      "server_port": 11815,
-      "method": "aes-256-cfb",
-      "password": "qwerREWQ@@"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_US_美国",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-      "server": "146.75.119.82",
-      "server_port": 80,
-      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 4",
-      "server": "japan.geodema.network",
-      "server_port": 443,
-      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
-      "tls": {
-        "enabled": true,
-        "server_name": "japan.geodema.network",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 5",
-      "server": "103.219.193.54",
-      "server_port": 47365,
-      "uuid": "2c503f75-1dc8-4c0c-ba07-a11a9d085840",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "美国|@ripaojiedian",
-      "server": "160.16.81.84",
-      "server_port": 5076,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
       "type": "vmess",
-      "tag": "US27｜机房｜低风险",
-      "server": "v4.hdacd.com",
-      "server_port": 30804,
+      "tag": "🇺🇸US²_1|5.3MB/s|46%|GPT⁺|GM|YT|X|History|[原生|机房]",
+      "server": "v8.hdacd.com",
+      "server_port": 30808,
       "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
       "security": "auto",
       "alter_id": 0
-    },
-    {
-      "type": "trojan",
-      "tag": "日本|@ripaojiedian",
-      "server": "43.207.232.58",
-      "server_port": 2053,
-      "password": "BxceQaOe"
-    },
-    {
-      "type": "vmess",
-      "tag": "🇺🇸_美国 6",
-      "server": "ncgddx.gdsxrk.com",
-      "server_port": 25210,
-      "uuid": "623787ef-7786-4572-abf5-0180892558aa",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 7",
-      "server": "144.31.1.121",
-      "server_port": 443,
-      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
-      "tls": {
-        "enabled": true,
-        "server_name": "plcdn17.suio.me",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "美国2|@ripaojiedian",
-      "server": "153.121.38.213",
-      "server_port": 1281,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "trojan",
-      "tag": "US3｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35502,
-      "password": "91dd6cb4-3f5a-4bb0-8968-b398607fc487"
-    },
-    {
-      "type": "trojan",
-      "tag": "日本3|@ripaojiedian",
-      "server": "160.16.130.66",
-      "server_port": 1933,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "vless",
-      "tag": "🇭🇰HK¹-US⁰_2|1.2MB/s|3%|GPT⁺|GM|YT|TK-US|D+|X|History|[原生|机房]",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US¹⁺_1|0.5MB/s|3%|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
-      "server": "162.159.44.142",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 8",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-us2.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "🇺🇸US_2|2.9MB/s",
-      "server": "104.168.94.41",
-      "server_port": 32301,
-      "uuid": "a2235b72-fd9c-404f-be5a-53b2de0cb798",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vmess",
-      "tag": "🇺🇸US²_2|2.9MB/s|46%|GPT⁺|YT|NF|X|Succeed|[原生|机房]",
-      "server": "104.168.94.41",
-      "server_port": 32301,
-      "uuid": "a2235b72-fd9c-404f-be5a-53b2de0cb798",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-      "server": "146.75.119.82",
-      "server_port": 80,
-      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be"
     },
     {
       "type": "vless",
@@ -649,29 +929,34 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
       }
     },
     {
       "type": "shadowsocks",
-      "tag": "🇰🇷_KR_韩国 1",
-      "server": "221.139.79.57",
-      "server_port": 13979,
+      "tag": "🇰🇷KR_2|1.0MB/s",
+      "server": "168.126.234.230",
+      "server_port": 44112,
       "method": "aes-256-cfb",
       "password": "qwerREWQ@@"
     },
     {
       "type": "trojan",
-      "tag": "US55｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI²_3|7.1MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
-      "server": "146.75.119.82",
-      "server_port": 80,
-      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be"
+      "tag": "🇭🇰_香港 (2)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+DukeMehdi]+b2n.ir/v2ray-configs+|+783+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
     },
     {
       "type": "vmess",
@@ -683,32 +968,9 @@
       "alter_id": 0
     },
     {
-      "type": "shadowsocks",
-      "tag": "🇰🇷KR²_4|4.9MB/s|0%|GPT⁺|YT-CN|TK|NF|D+|X|History|[原生|住宅]",
-      "server": "168.126.234.247",
-      "server_port": 51978,
-      "method": "aes-256-cfb",
-      "password": "qwerREWQ@@"
-    },
-    {
-      "type": "trojan",
-      "tag": "美国3|@ripaojiedian",
-      "server": "43.198.151.117",
-      "server_port": 2173,
-      "password": "BxceQaOe"
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇰🇷KR_3|2.7MB/s",
-      "server": "168.126.234.247",
-      "server_port": 51978,
-      "method": "aes-256-cfb",
-      "password": "qwerREWQ@@"
-    },
-    {
       "type": "vless",
-      "tag": "🇯🇵JP_1|5.0MB/s",
-      "server": "162.159.45.232",
+      "tag": "🇭🇰HK¹-US⁰_1|14.1MB/s|3%|GPT⁺|YT|NF|D+|X|Succeed|[广播|机房]",
+      "server": "104.16.250.22",
       "server_port": 443,
       "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
       "tls": {
@@ -718,17 +980,221 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
       }
     },
     {
       "type": "vless",
-      "tag": "🇺🇸_美国 9",
-      "server": "plcdn17.suio.me",
+      "tag": "🇺🇸US¹⁺_3|5.5MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
+      "server": "162.159.44.142",
       "server_port": 443,
-      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
       "tls": {
         "enabled": true,
-        "server_name": "plcdn17.suio.me",
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇰🇷_韩国",
+      "server": "lord.kokopit.info",
+      "server_port": 2096,
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "tls": {
+        "enabled": true,
+        "server_name": "18XaCgNj9C.bAsErTy.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK79｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (2)",
+      "server": "us1.miyazono-kaori.com",
+      "server_port": 443,
+      "uuid": "274691f9-e6c0-46ff-82f2-3a9062872a04",
+      "tls": {
+        "enabled": true,
+        "server_name": "download-porter.hoyoverse.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "9mkPUmY5M-N81bSDf3lP9X3JnH25l4SfeUTnlwV04Eo",
+          "short_id": "d77c4204"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_US_美国",
+      "server": "cloudflare.182682.xyz",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇰🇷_韩国 (1)",
+      "server": "lord.kokopit.info",
+      "server_port": 2096,
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "tls": {
+        "enabled": true,
+        "server_name": "18XaCgNj9C.bAsErTy.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK28｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK15｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_2|1.1MB/s|1%|YT-CN|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK77｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_24|5.7MB/s|1%|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_5|13.8MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+      "server": "4599746a-t8rds0-tbnk1n-ueq.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "91df5a86-fcdd-11ef-94aa-f23c913c8d2b",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "4599746a-t8rds0-tbnk1n-ueq.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (3)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+EbraSha]+b2n.ir/v2ray-configs+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (3)",
+      "server": "5.180.24.11",
+      "server_port": 4443,
+      "uuid": "d5d5b641-dd56-4f39-9754-8d3c45cc2c5e",
+      "tls": {
+        "enabled": true,
+        "server_name": "github.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "5XB_N3ATilH-6tp_MXht-84_y5YaJnx_Z7MbuY2otHE",
+          "short_id": "aa7e96542880027a"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (4)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+DukeMehdi]+b2n.ir/v2ray-configs+|+934+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -737,32 +1203,195 @@
     },
     {
       "type": "trojan",
-      "tag": "US19｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35502,
-      "password": "fe6eae40-94da-4c80-9f23-5e3d4402d52b"
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "韩国|@ripaojiedian",
-      "server": "168.126.234.247",
-      "server_port": 51978,
-      "method": "ss",
-      "password": "//YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 10",
-      "server": "plcdn17.suio.me",
+      "tag": "🇭🇰_香港 (5)",
+      "server": "58.152.46.60",
       "server_port": 443,
-      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "plcdn17.suio.me",
+        "server_name": "🔒+[By+EbraSha]+b2n.ir/v2ray-configs+|+54+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
         }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK3｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "US27｜机房｜低风险",
+      "server": "v4.hdacd.com",
+      "server_port": 30804,
+      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "vmess",
+      "tag": "🇺🇸US²_2|2.9MB/s|46%|GPT⁺|YT|NF|X|Succeed|[原生|机房]",
+      "server": "104.168.94.41",
+      "server_port": 32301,
+      "uuid": "a2235b72-fd9c-404f-be5a-53b2de0cb798",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 38",
+      "server": "f5596b30-t6pb40-tpaqgu-1smhu.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "62f2374c-891b-11ef-a3f6-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "f5596b30-t6pb40-tpaqgu-1smhu.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇻🇳VN²_5|1.0MB/s|GPT⁺|GM|YT-US|X",
+      "server": "103.186.155.58",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "type": "vmess",
+      "tag": "香港2|@ripaojiedian",
+      "server": "hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "96c798f6-4645-11ee-b8a1-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_3|1.8MB/s|D+|X|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK9｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "fe6eae40-94da-4c80-9f23-5e3d4402d52b"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK25｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK47｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "美国|@ripaojiedian",
+      "server": "160.16.81.84",
+      "server_port": 5076,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_30|4.0MB/s|1%|D+|X|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (6)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "++[By+EbraSha]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK81｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "HK93｜机房｜低风险",
+      "server": "n1761214904.wpg27.xyz",
+      "server_port": 443,
+      "uuid": "7f6f64ae-3778-434c-adfc-95cb67ee8b73",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "n1761214904.wpg27.xyz"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n1761214904.wpg27.xyz",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK71｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "40991964-b3be-4458-8bc7-5b1774552acf"
+    },
+    {
+      "type": "vmess",
+      "tag": "HK97｜机房｜低风险",
+      "server": "n1761214907.74qxv.top",
+      "server_port": 443,
+      "uuid": "4c17399f-c93d-4527-8ace-5bdc2f0901f3",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "n1761214907.74qxv.top"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n1761214907.74qxv.top",
+        "insecure": true
       }
     },
     {
@@ -782,172 +1411,8 @@
     },
     {
       "type": "vless",
-      "tag": "🇰🇷_韩国",
-      "server": "lord.kokopit.info",
-      "server_port": 2096,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
-      "tls": {
-        "enabled": true,
-        "server_name": "18XaCgNj9C.bAsErTy.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 11",
-      "server": "144.31.1.121",
-      "server_port": 443,
-      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
-      "tls": {
-        "enabled": true,
-        "server_name": "plcdn17.suio.me",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "US59｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 8443,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "trojan",
-      "tag": "US60｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 8443,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 12",
-      "server": "142.91.106.176",
-      "server_port": 443,
-      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
-      "tls": {
-        "enabled": true,
-        "server_name": "japan.geodema.network",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 13",
-      "server": "47.83.153.19",
-      "server_port": 59750,
-      "uuid": "9e76cfb8-b7a6-40f6-c2aa-9905aa19f31b",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.amd.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "US17｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35502,
-      "password": "40991964-b3be-4458-8bc7-5b1774552acf"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 14",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-de1.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "日本2|@ripaojiedian",
-      "server": "153.121.38.213",
-      "server_port": 1933,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 15",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-us3.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "🇺🇸US_9|1.4MB/s",
-      "server": "920a-4BCc-9A2d-57960603C7d9.457.pP.Ua",
-      "server_port": 443,
-      "uuid": "a1d2e3cd-297e-4753-8e7a-6d9fb0f4aac1",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vless",
-      "tag": "🇯🇵JP_5|2.6MB/s",
-      "server": "116.80.58.239",
-      "server_port": 39975,
-      "uuid": "15b84012-d261-4b4c-807a-061bb4a901fd",
-      "tls": {
-        "enabled": true,
-        "server_name": "cloudcircus.jp",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇰🇷KR_1|3.4MB/s",
-      "server": "121.170.203.148",
-      "server_port": 11815,
-      "method": "aes-256-cfb",
-      "password": "qwerREWQ@@"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 16",
-      "server": "151.101.3.8",
-      "server_port": 80,
-      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82"
-    },
-    {
-      "type": "trojan",
-      "tag": "US58｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2096,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US¹⁺_3|5.5MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
-      "server": "162.159.44.142",
+      "tag": "🇭🇰HK¹-US⁰_2|1.2MB/s|3%|GPT⁺|GM|YT|TK-US|D+|X|History|[原生|机房]",
+      "server": "162.159.16.63",
       "server_port": 443,
       "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
       "tls": {
@@ -957,195 +1422,32 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
-      }
-    },
-    {
-      "type": "shadowsocks",
-      "tag": "🇰🇷KR_2|1.0MB/s",
-      "server": "168.126.234.230",
-      "server_port": 44112,
-      "method": "aes-256-cfb",
-      "password": "qwerREWQ@@"
-    },
-    {
-      "type": "trojan",
-      "tag": "US57｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
-    },
-    {
-      "type": "vless",
-      "tag": "🇯🇵JP_3|4.5MB/s",
-      "server": "151.101.3.8",
-      "server_port": 80,
-      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82"
-    },
-    {
-      "type": "trojan",
-      "tag": "🇯🇵JP²_2|3.6MB/s|4%|GPT⁺|GM|YT|TK|NF|X|[广播|机房]",
-      "server": "tuntro003.instconn.com",
-      "server_port": 443,
-      "password": "469c8135-8aea-4c7f-8ec2-c5fdfa980b48"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 17",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-jp2.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_US_美国 1",
-      "server": "test2.f1u.us.ci",
-      "server_port": 2083,
-      "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
-      "tls": {
-        "enabled": true,
-        "server_name": "news1.f1w.de5.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "🇰🇷KR_5|1.7MB/s",
-      "server": "152.70.92.69",
-      "server_port": 80,
-      "uuid": "bb9c3993-a4b9-4dad-aeb9-ac86371ae68b",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US_6|1.3MB/s",
-      "server": "79.110.63.79",
-      "server_port": 2255,
-      "uuid": "02b320ce-09f8-4cb5-9c46-9024f5585881"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 18",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-jp1.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vmess",
-      "tag": "🇺🇸US_4|1.6MB/s",
-      "server": "v29.hdacd.com",
-      "server_port": 30829,
-      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
-      "security": "auto",
-      "alter_id": 0
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 19",
-      "server": "japan.geodema.network",
-      "server_port": 443,
-      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
-      "tls": {
-        "enabled": true,
-        "server_name": "japan.geodema.network",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US_3|2.0MB/s",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
       }
     },
     {
       "type": "trojan",
-      "tag": "US4｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35502,
-      "password": "db86510f-8f0e-4e0e-9534-746dd8e4d07e"
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_US_美国 2",
-      "server": "cloudflare.182682.xyz",
+      "tag": "HK26｜家宽｜非常安全",
+      "server": "58.152.46.60",
       "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_美国 20",
-      "server": "63.141.128.180",
-      "server_port": 443,
-      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
-      "tls": {
-        "enabled": true,
-        "server_name": "d2-us4.djwstlsweb.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇯🇵JP²_1|6.5MB/s|0%|GPT⁺|YT-CN|X|History",
-      "server": "japan.geodema.network",
-      "server_port": 443,
-      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
-      "tls": {
-        "enabled": true,
-        "server_name": "japan.geodema.network",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
+      "password": "BxceQaOe"
     },
     {
       "type": "trojan",
-      "tag": "US18｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35502,
-      "password": "154e3552-cd70-4b43-a906-121b5ba29bbd"
+      "tag": "HK82｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK62｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
     },
     {
       "type": "vless",
@@ -1160,32 +1462,62 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
       }
     },
     {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_22|6.5MB/s|YT-CN|D+|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK43｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
       "type": "vless",
-      "tag": "🇺🇸_美国 21",
-      "server": "5.180.24.11",
-      "server_port": 4443,
-      "uuid": "d5d5b641-dd56-4f39-9754-8d3c45cc2c5e",
+      "tag": "🇺🇸_美国 (4)",
+      "server": "142.91.106.176",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
       "tls": {
         "enabled": true,
-        "server_name": "github.com",
+        "server_name": "japan.geodema.network",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
         }
       }
     },
     {
-      "type": "vless",
-      "tag": "🇺🇸_美国 22",
-      "server": "us1.miyazono-kaori.com",
+      "type": "trojan",
+      "tag": "日本|@ripaojiedian",
+      "server": "43.207.232.58",
+      "server_port": 2053,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (7)",
+      "server": "58.152.46.60",
       "server_port": 443,
-      "uuid": "274691f9-e6c0-46ff-82f2-3a9062872a04",
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "download-porter.hoyoverse.com",
+        "server_name": "������+[By+EbraSha]+b2n.ir/v2ray-configs+|+868+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1194,10 +1526,402 @@
     },
     {
       "type": "trojan",
-      "tag": "US56｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
+      "tag": "HK41｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 39",
+      "server": "ec130d51-t6pb40-t72h4q-1spnr.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "127e3f92-f714-11ef-bbb0-f23c91cfbbc9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "ec130d51-t6pb40-t72h4q-1spnr.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US2｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35501,
+      "password": "843bcd0b-f2ab-482f-8262-6d09cf97f4b8"
+    },
+    {
+      "type": "trojan",
+      "tag": "日本3|@ripaojiedian",
+      "server": "160.16.130.66",
+      "server_port": 1933,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (8)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "🔒+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+88+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_US_美国 (1)",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (9)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+934+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK13｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "f272b771-49f1-48f0-8ac4-ab7cd1a5c343"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_11|0.8MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK85｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷_KR_韩国",
+      "server": "221.139.79.57",
+      "server_port": 13979,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "vmess",
+      "tag": "香港|@ripaojiedian",
+      "server": "v10.hdacd.com",
+      "server_port": 30807,
+      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_12|13.7MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+      "server": "66cc9697-t8rds0-tc67m2-1tjc4.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "fac704ae-0304-11f0-a2ef-f23c91cfbbc9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "66cc9697-t8rds0-tc67m2-1tjc4.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_6|5.2MB/s|1%|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK1｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (5)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-us3.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/us3"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (6)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-us1.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/us1"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US3｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35502,
+      "password": "91dd6cb4-3f5a-4bb0-8968-b398607fc487"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (10)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+EbraSha]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_27|7.5MB/s|1%|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "美国3|@ripaojiedian",
+      "server": "43.198.151.117",
+      "server_port": 2173,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK72｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "5107a215-5284-44d5-b740-607bed57026e"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (7)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-us4.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/us4"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (11)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+DukeMehdi]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (12)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "++++++",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_4|1.2MB/s|1%|D+|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (13)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "++[By+DukeMehdi]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_8|2.9MB/s",
+      "server": "104.18.185.26",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_20|9.0MB/s|1%|D+|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_US_美国 (2)",
+      "server": "test2.f1u.us.ci",
+      "server_port": 2083,
+      "uuid": "d342d11e-d424-4583-b36e-524ab1f0afa4",
+      "tls": {
+        "enabled": true,
+        "server_name": "news1.f1w.de5.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK33｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK52｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "3cd9679e-cd01-4aa6-9ddc-3ffd8b53f02e"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_7|14.7MB/s|1%|YT|D+|X|[原生|住宅]",
+      "server": "c64f936b-t8rds0-tcuz7t-1ta58.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "e2d8b574-e089-11ef-9cc7-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "c64f936b-t8rds0-tcuz7t-1ta58.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_10|5.4MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
     },
     {
       "type": "vless",
@@ -1212,7 +1936,498 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
       }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (14)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+DukeMehdi]+b2n.ir/v2ray-configs+|+945+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US19｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35502,
+      "password": "fe6eae40-94da-4c80-9f23-5e3d4402d52b"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK40｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK6｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31102,
+      "password": "154e3552-cd70-4b43-a906-121b5ba29bbd"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷KR²_2|6.0MB/s|0%|GPT⁺|GM|YT|TK|NF|D+|X|History|[原生|住宅]",
+      "server": "121.170.203.148",
+      "server_port": 11815,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "trojan",
+      "tag": "香港3|@ripaojiedian",
+      "server": "112.118.116.123",
+      "server_port": 443,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (8)",
+      "server": "plcdn17.suio.me",
+      "server_port": 443,
+      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
+      "tls": {
+        "enabled": true,
+        "server_name": "plcdn17.suio.me",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US54｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK31｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK36｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "US18｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35502,
+      "password": "154e3552-cd70-4b43-a906-121b5ba29bbd"
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇬SG_1|4.4MB/s",
+      "server": "cloudflare.182682.xyz",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "美国2|@ripaojiedian",
+      "server": "153.121.38.213",
+      "server_port": 1281,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 9",
+      "server": "cd5a4e76-t70f40-t7dv8l-1szgv.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "448aff24-b2e6-11ef-97e0-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "cd5a4e76-t70f40-t7dv8l-1szgv.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇭🇰_香港 (15)",
+      "server": "156.224.78.8",
+      "server_port": 10001,
+      "uuid": "9c79aceb-4649-44ea-9698-b5e9ecf6d6da",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.icloud.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "D_kMOsg1KCtT0tudPFVDXGuEcSqZGtUYqBB-BiIxmls",
+          "short_id": "f7223dab"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇺🇸US_4|1.6MB/s",
+      "server": "v29.hdacd.com",
+      "server_port": 30829,
+      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (16)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+382+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (9)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-jp1.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/jp1"
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇺🇸US_2|2.9MB/s",
+      "server": "104.168.94.41",
+      "server_port": 32301,
+      "uuid": "a2235b72-fd9c-404f-be5a-53b2de0cb798",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (10)",
+      "server": "japan.geodema.network",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
+      "tls": {
+        "enabled": true,
+        "server_name": "japan.geodema.network",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "HK95｜机房｜低风险",
+      "server": "n1747624282.lie5d.cyou",
+      "server_port": 443,
+      "uuid": "30109222-8c53-41bc-9781-a01cdeb68e4c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "n1747624282.lie5d.cyou"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n1747624282.lie5d.cyou",
+        "insecure": true
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "HK92｜机房｜低风险",
+      "server": "n1761214912.wpg27.xyz",
+      "server_port": 443,
+      "uuid": "4f86a909-836d-4643-b650-d812144a1fa9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "n1761214912.wpg27.xyz"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n1761214912.wpg27.xyz",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "新加坡3|@ripaojiedian",
+      "server": "95.40.111.8",
+      "server_port": 2673,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇭🇰HK_3|1.1MB/s",
+      "server": "103.149.182.158",
+      "server_port": 8388,
+      "method": "chacha20-ietf",
+      "password": "asd123456"
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇬SG_2|4.2MB/s",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_25|6.0MB/s|YT-CN|D+|X",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (17)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "🔒+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+783+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US¹⁺_1|0.5MB/s|3%|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇯🇵JP_3|4.5MB/s",
+      "server": "151.101.3.8",
+      "server_port": 80,
+      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
+      "transport": {
+        "type": "ws",
+        "path": "/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK51｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK70｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "7ce4327c-43d3-404b-ad66-283a9f6b6eb4"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK32｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "新加坡|@ripaojiedian",
+      "server": "153.121.38.213",
+      "server_port": 3901,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷KR_3|2.7MB/s",
+      "server": "168.126.234.247",
+      "server_port": 51978,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (11)",
+      "server": "173.245.59.254",
+      "server_port": 8080,
+      "uuid": "5583f734-f94c-45f8-9339-21d1eed95da7",
+      "transport": {
+        "type": "ws",
+        "path": "/cdn"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_13|2.2MB/s|YT-CN|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_21|13.8MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+      "server": "d091d3a5-t8rds0-tm23vf-1jk6u.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "45bc25b2-1a10-11ed-91c0-f23c91cfbbc9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "d091d3a5-t8rds0-tm23vf-1jk6u.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (18)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "t.me/ripaojiedian",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇬SG²_1|11.9MB/s|GPT⁺|GM|YT|TK|X|History|[广播|机房]",
+      "server": "146.190.89.69",
+      "server_port": 25863,
+      "uuid": "58f206da-752d-4750-a2ac-b72d0cab8032",
+      "tls": {
+        "enabled": true,
+        "server_name": "aws.amazon.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "LLou1BsPSrrNXOJOb7-YZ159F_MAdrTSmP8loWG6GhE",
+          "short_id": ""
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (19)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+17+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK11｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31102,
+      "password": "f272b771-49f1-48f0-8ac4-ab7cd1a5c343"
     },
     {
       "type": "vless",
@@ -1226,18 +2441,23 @@
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
         }
       }
     },
     {
-      "type": "vless",
-      "tag": "🇰🇷_韩国 1",
-      "server": "lord.kokopit.info",
-      "server_port": 2096,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (20)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "18XaCgNj9C.bAsErTy.InFo",
+        "server_name": "+++++++[By+EbraSha]+b2n.ir/v2ray-configs+|+54+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1246,13 +2466,227 @@
     },
     {
       "type": "vless",
-      "tag": "US_speednode_0028",
-      "server": "129.153.71.226",
+      "tag": "🇺🇸_美国 (12)",
+      "server": "144.31.1.121",
+      "server_port": 443,
+      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
+      "tls": {
+        "enabled": true,
+        "server_name": "plcdn17.suio.me",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US62｜机房｜低风险",
+      "server": "bestcdn1.868863.xyz",
+      "server_port": 2087,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK7｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31102,
+      "password": "db86510f-8f0e-4e0e-9534-746dd8e4d07e"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK55｜原生/疑似家宽｜非常安全",
+      "server": "cdnfire.xiaomispeed.com",
+      "server_port": 21102,
+      "password": "90e57252-bb50-4cbc-b763-4e3c72362c3b"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (13)",
+      "server": "63.141.128.180",
       "server_port": 443,
       "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
       "tls": {
         "enabled": true,
-        "server_name": "iosapps.itunes.apple.com",
+        "server_name": "d2-jp2.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/jp2"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_8|6.2MB/s|1%|YT-CN|D+|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK63｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "843bcd0b-f2ab-482f-8262-6d09cf97f4b8"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK73｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "91dd6cb4-3f5a-4bb0-8968-b398607fc487"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK42｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_3|2.0MB/s",
+      "server": "104.16.250.22",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK59｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "2cfd8fb6-1f17-4d33-a3b9-448b1d723723"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK34｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK19｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK57｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "9463d7ac-65c9-4022-9e81-f2c3f331e06b"
+    },
+    {
+      "type": "vmess",
+      "tag": "HK90｜机房｜低风险",
+      "server": "n1761214908.wpg27.xyz",
+      "server_port": 443,
+      "uuid": "3514a93f-bb26-4442-8f99-971b2ff3388a",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "n1761214908.wpg27.xyz"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n1761214908.wpg27.xyz",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US61｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2053,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (14)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-de1.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/de1"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (21)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+EbraSha]+b2n.ir/v2ray-configs+|+83+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK66｜机房｜低风险",
+      "server": "tuntro000.instconn.com",
+      "server_port": 443,
+      "password": "469c8135-8aea-4c7f-8ec2-c5fdfa980b48"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK78｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (22)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+DukeMehdi]+b2n.ir/v2ray-configs+|+166+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1272,28 +2706,134 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_6|1.3MB/s",
+      "server": "79.110.63.79",
+      "server_port": 2255,
+      "uuid": "02b320ce-09f8-4cb5-9c46-9024f5585881",
+      "tls": {
+        "enabled": true,
+        "server_name": "radar.arvancloud.ir",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "Cs7yLk8XXPksSjf6GB1JFYyFICqWVL3nL-10K7jQ7xc",
+          "short_id": "983c9303725c67"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (15)",
+      "server": "plcdn17.suio.me",
+      "server_port": 443,
+      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
+      "tls": {
+        "enabled": true,
+        "server_name": "plcdn17.suio.me",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
       }
     },
     {
       "type": "trojan",
-      "tag": "US1｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35501,
-      "password": "5107a215-5284-44d5-b740-607bed57026e"
+      "tag": "香港5|@ripaojiedian",
+      "server": "58.152.25.220",
+      "server_port": 443,
+      "password": "BxceQaOe"
     },
     {
       "type": "trojan",
-      "tag": "US54｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
+      "tag": "US17｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35502,
+      "password": "40991964-b3be-4458-8bc7-5b1774552acf"
     },
     {
       "type": "trojan",
-      "tag": "US2｜家宽｜非常安全",
-      "server": "green2.cdntencentmusic.com",
-      "server_port": 35501,
-      "password": "843bcd0b-f2ab-482f-8262-6d09cf97f4b8"
+      "tag": "🇭🇰_香港 (23)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+EbraSha]+b2n.ir/v2ray-configs+|+166+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "HK96｜机房｜低风险",
+      "server": "n1761214905.wpg27.xyz",
+      "server_port": 443,
+      "uuid": "b1d3007c-441a-42d5-84b5-20301c46fa2c",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "n1761214905.wpg27.xyz"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "n1761214905.wpg27.xyz",
+        "insecure": true
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (16)",
+      "server": "144.31.1.121",
+      "server_port": 443,
+      "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
+      "tls": {
+        "enabled": true,
+        "server_name": "plcdn17.suio.me",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "日本2|@ripaojiedian",
+      "server": "153.121.38.213",
+      "server_port": 1933,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK_1|1.0MB/s",
+      "server": "hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "a4c9b7cc-a816-11ed-9f65-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "broadcastlv.chat.bilibili.com"
+        }
+      }
     },
     {
       "type": "vless",
@@ -1308,14 +2848,772 @@
           "enabled": true,
           "fingerprint": "chrome"
         }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560"
       }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK76｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK45｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (17)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-jp2.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/jp2"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (24)",
+      "server": "tuntro000.instconn.com",
+      "server_port": 443,
+      "password": "469c8135-8aea-4c7f-8ec2-c5fdfa980b48",
+      "tls": {
+        "enabled": true,
+        "server_name": "hkip5.686911.xyz",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_19|2.8MB/s|YT-CN|D+|X|Succeed|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (25)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "58.152.46.60",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK46｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "新加坡2|@ripaojiedian",
+      "server": "153.121.38.213",
+      "server_port": 3076,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷_KR_韩国 (1)",
+      "server": "121.170.203.148",
+      "server_port": 11815,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK54｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "2683d8cb-6c64-4749-9cb9-24dfe71a5fdb"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇭🇰HK_4|2.0MB/s",
+      "server": "212.192.15.59",
+      "server_port": 50521,
+      "method": "aes-256-gcm",
+      "password": "7e1dd4c55bf85da5"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK18｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK39｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "US4｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35502,
+      "password": "db86510f-8f0e-4e0e-9534-746dd8e4d07e"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (26)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+DukeMehdi]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US55｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (27)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "�+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+17+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK10｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "f1a09e6c-f30c-43ca-a9e4-e2015ee5c0da"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK50｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (28)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+EbraSha]+b2n.ir/v2ray-configs+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (29)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "t.me%2Fripaojiedian",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK67｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "cde8eda2-9c2e-4fae-b308-2fed2cc33e4b"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK58｜原生/疑似家宽｜非常安全",
+      "server": "cdnfire.xiaomispeed.com",
+      "server_port": 21101,
+      "password": "90e57252-bb50-4cbc-b763-4e3c72362c3b"
+    },
+    {
+      "type": "vless",
+      "tag": "🇯🇵JP²_1|6.5MB/s|0%|GPT⁺|YT-CN|X|History",
+      "server": "japan.geodema.network",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
+      "tls": {
+        "enabled": true,
+        "server_name": "japan.geodema.network",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK49｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK14｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "db86510f-8f0e-4e0e-9534-746dd8e4d07e"
     },
     {
       "type": "trojan",
       "tag": "US63｜机房｜低风险",
       "server": "bestcdn2.868863.xyz",
       "server_port": 2096,
-      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea"
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US59｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 8443,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK8｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31102,
+      "password": "843bcd0b-f2ab-482f-8262-6d09cf97f4b8"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK4｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "US_speednode_0028",
+      "server": "129.153.71.226",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "iosapps.itunes.apple.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰HK²_29|2.2MB/s|1%|YT-CN|X|History|[原生|住宅]",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK16｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK21｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇸🇬SG_3|1.7MB/s",
+      "server": "103.36.91.32",
+      "server_port": 8388,
+      "method": "chacha20-ietf",
+      "password": "asd123456"
+    },
+    {
+      "type": "trojan",
+      "tag": "US57｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇰🇷 韩国|@ripaojiedian",
+      "server": "168.126.234.247",
+      "server_port": 51978,
+      "method": "aes-256-cfb",
+      "password": "qwerREWQ@@"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇺🇸US_9|1.4MB/s",
+      "server": "920a-4BCc-9A2d-57960603C7d9.457.pP.Ua",
+      "server_port": 443,
+      "uuid": "a1d2e3cd-297e-4753-8e7a-6d9fb0f4aac1",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/kT5VHYcMrphesqROzSPoHrBo",
+        "headers": {
+          "Host": "920a-4bcc-9A2D-57960603c7d9.457.PP.ua"
+        }
+      },
+      "tls": {
+        "enabled": true,
+        "server_name": "920a-4BCc-9A2d-57960603C7d9.457.pP.Ua",
+        "insecure": true
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US1｜家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 35501,
+      "password": "5107a215-5284-44d5-b740-607bed57026e"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK65｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "2cfd8fb6-1f17-4d33-a3b9-448b1d723723"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰HK²_23|12.0MB/s|1%|GPT⁺|YT|NF|D+|X|[原生|住宅]",
+      "server": "2859af40-t70f40-tdh9w7-ahsb.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "2e42c1ee-aaaa-11ec-bb74-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "2859af40-t70f40-tdh9w7-ahsb.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK68｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "459850f0-b409-4f18-95e2-440d4ebea0cd"
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 22",
+      "server": "1eca9439-t6r5s0-taklwz-12bd.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "ea76ae7e-ea95-11ef-8b73-f23c91cfbbc9",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "1eca9439-t6r5s0-taklwz-12bd.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (30)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "�+[By+EbraSha]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US60｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 8443,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US64｜机房｜低风险",
+      "server": "bestcdn5.868863.xyz",
+      "server_port": 8443,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (18)",
+      "server": "47.83.153.19",
+      "server_port": 59750,
+      "uuid": "9e76cfb8-b7a6-40f6-c2aa-9905aa19f31b",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.amd.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "W9BjX6YmCIVsjhKMlz233Yoe0xcf0SVHfvPKqbf3vCg",
+          "short_id": ""
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK30｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vmess",
+      "tag": "中国 - 香港 - Hong Kong Telecommunications (HKT) Limited Mass Internet - 14",
+      "server": "44a1b64f-t77ts0-tb592v-4lg6.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "a4c9b7cc-a816-11ed-9f65-f23c9164ca5d",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "44a1b64f-t77ts0-tb592v-4lg6.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (19)",
+      "server": "151.101.3.8",
+      "server_port": 80,
+      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
+      "transport": {
+        "type": "ws",
+        "path": "/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (31)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+EbraSha]+b2n.ir/v2ray-configs+|+761+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮FI²_3|7.1MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (20)",
+      "server": "63.141.128.180",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "d2-us2.djwstlsweb.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/djjc/us2"
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇰🇷KR_5|1.7MB/s",
+      "server": "152.70.92.69",
+      "server_port": 80,
+      "uuid": "bb9c3993-a4b9-4dad-aeb9-ac86371ae68b",
+      "security": "auto",
+      "alter_id": 0
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "韩国|@ripaojiedian",
+      "server": "168.126.234.247",
+      "server_port": 51978,
+      "method": "ss",
+      "password": "//YWVzLTI1Ni1jZmI6cXdlclJFV1FAQA"
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (32)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "+++++++[By+EbraSha]+trojan-HK+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "US56｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "d5d48bc6-87e7-4b40-ad03-d0628532e8ea",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "🇭🇰_香港 (33)",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "🔒",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "🇻🇳VN²_9|1.1MB/s|GPT⁺|GM|YT-US|X|[原生|机房]",
+      "server": "103.186.155.215",
+      "server_port": 38388,
+      "method": "aes-256-cfb",
+      "password": "Xn8jKdmDM00IeO%#$#fJAMtsEAEUOpH/YWYtYqDFnT0SV"
+    },
+    {
+      "type": "trojan",
+      "tag": "HK64｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31103,
+      "password": "db86510f-8f0e-4e0e-9534-746dd8e4d07e"
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰 HK²_30|4.3MB/s|0%|YT|X|[原生|住宅]",
+      "server": "71ac3d4f-t6r5s0-t85e8f-141tv.hkt.gotochinatown.net",
+      "server_port": 80,
+      "uuid": "bd77bfe8-e0f3-11ec-bd7c-f23c913c8d2b",
+      "security": "auto",
+      "alter_id": 0,
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "71ac3d4f-t6r5s0-t85e8f-141tv.hkt.gotochinatown.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (21)",
+      "server": "japan.geodema.network",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
+      "tls": {
+        "enabled": true,
+        "server_name": "japan.geodema.network",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK22｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "vless",
+      "tag": "🇯🇵JP_1|5.0MB/s",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/"
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_美国 (22)",
+      "server": "129.153.71.226",
+      "server_port": 443,
+      "uuid": "080d1733-7509-4c7b-8c7e-5a1f415efc80",
+      "tls": {
+        "enabled": true,
+        "server_name": "iosapps.itunes.apple.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "qkP2pqQ3NHNBkyzqsC2W9wChp3OfeXdVjOhUv8vQW0o",
+          "short_id": "aac4df9d05a5ba8f"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "HK69｜原生/疑似家宽｜非常安全",
+      "server": "green2.cdntencentmusic.com",
+      "server_port": 31101,
+      "password": "0a10af44-d4c6-4803-aca4-abc92983bc5c"
+    },
+    {
+      "type": "vless",
+      "tag": "🇭🇰HK_2|1.6MB/s",
+      "server": "161.248.63.15",
+      "server_port": 41579,
+      "uuid": "f64cdd9d-57c3-45b2-e999-c46006719646",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.icloud.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "3W_eKpL975AF7oI-mkgVtf2iK954luxwaT6C41re0RI",
+          "short_id": "2efb6c97c1"
+        }
+      }
+    },
+    {
+      "type": "vmess",
+      "tag": "🇭🇰 香港|@ripaojiedian",
+      "server": "v10.hdacd.com",
+      "server_port": 30807,
+      "uuid": "cbb3f877-d1fb-344c-87a9-d153bffd5484",
+      "security": "auto",
+      "alter_id": 0
     }
   ],
   "route": {
@@ -1337,29 +3635,28 @@
       }
     ],
     "final": "proxy",
-    "auto_detect_interface": true,
-    "default_domain_resolver": "dns_local"
+    "auto_detect_interface": true
   },
   "rule_set": [
     {
       "tag": "geoip-cn",
       "type": "remote",
       "format": "binary",
-      "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+      "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
       "download_detour": "direct"
     },
     {
       "tag": "geosite-cn",
       "type": "remote",
       "format": "binary",
-      "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+      "url": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
       "download_detour": "direct"
     },
     {
       "tag": "ad-rules",
       "type": "remote",
       "format": "binary",
-      "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs",
+      "url": "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs",
       "download_detour": "direct"
     }
   ]
