@@ -17,17 +17,18 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 资源与 DNS 配置
+# 资源与 DNS 链接
 AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-ALI_DOH = "https://dns.alidns.com/dns-query" 
-ALI_IP = "223.5.5.5" 
+ALI_DOH = "https://dns.alidns.com/dns-query" # 国内 DoH
+CF_DOH = "https://1.1.1.1/dns-query"      # 国外 DoH
+ALI_IP = "223.5.5.5"                      # 阿里基础 DNS
 
-# 测速配置 (已调整为 500ms 严选模式)
-TIMEOUT = 0.5        # 建立连接的超时时间 (秒)
-MAX_LATENCY = 500    # 允许的最大延迟 (毫秒)，超过此值的节点将被丢弃
-MAX_WORKERS = 60     # 并发线程数
+# 测速配置 (500ms 严选)
+TIMEOUT = 0.5        
+MAX_LATENCY = 500    
+MAX_WORKERS = 60     
 
-# 地区过滤正则表达式 (仅保留美、日、韩)
+# 地区过滤 (仅保留美、日、韩)
 REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States", re.I)
 
 # --- sing-box 1.12.x 现代配置模板 ---
@@ -35,15 +36,19 @@ SB_TEMPLATE = {
     "log": {"level": "info", "timestamp": True},
     "dns": {
         "servers": [
-            {"tag": "dns_proxy", "address": ALI_DOH, "address_resolver": "dns_direct", "detour": "proxy"},
-            {"tag": "dns_direct", "address": ALI_IP, "detour": "direct"},
+            # 1. 国外 DNS: Cloudflare DoH (通过代理出站，解析国外域名)
+            {"tag": "dns_proxy", "address": CF_DOH, "address_resolver": "dns_local", "detour": "proxy"},
+            # 2. 国内 DNS: 阿里 DoH (直连出站，解析国内域名)
+            {"tag": "dns_direct", "address": ALI_DOH, "address_resolver": "dns_local", "detour": "direct"},
+            # 3. 本地解析器: 用于解析上述 DoH 自身的域名
+            {"tag": "dns_local", "address": ALI_IP, "detour": "direct"},
             {"tag": "dns_fakeip", "address": "fakeip"}
         ],
         "rules": [
-            {"outbound": "any", "server": "dns_direct"},
-            {"rule_set": "geosite-cn", "server": "dns_direct"},
-            {"rule_set": "ad-rules", "server": "dns_direct", "action": "reject"},
-            {"query_type": ["A", "AAAA"], "server": "dns_proxy"}
+            {"outbound": "any", "server": "dns_local"},
+            {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"}, # 广告拦截
+            {"rule_set": "geosite-cn", "server": "dns_direct"},                 # 中国域名走阿里
+            {"query_type": ["A", "AAAA"], "server": "dns_proxy"}                # 其余默认走 CF
         ],
         "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
     },
@@ -85,7 +90,7 @@ def decode_base64(data):
     except: return ""
 
 def check_node(node_link):
-    """使用阿里 DNS 解析并严格测量 TCP 延迟"""
+    """测速逻辑：解析节点地址并测试 TCP 握手延迟"""
     try:
         if "vmess://" in node_link:
             data = json.loads(base64.b64decode(node_link[8:]).decode())
@@ -94,51 +99,41 @@ def check_node(node_link):
             u = urlparse(node_link)
             host, port = u.hostname, u.port
 
-        # 1. 使用阿里 DNS 解析
+        # 解析域名获取 IP
         if not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
-            resolver = dns.resolver.Resolver()
-            resolver.nameservers = [ALI_IP]
+            resolver = dns.resolver.Resolver(); resolver.nameservers = [ALI_IP]
             answer = resolver.resolve(host, 'A')
             ip = str(answer[0])
-        else:
-            ip = host
+        else: ip = host
 
-        # 2. 测量握手延迟
+        # 测量连接耗时
         start_time = time.time()
         with socket.create_connection((ip, port), timeout=TIMEOUT):
             latency = (time.time() - start_time) * 1000
-            
-        # 3. 500ms 阈值判断
-        if latency <= MAX_LATENCY:
-            return node_link
-    except:
-        return None
+        
+        if latency <= MAX_LATENCY: return node_link
+    except: return None
     return None
 
 def parse_to_outbound(link):
+    """将通用链接转换为 sing-box outbound 格式"""
     try:
         if link.startswith("vmess://"):
             data = json.loads(base64.b64decode(link[8:]).decode())
             tag = data.get('ps', 'Node')
         else:
-            u = urlparse(link)
-            tag = unquote(u.fragment) or "Node"
+            u = urlparse(link); tag = unquote(u.fragment) or "Node"
         
         if not REGION_RE.search(tag): return None
 
         if link.startswith("vmess://"):
             data = json.loads(base64.b64decode(link[8:]).decode())
-            node = {
-                "type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']),
-                "uuid": data['id'], "security": "auto", "alter_id": 0
-            }
+            node = {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto", "alter_id": 0}
             if data.get('net') and data['net'] != "tcp": node["transport"] = {"type": data['net']}
             if data.get('tls') == "tls": node["tls"] = {"enabled": True, "server_name": data.get('sni', data['add'])}
             return node
-            
         elif link.startswith(("vless://", "trojan://")):
-            u = urlparse(link); q = parse_qs(u.query)
-            protocol = u.scheme
+            u = urlparse(link); q = parse_qs(u.query); protocol = u.scheme
             node = {"type": protocol, "tag": tag, "server": u.hostname, "server_port": int(u.port)}
             if protocol == "vless": node["uuid"] = u.username
             else: node["password"] = u.username
@@ -151,38 +146,38 @@ def main():
     all_nodes = []
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'}
     
+    # 抓取节点
     for url in SOURCES:
         try:
             r = requests.get(url, headers=headers, timeout=10)
             if r.status_code == 200:
-                content = r.text.strip()
-                decoded = decode_base64(content) or content
+                content = r.text.strip(); decoded = decode_base64(content) or content
                 all_nodes.extend([l.strip() for l in decoded.splitlines() if "://" in l])
         except: continue
         
+    # 去重测速
     all_nodes = list(set(all_nodes))
-    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, all_nodes)) if r]
 
+    # 构建配置
     outbounds, tags = [], []
     for l in alive:
         o = parse_to_outbound(l)
         if o:
             t = o['tag']; i = 1
             while t in tags: t = f"{o['tag']} {i}"; i += 1
-            o['tag'] = t
-            outbounds.append(o)
-            tags.append(t)
+            o['tag'] = t; outbounds.append(o); tags.append(t)
 
     config = SB_TEMPLATE.copy()
     config['outbounds'].extend(outbounds)
     config['outbounds'][0]['outbounds'].extend(tags)
     config['outbounds'][1]['outbounds'].extend(tags)
 
+    # 保存
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"筛选完成！已保留延迟低于 500ms 的 {len(tags)} 个美/日/韩节点。")
+    print(f"筛选完成！已生成 config.json，包含 {len(tags)} 个 500ms 内的美/日/韩节点。")
 
 if __name__ == "__main__":
     main()
