@@ -17,25 +17,23 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 资源链接 (已替换为 v6.gh-proxy.org 镜像)
+# 资源链接 (使用镜像并强制直连)
 AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 GEOIP_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
-# DNS 配置
-ALI_DOH = "https://dns.alidns.com/dns-query"
-CF_DOH = "https://1.1.1.1/dns-query"
+# DNS 设置
 ALI_IP = "223.5.5.5"
+CF_DOH = "https://1.1.1.1/dns-query"
+ALI_DOH = "https://dns.alidns.com/dns-query"
 
-# 测速配置
-TIMEOUT = 0.5      # 握手超时
-MAX_LATENCY = 500  # 严选阈值
-MAX_WORKERS = 50   
-
-# 地区过滤
+# 测速
+TIMEOUT = 0.5
+MAX_LATENCY = 500
+MAX_WORKERS = 50
 REGION_RE = re.compile(r"日本|JP|Japan|韩国|KR|Korea|美国|US|United States", re.I)
 
-# --- sing-box 1.12.x 配置模板 ---
+# --- 现代配置模板 ---
 SB_TEMPLATE = {
     "log": {"level": "info", "timestamp": True},
     "dns": {
@@ -46,7 +44,7 @@ SB_TEMPLATE = {
             {"tag": "dns_fakeip", "address": "fakeip"}
         ],
         "rules": [
-            {"outbound": "any", "server": "dns_local"},
+            {"outbound": "any", "server": "dns_local"}, # 所有的出站解析优先走本地
             {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
             {"rule_set": "geosite-cn", "server": "dns_direct"},
             {"query_type": ["A", "AAAA"], "server": "dns_proxy"}
@@ -73,13 +71,14 @@ SB_TEMPLATE = {
             {"rule_set": "ad-rules", "outbound": "block-out"},
             {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
         ],
-        "rule_set": [
-            {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"}, # 走国内
-            {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"}, # 走国内
-            {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"} # 走国内
-        ],
         "auto_detect_interface": True
-    }
+    },
+    # 移出到顶层，修复弃用警告
+    "rule_set": [
+        {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
+        {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
+        {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
+    ]
 }
 
 def decode_base64(data):
@@ -98,33 +97,31 @@ def check_node(node_link):
         else:
             u = urlparse(node_link)
             host, port = u.hostname, u.port
-
+        if not host or not port: return None
+        # 使用基础 DNS 预解析，防止 socket 堵塞
+        ip = host
         if not re.match(r"^\d{1,3}(\.\d{1,3}){3}$", host):
-            resolver = dns.resolver.Resolver(); resolver.nameservers = [ALI_IP]
-            answer = resolver.resolve(host, 'A')
-            ip = str(answer[0])
-        else: ip = host
-
+            resolver = dns.resolver.Resolver(); resolver.nameservers = [ALI_IP]; resolver.timeout = 0.5
+            answer = resolver.resolve(host, 'A'); ip = str(answer[0])
         start_time = time.time()
         with socket.create_connection((ip, port), timeout=TIMEOUT):
-            latency = (time.time() - start_time) * 1000
-        if latency <= MAX_LATENCY: return node_link
+            return node_link if (time.time() - start_time) * 1000 <= MAX_LATENCY else None
     except: return None
 
 def parse_to_outbound(link):
     try:
         if link.startswith("vmess://"):
             data = json.loads(base64.b64decode(link[8:]).decode())
-            tag = data.get('ps', 'Node')
+            tag = data.get('ps', 'VMess-Node')
             if not REGION_RE.search(tag): return None
-            node = {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto"}
-            if data.get('tls') == "tls": node["tls"] = {"enabled": True, "server_name": data.get('sni', data['add'])}
+            node = {"type": "vmess", "tag": tag, "server": data['add'], "server_port": int(data['port']), "uuid": data['id'], "security": "auto", "alter_id": 0}
+            if data.get('tls') == "tls": node["tls"] = {"enabled": True, "server_name": data.get('sni', data['add']), "utls": {"enabled": True, "fingerprint": "chrome"}}
+            if data.get('net') and data['net'] != "tcp": node["transport"] = {"type": data['net']}
             return node
         elif link.startswith("ss://"):
-            u = urlparse(link)
-            tag = unquote(u.fragment) or "SS-Node"
+            u = urlparse(link); tag = unquote(u.fragment) or "SS-Node"
             if not REGION_RE.search(tag): return None
-            user_info = decode_base64(u.username) if ":" not in u.username else u.username
+            user_info = decode_base64(u.username) if ":" not in (u.username or "") else u.username
             method, password = user_info.split(":", 1)
             return {"type": "shadowsocks", "tag": tag, "server": u.hostname, "server_port": u.port, "method": method, "password": password}
         elif link.startswith(("vless://", "trojan://")):
@@ -140,19 +137,19 @@ def parse_to_outbound(link):
     except: return None
 
 def main():
+    print("开始抓取节点...")
     all_nodes = []
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    
     for url in SOURCES:
         try:
-            r = requests.get(url, headers=headers, timeout=10)
+            r = requests.get(url, timeout=10)
             if r.status_code == 200:
-                content = r.text.strip()
-                decoded = decode_base64(content) or content
+                content = r.text.strip(); decoded = decode_base64(content) or content
                 all_nodes.extend([l.strip() for l in decoded.splitlines() if "://" in l])
         except: continue
     
     all_nodes = list(set(all_nodes))
+    print(f"原始节点数: {len(all_nodes)}，正在进行测速筛选...")
+    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         alive = [r for r in list(ex.map(check_node, all_nodes)) if r]
 
@@ -171,7 +168,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"筛选完成！包含 {len(tags)} 个美/日/韩节点。资源下载已设置为直连。")
+    print(f"任务完成！已生成 config.json，包含 {len(tags)} 个有效节点。")
 
 if __name__ == "__main__":
     main()
