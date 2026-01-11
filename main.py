@@ -23,8 +23,8 @@ GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNe
 
 # 严格过滤参数
 MAX_LATENCY = 0.2  # 200ms
-TIMEOUT = 1.0      # 1秒超时
-MAX_WORKERS = 60
+TIMEOUT = 0.4      # 1秒超时
+MAX_WORKERS = 80
 
 # 仅保留：日本、美国、香港、韩国
 REGION_RE = re.compile(r"日本|JP|Japan|美国|US|United States|香港|HK|HongKong|韩国|KR|Korea", re.I)
