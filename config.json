@@ -70,82 +70,166 @@
       "tag": "proxy",
       "outbounds": [
         "auto-test",
-        "[5ms] 🇯🇵JP_2|4.4MB/s",
-        "[5ms] 🇺🇸_美国",
-        "[5ms] 🇺🇸US_1|5.0MB/s",
-        "[5ms] 🇺🇸_US_美国",
-        "[5ms] 🇺🇸US_2|2.5MB/s",
-        "[5ms] US_speednode_0013",
-        "[5ms] 🇭🇰HK¹-US⁰_1|7.7MB/s|GPT⁺|YT|D+|X|History",
-        "[5ms] US_speednode_0014",
-        "[5ms] 🇺🇸US_9|2.5MB/s",
-        "[5ms] 🇺🇸US¹⁺_5|2.2MB/s|3%|GPT|GM|YT-HK|D+|X|History",
-        "[5ms] US66｜机房｜低风险",
-        "[6ms] 🇺🇸_US_美国",
-        "[6ms] 🇺🇸US_8|3.1MB/s",
-        "[6ms] 🇺🇸US_7|1.4MB/s",
-        "[6ms] 🇺🇸US¹⁺_2|2.7MB/s|3%|GPT⁺|YT-HK|NF|D+|X|History|[原生|机房]",
-        "[6ms] US79｜机房｜低风险",
-        "[6ms] US16｜机房｜低风险",
-        "[6ms] US18｜机房｜低风险",
-        "[6ms] US30｜机房｜低风险",
-        "[6ms] 🇺🇸US¹⁺_4|6.1MB/s|3%|GPT|GM|YT-HK|D+|X|Succeed",
-        "[6ms] US31｜机房｜低风险",
-        "[6ms] 🇺🇸_US_美国_1",
-        "[6ms] US21｜机房｜低风险",
-        "[6ms] US70｜机房｜低风险",
-        "[6ms] US78｜机房｜低风险",
-        "[6ms] US64｜机房｜低风险",
-        "[6ms] US71｜机房｜低风险",
-        "[6ms] US75｜机房｜低风险",
-        "[7ms] US32｜机房｜低风险",
-        "[8ms] 🇰🇷_韩国",
-        "[8ms] 🇰🇷_韩国_1",
-        "[9ms] 🇰🇷_韩国",
-        "[10ms] 🇺🇸_美国",
-        "[11ms] US67｜机房｜低风险",
-        "[17ms] 🇺🇸US_4|1.8MB/s",
-        "[17ms] 🇺🇸US_5|1.7MB/s",
-        "[17ms] 🇺🇸US¹⁺_3|5.8MB/s|3%|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+        "[16ms] 🇺🇸_美国",
+        "[16ms] 🇯🇵JP_3|6.8MB/s",
+        "[17ms] 🇸🇬SG¹-KR⁰_1|13.3MB/s|GM|YT|D+|X|History|[广播|机房]",
+        "[17ms] 🇺🇸_美国",
+        "[17ms] 🇯🇵JP_4|4.6MB/s",
+        "[17ms] 🇺🇸US¹-SG⁰_1|6.7MB/s|3%|GPT⁺|GM|D+|X|[广播|机房]",
         "[17ms] 🇺🇸_US_美国",
-        "[18ms] US27｜机房｜低风险",
-        "[19ms] 🇺🇸_美国",
-        "[19ms] 🇺🇸_美国_1",
+        "[17ms] 🇺🇸_US_美国_1",
+        "[17ms] 🇺🇸_美国_1",
+        "[17ms] US_speednode_0013",
+        "[17ms] 🇺🇸US¹⁺_5|1.0MB/s|3%|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+        "[17ms] US16｜机房｜低风险",
+        "[17ms] 🇩🇪DE²_8|4.1MB/s|25%|GPT⁺|YT-US|X|[原生|机房]",
+        "[17ms] 🇺🇸US¹⁺_1|4.4MB/s|3%|GPT|GM|YT|D+|X|Succeed|[原生|机房]",
+        "[17ms] US78｜机房｜低风险",
+        "[17ms] 🇭🇰HK¹-US⁰_2|1.6MB/s|GPT|D+|X|Succeed",
+        "[18ms] 🇭🇰HK¹-US⁰_1|4.9MB/s|GPT|D+|X|Succeed|[原生|机房]",
+        "[18ms] US79｜机房｜低风险",
+        "[18ms] 🇸🇬SG¹-JP⁰_1|2.7MB/s|GM|YT|D+|X|History",
+        "[18ms] 🇺🇸_US_美国",
+        "[18ms] US20｜机房｜低风险",
         "[19ms] 🇰🇷_韩国",
-        "[28ms] 🇺🇸US¹⁺_1|4.2MB/s|3%|GPT⁺|YT|TK|D+|X|History|[原生|机房]",
-        "[28ms] 🇺🇸US¹⁺_6|3.2MB/s|GPT⁺|GM|YT|TK|D+|X|History|[原生|机房]",
-        "[30ms] 🇯🇵JP_3|3.3MB/s",
-        "[32ms] US69｜机房｜低风险",
-        "[33ms] 🇺🇸_美国",
-        "[39ms] US20｜机房｜低风险",
-        "[43ms] 🇰🇷_韩国",
-        "[49ms] US28｜机房｜低风险",
-        "[49ms] 🇯🇵JP_1|4.3MB/s",
-        "[53ms] US102｜机房｜低风险",
-        "[57ms] US103｜机房｜低风险",
-        "[79ms] 🇺🇸_美国",
-        "[87ms] 🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
-        "[87ms] 🇫🇮FI²_2|6.5MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-        "[88ms] 🇺🇸_美国",
-        "[97ms] 🇺🇸_美国",
-        "[102ms] 🇬🇧GB¹-US⁰_1|4.0MB/s|0%|GPT⁺|TK|NF|D+|X|Succeed|[广播|机房]",
-        "[105ms] US76｜机房｜低风险",
-        "[114ms] 🇺🇸_美国",
-        "[148ms] US23｜机房｜低风险",
-        "[157ms] 🇺🇸_美国",
-        "[159ms] US_speednode_0015",
-        "[159ms] 美国2|@ripaojiedian",
-        "[159ms] 日本2|@ripaojiedian",
-        "[159ms] 日本3|@ripaojiedian",
-        "[160ms] 美国|@ripaojiedian",
-        "[160ms] 🇺🇸_美国",
+        "[19ms] US69｜机房｜低风险",
+        "[19ms] 🇰🇷_韩国_1",
+        "[19ms] US68｜机房｜低风险",
+        "[19ms] 🇺🇸_美国",
+        "[20ms] US_speednode_0014",
+        "[20ms] 🇺🇸US¹⁺_4|1.2MB/s|GPT|GM|YT|D+|X|Succeed|[原生|机房]",
+        "[21ms] 🇺🇸_US_美国",
+        "[23ms] 🇯🇵JP_1|7.4MB/s",
+        "[23ms] 🇯🇵JP_2|7.2MB/s",
+        "[23ms] 🇺🇸US¹⁺_2|4.9MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
+        "[24ms] 🇺🇸US¹⁺_3|4.0MB/s|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+        "[24ms] 🇺🇸US¹⁺_6|4.9MB/s|3%|GPT⁺|GM|YT|NF|D+|X|History|[原生|机房]",
+        "[24ms] US27｜机房｜低风险",
+        "[24ms] 🇬🇧GB¹-US⁰_2|5.0MB/s|GPT|NF|D+|X|History|[广播|机房]",
+        "[25ms] 🇺🇸US¹⁺_7|3.8MB/s|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
+        "[27ms] US66｜机房｜低风险",
+        "[38ms] US102｜机房｜低风险",
+        "[41ms] US103｜机房｜低风险",
+        "[59ms] 🇺🇸_US_美国",
+        "[60ms] US64｜机房｜低风险",
+        "[66ms] 🇺🇸US¹-SG⁰_2|2.3MB/s|GM|NF|D+|X|[原生|机房]",
+        "[75ms] 🇺🇸US_1|3.3MB/s",
+        "[85ms] 🇭🇰HK¹-SG⁰_1|6.7MB/s|3%|GPT|YT|D+|X",
+        "[86ms] 🇰🇷_韩国",
+        "[90ms] 🇺🇸_美国",
+        "[90ms] 🇺🇸_US_美国",
+        "[96ms] 🇺🇸_美国",
+        "[99ms] 🇰🇷_韩国",
+        "[107ms] 🇺🇸_美国",
+        "[115ms] 🇰🇷_韩国",
+        "[118ms] 🇺🇸_美国",
+        "[119ms] 美国2|@ripaojiedian",
+        "[119ms] 日本3|@ripaojiedian",
+        "[120ms] US_speednode_0015",
+        "[122ms] 🇺🇸_美国",
+        "[123ms] 日本2|@ripaojiedian",
+        "[124ms] 🇺🇸_美国",
+        "[125ms] 美国|@ripaojiedian",
+        "[129ms] 🇫🇮FI²_4|6.9MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "[130ms] 🇫🇮FI²_7|6.9MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+        "[133ms] 🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "[135ms] 🇫🇮FI²_6|7.0MB/s|7%|GPT⁺|YT-US|TK|NF|X|History|[广播|机房]",
+        "[136ms] 🇫🇮FI²_3|6.5MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+        "[139ms] 🇬🇧GB¹-US⁰_1|1.8MB/s|GPT⁺|NF|D+|X|Succeed|[广播|机房]",
+        "[143ms] US32｜机房｜低风险",
+        "[153ms] 🇺🇸_美国",
+        "[163ms] 🇭🇰_香港",
         "[165ms] 🇺🇸_US_美国",
-        "[170ms] 🇺🇸_US_美国",
-        "[172ms] 🇺🇸_US_美国",
-        "[178ms] 🇺🇸US_11|3.7MB/s",
-        "[180ms] 🇰🇷_韩国",
-        "[181ms] 🇰🇷_韩国",
-        "[183ms] 🇺🇸US_10|2.2MB/s",
+        "[167ms] 🇭🇰_香港",
+        "[172ms] 🇰🇷_韩国",
+        "[172ms] 香港3|@ripaojiedian",
+        "[182ms] HK25｜家宽｜非常安全",
+        "[183ms] HK31｜家宽｜非常安全",
+        "[184ms] HK58｜家宽｜非常安全",
+        "[184ms] US70｜机房｜低风险",
+        "[185ms] HK33｜家宽｜非常安全",
+        "[185ms] 🇭🇰_香港",
+        "[185ms] HK57｜家宽｜非常安全",
+        "[185ms] 🇭🇰HK²_3|0.6MB/s|1%|YT-CN|X|History",
+        "[185ms] 🇭🇰HK²_4|4.1MB/s|1%|X|History",
+        "[185ms] HK83｜家宽｜非常安全",
+        "[185ms] HK52｜家宽｜非常安全",
+        "[185ms] HK77｜家宽｜非常安全",
+        "[185ms] HK84｜家宽｜非常安全",
+        "[186ms] HK92｜家宽｜非常安全",
+        "[186ms] HK76｜家宽｜非常安全",
+        "[186ms] HK90｜家宽｜非常安全",
+        "[186ms] HK70｜家宽｜非常安全",
+        "[186ms] HK22｜家宽｜非常安全",
+        "[186ms] HK49｜家宽｜非常安全",
+        "[186ms] HK80｜家宽｜非常安全",
+        "[186ms] HK45｜家宽｜非常安全",
+        "[186ms] HK71｜家宽｜非常安全",
+        "[186ms] HK26｜家宽｜非常安全",
+        "[186ms] HK35｜家宽｜非常安全",
+        "[186ms] HK34｜家宽｜非常安全",
+        "[187ms] HK50｜家宽｜非常安全",
+        "[187ms] HK59｜家宽｜非常安全",
+        "[187ms] HK67｜家宽｜非常安全",
+        "[187ms] 🇭🇰_香港",
+        "[187ms] 🇭🇰HK²_5|0.8MB/s|1%|D+|X|Succeed",
+        "[187ms] HK37｜家宽｜非常安全",
+        "[187ms] HK20｜家宽｜非常安全",
+        "[188ms] HK97｜家宽｜非常安全",
+        "[188ms] HK47｜家宽｜非常安全",
+        "[188ms] HK51｜家宽｜非常安全",
+        "[188ms] 🇭🇰_香港",
+        "[188ms] HK91｜家宽｜非常安全",
+        "[188ms] HK21｜家宽｜非常安全",
+        "[188ms] HK46｜家宽｜非常安全",
+        "[188ms] HK30｜家宽｜非常安全",
+        "[189ms] HK86｜家宽｜非常安全",
+        "[189ms] HK78｜家宽｜非常安全",
+        "[189ms] 🇭🇰HK²_25|0.6MB/s|X|History",
+        "[189ms] 🇭🇰HK²_1|0.5MB/s|1%|D+|X|History",
+        "[189ms] HK74｜家宽｜非常安全",
+        "[189ms] HK93｜家宽｜非常安全",
+        "[189ms] HK43｜家宽｜非常安全",
+        "[189ms] HK61｜家宽｜非常安全",
+        "[189ms] HK3｜家宽｜非常安全",
+        "[189ms] HK94｜家宽｜非常安全",
+        "[189ms] 🇭🇰HK²_7|0.5MB/s|1%|YT-CN|D+|X|History",
+        "[189ms] HK87｜家宽｜非常安全",
+        "[190ms] 🇯🇵_日本",
+        "[190ms] HK54｜家宽｜非常安全",
+        "[190ms] HK56｜家宽｜非常安全",
+        "[190ms] HK63｜家宽｜非常安全",
+        "[190ms] HK44｜家宽｜非常安全",
+        "[190ms] HK98｜家宽｜非常安全",
+        "[190ms] HK5｜家宽｜非常安全",
+        "[190ms] HK65｜家宽｜非常安全",
+        "[190ms] 🇭🇰HK²_6|1.1MB/s|1%|YT-CN|D+|X",
+        "[190ms] 🇭🇰_香港",
+        "[190ms] HK73｜家宽｜非常安全",
+        "[190ms] HK99｜家宽｜非常安全",
+        "[190ms] HK41｜家宽｜非常安全",
+        "[190ms] HK38｜家宽｜非常安全",
+        "[191ms] HK2｜家宽｜非常安全",
+        "[191ms] HK96｜家宽｜非常安全",
+        "[191ms] HK23｜家宽｜非常安全",
+        "[191ms] HK60｜家宽｜非常安全",
+        "[191ms] HK75｜家宽｜非常安全",
+        "[191ms] HK72｜家宽｜非常安全",
+        "[191ms] HK39｜家宽｜非常安全",
+        "[191ms] HK40｜家宽｜非常安全",
+        "[192ms] 🇭🇰HK²_21|0.6MB/s|1%|D+|X|History",
+        "[193ms] HK24｜家宽｜非常安全",
+        "[193ms] 🇭🇰HK²_23|0.5MB/s|1%|D+|X|History",
+        "[193ms] HK28｜家宽｜非常安全",
+        "[193ms] HK85｜家宽｜非常安全",
+        "[193ms] HK29｜家宽｜非常安全",
+        "[195ms] 🇭🇰_香港",
+        "[196ms] HK42｜家宽｜非常安全",
+        "[196ms] HK36｜家宽｜非常安全",
+        "[196ms] HK69｜家宽｜非常安全",
+        "[197ms] HK53｜家宽｜非常安全",
+        "[197ms] HK81｜家宽｜非常安全",
+        "[198ms] HK68｜家宽｜非常安全",
         "direct"
       ]
     },
@@ -153,82 +237,166 @@
       "type": "urltest",
       "tag": "auto-test",
       "outbounds": [
-        "[5ms] 🇯🇵JP_2|4.4MB/s",
-        "[5ms] 🇺🇸_美国",
-        "[5ms] 🇺🇸US_1|5.0MB/s",
-        "[5ms] 🇺🇸_US_美国",
-        "[5ms] 🇺🇸US_2|2.5MB/s",
-        "[5ms] US_speednode_0013",
-        "[5ms] 🇭🇰HK¹-US⁰_1|7.7MB/s|GPT⁺|YT|D+|X|History",
-        "[5ms] US_speednode_0014",
-        "[5ms] 🇺🇸US_9|2.5MB/s",
-        "[5ms] 🇺🇸US¹⁺_5|2.2MB/s|3%|GPT|GM|YT-HK|D+|X|History",
-        "[5ms] US66｜机房｜低风险",
-        "[6ms] 🇺🇸_US_美国",
-        "[6ms] 🇺🇸US_8|3.1MB/s",
-        "[6ms] 🇺🇸US_7|1.4MB/s",
-        "[6ms] 🇺🇸US¹⁺_2|2.7MB/s|3%|GPT⁺|YT-HK|NF|D+|X|History|[原生|机房]",
-        "[6ms] US79｜机房｜低风险",
-        "[6ms] US16｜机房｜低风险",
-        "[6ms] US18｜机房｜低风险",
-        "[6ms] US30｜机房｜低风险",
-        "[6ms] 🇺🇸US¹⁺_4|6.1MB/s|3%|GPT|GM|YT-HK|D+|X|Succeed",
-        "[6ms] US31｜机房｜低风险",
-        "[6ms] 🇺🇸_US_美国_1",
-        "[6ms] US21｜机房｜低风险",
-        "[6ms] US70｜机房｜低风险",
-        "[6ms] US78｜机房｜低风险",
-        "[6ms] US64｜机房｜低风险",
-        "[6ms] US71｜机房｜低风险",
-        "[6ms] US75｜机房｜低风险",
-        "[7ms] US32｜机房｜低风险",
-        "[8ms] 🇰🇷_韩国",
-        "[8ms] 🇰🇷_韩国_1",
-        "[9ms] 🇰🇷_韩国",
-        "[10ms] 🇺🇸_美国",
-        "[11ms] US67｜机房｜低风险",
-        "[17ms] 🇺🇸US_4|1.8MB/s",
-        "[17ms] 🇺🇸US_5|1.7MB/s",
-        "[17ms] 🇺🇸US¹⁺_3|5.8MB/s|3%|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+        "[16ms] 🇺🇸_美国",
+        "[16ms] 🇯🇵JP_3|6.8MB/s",
+        "[17ms] 🇸🇬SG¹-KR⁰_1|13.3MB/s|GM|YT|D+|X|History|[广播|机房]",
+        "[17ms] 🇺🇸_美国",
+        "[17ms] 🇯🇵JP_4|4.6MB/s",
+        "[17ms] 🇺🇸US¹-SG⁰_1|6.7MB/s|3%|GPT⁺|GM|D+|X|[广播|机房]",
         "[17ms] 🇺🇸_US_美国",
-        "[18ms] US27｜机房｜低风险",
-        "[19ms] 🇺🇸_美国",
-        "[19ms] 🇺🇸_美国_1",
+        "[17ms] 🇺🇸_US_美国_1",
+        "[17ms] 🇺🇸_美国_1",
+        "[17ms] US_speednode_0013",
+        "[17ms] 🇺🇸US¹⁺_5|1.0MB/s|3%|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+        "[17ms] US16｜机房｜低风险",
+        "[17ms] 🇩🇪DE²_8|4.1MB/s|25%|GPT⁺|YT-US|X|[原生|机房]",
+        "[17ms] 🇺🇸US¹⁺_1|4.4MB/s|3%|GPT|GM|YT|D+|X|Succeed|[原生|机房]",
+        "[17ms] US78｜机房｜低风险",
+        "[17ms] 🇭🇰HK¹-US⁰_2|1.6MB/s|GPT|D+|X|Succeed",
+        "[18ms] 🇭🇰HK¹-US⁰_1|4.9MB/s|GPT|D+|X|Succeed|[原生|机房]",
+        "[18ms] US79｜机房｜低风险",
+        "[18ms] 🇸🇬SG¹-JP⁰_1|2.7MB/s|GM|YT|D+|X|History",
+        "[18ms] 🇺🇸_US_美国",
+        "[18ms] US20｜机房｜低风险",
         "[19ms] 🇰🇷_韩国",
-        "[28ms] 🇺🇸US¹⁺_1|4.2MB/s|3%|GPT⁺|YT|TK|D+|X|History|[原生|机房]",
-        "[28ms] 🇺🇸US¹⁺_6|3.2MB/s|GPT⁺|GM|YT|TK|D+|X|History|[原生|机房]",
-        "[30ms] 🇯🇵JP_3|3.3MB/s",
-        "[32ms] US69｜机房｜低风险",
-        "[33ms] 🇺🇸_美国",
-        "[39ms] US20｜机房｜低风险",
-        "[43ms] 🇰🇷_韩国",
-        "[49ms] US28｜机房｜低风险",
-        "[49ms] 🇯🇵JP_1|4.3MB/s",
-        "[53ms] US102｜机房｜低风险",
-        "[57ms] US103｜机房｜低风险",
-        "[79ms] 🇺🇸_美国",
-        "[87ms] 🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
-        "[87ms] 🇫🇮FI²_2|6.5MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-        "[88ms] 🇺🇸_美国",
-        "[97ms] 🇺🇸_美国",
-        "[102ms] 🇬🇧GB¹-US⁰_1|4.0MB/s|0%|GPT⁺|TK|NF|D+|X|Succeed|[广播|机房]",
-        "[105ms] US76｜机房｜低风险",
-        "[114ms] 🇺🇸_美国",
-        "[148ms] US23｜机房｜低风险",
-        "[157ms] 🇺🇸_美国",
-        "[159ms] US_speednode_0015",
-        "[159ms] 美国2|@ripaojiedian",
-        "[159ms] 日本2|@ripaojiedian",
-        "[159ms] 日本3|@ripaojiedian",
-        "[160ms] 美国|@ripaojiedian",
-        "[160ms] 🇺🇸_美国",
+        "[19ms] US69｜机房｜低风险",
+        "[19ms] 🇰🇷_韩国_1",
+        "[19ms] US68｜机房｜低风险",
+        "[19ms] 🇺🇸_美国",
+        "[20ms] US_speednode_0014",
+        "[20ms] 🇺🇸US¹⁺_4|1.2MB/s|GPT|GM|YT|D+|X|Succeed|[原生|机房]",
+        "[21ms] 🇺🇸_US_美国",
+        "[23ms] 🇯🇵JP_1|7.4MB/s",
+        "[23ms] 🇯🇵JP_2|7.2MB/s",
+        "[23ms] 🇺🇸US¹⁺_2|4.9MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
+        "[24ms] 🇺🇸US¹⁺_3|4.0MB/s|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+        "[24ms] 🇺🇸US¹⁺_6|4.9MB/s|3%|GPT⁺|GM|YT|NF|D+|X|History|[原生|机房]",
+        "[24ms] US27｜机房｜低风险",
+        "[24ms] 🇬🇧GB¹-US⁰_2|5.0MB/s|GPT|NF|D+|X|History|[广播|机房]",
+        "[25ms] 🇺🇸US¹⁺_7|3.8MB/s|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
+        "[27ms] US66｜机房｜低风险",
+        "[38ms] US102｜机房｜低风险",
+        "[41ms] US103｜机房｜低风险",
+        "[59ms] 🇺🇸_US_美国",
+        "[60ms] US64｜机房｜低风险",
+        "[66ms] 🇺🇸US¹-SG⁰_2|2.3MB/s|GM|NF|D+|X|[原生|机房]",
+        "[75ms] 🇺🇸US_1|3.3MB/s",
+        "[85ms] 🇭🇰HK¹-SG⁰_1|6.7MB/s|3%|GPT|YT|D+|X",
+        "[86ms] 🇰🇷_韩国",
+        "[90ms] 🇺🇸_美国",
+        "[90ms] 🇺🇸_US_美国",
+        "[96ms] 🇺🇸_美国",
+        "[99ms] 🇰🇷_韩国",
+        "[107ms] 🇺🇸_美国",
+        "[115ms] 🇰🇷_韩国",
+        "[118ms] 🇺🇸_美国",
+        "[119ms] 美国2|@ripaojiedian",
+        "[119ms] 日本3|@ripaojiedian",
+        "[120ms] US_speednode_0015",
+        "[122ms] 🇺🇸_美国",
+        "[123ms] 日本2|@ripaojiedian",
+        "[124ms] 🇺🇸_美国",
+        "[125ms] 美国|@ripaojiedian",
+        "[129ms] 🇫🇮FI²_4|6.9MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "[130ms] 🇫🇮FI²_7|6.9MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+        "[133ms] 🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+        "[135ms] 🇫🇮FI²_6|7.0MB/s|7%|GPT⁺|YT-US|TK|NF|X|History|[广播|机房]",
+        "[136ms] 🇫🇮FI²_3|6.5MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+        "[139ms] 🇬🇧GB¹-US⁰_1|1.8MB/s|GPT⁺|NF|D+|X|Succeed|[广播|机房]",
+        "[143ms] US32｜机房｜低风险",
+        "[153ms] 🇺🇸_美国",
+        "[163ms] 🇭🇰_香港",
         "[165ms] 🇺🇸_US_美国",
-        "[170ms] 🇺🇸_US_美国",
-        "[172ms] 🇺🇸_US_美国",
-        "[178ms] 🇺🇸US_11|3.7MB/s",
-        "[180ms] 🇰🇷_韩国",
-        "[181ms] 🇰🇷_韩国",
-        "[183ms] 🇺🇸US_10|2.2MB/s"
+        "[167ms] 🇭🇰_香港",
+        "[172ms] 🇰🇷_韩国",
+        "[172ms] 香港3|@ripaojiedian",
+        "[182ms] HK25｜家宽｜非常安全",
+        "[183ms] HK31｜家宽｜非常安全",
+        "[184ms] HK58｜家宽｜非常安全",
+        "[184ms] US70｜机房｜低风险",
+        "[185ms] HK33｜家宽｜非常安全",
+        "[185ms] 🇭🇰_香港",
+        "[185ms] HK57｜家宽｜非常安全",
+        "[185ms] 🇭🇰HK²_3|0.6MB/s|1%|YT-CN|X|History",
+        "[185ms] 🇭🇰HK²_4|4.1MB/s|1%|X|History",
+        "[185ms] HK83｜家宽｜非常安全",
+        "[185ms] HK52｜家宽｜非常安全",
+        "[185ms] HK77｜家宽｜非常安全",
+        "[185ms] HK84｜家宽｜非常安全",
+        "[186ms] HK92｜家宽｜非常安全",
+        "[186ms] HK76｜家宽｜非常安全",
+        "[186ms] HK90｜家宽｜非常安全",
+        "[186ms] HK70｜家宽｜非常安全",
+        "[186ms] HK22｜家宽｜非常安全",
+        "[186ms] HK49｜家宽｜非常安全",
+        "[186ms] HK80｜家宽｜非常安全",
+        "[186ms] HK45｜家宽｜非常安全",
+        "[186ms] HK71｜家宽｜非常安全",
+        "[186ms] HK26｜家宽｜非常安全",
+        "[186ms] HK35｜家宽｜非常安全",
+        "[186ms] HK34｜家宽｜非常安全",
+        "[187ms] HK50｜家宽｜非常安全",
+        "[187ms] HK59｜家宽｜非常安全",
+        "[187ms] HK67｜家宽｜非常安全",
+        "[187ms] 🇭🇰_香港",
+        "[187ms] 🇭🇰HK²_5|0.8MB/s|1%|D+|X|Succeed",
+        "[187ms] HK37｜家宽｜非常安全",
+        "[187ms] HK20｜家宽｜非常安全",
+        "[188ms] HK97｜家宽｜非常安全",
+        "[188ms] HK47｜家宽｜非常安全",
+        "[188ms] HK51｜家宽｜非常安全",
+        "[188ms] 🇭🇰_香港",
+        "[188ms] HK91｜家宽｜非常安全",
+        "[188ms] HK21｜家宽｜非常安全",
+        "[188ms] HK46｜家宽｜非常安全",
+        "[188ms] HK30｜家宽｜非常安全",
+        "[189ms] HK86｜家宽｜非常安全",
+        "[189ms] HK78｜家宽｜非常安全",
+        "[189ms] 🇭🇰HK²_25|0.6MB/s|X|History",
+        "[189ms] 🇭🇰HK²_1|0.5MB/s|1%|D+|X|History",
+        "[189ms] HK74｜家宽｜非常安全",
+        "[189ms] HK93｜家宽｜非常安全",
+        "[189ms] HK43｜家宽｜非常安全",
+        "[189ms] HK61｜家宽｜非常安全",
+        "[189ms] HK3｜家宽｜非常安全",
+        "[189ms] HK94｜家宽｜非常安全",
+        "[189ms] 🇭🇰HK²_7|0.5MB/s|1%|YT-CN|D+|X|History",
+        "[189ms] HK87｜家宽｜非常安全",
+        "[190ms] 🇯🇵_日本",
+        "[190ms] HK54｜家宽｜非常安全",
+        "[190ms] HK56｜家宽｜非常安全",
+        "[190ms] HK63｜家宽｜非常安全",
+        "[190ms] HK44｜家宽｜非常安全",
+        "[190ms] HK98｜家宽｜非常安全",
+        "[190ms] HK5｜家宽｜非常安全",
+        "[190ms] HK65｜家宽｜非常安全",
+        "[190ms] 🇭🇰HK²_6|1.1MB/s|1%|YT-CN|D+|X",
+        "[190ms] 🇭🇰_香港",
+        "[190ms] HK73｜家宽｜非常安全",
+        "[190ms] HK99｜家宽｜非常安全",
+        "[190ms] HK41｜家宽｜非常安全",
+        "[190ms] HK38｜家宽｜非常安全",
+        "[191ms] HK2｜家宽｜非常安全",
+        "[191ms] HK96｜家宽｜非常安全",
+        "[191ms] HK23｜家宽｜非常安全",
+        "[191ms] HK60｜家宽｜非常安全",
+        "[191ms] HK75｜家宽｜非常安全",
+        "[191ms] HK72｜家宽｜非常安全",
+        "[191ms] HK39｜家宽｜非常安全",
+        "[191ms] HK40｜家宽｜非常安全",
+        "[192ms] 🇭🇰HK²_21|0.6MB/s|1%|D+|X|History",
+        "[193ms] HK24｜家宽｜非常安全",
+        "[193ms] 🇭🇰HK²_23|0.5MB/s|1%|D+|X|History",
+        "[193ms] HK28｜家宽｜非常安全",
+        "[193ms] HK85｜家宽｜非常安全",
+        "[193ms] HK29｜家宽｜非常安全",
+        "[195ms] 🇭🇰_香港",
+        "[196ms] HK42｜家宽｜非常安全",
+        "[196ms] HK36｜家宽｜非常安全",
+        "[196ms] HK69｜家宽｜非常安全",
+        "[197ms] HK53｜家宽｜非常安全",
+        "[197ms] HK81｜家宽｜非常安全",
+        "[198ms] HK68｜家宽｜非常安全"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "10m"
@@ -247,7 +415,7 @@
     },
     {
       "type": "vless",
-      "tag": "[5ms] 🇯🇵JP_2|4.4MB/s",
+      "tag": "[16ms] 🇺🇸_美国",
       "server": "151.101.3.8",
       "server_port": 80,
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
@@ -261,7 +429,7 @@
     },
     {
       "type": "vless",
-      "tag": "[5ms] 🇺🇸_美国",
+      "tag": "[16ms] 🇯🇵JP_3|6.8MB/s",
       "server": "151.101.3.8",
       "server_port": 80,
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
@@ -275,7 +443,7 @@
     },
     {
       "type": "vless",
-      "tag": "[5ms] 🇺🇸US_1|5.0MB/s",
+      "tag": "[17ms] 🇸🇬SG¹-KR⁰_1|13.3MB/s|GM|YT|D+|X|History|[广播|机房]",
       "server": "151.101.3.8",
       "server_port": 80,
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
@@ -289,7 +457,29 @@
     },
     {
       "type": "vless",
-      "tag": "[5ms] 🇺🇸_US_美国",
+      "tag": "[17ms] 🇺🇸_美国",
+      "server": "185.186.245.206",
+      "server_port": 81,
+      "uuid": "00a85603-d8c6-437d-a8bd-ea521107bd87",
+      "tls": {
+        "enabled": true,
+        "server_name": "danfeng.ye.gs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "danfeng.ye.gs"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[17ms] 🇯🇵JP_4|4.6MB/s",
       "server": "151.101.3.8",
       "server_port": 80,
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
@@ -303,9 +493,9 @@
     },
     {
       "type": "vless",
-      "tag": "[5ms] 🇺🇸US_2|2.5MB/s",
-      "server": "37.0.6.46",
-      "server_port": 443,
+      "tag": "[17ms] 🇺🇸US¹-SG⁰_1|6.7MB/s|3%|GPT⁺|GM|D+|X|[广播|机房]",
+      "server": "162.159.254.137",
+      "server_port": 2053,
       "uuid": "00a85603-d8c6-437d-a8bd-ea521107bd87",
       "tls": {
         "enabled": true,
@@ -317,599 +507,9 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/",
+        "path": "/proxyip=sjc.o00o.ooo",
         "headers": {
           "Host": "snippet.danfeng.frii.site"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[5ms] US_speednode_0013",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560security=tls",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[5ms] 🇭🇰HK¹-US⁰_1|7.7MB/s|GPT⁺|YT|D+|X|History",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[5ms] US_speednode_0014",
-      "server": "104.17.25.173",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560fp=chrome",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[5ms] 🇺🇸US_9|2.5MB/s",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[5ms] 🇺🇸US¹⁺_5|2.2MB/s|3%|GPT|GM|YT-HK|D+|X|History",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[5ms] US66｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367203719.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[6ms] 🇺🇸_US_美国",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[6ms] 🇺🇸US_8|3.1MB/s",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[6ms] 🇺🇸US_7|1.4MB/s",
-      "server": "104.17.25.173",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[6ms] 🇺🇸US¹⁺_2|2.7MB/s|3%|GPT⁺|YT-HK|NF|D+|X|History|[原生|机房]",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US79｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2083,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367209947.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US16｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398397105.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US18｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398398310.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US30｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2096,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/agraeabtegrrh",
-        "headers": {
-          "Host": "17680398397304.206352.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[6ms] 🇺🇸US¹⁺_4|6.1MB/s|3%|GPT|GM|YT-HK|D+|X|Succeed",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US31｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2083,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398395997.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[6ms] 🇺🇸_US_美国_1",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US21｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 8443,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398394331.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US70｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 8443,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367206382.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US78｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2096,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/agraeabtegrrh",
-        "headers": {
-          "Host": "17681367209603.206352.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US64｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367205486.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US71｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2053,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367207768.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[6ms] US75｜机房｜低风险",
-      "server": "bestcdn2.868863.xyz",
-      "server_port": 2096,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367202607.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[7ms] US32｜机房｜低风险",
-      "server": "bestcdn5.868863.xyz",
-      "server_port": 8443,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398392331.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[8ms] 🇰🇷_韩国",
-      "server": "lord.kokopit.info",
-      "server_port": 2096,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
-      "tls": {
-        "enabled": true,
-        "server_name": "YdHxR987jY.bAsErTy.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "YdHxR987jY.bAsErTy.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[8ms] 🇰🇷_韩国_1",
-      "server": "lord.kokopit.info",
-      "server_port": 2096,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
-      "tls": {
-        "enabled": true,
-        "server_name": "18XaCgNj9C.bAsErTy.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "18XaCgNj9C.bAsErTy.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[9ms] 🇰🇷_韩国",
-      "server": "lord.kokopit.info",
-      "server_port": 8443,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
-      "tls": {
-        "enabled": true,
-        "server_name": "QaFuTgIh7K.bAsErTy.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "QaFuTgIh7K.bAsErTy.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[10ms] 🇺🇸_美国",
-      "server": "5.180.24.11",
-      "server_port": 4443,
-      "uuid": "d5d5b641-dd56-4f39-9754-8d3c45cc2c5e",
-      "tls": {
-        "enabled": true,
-        "server_name": "github.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "5XB_N3ATilH-6tp_MXht-84_y5YaJnx_Z7MbuY2otHE",
-          "short_id": "aa7e96542880027a"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[11ms] US67｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2087,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17681367208710.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[17ms] 🇺🇸US_4|1.8MB/s",
-      "server": "104.21.227.134",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[17ms] 🇺🇸US_5|1.7MB/s",
-      "server": "104.21.224.5",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[17ms] 🇺🇸US¹⁺_3|5.8MB/s|3%|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
-      "server": "104.21.227.134",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
         }
       }
     },
@@ -936,22 +536,30 @@
       }
     },
     {
-      "type": "trojan",
-      "tag": "[18ms] US27｜机房｜低风险",
-      "server": "bestcdn2.868863.xyz",
-      "server_port": 2096,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
+      "type": "vless",
+      "tag": "[17ms] 🇺🇸_US_美国_1",
+      "server": "104.18.185.26",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
       "transport": {
         "type": "ws",
-        "path": "/videomuaawe",
+        "path": "/?ed=2560",
         "headers": {
-          "Host": "17680398391059.206355.xyz"
+          "Host": "l.ayovo.netlib.re"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "[19ms] 🇺🇸_美国",
+      "tag": "[17ms] 🇺🇸_美国_1",
       "server": "172.64.79.60",
       "server_port": 443,
       "uuid": "e258977b-e413-4718-a3af-02d75492c349",
@@ -973,13 +581,85 @@
     },
     {
       "type": "vless",
-      "tag": "[19ms] 🇺🇸_美国_1",
-      "server": "172.64.79.60",
+      "tag": "[17ms] US_speednode_0013",
+      "server": "104.18.185.26",
       "server_port": 443,
-      "uuid": "e258977b-e413-4718-a3af-02d75492c349",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
       "tls": {
         "enabled": true,
-        "server_name": "ww20.sgxaniu.qzz.io",
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560security=tls",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[17ms] 🇺🇸US¹⁺_5|1.0MB/s|3%|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+      "server": "104.21.227.134",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[17ms] US16｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe",
+        "headers": {
+          "Host": "17680398397105.206355.xyz"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[17ms] 🇩🇪DE²_8|4.1MB/s|25%|GPT⁺|YT-US|X|[原生|机房]",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=8880",
+        "headers": {
+          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[17ms] 🇺🇸US¹⁺_1|4.4MB/s|3%|GPT|GM|YT|D+|X|Succeed|[原生|机房]",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -989,7 +669,129 @@
         "type": "ws",
         "path": "/?ed=2560",
         "headers": {
-          "Host": "ww20.sgxaniu.qzz.io"
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[17ms] US78｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2096,
+      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
+      "transport": {
+        "type": "ws",
+        "path": "/agraeabtegrrh",
+        "headers": {
+          "Host": "17681367209603.206352.xyz"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[17ms] 🇭🇰HK¹-US⁰_2|1.6MB/s|GPT|D+|X|Succeed",
+      "server": "104.16.250.22",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[18ms] 🇭🇰HK¹-US⁰_1|4.9MB/s|GPT|D+|X|Succeed|[原生|机房]",
+      "server": "104.18.185.26",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[18ms] US79｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2083,
+      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe",
+        "headers": {
+          "Host": "17681367209947.206355.xyz"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[18ms] 🇸🇬SG¹-JP⁰_1|2.7MB/s|GM|YT|D+|X|History",
+      "server": "151.101.3.8",
+      "server_port": 80,
+      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
+      "transport": {
+        "type": "ws",
+        "path": "/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN",
+        "headers": {
+          "Host": "mitivpn.global.ssl.fastly.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[18ms] 🇺🇸_US_美国",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[18ms] US20｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2096,
+      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe",
+        "headers": {
+          "Host": "17680398397353.206355.xyz"
         }
       }
     },
@@ -1011,79 +813,13 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "18XaCgNj9C.bAsErTy.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[28ms] 🇺🇸US¹⁺_1|4.2MB/s|3%|GPT⁺|YT|TK|D+|X|History|[原生|机房]",
-      "server": "162.159.44.142",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[28ms] 🇺🇸US¹⁺_6|3.2MB/s|GPT⁺|GM|YT|TK|D+|X|History|[原生|机房]",
-      "server": "162.159.44.142",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[30ms] 🇯🇵JP_3|3.3MB/s",
-      "server": "162.159.44.142",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
+          "Host": ""
         }
       }
     },
     {
       "type": "trojan",
-      "tag": "[32ms] US69｜机房｜低风险",
+      "tag": "[19ms] US69｜机房｜低风险",
       "server": "bestcdn4.868863.xyz",
       "server_port": 8443,
       "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
@@ -1097,49 +833,13 @@
     },
     {
       "type": "vless",
-      "tag": "[33ms] 🇺🇸_美国",
-      "server": "185.186.245.206",
-      "server_port": 81,
-      "uuid": "00a85603-d8c6-437d-a8bd-ea521107bd87",
-      "tls": {
-        "enabled": true,
-        "server_name": "danfeng.ye.gs",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "danfeng.ye.gs"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[39ms] US20｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2096,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398397353.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[43ms] 🇰🇷_韩国",
+      "tag": "[19ms] 🇰🇷_韩国_1",
       "server": "lord.kokopit.info",
       "server_port": 2096,
       "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
       "tls": {
         "enabled": true,
-        "server_name": "18XaCgNj9C.bAsErTy.InFo",
+        "server_name": "YdHxR987jY.bAsErTy.InFo",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1149,27 +849,253 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": ""
+          "Host": "YdHxR987jY.bAsErTy.InFo"
         }
       }
     },
     {
       "type": "trojan",
-      "tag": "[49ms] US28｜机房｜低风险",
-      "server": "bestcdn3.868863.xyz",
-      "server_port": 2087,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
+      "tag": "[19ms] US68｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2096,
+      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
       "transport": {
         "type": "ws",
-        "path": "/agraeabtegrrh",
+        "path": "/videomuaawe",
         "headers": {
-          "Host": "17680398399343.206352.xyz"
+          "Host": "17681367208022.206355.xyz"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "[49ms] 🇯🇵JP_1|4.3MB/s",
+      "tag": "[19ms] 🇺🇸_美国",
+      "server": "172.64.79.60",
+      "server_port": 443,
+      "uuid": "e258977b-e413-4718-a3af-02d75492c349",
+      "tls": {
+        "enabled": true,
+        "server_name": "ww20.sgxaniu.qzz.io",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "ww20.sgxaniu.qzz.io"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[20ms] US_speednode_0014",
+      "server": "104.17.25.173",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560fp=chrome",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[20ms] 🇺🇸US¹⁺_4|1.2MB/s|GPT|GM|YT|D+|X|Succeed|[原生|机房]",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[21ms] 🇺🇸_US_美国",
+      "server": "151.101.3.8",
+      "server_port": 80,
+      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
+      "transport": {
+        "type": "ws",
+        "path": "/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN",
+        "headers": {
+          "Host": "mitivpn.global.ssl.fastly.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[23ms] 🇯🇵JP_1|7.4MB/s",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[23ms] 🇯🇵JP_2|7.2MB/s",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[23ms] 🇺🇸US¹⁺_2|4.9MB/s|3%|GPT⁺|GM|YT|NF|D+|X|Succeed|[原生|机房]",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[24ms] 🇺🇸US¹⁺_3|4.0MB/s|GPT|GM|YT|TK|NF|D+|X|Succeed|[原生|机房]",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[24ms] 🇺🇸US¹⁺_6|4.9MB/s|3%|GPT⁺|GM|YT|NF|D+|X|History|[原生|机房]",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[24ms] US27｜机房｜低风险",
+      "server": "bestcdn2.868863.xyz",
+      "server_port": 2096,
+      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe",
+        "headers": {
+          "Host": "17680398391059.206355.xyz"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[24ms] 🇬🇧GB¹-US⁰_2|5.0MB/s|GPT|NF|D+|X|History|[广播|机房]",
+      "server": "cloudflare.182682.xyz",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[25ms] 🇺🇸US¹⁺_7|3.8MB/s|GPT|GM|YT|NF|D+|X|History|[原生|机房]",
       "server": "162.159.45.232",
       "server_port": 443,
       "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
@@ -1191,7 +1117,21 @@
     },
     {
       "type": "trojan",
-      "tag": "[53ms] US102｜机房｜低风险",
+      "tag": "[27ms] US66｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe",
+        "headers": {
+          "Host": "17681367203719.206355.xyz"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[38ms] US102｜机房｜低风险",
       "server": "158.101.11.204",
       "server_port": 15805,
       "password": "iwangjie",
@@ -1205,7 +1145,7 @@
     },
     {
       "type": "trojan",
-      "tag": "[57ms] US103｜机房｜低风险",
+      "tag": "[41ms] US103｜机房｜低风险",
       "server": "158.101.11.204",
       "server_port": 15805,
       "password": "iwangjie",
@@ -1219,7 +1159,173 @@
     },
     {
       "type": "vless",
-      "tag": "[79ms] 🇺🇸_美国",
+      "tag": "[59ms] 🇺🇸_US_美国",
+      "server": "lord.kokopit.info",
+      "server_port": 8443,
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "tls": {
+        "enabled": true,
+        "server_name": "QaFuTgIh7K.bAsErTy.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "QaFuTgIh7K.bAsErTy.InFo"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[60ms] US64｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
+      "server_port": 2087,
+      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
+      "transport": {
+        "type": "ws",
+        "path": "/videomuaawe",
+        "headers": {
+          "Host": "17681367205486.206355.xyz"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[66ms] 🇺🇸US¹-SG⁰_2|2.3MB/s|GM|NF|D+|X|[原生|机房]",
+      "server": "singapore.com",
+      "server_port": 2053,
+      "uuid": "00a85603-d8c6-437d-a8bd-ea521107bd87",
+      "tls": {
+        "enabled": true,
+        "server_name": "snippet.danfeng.frii.site",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "snippet.danfeng.frii.site"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[75ms] 🇺🇸US_1|3.3MB/s",
+      "server": "convera.com",
+      "server_port": 2053,
+      "uuid": "00a85603-d8c6-437d-a8bd-ea521107bd87",
+      "tls": {
+        "enabled": true,
+        "server_name": "snippet.danfeng.frii.site",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "snippet.danfeng.frii.site"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[85ms] 🇭🇰HK¹-SG⁰_1|6.7MB/s|3%|GPT|YT|D+|X",
+      "server": "bestcf.030101.xyz",
+      "server_port": 2053,
+      "uuid": "00a85603-d8c6-437d-a8bd-ea521107bd87",
+      "tls": {
+        "enabled": true,
+        "server_name": "snippet.danfeng.frii.site",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "snippet.danfeng.frii.site"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[86ms] 🇰🇷_韩国",
+      "server": "lord.kokopit.info",
+      "server_port": 2096,
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "tls": {
+        "enabled": true,
+        "server_name": "18XaCgNj9C.bAsErTy.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "18XaCgNj9C.bAsErTy.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[90ms] 🇺🇸_美国",
+      "server": "us12.miyazono-kaori.com",
+      "server_port": 443,
+      "uuid": "582f44d4-4511-402c-a0b7-b5771a2a5c9d",
+      "tls": {
+        "enabled": true,
+        "server_name": "download-porter.hoyoverse.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "deEvuAAA_iJigkbck4yU_UmE8d491Dqt5V49y3n3DRw",
+          "short_id": "0c69e956b6"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[90ms] 🇺🇸_US_美国",
+      "server": "lord.kokopit.info",
+      "server_port": 443,
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "tls": {
+        "enabled": true,
+        "server_name": "UqUuK6n7Sg.BaSeRtY.iNfO",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "UqUuK6n7Sg.BaSeRtY.iNfO"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[96ms] 🇺🇸_美国",
       "server": "us2.miyazono-kaori.com",
       "server_port": 443,
       "uuid": "582f44d4-4511-402c-a0b7-b5771a2a5c9d",
@@ -1239,55 +1345,29 @@
     },
     {
       "type": "vless",
-      "tag": "[87ms] 🇫🇮FI²_1|6.4MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
-      "server": "146.75.119.82",
-      "server_port": 80,
-      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
-      "transport": {
-        "type": "ws",
-        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048",
-        "headers": {
-          "Host": "welcomtofreeboarders.com"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[87ms] 🇫🇮FI²_2|6.5MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
-      "server": "146.75.119.82",
-      "server_port": 80,
-      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
-      "transport": {
-        "type": "ws",
-        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048",
-        "headers": {
-          "Host": "welcomtofreeboarders.com"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[88ms] 🇺🇸_美国",
-      "server": "us11.miyazono-kaori.com",
+      "tag": "[99ms] 🇰🇷_韩国",
+      "server": "lord.kokopit.info",
       "server_port": 443,
-      "uuid": "582f44d4-4511-402c-a0b7-b5771a2a5c9d",
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
       "tls": {
         "enabled": true,
-        "server_name": "download-porter.hoyoverse.com",
+        "server_name": "6BnL03uZ9l.BaSeRtY.iNfO",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "WC40e9QWe66kR6Zb1qkk9OeJBDQivKzqBczp9natHjk",
-          "short_id": "8b0b8e33a9ae3e"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "6BnL03uZ9l.BaSeRtY.iNfO"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "[97ms] 🇺🇸_美国",
+      "tag": "[107ms] 🇺🇸_美国",
       "server": "us1.miyazono-kaori.com",
       "server_port": 443,
       "uuid": "582f44d4-4511-402c-a0b7-b5771a2a5c9d",
@@ -1307,7 +1387,202 @@
     },
     {
       "type": "vless",
-      "tag": "[102ms] 🇬🇧GB¹-US⁰_1|4.0MB/s|0%|GPT⁺|TK|NF|D+|X|Succeed|[广播|机房]",
+      "tag": "[115ms] 🇰🇷_韩国",
+      "server": "lord.kokopit.info",
+      "server_port": 2096,
+      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "tls": {
+        "enabled": true,
+        "server_name": "18XaCgNj9C.bAsErTy.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "18XaCgNj9C.bAsErTy.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[118ms] 🇺🇸_美国",
+      "server": "142.91.106.176",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
+      "tls": {
+        "enabled": true,
+        "server_name": "japan.geodema.network",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[119ms] 美国2|@ripaojiedian",
+      "server": "160.16.89.176",
+      "server_port": 5076,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "trojan",
+      "tag": "[119ms] 日本3|@ripaojiedian",
+      "server": "160.16.57.238",
+      "server_port": 4006,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "vless",
+      "tag": "[120ms] US_speednode_0015",
+      "server": "142.91.106.176",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
+      "tls": {
+        "enabled": true,
+        "server_name": "japan.geodema.network",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[122ms] 🇺🇸_美国",
+      "server": "japan.geodema.network",
+      "server_port": 443,
+      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
+      "tls": {
+        "enabled": true,
+        "server_name": "japan.geodema.network",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
+          "short_id": "1ed136481e0ede74"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[123ms] 日本2|@ripaojiedian",
+      "server": "153.121.39.240",
+      "server_port": 4006,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "vless",
+      "tag": "[124ms] 🇺🇸_美国",
+      "server": "us11.miyazono-kaori.com",
+      "server_port": 443,
+      "uuid": "582f44d4-4511-402c-a0b7-b5771a2a5c9d",
+      "tls": {
+        "enabled": true,
+        "server_name": "download-porter.hoyoverse.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "WC40e9QWe66kR6Zb1qkk9OeJBDQivKzqBczp9natHjk",
+          "short_id": "8b0b8e33a9ae3e"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[125ms] 美国|@ripaojiedian",
+      "server": "160.16.81.84",
+      "server_port": 5076,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "vless",
+      "tag": "[129ms] 🇫🇮FI²_4|6.9MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048",
+        "headers": {
+          "Host": "welcomtofreeboarders.com"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[130ms] 🇫🇮FI²_7|6.9MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048",
+        "headers": {
+          "Host": "welcomtofreeboarders.com"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[133ms] 🇫🇮FI²_5|7.0MB/s|7%|GPT⁺|YT-US|X|Succeed|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048",
+        "headers": {
+          "Host": "welcomtofreeboarders.com"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[135ms] 🇫🇮FI²_6|7.0MB/s|7%|GPT⁺|YT-US|TK|NF|X|History|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048",
+        "headers": {
+          "Host": "welcomtofreeboarders.com"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[136ms] 🇫🇮FI²_3|6.5MB/s|7%|GPT⁺|YT-US|X|History|[广播|机房]",
+      "server": "146.75.119.82",
+      "server_port": 80,
+      "uuid": "74542945-0d84-4797-a56e-e7f31b84c5be",
+      "transport": {
+        "type": "ws",
+        "path": "/ws/?ed=2048/@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz@AzadMarz/?2048",
+        "headers": {
+          "Host": "welcomtofreeboarders.com"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[139ms] 🇬🇧GB¹-US⁰_1|1.8MB/s|GPT⁺|NF|D+|X|Succeed|[广播|机房]",
       "server": "cloudflare.182682.xyz",
       "server_port": 443,
       "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
@@ -1329,21 +1604,21 @@
     },
     {
       "type": "trojan",
-      "tag": "[105ms] US76｜机房｜低风险",
-      "server": "bestcdn3.868863.xyz",
-      "server_port": 2087,
-      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
+      "tag": "[143ms] US32｜机房｜低风险",
+      "server": "bestcdn5.868863.xyz",
+      "server_port": 8443,
+      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
       "transport": {
         "type": "ws",
-        "path": "/agraeabtegrrh",
+        "path": "/videomuaawe",
         "headers": {
-          "Host": "17681367201705.206352.xyz"
+          "Host": "17680398392331.206355.xyz"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "[114ms] 🇺🇸_美国",
+      "tag": "[153ms] 🇺🇸_美国",
       "server": "144.31.1.121",
       "server_port": 443,
       "uuid": "21f8d9aa-8ec7-4340-aa0a-7ce19f244adc",
@@ -1358,98 +1633,16 @@
     },
     {
       "type": "trojan",
-      "tag": "[148ms] US23｜机房｜低风险",
-      "server": "bestcdn4.868863.xyz",
-      "server_port": 2053,
-      "password": "f49525e7-3a15-427a-aa7e-d66948dc6bfd",
-      "transport": {
-        "type": "ws",
-        "path": "/videomuaawe",
-        "headers": {
-          "Host": "17680398395728.206355.xyz"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[157ms] 🇺🇸_美国",
-      "server": "us12.miyazono-kaori.com",
+      "tag": "[163ms] 🇭🇰_香港",
+      "server": "112.118.116.123",
       "server_port": 443,
-      "uuid": "582f44d4-4511-402c-a0b7-b5771a2a5c9d",
+      "password": "61d8077bfb174e171b8283f155a555ad",
       "tls": {
         "enabled": true,
-        "server_name": "download-porter.hoyoverse.com",
+        "server_name": "www.nintendogames.net",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "deEvuAAA_iJigkbck4yU_UmE8d491Dqt5V49y3n3DRw",
-          "short_id": "0c69e956b6"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[159ms] US_speednode_0015",
-      "server": "142.91.106.176",
-      "server_port": 443,
-      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
-      "tls": {
-        "enabled": true,
-        "server_name": "japan.geodema.network",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "[159ms] 美国2|@ripaojiedian",
-      "server": "160.16.89.176",
-      "server_port": 5076,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "trojan",
-      "tag": "[159ms] 日本2|@ripaojiedian",
-      "server": "153.121.39.240",
-      "server_port": 4006,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "trojan",
-      "tag": "[159ms] 日本3|@ripaojiedian",
-      "server": "160.16.57.238",
-      "server_port": 4006,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "trojan",
-      "tag": "[160ms] 美国|@ripaojiedian",
-      "server": "160.16.81.84",
-      "server_port": 5076,
-      "password": "61d8077bfb174e171b8283f155a555ad"
-    },
-    {
-      "type": "vless",
-      "tag": "[160ms] 🇺🇸_美国",
-      "server": "142.91.106.176",
-      "server_port": 443,
-      "uuid": "a11ab9c5-4155-430b-9efc-7a7122531382",
-      "tls": {
-        "enabled": true,
-        "server_name": "japan.geodema.network",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "EltWI8AOqkN8lMjRycweRRoFRah5hu6xiKtgBmQOdE8",
-          "short_id": "1ed136481e0ede74"
         }
       }
     },
@@ -1476,14 +1669,29 @@
       }
     },
     {
-      "type": "vless",
-      "tag": "[170ms] 🇺🇸_US_美国",
-      "server": "lord.kokopit.info",
+      "type": "trojan",
+      "tag": "[167ms] 🇭🇰_香港",
+      "server": "112.118.116.123",
       "server_port": 443,
+      "password": "61d8077bfb174e171b8283f155a555ad",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.nintendogames.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "[172ms] 🇰🇷_韩国",
+      "server": "lord.kokopit.info",
+      "server_port": 2096,
       "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
       "tls": {
         "enabled": true,
-        "server_name": "UqUuK6n7Sg.BaSeRtY.iNfO",
+        "server_name": "YdHxR987jY.bAsErTy.InFo",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1493,121 +1701,680 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "UqUuK6n7Sg.BaSeRtY.iNfO"
+          "Host": "YdHxR987jY.bAsErTy.InFo"
         }
       }
     },
     {
-      "type": "vless",
-      "tag": "[172ms] 🇺🇸_US_美国",
-      "server": "lord.kokopit.info",
+      "type": "trojan",
+      "tag": "[172ms] 香港3|@ripaojiedian",
+      "server": "112.118.116.123",
+      "server_port": 443,
+      "password": "61d8077bfb174e171b8283f155a555ad"
+    },
+    {
+      "type": "trojan",
+      "tag": "[182ms] HK25｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[183ms] HK31｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[184ms] HK58｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[184ms] US70｜机房｜低风险",
+      "server": "bestcdn4.868863.xyz",
       "server_port": 8443,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
-      "tls": {
-        "enabled": true,
-        "server_name": "QaFuTgIh7K.bAsErTy.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
+      "password": "23c52ecb-69c8-4782-95b0-4b5a8d4a35ec",
       "transport": {
         "type": "ws",
-        "path": "/",
+        "path": "/videomuaawe",
         "headers": {
-          "Host": "QaFuTgIh7K.bAsErTy.InFo"
+          "Host": "17681367206382.206355.xyz"
         }
       }
     },
     {
-      "type": "vless",
-      "tag": "[178ms] 🇺🇸US_11|3.7MB/s",
-      "server": "picassooo.info",
-      "server_port": 22955,
-      "uuid": "63f92f3c-447c-4283-80b9-0af8e164cdad",
-      "tls": {
-        "enabled": true,
-        "server_name": "one-piece.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "9Mt_Y8J_qDb1khlieWnhDSAq-kGtLHw6aOKgkAzOMms",
-          "short_id": "6ba85179e30d4fc2"
-        }
-      },
-      "transport": {
-        "type": "grpc",
-        "service_name": "grpc"
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "[180ms] 🇰🇷_韩国",
-      "server": "lord.kokopit.info",
+      "type": "trojan",
+      "tag": "[185ms] HK33｜家宽｜非常安全",
+      "server": "58.152.46.60",
       "server_port": 443,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] 🇭🇰_香港",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "6BnL03uZ9l.BaSeRtY.iNfO",
+        "server_name": "+++++++[By+DukeMehdi]+b2n.ir/v2ray-configs+|+78+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "6BnL03uZ9l.BaSeRtY.iNfO"
         }
       }
     },
     {
-      "type": "vless",
-      "tag": "[181ms] 🇰🇷_韩国",
-      "server": "lord.kokopit.info",
-      "server_port": 2096,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "type": "trojan",
+      "tag": "[185ms] HK57｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] 🇭🇰HK²_3|0.6MB/s|1%|YT-CN|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] 🇭🇰HK²_4|4.1MB/s|1%|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] HK83｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] HK52｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] HK77｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[185ms] HK84｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK92｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK76｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK90｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK70｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK22｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK49｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK80｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK45｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK71｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK26｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK35｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[186ms] HK34｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[187ms] HK50｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[187ms] HK59｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[187ms] HK67｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[187ms] 🇭🇰_香港",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "YdHxR987jY.bAsErTy.InFo",
+        "server_name": "+++++++[By+EbraSha]+trojan-HK+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "YdHxR987jY.bAsErTy.InFo"
         }
       }
     },
     {
-      "type": "vless",
-      "tag": "[183ms] 🇺🇸US_10|2.2MB/s",
-      "server": "lord.kokopit.info",
-      "server_port": 2096,
-      "uuid": "337bf72e-bb79-4d5f-be3f-7822eb77100c",
+      "type": "trojan",
+      "tag": "[187ms] 🇭🇰HK²_5|0.8MB/s|1%|D+|X|Succeed",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[187ms] HK37｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[187ms] HK20｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK97｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK47｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK51｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] 🇭🇰_香港",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
       "tls": {
         "enabled": true,
-        "server_name": "YdHxR987jY.bAsErTy.InFo",
+        "server_name": "+++++++[By+EbraSha]+b2n.ir/v2ray-configs+",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
         }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "YdHxR987jY.bAsErTy.InFo"
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK91｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK21｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK46｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[188ms] HK30｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK86｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK78｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] 🇭🇰HK²_25|0.6MB/s|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] 🇭🇰HK²_1|0.5MB/s|1%|D+|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK74｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK93｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK43｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK61｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK3｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK94｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] 🇭🇰HK²_7|0.5MB/s|1%|YT-CN|D+|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[189ms] HK87｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] 🇯🇵_日本",
+      "server": "tuntro003.instconn.com",
+      "server_port": 443,
+      "password": "469c8135-8aea-4c7f-8ec2-c5fdfa980b48",
+      "tls": {
+        "enabled": true,
+        "server_name": "login-staticjpc.jasmine-douyin.top",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
         }
       }
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK54｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK56｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK63｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK44｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK98｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK5｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK65｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] 🇭🇰HK²_6|1.1MB/s|1%|YT-CN|D+|X",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] 🇭🇰_香港",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "������+[By+EbraSha]+b2n.ir/v2ray-configs+|+868+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK73｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK99｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK41｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[190ms] HK38｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK2｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK96｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK23｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK60｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK75｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK72｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK39｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[191ms] HK40｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[192ms] 🇭🇰HK²_21|0.6MB/s|1%|D+|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[193ms] HK24｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[193ms] 🇭🇰HK²_23|0.5MB/s|1%|D+|X|History",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[193ms] HK28｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[193ms] HK85｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[193ms] HK29｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[195ms] 🇭🇰_香港",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe",
+      "tls": {
+        "enabled": true,
+        "server_name": "🔒+[By+DukeMehdi]+b2n.ir/v2ray-configs+|+783+",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "[196ms] HK42｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[196ms] HK36｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[196ms] HK69｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[197ms] HK53｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[197ms] HK81｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
+    },
+    {
+      "type": "trojan",
+      "tag": "[198ms] HK68｜家宽｜非常安全",
+      "server": "58.152.46.60",
+      "server_port": 443,
+      "password": "BxceQaOe"
     }
   ],
   "route": {
