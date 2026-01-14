@@ -8,9 +8,6 @@ import re
 import sys
 from urllib.parse import urlparse, parse_qs, unquote
 
-def log(msg):
-    print(msg, flush=True)
-
 # --- 配置区 ---
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt", 
@@ -21,8 +18,13 @@ SOURCES = [
 ]
 
 MAX_KEEP_NODES = 800 
+AD_RULES_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
+GEOIP_CN_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+GEOSITE_CN_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+
 TIMEOUT = 2       
-MAX_WORKERS = 100
+MAX_WORKERS = 100   
+DNS_CACHE = {}
 
 def get_modern_template():
     return {
@@ -30,15 +32,15 @@ def get_modern_template():
         "dns": {
             "servers": [
                 {"tag": "dns_fakeip", "address": "fakeip"},
-                # 国外 DNS 走代理出口
+                # 国外 DNS：走代理，通过 dns_local 解析服务器域名
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                # 国内 DNS 走直连 (阿里 DNS)
+                # 国内 DNS：直连
                 {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
-                # 解析规则文件域名和国内域名走阿里 DNS
-                {"rule_set": ["geoip-cn", "geosite-cn"], "server": "dns_direct"},
+                {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
+                {"rule_set": "geosite-cn", "server": "dns_direct"},
                 {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
             ],
             "final": "dns_proxy",
@@ -46,151 +48,151 @@ def get_modern_template():
             "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
         },
         "inbounds": [
-            {"type": "tun", "tag": "tun-in", "address": ["172.19.0.1/30"], "auto_route": True, "strict_route": True, "sniff": True}
+            {
+                "type": "tun",
+                "tag": "tun-in",
+                "address": ["172.19.0.1/30"],
+                "auto_route": True,
+                "strict_route": True,
+                "stack": "mixed", # 修复：mixed 兼容性更好
+                "sniff": True
+            }
         ],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
             {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
             {"type": "direct", "tag": "direct"},
-            {"type": "dns", "tag": "dns-out"}
+            {"type": "dns", "tag": "dns-out"},
+            {"type": "block", "tag": "block-out"}
         ],
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
+                {"rule_set": "ad-rules", "outbound": "block-out"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
             ],
             "final": "proxy",
             "auto_detect_interface": True,
             "rule_set": [
-                {
-                    "tag": "geoip-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-                    "download_detour": "direct"
-                },
-                {
-                    "tag": "geosite-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-                    "download_detour": "direct"
-                }
+                {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
+                {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
+                {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
             ]
         }
     }
 
-def resolve_with_1111(domain):
-    if not domain or re.match(r"^\d", domain): return domain
+def safe_decode(data):
     try:
-        r = requests.get(f"https://1.1.1.1/dns-query?name={domain}&type=A", headers={"accept": "application/dns-json"}, timeout=5)
-        ans = r.json().get("Answer", [])
-        return ans[0]["data"] if ans else None
-    except: return None
+        data = data.strip().replace('\n', '').replace('\r', '')
+        return base64.b64decode(data + '=' * (-len(data) % 4)).decode('utf-8', 'ignore')
+    except: return data
 
-def check_conn(info):
-    link, ip, port = info
+def resolve_with_1111(domain):
+    if not domain or re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain): return domain
+    if domain in DNS_CACHE: return DNS_CACHE[domain]
     try:
-        s = time.time()
-        socket.create_connection((ip, int(port)), timeout=TIMEOUT).close()
-        return (link, ip, time.time() - s)
+        r = requests.get("https://1.1.1.1/dns-query", params={"name": domain, "type": "A"}, headers={"accept": "application/dns-json"}, timeout=3.0)
+        data = r.json()
+        if "Answer" in data:
+            for ans in data["Answer"]:
+                if ans["type"] == 1:
+                    DNS_CACHE[domain] = ans["data"]
+                    return ans["data"]
+    except: pass
+    return None
+
+def extract_region(tag):
+    regions = ["香港", "日本", "美国", "韩国", "新加坡", "台湾", "德国", "英国", "HK", "JP", "US", "KR", "SG", "TW", "CN", "MO", "UK", "FR", "RU"]
+    for r in regions:
+        if r.lower() in tag.lower(): return r.upper()
+    return "其它"
+
+def check_node_ali(node_info):
+    link, target_ip, port = node_info
+    try:
+        start_time = time.time()
+        with socket.create_connection((target_ip, int(port)), timeout=TIMEOUT):
+            return (link, target_ip, time.time() - start_time)
     except: return None
 
 def main():
-    log(">>> 任务开始: 抓取订阅节点")
-    links = []
-    for s in SOURCES:
+    print(f"--- 步骤1: 抓取订阅源 ---", flush=True)
+    raw_links = []
+    for url in SOURCES:
         try:
-            r = requests.get(s, timeout=10)
-            txt = r.text
-            if "://" not in txt:
-                txt = base64.b64decode(txt + "==").decode('utf-8', 'ignore')
-            found = re.findall(r"(?:vless|trojan|hysteria2|hy2)://[^\s]+", txt)
-            links.extend(found)
-            log(f"源 {s[:30]}... 抓取成功")
+            r = requests.get(url, timeout=10)
+            if r.status_code == 200:
+                text = r.text
+                if "://" not in text: text = safe_decode(text)
+                found = re.findall(r"(?:vless|trojan|hysteria2|hy2)://[^\s]+", text)
+                raw_links.extend(found)
+                print(f"  √ 已抓取: {url[:40]}... ({len(found)} 个)")
         except: pass
 
-    unique = list(set(links))
-    log(f"去重后节点总数: {len(unique)}")
-
-    to_test = []
-    for l in unique:
+    unique_links = list(set(raw_links))
+    print(f"--- 步骤2: 解析域名 ---", flush=True)
+    nodes_to_test = []
+    for link in unique_links:
         try:
-            u = urlparse(l)
+            u = urlparse(link)
             ip = resolve_with_1111(u.hostname)
-            if ip: to_test.append((l, ip, u.port or 443))
+            if ip: nodes_to_test.append((link, ip, u.port or 443))
         except: pass
 
-    log(">>> 正在进行 TCP 握手测速...")
+    print(f"--- 步骤3: 测速筛选 ---", flush=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
-        r1 = [res for res in ex.map(check_conn, to_test) if res]
+        r1 = [res for res in ex.map(check_node_ali, nodes_to_test) if res]
     
     r1.sort(key=lambda x: x[2])
-    final_nodes = r1[:MAX_KEEP_NODES]
+    final_list = r1[:MAX_KEEP_NODES]
 
-    outbounds, tags = [], []
-    for link, ip, lat in final_nodes:
+    final_outbounds, final_tags = [], []
+    for link, ip, lat in final_list:
         try:
             u = urlparse(link)
             q = parse_qs(u.query)
+            protocol = "hysteria2" if u.scheme in ["hy2", "hysteria2"] else u.scheme
+            region = extract_region(unquote(u.fragment) or "")
             ms = int(lat * 1000)
-            raw_tag = unquote(u.fragment).split(' ')[0][:6] if u.fragment else "Node"
-            node_tag = f"{raw_tag}|{ms}ms"
+            node_tag = f"{region}|{ms}ms"
             
             counter = 1
             unique_tag = node_tag
-            while unique_tag in tags:
+            while unique_tag in final_tags:
                 unique_tag = f"{node_tag}_{counter}"
                 counter += 1
-            tags.append(unique_tag)
             
             node = {
-                "type": "hysteria2" if u.scheme in ["hy2", "hysteria2"] else u.scheme,
+                "type": protocol,
                 "tag": unique_tag,
                 "server": ip,
                 "server_port": int(u.port or 443),
-                "password" if u.scheme != "vless" else "uuid": u.username
+                "password" if protocol != "vless" else "uuid": u.username
             }
 
-            # TLS & Reality & uTLS 修复逻辑
-            if "tls" in link or "reality" in str(q) or u.scheme in ["hy2", "hysteria2"]:
-                node["tls"] = {
-                    "enabled": True,
-                    "server_name": q.get('sni', [u.hostname])[0]
-                }
-                
-                # Reality 节点必须启用 uTLS
+            if "tls" in link or "reality" in str(q) or protocol == "hysteria2":
+                node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0]}
                 if 'pbk' in q:
-                    node["tls"]["reality"] = {
-                        "enabled": True,
-                        "public_key": q['pbk'][0],
-                        "short_id": q.get('sid', [''])[0]
-                    }
-                    node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
-                
-                # 非 Hysteria 协议的其他 TLS 节点默认开启 uTLS 指纹
-                elif u.scheme not in ["hy2", "hysteria2"]:
+                    node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
+                # 修复：非 Hy2 强制启用 uTLS
+                if protocol != "hysteria2":
                     node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
             
-            # Transport WS
             if q.get('type', [''])[0] == 'ws':
-                node["transport"] = {
-                    "type": "ws",
-                    "path": q.get('path', ['/'])[0],
-                    "headers": {"Host": q.get('host', [u.hostname])[0]}
-                }
+                node["transport"] = {"type": "ws", "path": q.get('path', ['/'])[0], "headers": {"Host": q.get('host', [u.hostname])[0]}}
 
-            outbounds.append(node)
+            final_outbounds.append(node)
+            final_tags.append(unique_tag)
         except: continue
 
-    conf = get_modern_template()
-    conf["outbounds"].extend(outbounds)
-    conf["outbounds"][0]["outbounds"].extend(tags)
-    conf["outbounds"][1]["outbounds"] = tags
+    config = get_modern_template()
+    config['outbounds'].extend(final_outbounds)
+    config['outbounds'][0]['outbounds'] = ["auto-test"] + final_tags + ["direct"]
+    config['outbounds'][1]['outbounds'] = final_tags
 
     with open("config.json", "w", encoding="utf-8") as f:
-        json.dump(conf, f, indent=2, ensure_ascii=False)
-    log(f"✅ 成功! 已写入 {len(outbounds)} 个节点。")
+        json.dump(config, f, indent=2, ensure_ascii=False)
+    print(f"✅ 完成！已保存 {len(final_outbounds)} 个节点。")
 
 if __name__ == "__main__":
     main()
