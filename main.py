@@ -30,14 +30,14 @@ def get_modern_template():
         "dns": {
             "servers": [
                 {"tag": "dns_fakeip", "address": "fakeip"},
-                # 国外 DNS：走代理
+                # 国外 DNS 走代理出口
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                # 国内 DNS：走直连 (用于下载规则和访问国内域名)
+                # 国内 DNS 走直连 (阿里 DNS)
                 {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
-                # 确保下载规则集的域名（如 github/gh-proxy）通过阿里 DNS 解析
+                # 解析规则文件域名和国内域名走阿里 DNS
                 {"rule_set": ["geoip-cn", "geosite-cn"], "server": "dns_direct"},
                 {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
             ],
@@ -67,20 +67,19 @@ def get_modern_template():
                     "type": "remote",
                     "format": "binary",
                     "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-                    "download_detour": "direct" # 强制直连下载
+                    "download_detour": "direct"
                 },
                 {
                     "tag": "geosite-cn",
                     "type": "remote",
                     "format": "binary",
                     "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-                    "download_detour": "direct" # 强制直连下载
+                    "download_detour": "direct"
                 }
             ]
         }
     }
 
-# --- 解析与测速逻辑 ---
 def resolve_with_1111(domain):
     if not domain or re.match(r"^\d", domain): return domain
     try:
@@ -98,7 +97,7 @@ def check_conn(info):
     except: return None
 
 def main():
-    log(">>> 启动任务: 抓取并解析节点")
+    log(">>> 任务开始: 抓取订阅节点")
     links = []
     for s in SOURCES:
         try:
@@ -108,11 +107,11 @@ def main():
                 txt = base64.b64decode(txt + "==").decode('utf-8', 'ignore')
             found = re.findall(r"(?:vless|trojan|hysteria2|hy2)://[^\s]+", txt)
             links.extend(found)
-            log(f"抓取成功: {s[:40]}...")
-        except: log(f"抓取失败: {s[:40]}...")
+            log(f"源 {s[:30]}... 抓取成功")
+        except: pass
 
     unique = list(set(links))
-    log(f"去重后总数: {len(unique)}")
+    log(f"去重后节点总数: {len(unique)}")
 
     to_test = []
     for l in unique:
@@ -122,7 +121,7 @@ def main():
             if ip: to_test.append((l, ip, u.port or 443))
         except: pass
 
-    log(">>> 开始 TCP 测速")
+    log(">>> 正在进行 TCP 握手测速...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         r1 = [res for res in ex.map(check_conn, to_test) if res]
     
@@ -136,12 +135,12 @@ def main():
             q = parse_qs(u.query)
             ms = int(lat * 1000)
             raw_tag = unquote(u.fragment).split(' ')[0][:6] if u.fragment else "Node"
-            tag = f"{raw_tag}|{ms}ms"
+            node_tag = f"{raw_tag}|{ms}ms"
             
             counter = 1
-            unique_tag = tag
+            unique_tag = node_tag
             while unique_tag in tags:
-                unique_tag = f"{tag}_{counter}"
+                unique_tag = f"{node_tag}_{counter}"
                 counter += 1
             tags.append(unique_tag)
             
@@ -152,10 +151,35 @@ def main():
                 "server_port": int(u.port or 443),
                 "password" if u.scheme != "vless" else "uuid": u.username
             }
+
+            # TLS & Reality & uTLS 修复逻辑
             if "tls" in link or "reality" in str(q) or u.scheme in ["hy2", "hysteria2"]:
-                node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0]}
+                node["tls"] = {
+                    "enabled": True,
+                    "server_name": q.get('sni', [u.hostname])[0]
+                }
+                
+                # Reality 节点必须启用 uTLS
                 if 'pbk' in q:
-                    node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
+                    node["tls"]["reality"] = {
+                        "enabled": True,
+                        "public_key": q['pbk'][0],
+                        "short_id": q.get('sid', [''])[0]
+                    }
+                    node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
+                
+                # 非 Hysteria 协议的其他 TLS 节点默认开启 uTLS 指纹
+                elif u.scheme not in ["hy2", "hysteria2"]:
+                    node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
+            
+            # Transport WS
+            if q.get('type', [''])[0] == 'ws':
+                node["transport"] = {
+                    "type": "ws",
+                    "path": q.get('path', ['/'])[0],
+                    "headers": {"Host": q.get('host', [u.hostname])[0]}
+                }
+
             outbounds.append(node)
         except: continue
 
@@ -166,7 +190,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(conf, f, indent=2, ensure_ascii=False)
-    log(f"✅ 完成！已写入 {len(outbounds)} 个节点。规则集配置为远程下载，解析走阿里 DNS。")
+    log(f"✅ 成功! 已写入 {len(outbounds)} 个节点。")
 
 if __name__ == "__main__":
     main()
