@@ -23,13 +23,19 @@ jobs:
       - name: Install Dependencies
         run: pip install requests
 
+      - name: Download Rule Sets to Local
+        run: |
+          mkdir -p rules
+          curl -L -o rules/geoip-cn.srs https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs
+          curl -L -o rules/geosite-cn.srs https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs
+
       - name: Run Script
         run: python main.py
 
       - name: Deploy Result
         run: |
           git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add config.json
-          git commit -m "Auto Update: $(date +'%Y-%m-%d %H:%M:%S')" || exit 0
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add config.json rules/*.srs
+          git commit -m "Auto Update Nodes & Rules: $(date +'%Y-%m-%d %H:%M:%S')" || exit 0
           git push
