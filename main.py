@@ -18,9 +18,9 @@ SOURCES = [
 ]
 
 # 筛选阶段配置
-ROUND1_KEEP = 500  # 第一轮保留数
-MAX_KEEP_NODES = 100 # 最终保留数
-TIMEOUT = 0.6       # 适当放宽超时提高稳定性
+ROUND1_KEEP = 300  # 第一轮保留数
+MAX_KEEP_NODES = 50 # 最终保留数
+TIMEOUT = 0.4       # 适当放宽超时提高稳定性
 MAX_WORKERS = 100   
 
 DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net"]
