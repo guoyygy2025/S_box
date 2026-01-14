@@ -8,7 +8,6 @@ import re
 import sys
 from urllib.parse import urlparse, parse_qs, unquote
 
-# 强制刷新输出
 def log(msg):
     print(msg, flush=True)
 
@@ -21,8 +20,9 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 100 
-TIMEOUT = 0.2       
+MAX_KEEP_NODES = 800 
+TIMEOUT = 2       
+MAX_WORKERS = 100
 
 def get_modern_template():
     return {
@@ -30,25 +30,51 @@ def get_modern_template():
         "dns": {
             "servers": [
                 {"tag": "dns_fakeip", "address": "fakeip"},
-                {"tag": "dns_proxy", "address": "https://223.5.5.5/dns-query", "detour": "proxy"},
-                {"tag": "dns_direct", "address": "https://223.6.6.6/dns-query", "detour": "direct"},
+                # 国外 DNS 走代理
+                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
+                # 国内 DNS 走直连
+                {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
                 {"rule_set": "geosite-cn", "server": "dns_direct"},
                 {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
             ],
-            "final": "dns_direct",
+            "final": "dns_proxy",
             "strategy": "prefer_ipv4",
             "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
         },
-        "inbounds": [{"type": "tun", "tag": "tun-in", "address": ["172.19.0.1/30"], "auto_route": True, "strict_route": True, "sniff": True}],
+        "inbounds": [
+            {"type": "tun", "tag": "tun-in", "address": ["172.19.0.1/30"], "auto_route": True, "strict_route": True, "sniff": True}
+        ],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
-            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://223.5.5.5/dns-query", "interval": "10m"},
-            {"type": "direct", "tag": "direct"}
+            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
+            {"type": "direct", "tag": "direct"},
+            {"type": "dns", "tag": "dns-out"}
         ],
-        "route": {"rules": [{"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}], "final": "proxy"}
+        "route": {
+            "rules": [
+                {"protocol": "dns", "outbound": "dns-out"},
+                {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
+            ],
+            "final": "proxy",
+            "auto_detect_interface": True,
+            "rule_set": [
+                {
+                    "tag": "geoip-cn",
+                    "type": "local",
+                    "format": "binary",
+                    "path": "rules/geoip-cn.srs"
+                },
+                {
+                    "tag": "geosite-cn",
+                    "type": "local",
+                    "format": "binary",
+                    "path": "rules/geosite-cn.srs"
+                }
+            ]
+        }
     }
 
 def resolve_with_1111(domain):
@@ -68,23 +94,22 @@ def check_conn(info):
     except: return None
 
 def main():
-    log("开始运行脚本...")
+    log(">>> 启动任务: 抓取并解析节点")
     links = []
     for s in SOURCES:
         try:
-            log(f"正在抓取: {s[:30]}...")
             r = requests.get(s, timeout=10)
             txt = r.text
             if "://" not in txt:
                 txt = base64.b64decode(txt + "==").decode('utf-8', 'ignore')
             found = re.findall(r"(?:vless|trojan|hysteria2|hy2)://[^\s]+", txt)
             links.extend(found)
-        except Exception as e: log(f"抓取失败: {e}")
+            log(f"抓取成功: {s[:40]}...")
+        except: log(f"抓取失败: {s[:40]}...")
 
     unique = list(set(links))
-    log(f"去重后节点数: {len(unique)}")
+    log(f"去重后总数: {len(unique)}")
 
-    log("开始解析 IP (使用 1.1.1.1)...")
     to_test = []
     for l in unique:
         try:
@@ -92,18 +117,13 @@ def main():
             ip = resolve_with_1111(u.hostname)
             if ip: to_test.append((l, ip, u.port or 443))
         except: pass
-    
-    log(f"解析成功: {len(to_test)}")
-    if not to_test: return
 
-    log("开始测速 (阿里 223.5.5.5)...")
-    with concurrent.futures.ThreadPoolExecutor(max_workers=50) as ex:
+    log(">>> 开始 TCP 测速")
+    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         r1 = [res for res in ex.map(check_conn, to_test) if res]
     
     r1.sort(key=lambda x: x[2])
-    # 进行三次测速筛选
     final_nodes = r1[:MAX_KEEP_NODES]
-    log(f"测速完成，保留节点: {len(final_nodes)}")
 
     outbounds, tags = [], []
     for link, ip, lat in final_nodes:
@@ -111,17 +131,27 @@ def main():
             u = urlparse(link)
             q = parse_qs(u.query)
             ms = int(lat * 1000)
-            tag = f"{unquote(u.fragment)[:5] or 'Node'}|{ms}ms"
-            while tag in tags: tag += "_"
-            tags.append(tag)
+            raw_tag = unquote(u.fragment).split(' ')[0][:6] if u.fragment else "Node"
+            tag = f"{raw_tag}|{ms}ms"
+            
+            counter = 1
+            unique_tag = tag
+            while unique_tag in tags:
+                unique_tag = f"{tag}_{counter}"
+                counter += 1
+            tags.append(unique_tag)
             
             node = {
                 "type": "hysteria2" if u.scheme in ["hy2", "hysteria2"] else u.scheme,
-                "tag": tag, "server": ip, "server_port": int(u.port or 443),
+                "tag": unique_tag,
+                "server": ip,
+                "server_port": int(u.port or 443),
                 "password" if u.scheme != "vless" else "uuid": u.username
             }
-            if "tls" in link or "reality" in str(q) or u.scheme == "hysteria2":
+            if "tls" in link or "reality" in str(q) or u.scheme in ["hy2", "hysteria2"]:
                 node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0]}
+                if 'pbk' in q:
+                    node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
             outbounds.append(node)
         except: continue
 
@@ -132,10 +162,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(conf, f, indent=2, ensure_ascii=False)
-    log("✅ 成功生成 config.json")
+    log(f"✅ 完成！已写入 {len(outbounds)} 个节点及本地规则配置。")
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        log(f"程序运行崩溃: {str(e)}")
+    main()
