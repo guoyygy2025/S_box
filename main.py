@@ -22,7 +22,7 @@ SOURCES = [
 ]
 
 MAX_KEEP_NODES = 100 
-TIMEOUT = 0.4       
+TIMEOUT = 0.2       
 
 def get_modern_template():
     return {
