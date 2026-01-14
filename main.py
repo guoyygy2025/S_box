@@ -30,14 +30,15 @@ def get_modern_template():
         "dns": {
             "servers": [
                 {"tag": "dns_fakeip", "address": "fakeip"},
-                # 国外 DNS 走代理
+                # 国外 DNS：走代理
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                # 国内 DNS 走直连
+                # 国内 DNS：走直连 (用于下载规则和访问国内域名)
                 {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
-                {"rule_set": "geosite-cn", "server": "dns_direct"},
+                # 确保下载规则集的域名（如 github/gh-proxy）通过阿里 DNS 解析
+                {"rule_set": ["geoip-cn", "geosite-cn"], "server": "dns_direct"},
                 {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
             ],
             "final": "dns_proxy",
@@ -63,20 +64,23 @@ def get_modern_template():
             "rule_set": [
                 {
                     "tag": "geoip-cn",
-                    "type": "local",
+                    "type": "remote",
                     "format": "binary",
-                    "path": "rules/geoip-cn.srs"
+                    "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
+                    "download_detour": "direct" # 强制直连下载
                 },
                 {
                     "tag": "geosite-cn",
-                    "type": "local",
+                    "type": "remote",
                     "format": "binary",
-                    "path": "rules/geosite-cn.srs"
+                    "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+                    "download_detour": "direct" # 强制直连下载
                 }
             ]
         }
     }
 
+# --- 解析与测速逻辑 ---
 def resolve_with_1111(domain):
     if not domain or re.match(r"^\d", domain): return domain
     try:
@@ -162,7 +166,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(conf, f, indent=2, ensure_ascii=False)
-    log(f"✅ 完成！已写入 {len(outbounds)} 个节点及本地规则配置。")
+    log(f"✅ 完成！已写入 {len(outbounds)} 个节点。规则集配置为远程下载，解析走阿里 DNS。")
 
 if __name__ == "__main__":
     main()
