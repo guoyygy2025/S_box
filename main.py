@@ -21,7 +21,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 500 
+MAX_KEEP_NODES = 100 
 TIMEOUT = 0.4       
 
 def get_modern_template():
