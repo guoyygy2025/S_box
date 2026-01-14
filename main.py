@@ -5,10 +5,14 @@ import concurrent.futures
 import json
 import time
 import re
+import sys
 from urllib.parse import urlparse, parse_qs, unquote
 
+# 强制刷新输出，确保 GitHub Actions 日志可见
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(line_buffering=True)
+
 # --- 配置区 ---
-# 1. 订阅源列表
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt", 
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
@@ -17,18 +21,15 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 2. 自定义保留节点数量 (例如: 500 或 1000)
 MAX_KEEP_NODES = 800 
-
-# 3. 资源规则链接
-AD_RULES_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
-
-# 4. 测速配置
 TIMEOUT = 2       
 MAX_WORKERS = 100   
 DNS_CACHE = {}
+
+# 规则链接
+AD_RULES_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
+GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
 def get_modern_template():
     return {
@@ -75,7 +76,7 @@ def get_modern_template():
 
 def safe_decode(data):
     try:
-        data = data.strip()
+        data = data.strip().replace('\n', '').replace('\r', '')
         return base64.b64decode(data + '=' * (-len(data) % 4)).decode('utf-8', 'ignore')
     except:
         return data
@@ -84,7 +85,8 @@ def resolve_with_1111(domain):
     if not domain or re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain): return domain
     if domain in DNS_CACHE: return DNS_CACHE[domain]
     try:
-        r = requests.get("https://1.1.1.1/dns-query", params={"name": domain, "type": "A"}, headers={"accept": "application/dns-json"}, timeout=3.0)
+        # 使用 Cloudflare DNS-over-HTTPS JSON API
+        r = requests.get("https://1.1.1.1/dns-query", params={"name": domain, "type": "A"}, headers={"accept": "application/dns-json"}, timeout=5.0)
         data = r.json()
         if "Answer" in data:
             for ans in data["Answer"]:
@@ -95,7 +97,7 @@ def resolve_with_1111(domain):
     return None
 
 def extract_region(tag):
-    regions = ["香港", "日本", "美国", "韩国", "新加坡", "台湾", "德国", "英国", "HK", "JP", "US", "KR", "SG", "TW", "CN", "CN", "HK", "MO", "UK", "FR", "RU"]
+    regions = ["香港", "日本", "美国", "韩国", "新加坡", "台湾", "德国", "英国", "HK", "JP", "US", "KR", "SG", "TW", "CN", "MO", "UK", "FR", "RU"]
     for r in regions:
         if r.lower() in tag.lower(): return r.upper()
     return "其它"
@@ -109,21 +111,24 @@ def check_node_ali(node_info):
     except: return None
 
 def main():
-    print(f"--- 步骤1: 抓取并解析节点 (目标保留量: {MAX_KEEP_NODES}) ---")
+    print(">>> 步骤1: 抓取并解析节点...", flush=True)
     raw_links = []
     for url in SOURCES:
         try:
-            r = requests.get(url, timeout=10)
+            r = requests.get(url, timeout=15)
             if r.status_code == 200:
                 text = r.text
                 if "://" not in text: text = safe_decode(text)
                 found = re.findall(r"(?:vless|trojan|hysteria2|hy2)://[^\s]+", text)
                 raw_links.extend(found)
-        except: continue
+                print(f"成功抓取源: {url[:50]}... (获取 {len(found)} 个节点)", flush=True)
+        except Exception as e:
+            print(f"源抓取跳过: {url[:50]}... 错误: {e}", flush=True)
 
     unique_links = list(set(raw_links))
-    print(f"抓取到原始节点: {len(unique_links)} 个")
+    print(f"去重后总计: {len(unique_links)} 个节点", flush=True)
 
+    print(">>> 步骤2: 正在解析域名 (DNS: 1.1.1.1)...", flush=True)
     nodes_to_test = []
     for link in unique_links:
         try:
@@ -131,39 +136,32 @@ def main():
             ip = resolve_with_1111(u.hostname)
             if ip: nodes_to_test.append((link, ip, u.port or 443))
         except: pass
-    print(f"1.1.1.1 解析成功节点: {len(nodes_to_test)}")
+    print(f"解析成功节点: {len(nodes_to_test)}", flush=True)
 
     if not nodes_to_test:
-        return print("错误: 无有效解析节点，请检查网络环境。")
+        print("错误: 没有可用的解析节点，停止运行。")
+        return
 
-    # --- 三次测速逻辑 ---
-    # 第一轮: 扩大筛选范围，取目标量的 1.5 倍
-    print(f"--- 步骤2: 第一轮测速 (AliDNS 223.5.5.5) ---")
+    print(">>> 步骤3: 正在进行三轮稳定性测速 (DNS: AliDNS)...", flush=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         results = list(ex.map(check_node_ali, nodes_to_test))
         r1 = [res for res in results if res]
+    
     r1.sort(key=lambda x: x[2])
-    r1 = r1[:int(MAX_KEEP_NODES * 1.5)] 
-    print(f"第一轮存活: {len(r1)}")
-
-    if not r1: return print("错误: 测速无存活节点。")
-
-    print(f"--- 步骤3: 第二轮/第三轮稳定性复测 ---")
+    r1 = r1[:int(MAX_KEEP_NODES * 1.5)] # 初筛
+    
     r2 = [res for res in list(concurrent.futures.ThreadPoolExecutor(max_workers=50).map(check_node_ali, r1)) if res]
     r3 = [res for res in list(concurrent.futures.ThreadPoolExecutor(max_workers=50).map(check_node_ali, r2)) if res]
     
-    # 最终截取目标数量
     final_list = r3[:MAX_KEEP_NODES]
-    print(f"最终筛选优质节点: {len(final_list)}")
+    print(f"最终选定优质节点: {len(final_list)}", flush=True)
 
-    # --- 生成配置 ---
     final_outbounds, final_tags = [], []
     for link, ip, lat in final_list:
         try:
             u = urlparse(link)
             q = parse_qs(u.query)
             protocol = "hysteria2" if u.scheme in ["hy2", "hysteria2"] else u.scheme
-            
             region = extract_region(unquote(u.fragment) or "")
             ms = int(lat * 1000)
             node_tag = f"{region}|{ms}ms"
@@ -182,7 +180,6 @@ def main():
                 "password" if protocol != "vless" else "uuid": u.username
             }
 
-            # TLS & Reality & Transport 逻辑
             if "tls" in link or "reality" in str(q) or protocol == "hysteria2":
                 node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0]}
                 if 'pbk' in q:
@@ -205,7 +202,7 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✅ 任务完成！已保存 {len(final_outbounds)} 个节点至 config.json")
+    print(f"\n✅ 任务完成！已成功保存 {len(final_outbounds)} 个节点。", flush=True)
 
 if __name__ == "__main__":
     main()
