@@ -17,7 +17,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 800 
+MAX_KEEP_NODES = 100 
 
 # 定义下载域名，用于后续生成“白名单”规则
 DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net"]
@@ -26,7 +26,7 @@ AD_RULES_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai
 GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
-TIMEOUT = 2       
+TIMEOUT = 0.4       
 MAX_WORKERS = 100   
 DNS_CACHE = {}
 
