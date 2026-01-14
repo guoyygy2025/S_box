@@ -26,7 +26,7 @@ GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/
 GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
 # 4. 测速配置
-TIMEOUT = 2.0       
+TIMEOUT = 1       
 MAX_WORKERS = 100   
 DNS_CACHE = {}
 
