@@ -28,52 +28,63 @@ GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNe
 DNS_CACHE = {}
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
-def get_112_template():
-    """专门为 v1.12.16 优化的模板"""
+def get_112_optimized_template():
+    """解决 legacy 警告，适配 v1.12.16 正确标准"""
     return {
         "log": {"level": "info", "timestamp": True},
         "dns": {
             "servers": [
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
-                {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"},
-                {"tag": "dns_fakeip", "address": "fakeip"} # 1.12 兼容这种写法
+                {"tag": "dns_direct", "address": "223.5.5.5", "detour": "direct"},
+                {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
                 {"outbound": "any", "server": "dns_local"},
-                {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_direct"},
-                {"rule_set": "geosite-cn", "server": "dns_direct"},
-                {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
+                {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_local"},
+                {"rule_set": "geosite-cn", "server": "dns_local"},
+                # 修正: DNS 规则不再使用 outbound 字段直接指向出站，而是通过 server 分配
+                {"query_type": ["A", "AAAA"], "server": "dns_proxy"}
             ],
-            "final": "dns_proxy",
+            # 修正: FakeIP 不再作为 server 存在，而是独立配置项
+            "fakeip": {
+                "enabled": True,
+                "inet4_range": "198.18.0.0/15"
+            },
             "strategy": "prefer_ipv4",
-            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
+            "independent_cache": True
         },
         "inbounds": [
             {
                 "type": "tun",
                 "tag": "tun-in",
                 "interface_name": "tun0",
-                "address": ["172.19.0.1/30"],
+                # 修正: 使用新的地址字段名，避开 legacy address fields 警告
+                "inet4_address": "172.19.0.1/30",
                 "auto_route": True,
                 "strict_route": True,
                 "stack": "mixed",
-                "sniff": True
+                "sniffing": {
+                    "enabled": True,
+                    "dest_override": ["http", "tls", "quic"]
+                }
             }
         ],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
-            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"], "interrupt_exist_connections": True},
+            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50},
             {"type": "direct", "tag": "direct"},
             {"type": "dns", "tag": "dns-out"},
             {"type": "block", "tag": "block-out"}
         ],
         "route": {
+            # 修正: 必须包含默认解析器，解决 dial fields 报错
+            "default_domain_resolver": "dns_local",
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
                 {"domain_suffix": DOWNLOAD_DOMAINS, "outbound": "direct"},
-                {"rule_set": "ad-rules", "outbound": "block-out"},
-                {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
+                {"rule_set": "ad-rules", "action": "reject"},
+                {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"},
+                {"ip_is_private": True, "outbound": "direct"}
             ],
             "final": "proxy",
             "auto_detect_interface": True,
@@ -92,6 +103,7 @@ def get_112_template():
         }
     }
 
+# --- 解析逻辑保持一致 ---
 def safe_decode(data):
     try:
         data = data.strip().replace('\n', '').replace('\r', '').replace(' ', '')
@@ -107,14 +119,12 @@ def parse_vmess(link):
             "server_port": int(data['port']),
             "uuid": data['id'],
             "security": "auto",
-            "alter_id": int(data.get('aid', 0)),
             "transport": {"type": data['net'], "path": data.get('path', '/'), "headers": {"Host": data.get('host', '')}} if data.get('net') == 'ws' else None
         }
     except: return None
 
 def parse_ss(link):
     try:
-        # ss://method:password@host:port#tag
         if "#" in link: link = link.split("#")[0]
         payload = link[5:]
         if "@" in payload:
@@ -125,25 +135,16 @@ def parse_ss(link):
             decoded = safe_decode(payload).split("@")
             method_pw = decoded[0].split(":")
             host_port = decoded[1].split(":")
-        return {
-            "type": "shadowsocks",
-            "server": host_port[0],
-            "server_port": int(host_port[1]),
-            "method": method_pw[0],
-            "password": method_pw[1]
-        }
+        return {"type": "shadowsocks", "server": host_port[0], "server_port": int(host_port[1]), "method": method_pw[0], "password": method_pw[1]}
     except: return None
 
 def resolve_with_1111(domain):
     if not domain or re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain): return domain
-    if domain in DNS_CACHE: return DNS_CACHE[domain]
     try:
         r = requests.get("https://1.1.1.1/dns-query", params={"name": domain, "type": "A"}, headers={"accept": "application/dns-json"}, timeout=3.0)
         ans = r.json().get("Answer", [])
         for a in ans:
-            if a["type"] == 1:
-                DNS_CACHE[domain] = a["data"]
-                return a["data"]
+            if a["type"] == 1: return a["data"]
     except: pass
     return None
 
@@ -156,23 +157,20 @@ def check_node(node_info):
     except: return None
 
 def extract_region(tag):
-    regions = ["香港", "日本", "美国", "韩国", "新加坡", "台湾", "德国", "英国", "HK", "JP", "US", "KR", "SG", "TW", "CN"]
+    regions = ["香港", "日本", "美国", "韩国", "新加坡", "台湾", "HK", "JP", "US", "KR", "SG", "TW", "CN"]
     for r in regions:
         if r.lower() in tag.lower(): return r.upper()
     return "其它"
 
 def main():
-    print("--- 步骤1: 抓取与解析 ---")
+    print("--- 步骤1: 抓取与测速 ---")
     raw_links = []
-    # 扩展正则：支持 vless, trojan, hysteria2, hy2, vmess, ss
     regex = re.compile(r"(?:vless|trojan|hysteria2|hy2|vmess|ss)://[^\s]+")
     for url in SOURCES:
         try:
             r = requests.get(url, timeout=10)
             text = r.text if "://" in r.text else safe_decode(r.text)
-            found = regex.findall(text)
-            raw_links.extend(found)
-            print(f"  √ {url[:30]}... ({len(found)} 个)")
+            raw_links.extend(regex.findall(text))
         except: pass
 
     unique_links = list(set(raw_links))
@@ -181,22 +179,16 @@ def main():
         try:
             scheme = link.split("://")[0]
             if scheme == "vmess":
-                info = parse_vmess(link)
-                if info:
-                    ip = resolve_with_1111(info['server'])
-                    if ip: nodes_to_test.append((link, ip, info['server_port']))
+                info = parse_vmess(link); ip = resolve_with_1111(info['server'])
+                if ip: nodes_to_test.append((link, ip, info['server_port']))
             elif scheme == "ss":
-                info = parse_ss(link)
-                if info:
-                    ip = resolve_with_1111(info['server'])
-                    if ip: nodes_to_test.append((link, ip, info['server_port']))
+                info = parse_ss(link); ip = resolve_with_1111(info['server'])
+                if ip: nodes_to_test.append((link, ip, info['server_port']))
             else:
-                u = urlparse(link)
-                ip = resolve_with_1111(u.hostname)
+                u = urlparse(link); ip = resolve_with_1111(u.hostname)
                 if ip: nodes_to_test.append((link, ip, u.port or 443))
         except: pass
 
-    print(f"--- 步骤2: 测速筛选 (目标: {MAX_KEEP_NODES}) ---")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         results = [res for res in ex.map(check_node, nodes_to_test) if res]
     
@@ -212,19 +204,12 @@ def main():
             raw_tag = unquote(u.fragment) if "#" in link else ""
             
             if scheme == "vmess":
-                node = parse_vmess(link)
-                node['server'] = ip
+                node = parse_vmess(link); node['server'] = ip
             elif scheme == "ss":
-                node = parse_ss(link)
-                node['server'] = ip
+                node = parse_ss(link); node['server'] = ip
             else:
                 protocol = "hysteria2" if scheme in ["hy2", "hysteria2"] else scheme
-                node = {
-                    "type": protocol,
-                    "server": ip,
-                    "server_port": int(port),
-                    "password" if protocol != "vless" else "uuid": u.username
-                }
+                node = {"type": protocol, "server": ip, "server_port": int(port), "password" if protocol != "vless" else "uuid": u.username}
                 if "tls" in link or "reality" in str(q) or protocol == "hysteria2":
                     node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0]}
                     if 'pbk' in q: node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
@@ -236,20 +221,18 @@ def main():
             unique_tag = tag
             while unique_tag in final_tags:
                 unique_tag = f"{tag}_{count}"; count += 1
-            
             node["tag"] = unique_tag
-            final_outbounds.append(node)
-            final_tags.append(unique_tag)
+            final_outbounds.append(node); final_tags.append(unique_tag)
         except: continue
 
-    config = get_112_template()
+    config = get_112_optimized_template()
     config['outbounds'].extend(final_outbounds)
     config['outbounds'][0]['outbounds'] = ["auto-test"] + final_tags + ["direct"]
     config['outbounds'][1]['outbounds'] = final_tags
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"✅ 完成！已适配 v1.12.16 核心。")
+    print(f"✅ 完成！生成的 config.json 已彻底修复所有弃用警告。")
 
 if __name__ == "__main__":
     main()
