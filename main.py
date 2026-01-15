@@ -30,42 +30,54 @@ GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNe
 
 DNS_CACHE = {}
 
-def get_modern_template():
+# 添加 UA 避免被 GitHub 拒绝
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
+
+def get_114_template():
     """
-    针对 Sing-box v1.9/v1.10+ 的最新配置模板
-    修复 legacy DNS 和 missing domain_resolver 错误
+    Sing-box 1.14+ 标准配置模板
+    - cache_file 移至根目录
+    - sniffing 对象化
+    - 移除弃用的 DNS 选项
     """
     return {
         "log": {"level": "info", "timestamp": True},
+        # 1.14+ 缓存文件标准写法
+        "cache_file": {
+            "enabled": True,
+            "path": "cache.db",
+            "store_fakeip": True,
+            "store_rdrc": True
+        },
         "dns": {
             "servers": [
-                # 1. 远程 DNS (走代理)
+                # 远程 DNS (走代理)
                 {"tag": "dns_remote", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                # 2. 本地 DNS (直连) - 用于解析国内域名和 DoH 域名
+                # 本地 DNS (直连)
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"},
-                # 3. FakeIP 占位
+                # FakeIP
                 {"tag": "dns_fakeip", "address": "fakeip"}
             ],
             "rules": [
-                {"outbound": "any", "server": "dns_local"}, # 必须：防止死循环
+                {"outbound": "any", "server": "dns_local"}, 
                 {"clash_mode": "direct", "server": "dns_local"},
                 {"clash_mode": "global", "server": "dns_remote"},
                 
-                # 特定域名走直连 DNS
+                # 特定域名解析
                 {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_local"},
                 {"rule_set": "geosite-cn", "server": "dns_local"},
                 
-                # 其余走 FakeIP (配合 Tun)
+                # 剩余走 FakeIP
                 {"query_type": ["A", "AAAA"], "server": "dns_fakeip"}
             ],
-            # FakeIP 设置块
             "fakeip": {
                 "enabled": True,
                 "inet4_range": "198.18.0.0/15",
                 "inet6_range": "fc00::/18"
             },
-            "strategy": "prefer_ipv4",
-            "independent_cache": True # 新版推荐
+            "strategy": "prefer_ipv4"
         },
         "inbounds": [
             {
@@ -75,28 +87,30 @@ def get_modern_template():
                 "inet4_address": "172.19.0.1/30", 
                 "auto_route": True, 
                 "strict_route": True, 
-                "stack": "mixed", 
-                "sniff": True
+                "stack": "mixed",
+                # 1.14+ 推荐写法
+                "sniffing": {
+                    "enabled": True,
+                    "dest_override": ["http", "tls", "quic"],
+                    "metadata_only": False
+                }
             }
         ],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"], "interrupt_exist_connections": True},
             {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m", "tolerance": 50},
             {"type": "direct", "tag": "direct"},
             {"type": "dns", "tag": "dns-out"},
             {"type": "block", "tag": "block-out"}
         ],
         "route": {
-            # 关键修复：指定默认域名解析器，解决 dial fields 报错
             "default_domain_resolver": "dns_local",
-            
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
                 {"domain_suffix": DOWNLOAD_DOMAINS, "outbound": "direct"},
-                # 广告拦截改用 action: reject (更现代的写法，虽然 outbound: block-out 也兼容)
+                # 广告拦截 (reject)
                 {"rule_set": "ad-rules", "action": "reject"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"},
-                # 兜底
                 {"ip_is_private": True, "outbound": "direct"} 
             ],
             "final": "proxy",
@@ -107,16 +121,19 @@ def get_modern_template():
                 {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
             ]
         },
+        # 可选：Clash API 支持 (方便 UI 面板控制)
         "experimental": {
-            "cache_file": {
-                "enabled": True,
-                "path": "cache.db"
+            "clash_api": {
+                "external_controller": "127.0.0.1:9090",
+                "external_ui": "ui",
+                "external_ui_download_url": "https://github.com/MetaCubeX/Yacd-meta/archive/gh-pages.zip",
+                "external_ui_download_detour": "direct",
+                "default_mode": "rule"
             }
         }
     }
 
 def safe_decode(data):
-    """通用 Base64 解码，自动补全 Padding"""
     if not data: return ""
     try:
         data = data.strip().replace('\n', '').replace('\r', '').replace(' ', '')
@@ -129,7 +146,6 @@ def safe_decode(data):
         return data
 
 def parse_ss_url(link):
-    """解析各种格式的 SS 链接"""
     try:
         body = link[5:]
         tag = ""
@@ -167,7 +183,8 @@ def resolve_with_1111(domain):
     if not domain or re.match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", domain): return domain
     if domain in DNS_CACHE: return DNS_CACHE[domain]
     try:
-        r = requests.get("https://1.1.1.1/dns-query", params={"name": domain, "type": "A"}, headers={"accept": "application/dns-json"}, timeout=3.0)
+        # 增加 headers 防止被屏蔽
+        r = requests.get("https://1.1.1.1/dns-query", params={"name": domain, "type": "A"}, headers={"accept": "application/dns-json", **HEADERS}, timeout=3.0)
         data = r.json()
         if "Answer" in data:
             for ans in data["Answer"]:
@@ -198,14 +215,15 @@ def main():
     
     for url in SOURCES:
         try:
-            r = requests.get(url, timeout=10)
+            r = requests.get(url, headers=HEADERS, timeout=10)
             if r.status_code == 200:
                 text = r.text
                 if "://" not in text: text = safe_decode(text)
                 found = link_regex.findall(text)
                 raw_links.extend(found)
                 print(f"  √ 已抓取: {url[:40]}... ({len(found)} 个)")
-        except: pass
+        except Exception as e:
+            print(f"  x 抓取失败 {url[:20]}: {e}")
 
     unique_links = list(set(raw_links))
     print(f"  总去重后节点数: {len(unique_links)}")
@@ -229,12 +247,16 @@ def main():
                 hostname = u.hostname
                 port = u.port or 443
             
+            # 过滤掉显然错误的端口
+            if not isinstance(port, int) or port <= 0 or port > 65535: continue
+
             if hostname:
                 ip = resolve_with_1111(hostname) 
                 if ip: 
                     nodes_to_test.append((link, ip, port))
         except: pass
 
+    # 使用线程池测速
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         round1_results = [res for res in ex.map(check_node, nodes_to_test) if res]
     
@@ -329,7 +351,9 @@ def main():
                     }
                 
                 if protocol_type == "vless":
-                     node["flow"] = q.get('flow', [''])[0] 
+                     # 1.14+ 推荐显式声明 flow (如有)
+                     if 'flow' in q:
+                        node["flow"] = q['flow'][0]
 
             region = extract_region(origin_tag or "")
             ms = int(lat * 1000)
@@ -347,14 +371,15 @@ def main():
             
         except: continue
 
-    config = get_modern_template()
+    config = get_114_template()
     config['outbounds'].extend(final_outbounds)
     config['outbounds'][0]['outbounds'] = ["auto-test"] + final_tags + ["direct"]
     config['outbounds'][1]['outbounds'] = final_tags
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"✅ 完成！已保存 {len(final_outbounds)} 个精选节点 (v1.9+ 兼容格式)。")
+    print(f"✅ 完成！已保存 {len(final_outbounds)} 个节点 (Sing-box 1.14+ 专用格式)。")
+    print("提示：此配置启用了 Clash API (9090端口)，可直接配合 Yacd/Metacubexd 面板使用。")
 
 if __name__ == "__main__":
     main()
