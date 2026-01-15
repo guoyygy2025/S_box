@@ -28,20 +28,15 @@ GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNe
 DNS_CACHE = {}
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"}
 
-def get_114_clean_template():
-    """彻底适配 Sing-box v1.14.0+，移除 Clash API"""
+def get_112_template():
+    """适配 Sing-box v1.12.16 结构"""
     return {
         "log": {"level": "info", "timestamp": True},
-        "cache_file": {
-            "enabled": True,
-            "path": "cache.db",
-            "store_fakeip": True,
-            "store_rdrc": True
-        },
         "dns": {
             "servers": [
                 {"tag": "dns_remote", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"},
+                # v1.12.x 中 fakeip 还是作为一个 server 存在
                 {"tag": "dns_fakeip", "address": "fakeip"}
             ],
             "rules": [
@@ -55,8 +50,7 @@ def get_114_clean_template():
                 "inet4_range": "198.18.0.0/15",
                 "inet6_range": "fc00::/18"
             },
-            "strategy": "prefer_ipv4",
-            "independent_cache": True
+            "strategy": "prefer_ipv4"
         },
         "inbounds": [
             {
@@ -96,9 +90,19 @@ def get_114_clean_template():
                 {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
                 {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
             ]
+        },
+        # 在 1.12.x 中，cache_file 必须写在 experimental 里
+        "experimental": {
+            "cache_file": {
+                "enabled": True,
+                "path": "cache.db",
+                "store_fakeip": True,
+                "store_rdrc": True
+            }
         }
     }
 
+# --- 后续解析逻辑与之前一致 ---
 def safe_decode(data):
     try:
         data = data.strip().replace('\n', '').replace('\r', '').replace(' ', '').replace('-', '+').replace('_', '/')
@@ -179,7 +183,7 @@ def main():
                 if ip: nodes_to_test.append((link, ip, u.port or 443))
         except: pass
 
-    print(f"--- 步骤2: 多轮压力测速 (目标: {MAX_KEEP_NODES}个) ---")
+    print(f"--- 步骤2: 测速中... ---")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         results = [res for res in ex.map(check_node, nodes_to_test) if res]
     
@@ -192,7 +196,6 @@ def main():
             scheme = link.split("://")[0]
             node = {}
             raw_tag = ""
-            
             if scheme == "ss":
                 info = parse_ss_url(link)
                 node = {"type": "shadowsocks", "server": ip, "server_port": info['server_port'], "method": info['method'], "password": info['password']}
@@ -222,14 +225,14 @@ def main():
             final_tags.append(unique_tag)
         except: continue
 
-    config = get_114_clean_template()
+    config = get_112_template()
     config['outbounds'].extend(final_outbounds)
     config['outbounds'][0]['outbounds'] = ["auto-test"] + final_tags + ["direct"]
     config['outbounds'][1]['outbounds'] = final_tags
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    print(f"✅ 成功！生成 {len(final_outbounds)} 个优质节点。适配 Sing-box v1.14+ (无 API 版)。")
+    print(f"✅ 完成！已适配 v1.12.16。")
 
 if __name__ == "__main__":
     main()
