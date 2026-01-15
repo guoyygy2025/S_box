@@ -20,16 +20,23 @@ MAX_KEEP_NODES = 80
 TIMEOUT = 0.5       
 MAX_WORKERS = 100    
 
-# 关键：定义用于下载规则的域名白名单
-DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net", "raw.githubusercontent.com"]
+# 规则下载白名单：确保这些域名不走代理，不走 FakeIP
+DOWNLOAD_DOMAINS = [
+    "gh-proxy.com", 
+    "githubusercontent.com", 
+    "github.com", 
+    "jsdelivr.net", 
+    "raw.githubusercontent.com"
+]
+
 AD_RULES_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 GEOIP_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
 DNS_CACHE = {}
 
-def get_112_final_template():
-    """专为 v1.12.16 适配：优先规则下载 + 消除 Legacy 报错"""
+def get_112_merged_template():
+    """合并版模板：适配 1.12.16 语法 + 规则下载特权通道"""
     return {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -39,7 +46,7 @@ def get_112_final_template():
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"}
             ],
             "rules": [
-                # 优先级1：下载域名必须走本地 DNS 且直连，防止 FakeIP 导致的死循环
+                # 优先级1：下载域名强制直连解析，破除死循环
                 {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_local"},
                 {"outbound": "any", "server": "dns_local"},
                 {"rule_set": "geosite-cn", "server": "dns_direct"},
@@ -57,7 +64,7 @@ def get_112_final_template():
                 "auto_route": True,
                 "strict_route": True,
                 "stack": "mixed",
-                "sniff": True, # 修复: 1.12 不支持 sniffing 对象，使用布尔值
+                "sniff": True, # 适配 1.12.16：必须使用布尔值
                 "sniff_timeout": "300ms"
             }
         ],
@@ -69,12 +76,11 @@ def get_112_final_template():
             {"type": "block", "tag": "block-out"}
         ],
         "route": {
-            "default_domain_resolver": "dns_local", # 修复: 补全解析器
+            "default_domain_resolver": "dns_local",
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                # 核心逻辑：确保下载流量在所有规则匹配前强制直连
+                # 优先级1：路由层面强制下载域名直连
                 {"domain_suffix": DOWNLOAD_DOMAINS, "outbound": "direct"},
-                
                 {"rule_set": "ad-rules", "outbound": "block-out"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"},
                 {"ip_is_private": True, "outbound": "direct"}
@@ -92,13 +98,19 @@ def get_112_final_template():
         }
     }
 
-# --- 节点解析引擎 ---
+# --- 解析与测速引擎 ---
 
 def safe_decode(data):
     try:
         data = data.strip().replace('\n', '').replace('\r', '').replace(' ', '')
         return base64.b64decode(data + '=' * (-len(data) % 4)).decode('utf-8', 'ignore')
     except: return data
+
+def extract_region(tag):
+    regions = ["香港", "日本", "美国", "韩国", "新加坡", "台湾", "德国", "英国", "HK", "JP", "US", "KR", "SG", "TW", "CN", "RU"]
+    for r in regions:
+        if r.lower() in tag.lower(): return r.upper()
+    return "其它"
 
 def parse_vmess(link):
     try:
@@ -146,7 +158,7 @@ def check_node(node_info):
     except: return None
 
 def main():
-    print("🚀 启动 Sing-box v1.12.16 专属生成器...")
+    print("🚀 正在抓取并合并节点 (适配 v1.12.16)...")
     raw_links = []
     regex = re.compile(r"(?:vless|trojan|hysteria2|hy2|vmess|ss)://[^\s]+")
     
@@ -156,7 +168,7 @@ def main():
             text = r.text if "://" in r.text else safe_decode(r.text)
             found = regex.findall(text)
             raw_links.extend(found)
-            print(f"  √ 抓取: {url[:35]}...")
+            print(f"  √ 来源: {url[:30]}... ({len(found)}个)")
         except: pass
 
     unique_links = list(set(raw_links))
@@ -180,7 +192,7 @@ def main():
                 if ip: nodes_to_test.append((link, ip, u.port or 443))
         except: pass
 
-    print(f"📡 正在对 {len(nodes_to_test)} 个节点进行 TCP 测速...")
+    print(f"📡 测速筛选中 (目标: {len(nodes_to_test)} 节点)...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         results = [res for res in ex.map(check_node, nodes_to_test) if res]
     
@@ -194,6 +206,7 @@ def main():
             u = urlparse(link); q = parse_qs(u.query)
             node = {}
             raw_tag = unquote(u.fragment) if "#" in link else "Node"
+            region = extract_region(raw_tag)
             
             if scheme == "vmess":
                 node = parse_vmess(link); node['server'] = ip
@@ -204,11 +217,14 @@ def main():
                 node = {"type": protocol, "server": ip, "server_port": int(port), "password" if protocol != "vless" else "uuid": u.username}
                 if "tls" in link or "reality" in str(q) or protocol == "hysteria2":
                     node["tls"] = {"enabled": True, "server_name": q.get('sni', [u.hostname])[0]}
-                    if 'pbk' in q: node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
+                    if 'pbk' in q:
+                        node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
+                    if protocol != "hysteria2":
+                        node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
                 if q.get('type', [''])[0] == 'ws':
                     node["transport"] = {"type": "ws", "path": q.get('path', ['/'])[0], "headers": {"Host": q.get('host', [u.hostname])[0]}}
 
-            tag = f"{raw_tag[:8]}|{int(lat*1000)}ms"
+            tag = f"{region}|{int(lat*1000)}ms"
             count = 1
             unique_tag = tag
             while unique_tag in final_tags:
@@ -217,7 +233,7 @@ def main():
             final_outbounds.append(node); final_tags.append(unique_tag)
         except: continue
 
-    config = get_112_final_template()
+    config = get_112_merged_template()
     config['outbounds'].extend(final_outbounds)
     config['outbounds'][0]['outbounds'] = ["auto-test"] + final_tags + ["direct"]
     config['outbounds'][1]['outbounds'] = final_tags
@@ -226,11 +242,8 @@ def main():
         json.dump(config, f, indent=2, ensure_ascii=False)
     
     print("-" * 30)
-    print("✅ 配置文件 config.json 生成成功！")
-    print("📌 针对 1.12.16 优化：")
-    print("   1. 修复了 sniffing 报错")
-    print("   2. 解决了规则下载死循环（直连优先）")
-    print("   3. 消除了所有 Legacy 弃用警告")
+    print(f"✅ 合并成功！已筛选出 {len(final_outbounds)} 个优质节点。")
+    print("📌 针对 1.12.16 优化：修复 sniffing、规则下载优先直连、强化地区识别。")
 
 if __name__ == "__main__":
     main()
