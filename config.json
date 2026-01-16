@@ -51,7 +51,8 @@
           "A",
           "AAAA"
         ],
-        "server": "dns_fakeip"
+        "server": "dns_fakeip",
+        "rewrite_ttl": 1
       }
     ],
     "final": "dns_proxy",
@@ -70,8 +71,10 @@
       ],
       "auto_route": true,
       "strict_route": true,
-      "stack": "mixed",
-      "sniff": true
+      "stack": "gvisor",
+      "mtu": 9000,
+      "sniff": true,
+      "sniff_override_destination": true
     }
   ],
   "outbounds": [
@@ -80,66 +83,66 @@
       "tag": "proxy",
       "outbounds": [
         "auto-test",
-        "UN-5ms",
-        "UN-5ms-1",
-        "UN-5ms-2",
-        "UN-5ms-3",
-        "UN-5ms-4",
-        "UN-5ms-5",
-        "UN-5ms-6",
-        "UN-5ms-7",
-        "UN-5ms-8",
-        "UN-5ms-9",
-        "UN-5ms-10",
-        "UN-5ms-11",
-        "UN-5ms-12",
-        "UN-5ms-13",
-        "UN-5ms-14",
-        "UN-5ms-15",
-        "UN-5ms-16",
-        "UN-5ms-17",
-        "UN-5ms-18",
-        "UN-5ms-19",
-        "UN-5ms-20",
-        "UN-5ms-21",
-        "UN-5ms-22",
-        "UN-5ms-23",
-        "UN-5ms-24",
-        "UN-5ms-25",
-        "UN-5ms-26",
-        "UN-5ms-27",
-        "UN-5ms-28",
-        "UN-5ms-29",
-        "UN-5ms-30",
-        "UN-5ms-31",
-        "UN-5ms-32",
-        "UN-5ms-33",
-        "UN-5ms-34",
-        "UN-5ms-35",
-        "UN-5ms-36",
-        "UN-5ms-37",
-        "UN-5ms-38",
-        "UN-5ms-39",
-        "UN-5ms-40",
-        "UN-5ms-41",
-        "UN-5ms-42",
-        "UN-5ms-43",
-        "UN-5ms-44",
-        "UN-5ms-45",
-        "UN-5ms-46",
-        "UN-5ms-47",
-        "UN-5ms-48",
-        "UN-5ms-49",
-        "UN-5ms-50",
-        "UN-5ms-51",
-        "UN-5ms-52",
-        "UN-5ms-53",
-        "UN-5ms-54",
-        "UN-5ms-55",
-        "UN-5ms-56",
-        "UN-5ms-57",
-        "UN-5ms-58",
-        "UN-6ms",
+        "Node-7ms-0",
+        "Node-7ms-1",
+        "Node-8ms-2",
+        "Node-8ms-3",
+        "Node-8ms-4",
+        "Node-8ms-5",
+        "Node-8ms-6",
+        "Node-8ms-7",
+        "Node-8ms-8",
+        "Node-8ms-9",
+        "Node-8ms-10",
+        "Node-8ms-11",
+        "Node-8ms-12",
+        "Node-8ms-13",
+        "Node-8ms-14",
+        "Node-8ms-15",
+        "Node-8ms-16",
+        "Node-8ms-17",
+        "Node-8ms-18",
+        "Node-8ms-19",
+        "Node-8ms-20",
+        "Node-8ms-21",
+        "Node-8ms-22",
+        "Node-8ms-23",
+        "Node-8ms-24",
+        "Node-8ms-25",
+        "Node-8ms-26",
+        "Node-8ms-27",
+        "Node-8ms-28",
+        "Node-8ms-29",
+        "Node-8ms-30",
+        "Node-8ms-31",
+        "Node-8ms-32",
+        "Node-8ms-33",
+        "Node-8ms-34",
+        "Node-8ms-35",
+        "Node-8ms-36",
+        "Node-8ms-37",
+        "Node-8ms-38",
+        "Node-8ms-39",
+        "Node-8ms-40",
+        "Node-8ms-41",
+        "Node-8ms-42",
+        "Node-8ms-43",
+        "Node-8ms-44",
+        "Node-8ms-45",
+        "Node-8ms-46",
+        "Node-8ms-47",
+        "Node-8ms-48",
+        "Node-8ms-49",
+        "Node-8ms-50",
+        "Node-8ms-51",
+        "Node-8ms-52",
+        "Node-8ms-53",
+        "Node-8ms-54",
+        "Node-8ms-55",
+        "Node-8ms-56",
+        "Node-9ms-57",
+        "Node-9ms-58",
+        "Node-9ms-59",
         "direct"
       ]
     },
@@ -147,66 +150,66 @@
       "type": "urltest",
       "tag": "auto-test",
       "outbounds": [
-        "UN-5ms",
-        "UN-5ms-1",
-        "UN-5ms-2",
-        "UN-5ms-3",
-        "UN-5ms-4",
-        "UN-5ms-5",
-        "UN-5ms-6",
-        "UN-5ms-7",
-        "UN-5ms-8",
-        "UN-5ms-9",
-        "UN-5ms-10",
-        "UN-5ms-11",
-        "UN-5ms-12",
-        "UN-5ms-13",
-        "UN-5ms-14",
-        "UN-5ms-15",
-        "UN-5ms-16",
-        "UN-5ms-17",
-        "UN-5ms-18",
-        "UN-5ms-19",
-        "UN-5ms-20",
-        "UN-5ms-21",
-        "UN-5ms-22",
-        "UN-5ms-23",
-        "UN-5ms-24",
-        "UN-5ms-25",
-        "UN-5ms-26",
-        "UN-5ms-27",
-        "UN-5ms-28",
-        "UN-5ms-29",
-        "UN-5ms-30",
-        "UN-5ms-31",
-        "UN-5ms-32",
-        "UN-5ms-33",
-        "UN-5ms-34",
-        "UN-5ms-35",
-        "UN-5ms-36",
-        "UN-5ms-37",
-        "UN-5ms-38",
-        "UN-5ms-39",
-        "UN-5ms-40",
-        "UN-5ms-41",
-        "UN-5ms-42",
-        "UN-5ms-43",
-        "UN-5ms-44",
-        "UN-5ms-45",
-        "UN-5ms-46",
-        "UN-5ms-47",
-        "UN-5ms-48",
-        "UN-5ms-49",
-        "UN-5ms-50",
-        "UN-5ms-51",
-        "UN-5ms-52",
-        "UN-5ms-53",
-        "UN-5ms-54",
-        "UN-5ms-55",
-        "UN-5ms-56",
-        "UN-5ms-57",
-        "UN-5ms-58",
-        "UN-6ms"
+        "Node-7ms-0",
+        "Node-7ms-1",
+        "Node-8ms-2",
+        "Node-8ms-3",
+        "Node-8ms-4",
+        "Node-8ms-5",
+        "Node-8ms-6",
+        "Node-8ms-7",
+        "Node-8ms-8",
+        "Node-8ms-9",
+        "Node-8ms-10",
+        "Node-8ms-11",
+        "Node-8ms-12",
+        "Node-8ms-13",
+        "Node-8ms-14",
+        "Node-8ms-15",
+        "Node-8ms-16",
+        "Node-8ms-17",
+        "Node-8ms-18",
+        "Node-8ms-19",
+        "Node-8ms-20",
+        "Node-8ms-21",
+        "Node-8ms-22",
+        "Node-8ms-23",
+        "Node-8ms-24",
+        "Node-8ms-25",
+        "Node-8ms-26",
+        "Node-8ms-27",
+        "Node-8ms-28",
+        "Node-8ms-29",
+        "Node-8ms-30",
+        "Node-8ms-31",
+        "Node-8ms-32",
+        "Node-8ms-33",
+        "Node-8ms-34",
+        "Node-8ms-35",
+        "Node-8ms-36",
+        "Node-8ms-37",
+        "Node-8ms-38",
+        "Node-8ms-39",
+        "Node-8ms-40",
+        "Node-8ms-41",
+        "Node-8ms-42",
+        "Node-8ms-43",
+        "Node-8ms-44",
+        "Node-8ms-45",
+        "Node-8ms-46",
+        "Node-8ms-47",
+        "Node-8ms-48",
+        "Node-8ms-49",
+        "Node-8ms-50",
+        "Node-8ms-51",
+        "Node-8ms-52",
+        "Node-8ms-53",
+        "Node-8ms-54",
+        "Node-8ms-55",
+        "Node-8ms-56",
+        "Node-9ms-57",
+        "Node-9ms-58",
+        "Node-9ms-59"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "10m"
@@ -225,55 +228,10 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms",
+      "tag": "Node-7ms-0",
       "server": "151.101.3.8",
       "server_port": 80,
-      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "151.101.3.8",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "mitivpn.global.ssl.fastly.net"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-1",
-      "server": "151.101.3.8",
-      "server_port": 80,
-      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "151.101.3.8",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN",
-        "headers": {
-          "Host": "mitivpn.global.ssl.fastly.net"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-2",
-      "server": "151.101.3.8",
-      "server_port": 80,
+      "domain_resolver": "dns_local",
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
       "packet_encoding": "xray",
       "tls": {
@@ -294,9 +252,10 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-3",
+      "tag": "Node-7ms-1",
       "server": "151.101.3.8",
       "server_port": 80,
+      "domain_resolver": "dns_local",
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
       "packet_encoding": "xray",
       "tls": {
@@ -309,7 +268,7 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/JoinPLANB_NETJoinPLANB_NETJoinPLANB_NET",
+        "path": "/Join---PLANB_NET---Join---PLANB_NET---Join---PLANB_NET",
         "headers": {
           "Host": "mitivpn.global.ssl.fastly.net"
         }
@@ -317,9 +276,34 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-4",
+      "tag": "Node-8ms-2",
+      "server": "185.143.233.235",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "087d8602-503b-4091-9f05-44c20792083c",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "185.143.233.235",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "oon.visaups.ir"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-3",
       "server": "151.101.3.8",
       "server_port": 80,
+      "domain_resolver": "dns_local",
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
       "packet_encoding": "xray",
       "tls": {
@@ -340,82 +324,15 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-5",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tag": "Node-8ms-4",
+      "server": "185.143.233.235",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "087d8602-503b-4091-9f05-44c20792083c",
       "packet_encoding": "xray",
       "tls": {
         "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560security=tls",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-6",
-      "server": "172.64.145.38",
-      "server_port": 8443,
-      "password": "k52nemqqdx9e",
-      "tls": {
-        "enabled": true,
-        "server_name": "8end0fr.zjde5.de5.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "8end0fr.zjde5.de5.net"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-7",
-      "server": "25.25.25.0",
-      "server_port": 8880,
-      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=8880",
-        "headers": {
-          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-8",
-      "server": "5.10.214.5",
-      "server_port": 8443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
+        "server_name": "oon.visaups.ir",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -425,43 +342,21 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
+          "Host": "oon.visaups.ir"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-9",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "tag": "Node-8ms-5",
+      "server": "185.143.233.235",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "087d8602-503b-4091-9f05-44c20792083c",
       "packet_encoding": "xray",
       "tls": {
         "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-10",
-      "server": "5.10.214.5",
-      "server_port": 2087,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
+        "server_name": "oon.visaups.ir",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -471,20 +366,21 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "5.10.214.5"
+          "Host": "oon.visaups.ir"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-11",
-      "server": "25.25.25.0",
-      "server_port": 8880,
-      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "tag": "Node-8ms-6",
+      "server": "185.143.233.235",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "087d8602-503b-4091-9f05-44c20792083c",
       "packet_encoding": "xray",
       "tls": {
         "enabled": true,
-        "server_name": "25.25.25.0",
+        "server_name": "185.143.233.235",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -494,265 +390,38 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
+          "Host": "oon.visaups.ir"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-12",
-      "server": "5.10.214.0",
-      "server_port": 2087,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "tag": "Node-8ms-7",
+      "server": "45.77.87.33",
+      "server_port": 37795,
+      "domain_resolver": "dns_local",
+      "uuid": "8287e81d-2560-4aaf-ebc8-f6873c521f83",
       "packet_encoding": "xray",
       "tls": {
         "enabled": true,
-        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
+        "server_name": "www.lovelive-anime.jp",
+        "reality": {
+          "enabled": true,
+          "public_key": "4comh-7Jm_wZXJQ5QiLSCbVGQIbMUzHUIBdb0aFtLzM",
+          "short_id": ""
+        },
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-13",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-14",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560security=tls",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-15",
-      "server": "104.19.191.204",
-      "server_port": 2053,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "bpbG.AngUswEN.TOP",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoiV2R6bFpRVjlsIiwicHJvdG9jb2wiOiJ0ciIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOlsiYnBiLnlvdXNlZi5pc2VnYXJvLmNvbSJdfQ==?ed=2560",
-        "headers": {
-          "Host": "104.19.191.204"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-16",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-17",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-18",
-      "server": "5.10.214.5",
-      "server_port": 2087,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-19",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-20",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-21",
-      "server": "109.234.211.66",
-      "server_port": 2087,
-      "password": "trojan",
-      "tls": {
-        "enabled": true,
-        "server_name": "store.timimi.dpdns.org",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?BIA_TELEGRAM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)",
-        "headers": {
-          "Host": "store.timimi.dpdns.org"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-22",
-      "server": "104.19.220.93",
-      "server_port": 8443,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "bPbG.aNguSWeN.TOP",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoiaWJHVmxramhqNVRNdnoiLCJwcm90b2NvbCI6InRyIiwibW9kZSI6InByb3h5aXAiLCJwYW5lbElQcyI6WyJicGIueW91c2VmLmlzZWdhcm8uY29tIl19?ed=2560",
-        "headers": {
-          "Host": "104.19.220.93"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-23",
+      "tag": "Node-8ms-8",
       "server": "151.101.3.8",
       "server_port": 80,
+      "domain_resolver": "dns_local",
       "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
       "packet_encoding": "xray",
       "tls": {
@@ -765,7 +434,7 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/--@v2rayngzendegimamadv2rayngzendegimamadv2rayngzendegimamadv2rayngzendegimamad",
+        "path": "/",
         "headers": {
           "Host": "mitivpn.global.ssl.fastly.net"
         }
@@ -773,350 +442,10 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-24",
-      "server": "5.10.214.5",
-      "server_port": 2087,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-25",
-      "server": "5.10.214.0",
-      "server_port": 2096,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5.10.214.0"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-26",
-      "server": "172.67.216.61",
+      "tag": "Node-8ms-9",
+      "server": "74.48.0.99",
       "server_port": 443,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "BPbG.AngusWen.TOp",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoiejBIQnpPWm0iLCJwcm90b2NvbCI6InRyIiwibW9kZSI6InByb3h5aXAiLCJwYW5lbElQcyI6WyJicGIueW91c2VmLmlzZWdhcm8uY29tIl19?ed=2560",
-        "headers": {
-          "Host": "172.67.216.61"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-27",
-      "server": "45.131.4.246",
-      "server_port": 2082,
-      "uuid": "65a1e22c-d37e-4b92-b6ca-1d09dcd1d441",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "45.131.4.246",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2048",
-        "headers": {
-          "Host": "GER.SODOGODPING.IR"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-28",
-      "server": "109.234.211.66",
-      "server_port": 2087,
-      "password": "trojan",
-      "tls": {
-        "enabled": true,
-        "server_name": "store.timimi.dpdns.org",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?BIA_TELEGRAM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)",
-        "headers": {
-          "Host": "store.timimi.dpdns.org"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-29",
-      "server": "104.19.170.137",
-      "server_port": 2053,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "BPBG.aNGUSwen.TOP",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoid21pM1RsR1N6YUczeGFmIiwicHJvdG9jb2wiOiJ0ciIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOlsiYnBiLnlvdXNlZi5pc2VnYXJvLmNvbSJdfQ==?ed=2560",
-        "headers": {
-          "Host": "104.19.170.137"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-30",
-      "server": "104.19.191.204",
-      "server_port": 443,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "bpBG.AnGuswEN.tOP",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoiaHpiZzU3QXU2IiwicHJvdG9jb2wiOiJ0ciIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOlsiYnBiLnlvdXNlZi5pc2VnYXJvLmNvbSJdfQ==?ed=2560",
-        "headers": {
-          "Host": "104.19.191.204"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-31",
-      "server": "5.10.214.0",
-      "server_port": 8443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-32",
-      "server": "5.10.214.0",
-      "server_port": 8443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5.10.214.0"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-33",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/x-aniu/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-34",
-      "server": "104.16.250.22",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-35",
-      "server": "45.131.4.246",
-      "server_port": 2082,
-      "uuid": "65a1e22c-d37e-4b92-b6ca-1d09dcd1d441",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "45.131.4.246",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2048",
-        "headers": {
-          "Host": "GER.SODOGODPING.IR"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-36",
-      "server": "5.10.214.0",
-      "server_port": 443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-37",
-      "server": "172.66.0.102",
-      "server_port": 80,
-      "uuid": "%F0%9F%91%89%F0%9F%91%89BanV2ray%F0%9F%91%88%F0%9F%91%88",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "172.66.0.102",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/www.speedtest.net-www.bunny.net-www.speedtest.net-www.speedtest.net-www.bunny.net-www.speedtest.net-www.speedtest.net-www.bunny.net-www.bunny.net-www.speedtest.net-www.bunny.net-www.speedtest.net?ed=32143",
-        "headers": {
-          "Host": "visvuev-272526281716252527717252.poshakhowdy.ir."
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-38",
-      "server": "172.64.145.38",
-      "server_port": 8443,
-      "uuid": "9e685fe3-e0f9-482d-939c-200a3f89b363",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "vyznthvt7f5fr.zjde5.de5.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560fp=random",
-        "headers": {
-          "Host": "vyznthvt7f5fr.zjde5.de5.net"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-39",
-      "server": "50.62.172.26",
-      "server_port": 443,
+      "domain_resolver": "dns_local",
       "uuid": "e258977b-e413-4718-a3af-02d75492c349",
       "packet_encoding": "xray",
       "tls": {
@@ -1137,124 +466,10 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-40",
+      "tag": "Node-8ms-10",
       "server": "5.10.214.0",
-      "server_port": 2096,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "TzS7v35LfD.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-41",
-      "server": "5.10.214.5",
-      "server_port": 2087,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-42",
-      "server": "5.10.214.0",
-      "server_port": 2087,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-43",
-      "server": "162.159.16.63",
       "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-44",
-      "server": "5.10.214.0",
-      "server_port": 2096,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "TzS7v35LfD.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-45",
-      "server": "5.10.214.5",
-      "server_port": 443,
+      "domain_resolver": "dns_local",
       "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
       "packet_encoding": "xray",
       "tls": {
@@ -1275,14 +490,15 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-46",
-      "server": "5.10.214.0",
-      "server_port": 8443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "tag": "Node-8ms-11",
+      "server": "151.101.3.8",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
       "packet_encoding": "xray",
       "tls": {
         "enabled": true,
-        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
+        "server_name": "151.101.3.8",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1290,85 +506,18 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/",
+        "path": "/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN/---@MiTiVPN",
         "headers": {
-          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "trojan",
-      "tag": "UN-5ms-47",
-      "server": "104.21.16.217",
-      "server_port": 8443,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "Bpbg.AngusweN.TOP",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoiV1VsY0IxQTRNIiwicHJvdG9jb2wiOiJ0ciIsIm1vZGUiOiJwcm94eWlwIiwicGFuZWxJUHMiOlsiYnBiLnlvdXNlZi5pc2VnYXJvLmNvbSJdfQ==?ed=2560",
-        "headers": {
-          "Host": "104.21.16.217"
+          "Host": "mitivpn.global.ssl.fastly.net"
         }
       }
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-48",
-      "server": "25.25.25.0",
-      "server_port": 8880,
-      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-49",
-      "server": "104.17.25.173",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "l.ayovo.netlib.re"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-50",
+      "tag": "Node-8ms-12",
       "server": "5.10.214.0",
       "server_port": 2087,
+      "domain_resolver": "dns_local",
       "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
       "packet_encoding": "xray",
       "tls": {
@@ -1389,9 +538,339 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-51",
+      "tag": "Node-8ms-13",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-14",
+      "server": "151.101.3.8",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "dd0cfef0-fda9-47ec-8a65-49d7bc004f82",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "151.101.3.8",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/--@v2rayngzendegimamadv2rayngzendegimamadv2rayngzendegimamadv2rayngzendegimamad",
+        "headers": {
+          "Host": "mitivpn.global.ssl.fastly.net"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-15",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-16",
+      "server": "172.64.229.220",
+      "server_port": 2096,
+      "domain_resolver": "dns_local",
+      "uuid": "6967a849-dd32-b5a0-e669-914731fb981f",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "sss.nycmn.camdvr.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "sss.nycmn.camdvr.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-17",
+      "server": "5.10.214.0",
+      "server_port": 2087,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-18",
+      "server": "192.161.60.13",
+      "server_port": 52800,
+      "domain_resolver": "dns_local",
+      "uuid": "beddd73b-ed90-4e76-8a30-492384220878",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.paypal.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-19",
+      "server": "5.10.214.0",
+      "server_port": 8443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-20",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "162.159.45.232"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-21",
+      "server": "5.10.214.5",
+      "server_port": 8443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-22",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-23",
       "server": "25.25.25.0",
       "server_port": 8880,
+      "domain_resolver": "dns_local",
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=8880",
+        "headers": {
+          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-24",
+      "server": "5.10.214.5",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-25",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-26",
+      "server": "5.10.214.5",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-27",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "domain_resolver": "dns_local",
       "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
       "packet_encoding": "xray",
       "tls": {
@@ -1412,9 +891,153 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-52",
+      "tag": "Node-8ms-28",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-29",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560fp=chrome",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Node-8ms-30",
+      "server": "109.234.211.66",
+      "server_port": 2087,
+      "domain_resolver": "dns_local",
+      "password": "trojan",
+      "tls": {
+        "enabled": true,
+        "server_name": "store.timimi.dpdns.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?BIA_TELEGRAM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)",
+        "headers": {
+          "Host": "store.timimi.dpdns.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-31",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-32",
+      "server": "50.62.172.26",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "e258977b-e413-4718-a3af-02d75492c349",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "all.aniuge.qzz.io",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "all.aniuge.qzz.io"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-33",
+      "server": "5.10.214.5",
+      "server_port": 2087,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-34",
       "server": "5.10.214.0",
       "server_port": 443,
+      "domain_resolver": "dns_local",
       "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
       "packet_encoding": "xray",
       "tls": {
@@ -1434,32 +1057,11 @@
       }
     },
     {
-      "type": "trojan",
-      "tag": "UN-5ms-53",
-      "server": "104.18.93.164",
-      "server_port": 443,
-      "password": "123456",
-      "tls": {
-        "enabled": true,
-        "server_name": "bPBg.anGuSwEN.ToP",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/eyJqdW5rIjoiVFgyZVNBTzB2U1VORzlobCIsInByb3RvY29sIjoidHIiLCJtb2RlIjoicHJveHlpcCIsInBhbmVsSVBzIjpbImJwYi55b3VzZWYuaXNlZ2Fyby5jb20iXX0=?ed=2560",
-        "headers": {
-          "Host": "104.18.93.164"
-        }
-      }
-    },
-    {
       "type": "vless",
-      "tag": "UN-5ms-54",
+      "tag": "Node-8ms-35",
       "server": "45.131.4.246",
       "server_port": 2082,
+      "domain_resolver": "dns_local",
       "uuid": "65a1e22c-d37e-4b92-b6ca-1d09dcd1d441",
       "packet_encoding": "xray",
       "tls": {
@@ -1480,55 +1082,10 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-55",
-      "server": "103.160.204.9",
-      "server_port": 443,
-      "uuid": "e258977b-e413-4718-a3af-02d75492c349",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "x-hk24.xaniusnippets.qzz.io",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "x-hk24.xaniusnippets.qzz.io"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-56",
-      "server": "5.10.214.5",
-      "server_port": 443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "UN-5ms-57",
+      "tag": "Node-8ms-36",
       "server": "5.10.214.5",
       "server_port": 2087,
+      "domain_resolver": "dns_local",
       "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
       "packet_encoding": "xray",
       "tls": {
@@ -1549,14 +1106,15 @@
     },
     {
       "type": "vless",
-      "tag": "UN-5ms-58",
-      "server": "103.160.204.5",
-      "server_port": 443,
-      "uuid": "e258977b-e413-4718-a3af-02d75492c349",
+      "tag": "Node-8ms-37",
+      "server": "5.10.214.0",
+      "server_port": 2096,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
       "packet_encoding": "xray",
       "tls": {
         "enabled": true,
-        "server_name": "tw23.aniusnippets.qzz.io",
+        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -1564,17 +1122,18 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/?ed=2560",
+        "path": "/",
         "headers": {
-          "Host": "tw23.aniusnippets.qzz.io"
+          "Host": "5.10.214.0"
         }
       }
     },
     {
       "type": "trojan",
-      "tag": "UN-6ms",
+      "tag": "Node-8ms-38",
       "server": "104.21.16.217",
       "server_port": 2053,
+      "domain_resolver": "dns_local",
       "password": "123456",
       "tls": {
         "enabled": true,
@@ -1591,9 +1150,512 @@
           "Host": "104.21.16.217"
         }
       }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-39",
+      "server": "5.10.214.5",
+      "server_port": 2096,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "5.10.214.5"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Node-8ms-40",
+      "server": "172.67.216.61",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "password": "123456",
+      "tls": {
+        "enabled": true,
+        "server_name": "BPbG.AngusWen.TOp",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/eyJqdW5rIjoiejBIQnpPWm0iLCJwcm90b2NvbCI6InRyIiwibW9kZSI6InByb3h5aXAiLCJwYW5lbElQcyI6WyJicGIueW91c2VmLmlzZWdhcm8uY29tIl19?ed=2560",
+        "headers": {
+          "Host": "172.67.216.61"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-41",
+      "server": "bastion.h3.speed.cloudflare.com",
+      "server_port": 80,
+      "domain_resolver": "dns_local",
+      "uuid": "%F0%9F%91%89%F0%9F%91%89BanV2ray%F0%9F%91%88%F0%9F%91%88",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "visvuev-272526281716252527717252.poshakhowdy.ir.",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/www.speedtest.net-www.bunny.net-www.speedtest.net-www.speedtest.net-www.bunny.net-www.speedtest.net-www.speedtest.net-www.bunny.net-www.bunny.net-www.speedtest.net-www.bunny.net-www.speedtest.net",
+        "headers": {
+          "Host": "visvuev-272526281716252527717252.poshakhowdy.ir."
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-42",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/x-aniu/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-43",
+      "server": "144.34.230.39",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "6967a849-dd32-b5a0-e669-914731fb981f",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "sss.nycmn.camdvr.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "sss.nycmn.camdvr.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-44",
+      "server": "162.159.44.142",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-45",
+      "server": "5.10.214.0",
+      "server_port": 2096,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "TzS7v35LfD.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-46",
+      "server": "5.10.214.0",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "trojan",
+      "tag": "Node-8ms-47",
+      "server": "109.234.211.66",
+      "server_port": 2087,
+      "domain_resolver": "dns_local",
+      "password": "trojan",
+      "tls": {
+        "enabled": true,
+        "server_name": "store.timimi.dpdns.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?BIA_TELEGRAM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)TM(@AZARBAYJAB1)",
+        "headers": {
+          "Host": "store.timimi.dpdns.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-48",
+      "server": "5.10.214.5",
+      "server_port": 2096,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TzS7v35LfD.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "TzS7v35LfD.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-49",
+      "server": "5.10.214.0",
+      "server_port": 8443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-50",
+      "server": "5.10.214.5",
+      "server_port": 8443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-51",
+      "server": "5.10.214.0",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-52",
+      "server": "5.10.214.5",
+      "server_port": 2087,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-53",
+      "server": "5.10.214.5",
+      "server_port": 2087,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-54",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "domain_resolver": "dns_local",
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "25.25.25.0",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-55",
+      "server": "103.160.204.9",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "e258977b-e413-4718-a3af-02d75492c349",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "x-hk24.xaniusnippets.qzz.io",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "x-hk24.xaniusnippets.qzz.io"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-8ms-56",
+      "server": "162.159.45.232",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-9ms-57",
+      "server": "154.21.83.48",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "6967a849-dd32-b5a0-e669-914731fb981f",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "sss.nycmn.camdvr.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "sss.nycmn.camdvr.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-9ms-58",
+      "server": "144.34.228.162",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "6967a849-dd32-b5a0-e669-914731fb981f",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "sss.nycmn.camdvr.org",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/proxyip=sjc.o00o.ooo",
+        "headers": {
+          "Host": "sss.nycmn.camdvr.org"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-9ms-59",
+      "server": "5.10.214.5",
+      "server_port": 443,
+      "domain_resolver": "dns_local",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "packet_encoding": "xray",
+      "tls": {
+        "enabled": true,
+        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/",
+        "headers": {
+          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
+        }
+      }
     }
   ],
   "route": {
+    "default_domain_resolver": "dns_local",
     "rules": [
       {
         "protocol": "dns",
