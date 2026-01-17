@@ -16,7 +16,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 60 
+MAX_KEEP_NODES = 50 
 DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net"]
 
 # 规则集 URL (Sing-box v1.11+ 推荐使用 .srs)
@@ -24,7 +24,7 @@ AD_RULES_URL = "https://raw.githubusercontent.com/217heidai/adblockfilters/main/
 GEOIP_CN_URL = "https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs"
 
-TIMEOUT = 0.6  
+TIMEOUT = 0.3  
 MAX_WORKERS = 100
 
 def get_modern_template():
