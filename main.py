@@ -16,14 +16,14 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 50 
+MAX_KEEP_NODES = 10 
 DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net"]
 
 AD_RULES_URL = "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 GEOIP_CN_URL = "https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs"
 
-TIMEOUT = 0.5  
+TIMEOUT = 0.2  
 MAX_WORKERS = 100
 
 # UUID 正则表达式 (标准 8-4-4-4-12 格式)
