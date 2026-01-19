@@ -19,16 +19,16 @@ SOURCES = [
 MAX_KEEP_NODES = 50 
 DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net"]
 
-# 规则集 URL (1.12+ 强制使用 .srs 二进制格式以获得最佳性能)
+# 规则集 (sing-box 1.12+ 推荐二进制格式以减少内存开销)
 AD_RULES_URL = "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 GEOIP_CN_URL = "https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs"
 GEOSITE_CN_URL = "https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs"
 
-TIMEOUT = 0.5  # 略微增加测速超时以提高筛选质量
+TIMEOUT = 0.5  
 MAX_WORKERS = 100
 
 def get_modern_template():
-    """生成完全适配 1.12.17+ 规范的零警告模板"""
+    """生成符合 1.12.17 标准的零警告配置模板"""
     return {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -39,7 +39,6 @@ def get_modern_template():
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"} 
             ],
             "rules": [
-                # 1.12+ 规则必须包含 action 字段
                 {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_direct", "action": "route"},
                 {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
                 {"rule_set": "geosite-cn", "server": "dns_direct", "action": "route"},
@@ -106,7 +105,7 @@ def check_node(node_info):
     except: return None
 
 def main():
-    print("🚀 Sing-box 1.12.17+ 架构适配版启动...")
+    print("🚀 Sing-box 1.12.17+ 专用生成器启动...")
     
     raw_links = []
     for url in SOURCES:
@@ -123,10 +122,11 @@ def main():
         try:
             u = urlparse(link)
             if u.hostname:
-                nodes_to_test.append((link, u.hostname, u.port or (443 if u.scheme != 'ss' else 80)))
+                port = u.port if u.port else 443
+                nodes_to_test.append((link, u.hostname, port))
         except: continue
 
-    print(f"⚡ 测速筛选中 (目标保留 {MAX_KEEP_NODES} 个)...")
+    print(f"⚡ 正在筛选低延迟节点 (共 {len(nodes_to_test)} 个)...")
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as ex:
         results = [r for r in ex.map(check_node, nodes_to_test) if r]
     
@@ -138,8 +138,11 @@ def main():
         try:
             u = urlparse(link)
             q = parse_qs(u.query)
+            
+            # --- 关键修复：协议名转换 ---
             protocol = u.scheme
-            if protocol in ["hy2", "hysteria2"]: protocol = "hysteria2"
+            if protocol == "ss": protocol = "shadowsocks"
+            elif protocol in ["hy2", "hysteria2"]: protocol = "hysteria2"
             
             region = extract_region(unquote(u.fragment) if u.fragment else "")
             tag = f"{region}-{int(lat * 1000)}ms-{len(tags)}"
@@ -151,33 +154,35 @@ def main():
                 "server_port": int(u.port or 443)
             }
 
-            # 协议特定字段适配
-            if protocol == "vless":
-                node.update({"uuid": u.username, "packet_encoding": "xray"})
-            elif protocol == "trojan":
-                node.update({"password": u.username})
-            elif protocol == "ss":
+            if protocol == "shadowsocks":
                 if ":" not in u.username:
                     user_info = safe_decode(u.username)
                     method, password = user_info.split(":", 1)
                 else:
                     method, password = u.username, u.password
                 node.update({"method": method, "password": password})
+            
+            elif protocol == "vless":
+                node.update({"uuid": u.username, "packet_encoding": "xray"})
+            elif protocol == "trojan":
+                node.update({"password": u.username})
             elif protocol == "hysteria2":
                 node.update({"password": u.username})
 
-            # TLS 与 SNI
-            if protocol in ["vless", "trojan", "hysteria2"]:
+            # TLS 逻辑
+            if protocol in ["vless", "trojan", "hysteria2", "shadowsocks"]:
+                # 部分 SS 节点可能有插件，这里处理标准的 TLS 节点
                 sni = q.get('sni', [u.hostname])[0]
-                node["tls"] = {"enabled": True, "server_name": sni}
-                if 'pbk' in q: # Reality 适配
-                    node["tls"]["reality"] = {
-                        "enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]
-                    }
-                if protocol != "hysteria2":
-                    node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
+                if protocol != "shadowsocks": # 标准 SS 节点通常不直接在 type 层写 TLS
+                    node["tls"] = {"enabled": True, "server_name": sni}
+                    if 'pbk' in q: # Reality
+                        node["tls"]["reality"] = {
+                            "enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]
+                        }
+                    if protocol != "hysteria2":
+                        node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
 
-            # 传输层 (WS)
+            # Transport 逻辑
             if q.get('type', [''])[0] == 'ws':
                 node["transport"] = {
                     "type": "ws", "path": q.get('path', ['/'])[0],
@@ -188,6 +193,7 @@ def main():
             tags.append(tag)
         except: continue
 
+    # 合并配置
     config = get_modern_template()
     config['outbounds'].extend(outbounds)
     config['outbounds'][0]['outbounds'] = ["auto-test"] + tags + ["direct"]
@@ -197,7 +203,8 @@ def main():
         json.dump(config, f, indent=2, ensure_ascii=False)
     
     print(f"\n✅ 生成成功！适配版本: Sing-box 1.12.17+")
-    print(f"📦 节点: {len(outbounds)} | 栈: gVisor | 格式: SRS Binary Ready")
+    print(f"📦 已处理 shadowsocks 协议名修正。")
+    print(f"📂 节点总数: {len(outbounds)}")
 
 if __name__ == "__main__":
     main()
