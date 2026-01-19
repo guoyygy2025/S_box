@@ -16,8 +16,8 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 12 
-TIMEOUT = 0.8  # 稍微增加，防止漏掉高质量 Reality 节点
+MAX_KEEP_NODES = 50
+TIMEOUT = 0.4  # 稍微增加，防止漏掉高质量 Reality 节点
 DOWNLOAD_DOMAINS = ["gh-proxy.org", "gh-proxy.com", "jsdelivr.net"]
 
 def get_system_stack():
