@@ -16,7 +16,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-MAX_KEEP_NODES = 50 
+MAX_KEEP_NODES = 5 
 DOWNLOAD_DOMAINS = ["gh-proxy.org", "gh-proxy.com", "jsdelivr.net"]
 
 # 规则集 URL 同步
@@ -24,7 +24,7 @@ AD_RULES_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/
 GEOSITE_CN_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 GEOIP_CN_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 
-TIMEOUT = 0.2 
+TIMEOUT = 0.3 
 MAX_WORKERS = 100
 UUID_PATTERN = r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
 
