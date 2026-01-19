@@ -17,48 +17,48 @@ SOURCES = [
 ]
 
 MAX_KEEP_NODES = 10 
-# 这里保留下载规则集所需的域名为直连，避免更新规则时由于没代理而卡死
-DOWNLOAD_DOMAINS = ["gh-proxy.com", "jsdelivr.net"] 
+DOWNLOAD_DOMAINS = ["gh-proxy.org", "gh-proxy.com", "jsdelivr.net"] # 保持规则更新域名直连
 
-AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-GEOIP_CN_URL = "https://v6.gh-proxy.org/https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs"
-GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs"
+# 同步你提供的配置文件中的规则集地址
+AD_RULES_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
+GEOIP_CN_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+GEOSITE_CN_URL = "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
 
-TIMEOUT = 0.2  
+TIMEOUT = 0.3 # 稍微增加超时容错率
 MAX_WORKERS = 100
 
 UUID_PATTERN = r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
 
 def get_modern_template():
-    """生成模板：GitHub 已被移出直连列表，默认走代理"""
+    """根据用户提供的 JSON 结构生成的现代模板"""
     return {
-        "log": {"level": "info", "timestamp": True},
+        "log": {"level": "warn", "timestamp": True},
         "dns": {
             "servers": [
-                {"tag": "dns_fakeip", "address": "fakeip"},
-                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "address_resolver": "dns_local", "detour": "proxy"},
-                {"tag": "dns_direct", "address": "https://223.5.5.5/dns-query", "address_resolver": "dns_local", "detour": "direct"},
-                {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"} 
+                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
+                {"tag": "dns_local", "address": "https://223.5.5.5/dns-query", "detour": "direct"},
+                {"tag": "dns_block", "address": "rcode://success"},
+                {"tag": "fakeip_server", "address": "fakeip"}
             ],
             "rules": [
-                # 仅保留规则集下载域名直连，GitHub 相关域名删除，使其走 final (dns_proxy)
-                {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_direct", "action": "route"},
-                {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
-                {"rule_set": "geosite-cn", "server": "dns_direct", "action": "route"},
-                {"query_type": ["A", "AAAA"], "server": "dns_fakeip", "action": "route"}
+                {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_local", "action": "route"},
+                {"rule_set": "geosite-category-ads-all", "server": "dns_block", "action": "route"},
+                {"rule_set": "geosite-cn", "server": "dns_local", "action": "route"},
+                {"query_type": ["A", "AAAA"], "server": "fakeip_server", "action": "route"}
             ],
             "final": "dns_proxy",
             "strategy": "prefer_ipv4",
-            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
+            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18"}
         },
         "inbounds": [{
             "type": "tun",
             "tag": "tun-in",
-            "address": ["172.19.0.1/30"],
+            "inet4_address": ["172.19.0.1/30"],
+            "inet6_address": ["fd00::1/126"],
             "auto_route": True,
             "strict_route": True,
             "stack": "gvisor", 
-            "mtu": 9000,
+            "mtu": 1280, # 同步用户配置的 MTU
             "sniff": True,
             "sniff_override_destination": True
         }],
@@ -67,27 +67,26 @@ def get_modern_template():
             {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
             {"type": "direct", "tag": "direct"},
             {"type": "dns", "tag": "dns-out"},
-            {"type": "block", "tag": "block-out"}
+            {"type": "block", "tag": "block"}
         ],
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                # 这里 GitHub 域名已被删除，它们将跳过此规则并进入底部的 final (proxy)
+                {"ip_is_private": True, "outbound": "direct"},
                 {"domain_suffix": DOWNLOAD_DOMAINS, "outbound": "direct"},
-                {"rule_set": "ad-rules", "outbound": "block-out"},
+                {"rule_set": "geosite-category-ads-all", "action": "reject"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
             ],
             "final": "proxy",
             "auto_detect_interface": True,
             "rule_set": [
-                {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"},
+                {"tag": "geosite-category-ads-all", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"},
                 {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": GEOSITE_CN_URL, "download_detour": "direct"},
-                {"tag": "ad-rules", "type": "remote", "format": "binary", "url": AD_RULES_URL, "download_detour": "direct"}
+                {"tag": "geoip-cn", "type": "remote", "format": "binary", "url": GEOIP_CN_URL, "download_detour": "direct"}
             ]
         }
     }
 
-# 后续解析逻辑保持不变...
 def safe_decode(data):
     try:
         data = data.strip().replace('\n', '').replace('\r', '')
@@ -110,7 +109,7 @@ def check_node(node_info):
     except: return None
 
 def main():
-    print("🚀 Sing-box 生成器（GitHub 已设为代理）启动...")
+    print("🚀 Sing-box 深度优化生成器启动...")
     
     raw_links = []
     for url in SOURCES:
@@ -147,8 +146,7 @@ def main():
             if protocol in ["hy2", "hysteria2"]: protocol = "hysteria2"
             
             if protocol == "vless":
-                uuid_str = u.username
-                if not re.match(UUID_PATTERN, uuid_str): continue
+                if not re.match(UUID_PATTERN, u.username): continue
             
             region = extract_region(unquote(u.fragment) if u.fragment else "")
             tag = f"{region}-{int(lat * 1000)}ms-{len(tags)}"
@@ -161,22 +159,34 @@ def main():
             }
 
             if protocol == "vless":
-                node.update({"uuid": u.username, "packet_encoding": "xray"})
+                node.update({
+                    "uuid": u.username, 
+                    "flow": q.get('flow', ['xtls-rprx-vision'])[0], # 默认尝试启用 Vision
+                    "packet_encoding": "xudp" # 对应用户配置的 xudp
+                })
             elif protocol == "trojan":
                 node.update({"password": u.username})
             elif protocol == "hysteria2":
                 node.update({"password": u.username})
 
+            # TLS & Reality 逻辑
             if protocol in ["vless", "trojan", "hysteria2"]:
                 sni = q.get('sni', [u.hostname])[0]
                 node["tls"] = {"enabled": True, "server_name": sni}
-                if 'pbk' in q:
-                    node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
-                if protocol != "hysteria2":
-                    node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
+                if 'pbk' in q: # 匹配 Reality 
+                    node["tls"]["reality"] = {
+                        "enabled": True, 
+                        "public_key": q['pbk'][0], 
+                        "short_id": q.get('sid', [''])[0]
+                    }
+                node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
 
+            # Transport 逻辑 (如 WebSocket)
             if q.get('type', [''])[0] == 'ws':
-                node["transport"] = {"type": "ws", "path": q.get('path', ['/'])[0], "headers": {"Host": q.get('host', [u.hostname])[0]}}
+                node["transport"] = {
+                    "type": "ws", "path": q.get('path', ['/'])[0],
+                    "headers": {"Host": q.get('host', [u.hostname])[0]}
+                }
 
             outbounds.append(node)
             tags.append(tag)
@@ -190,8 +200,8 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✅ 生成成功！GitHub 现已走代理出站。")
-    print(f"📂 有效节点总数: {len(outbounds)}")
+    print(f"\n✅ 生成成功！GitHub 走代理，规则集加速已同步。")
+    print(f"📂 最终保留节点数: {len(outbounds)}")
 
 if __name__ == "__main__":
     main()
