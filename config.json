@@ -1,49 +1,47 @@
 {
   "log": {
-    "level": "info",
+    "level": "warn",
     "timestamp": true
   },
   "dns": {
     "servers": [
       {
-        "tag": "dns_fakeip",
-        "address": "fakeip"
-      },
-      {
         "tag": "dns_proxy",
         "address": "https://1.1.1.1/dns-query",
-        "address_resolver": "dns_local",
         "detour": "proxy"
       },
       {
-        "tag": "dns_direct",
+        "tag": "dns_local",
         "address": "https://223.5.5.5/dns-query",
-        "address_resolver": "dns_local",
         "detour": "direct"
       },
       {
-        "tag": "dns_local",
-        "address": "223.5.5.5",
-        "detour": "direct"
+        "tag": "dns_block",
+        "address": "rcode://success"
+      },
+      {
+        "tag": "fakeip_server",
+        "address": "fakeip"
       }
     ],
     "rules": [
       {
         "domain_suffix": [
+          "gh-proxy.org",
           "gh-proxy.com",
           "jsdelivr.net"
         ],
-        "server": "dns_direct",
+        "server": "dns_local",
         "action": "route"
       },
       {
-        "rule_set": "ad-rules",
-        "server": "dns_local",
-        "action": "reject"
+        "rule_set": "geosite-category-ads-all",
+        "server": "dns_block",
+        "action": "route"
       },
       {
         "rule_set": "geosite-cn",
-        "server": "dns_direct",
+        "server": "dns_local",
         "action": "route"
       },
       {
@@ -51,7 +49,7 @@
           "A",
           "AAAA"
         ],
-        "server": "dns_fakeip",
+        "server": "fakeip_server",
         "action": "route"
       }
     ],
@@ -59,20 +57,24 @@
     "strategy": "prefer_ipv4",
     "fakeip": {
       "enabled": true,
-      "inet4_range": "198.18.0.0/15"
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
     }
   },
   "inbounds": [
     {
       "type": "tun",
       "tag": "tun-in",
-      "address": [
+      "inet4_address": [
         "172.19.0.1/30"
+      ],
+      "inet6_address": [
+        "fd00::1/126"
       ],
       "auto_route": true,
       "strict_route": true,
       "stack": "gvisor",
-      "mtu": 9000,
+      "mtu": 1280,
       "sniff": true,
       "sniff_override_destination": true
     }
@@ -92,6 +94,7 @@
         "Node-1ms-6",
         "Node-1ms-7",
         "Node-1ms-8",
+        "Node-1ms-9",
         "direct"
       ]
     },
@@ -107,7 +110,8 @@
         "Node-1ms-5",
         "Node-1ms-6",
         "Node-1ms-7",
-        "Node-1ms-8"
+        "Node-1ms-8",
+        "Node-1ms-9"
       ],
       "url": "https://www.gstatic.com/generate_204",
       "interval": "10m"
@@ -122,15 +126,16 @@
     },
     {
       "type": "block",
-      "tag": "block-out"
+      "tag": "block"
     },
     {
       "type": "vless",
       "tag": "Node-1ms-0",
-      "server": "5.10.214.0",
+      "server": "5.10.214.5",
       "server_port": 2087,
       "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
         "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
@@ -150,13 +155,14 @@
     {
       "type": "vless",
       "tag": "Node-1ms-1",
-      "server": "104.17.25.173",
+      "server": "5.10.214.0",
       "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
+        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -164,22 +170,23 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/?ed=2560",
+        "path": "/",
         "headers": {
-          "Host": "l.ayovo.netlib.re"
+          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
         }
       }
     },
     {
       "type": "vless",
       "tag": "Node-1ms-2",
-      "server": "162.159.16.63",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
+      "server": "5.10.214.0",
+      "server_port": 8443,
+      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
+        "server_name": "TjLwH7cTdH.sMaRtTeChZaAl.InFo",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -187,88 +194,20 @@
       },
       "transport": {
         "type": "ws",
-        "path": "/?ed=2560",
+        "path": "/",
         "headers": {
-          "Host": "l.ayovo.netlib.re"
+          "Host": "TjLwH7cTdH.sMaRtTeChZaAl.InFo"
         }
       }
     },
     {
       "type": "vless",
       "tag": "Node-1ms-3",
-      "server": "5.10.214.0",
-      "server_port": 443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Node-1ms-4",
       "server": "5.10.214.5",
-      "server_port": 443,
-      "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "GfV5t2331T.sMaRtTeChZaAl.InFo",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/",
-        "headers": {
-          "Host": "GfV5t2331T.sMaRtTeChZaAl.InFo"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Node-1ms-5",
-      "server": "104.17.102.95",
-      "server_port": 8443,
-      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
-      "packet_encoding": "xray",
-      "tls": {
-        "enabled": true,
-        "server_name": "sni.meibidi.pp.ua",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "transport": {
-        "type": "ws",
-        "path": "/?ed=2560",
-        "headers": {
-          "Host": "sni.meibidi.pp.ua"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "Node-1ms-6",
-      "server": "5.10.214.0",
       "server_port": 2087,
       "uuid": "7e58699f-1d5d-4f6b-b181-cb74f0ad9509",
-      "packet_encoding": "xray",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
         "server_name": "5JxGp6VrFh.SmArTtEcHzAaL.iNfO",
@@ -281,7 +220,79 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "5.10.214.0"
+          "Host": "5.10.214.5"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-1ms-4",
+      "server": "162.159.16.63",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/x-aniu/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-1ms-5",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=8880",
+        "headers": {
+          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-1ms-6",
+      "server": "104.17.25.173",
+      "server_port": 443,
+      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "l.ayovo.netlib.re",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=2560",
+        "headers": {
+          "Host": "l.ayovo.netlib.re"
         }
       }
     },
@@ -291,7 +302,8 @@
       "server": "104.16.250.22",
       "server_port": 443,
       "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
         "server_name": "l.ayovo.netlib.re",
@@ -311,13 +323,14 @@
     {
       "type": "vless",
       "tag": "Node-1ms-8",
-      "server": "104.18.185.26",
-      "server_port": 443,
-      "uuid": "3e2e3c21-3fc8-468f-9ab5-e782bdf5bf97",
-      "packet_encoding": "xray",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "l.ayovo.netlib.re",
+        "server_name": "25.25.25.0",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -327,7 +340,31 @@
         "type": "ws",
         "path": "/",
         "headers": {
-          "Host": "l.ayovo.netlib.re"
+          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "Node-1ms-9",
+      "server": "25.25.25.0",
+      "server_port": 8880,
+      "uuid": "8e997404-cb62-4fa1-a8c9-c77a32f10153",
+      "flow": "xtls-rprx-vision",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "25.25.25.0",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "transport": {
+        "type": "ws",
+        "path": "/?ed=8880",
+        "headers": {
+          "Host": "rightel.IRANCEELL.mci.it.www.speedtest.net.zula.ir.focusontrade.ir"
         }
       }
     }
@@ -339,15 +376,20 @@
         "outbound": "dns-out"
       },
       {
+        "ip_is_private": true,
+        "outbound": "direct"
+      },
+      {
         "domain_suffix": [
+          "gh-proxy.org",
           "gh-proxy.com",
           "jsdelivr.net"
         ],
         "outbound": "direct"
       },
       {
-        "rule_set": "ad-rules",
-        "outbound": "block-out"
+        "rule_set": "geosite-category-ads-all",
+        "action": "reject"
       },
       {
         "rule_set": [
@@ -361,24 +403,24 @@
     "auto_detect_interface": true,
     "rule_set": [
       {
-        "tag": "geoip-cn",
+        "tag": "geosite-category-ads-all",
         "type": "remote",
         "format": "binary",
-        "url": "https://v6.gh-proxy.org/https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs",
+        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
         "download_detour": "direct"
       },
       {
         "tag": "geosite-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://v6.gh-proxy.org/https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs",
+        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
         "download_detour": "direct"
       },
       {
-        "tag": "ad-rules",
+        "tag": "geoip-cn",
         "type": "remote",
         "format": "binary",
-        "url": "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs",
+        "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
         "download_detour": "direct"
       }
     ]
