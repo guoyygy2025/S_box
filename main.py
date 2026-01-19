@@ -17,19 +17,20 @@ SOURCES = [
 ]
 
 MAX_KEEP_NODES = 10 
-DOWNLOAD_DOMAINS = ["gh-proxy.com", "githubusercontent.com", "github.com", "jsdelivr.net"]
+# 这里保留下载规则集所需的域名为直连，避免更新规则时由于没代理而卡死
+DOWNLOAD_DOMAINS = ["gh-proxy.com", "jsdelivr.net"] 
 
-AD_RULES_URL = "https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-GEOIP_CN_URL = "https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs"
-GEOSITE_CN_URL = "https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs"
+AD_RULES_URL = "https://v6.gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
+GEOIP_CN_URL = "https://v6.gh-proxy.org/https://github.com/SagerNet/sing-geoip/raw/rule-set/geoip-cn.srs"
+GEOSITE_CN_URL = "https://v6.gh-proxy.org/https://github.com/SagerNet/sing-geosite/raw/rule-set/geosite-cn.srs"
 
 TIMEOUT = 0.2  
 MAX_WORKERS = 100
 
-# UUID 正则表达式 (标准 8-4-4-4-12 格式)
 UUID_PATTERN = r"^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
 
 def get_modern_template():
+    """生成模板：GitHub 已被移出直连列表，默认走代理"""
     return {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -40,6 +41,7 @@ def get_modern_template():
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"} 
             ],
             "rules": [
+                # 仅保留规则集下载域名直连，GitHub 相关域名删除，使其走 final (dns_proxy)
                 {"domain_suffix": DOWNLOAD_DOMAINS, "server": "dns_direct", "action": "route"},
                 {"rule_set": "ad-rules", "server": "dns_local", "action": "reject"},
                 {"rule_set": "geosite-cn", "server": "dns_direct", "action": "route"},
@@ -70,6 +72,7 @@ def get_modern_template():
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
+                # 这里 GitHub 域名已被删除，它们将跳过此规则并进入底部的 final (proxy)
                 {"domain_suffix": DOWNLOAD_DOMAINS, "outbound": "direct"},
                 {"rule_set": "ad-rules", "outbound": "block-out"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
@@ -84,6 +87,7 @@ def get_modern_template():
         }
     }
 
+# 后续解析逻辑保持不变...
 def safe_decode(data):
     try:
         data = data.strip().replace('\n', '').replace('\r', '')
@@ -106,14 +110,13 @@ def check_node(node_info):
     except: return None
 
 def main():
-    print("🚀 Sing-box 生成器（已移除SS & 强化UUID校验）启动...")
+    print("🚀 Sing-box 生成器（GitHub 已设为代理）启动...")
     
     raw_links = []
     for url in SOURCES:
         try:
             r = requests.get(url, timeout=10)
             text = r.text if "://" in r.text else safe_decode(r.text)
-            # 仅抓取 vless, trojan, hy2
             found = re.findall(r"(?:vless|trojan|hysteria2|hy2)://[^\s#]+", text)
             raw_links.extend(found)
         except: continue
@@ -143,11 +146,9 @@ def main():
             protocol = u.scheme
             if protocol in ["hy2", "hysteria2"]: protocol = "hysteria2"
             
-            # --- VLESS UUID 强校验逻辑 ---
             if protocol == "vless":
                 uuid_str = u.username
-                if not re.match(UUID_PATTERN, uuid_str):
-                    continue # 格式不正确，跳过该节点
+                if not re.match(UUID_PATTERN, uuid_str): continue
             
             region = extract_region(unquote(u.fragment) if u.fragment else "")
             tag = f"{region}-{int(lat * 1000)}ms-{len(tags)}"
@@ -166,29 +167,21 @@ def main():
             elif protocol == "hysteria2":
                 node.update({"password": u.username})
 
-            # TLS 逻辑
             if protocol in ["vless", "trojan", "hysteria2"]:
                 sni = q.get('sni', [u.hostname])[0]
                 node["tls"] = {"enabled": True, "server_name": sni}
-                if 'pbk' in q: # Reality 逻辑
-                    node["tls"]["reality"] = {
-                        "enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]
-                    }
+                if 'pbk' in q:
+                    node["tls"]["reality"] = {"enabled": True, "public_key": q['pbk'][0], "short_id": q.get('sid', [''])[0]}
                 if protocol != "hysteria2":
                     node["tls"]["utls"] = {"enabled": True, "fingerprint": "chrome"}
 
-            # Transport 逻辑
             if q.get('type', [''])[0] == 'ws':
-                node["transport"] = {
-                    "type": "ws", "path": q.get('path', ['/'])[0],
-                    "headers": {"Host": q.get('host', [u.hostname])[0]}
-                }
+                node["transport"] = {"type": "ws", "path": q.get('path', ['/'])[0], "headers": {"Host": q.get('host', [u.hostname])[0]}}
 
             outbounds.append(node)
             tags.append(tag)
         except: continue
 
-    # 合并配置
     config = get_modern_template()
     config['outbounds'].extend(outbounds)
     config['outbounds'][0]['outbounds'] = ["auto-test"] + tags + ["direct"]
@@ -197,8 +190,7 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
     
-    print(f"\n✅ 生成成功！")
-    print(f"🛡️ 已过滤无效 UUID 的 VLESS 节点。")
+    print(f"\n✅ 生成成功！GitHub 现已走代理出站。")
     print(f"📂 有效节点总数: {len(outbounds)}")
 
 if __name__ == "__main__":
