@@ -7,7 +7,7 @@ import re
 import time
 from urllib.parse import urlparse, parse_qs
 
-# ================== 基本参数 ==================
+# ================== 参数 ==================
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/master/ConfigSub_list.txt",
@@ -17,20 +17,18 @@ SOURCES = [
 RULE_PROXY = "https://gh-proxy.org/https://raw.githubusercontent.com"
 
 MAX_KEEP_NODES = 40
-CONNECT_TIMEOUT = 3.0
-MAX_RTT = 2000  # ms
-
-# TikTok 强制解锁区
-TIKTOK_OUTBOUND = "JP"  # JP / SG
+CONNECT_TIMEOUT = 3
+MAX_RTT = 2000
+TIKTOK_OUTBOUND = "JP"
 
 COUNTRY_KEYWORDS = {
-    "US": ["us", "unitedstates"],
-    "HK": ["hk", "hongkong"],
+    "US": ["us", "united"],
+    "HK": ["hk", "hong"],
     "JP": ["jp", "japan"],
-    "SG": ["sg", "singapore"],
+    "SG": ["sg", "sing"],
 }
 
-# ================== 工具函数 ==================
+# ================== 工具 ==================
 def safe_decode(text):
     try:
         text = text.strip().replace("\n", "")
@@ -40,26 +38,21 @@ def safe_decode(text):
 
 def detect_country(text):
     t = text.lower()
-    for c, keys in COUNTRY_KEYWORDS.items():
-        if any(k in t for k in keys):
+    for c, ks in COUNTRY_KEYWORDS.items():
+        if any(k in t for k in ks):
             return c
     return "US"
 
 def speed_test(link):
     try:
         u = urlparse(link)
-        host = u.hostname
-        port = int(u.port or 443)
-        start = time.time()
-        s = socket.create_connection((host, port), timeout=CONNECT_TIMEOUT)
+        s = socket.create_connection((u.hostname, u.port or 443), timeout=CONNECT_TIMEOUT)
         s.close()
-        rtt = (time.time() - start) * 1000
-        if rtt <= MAX_RTT:
-            return link, rtt
+        return link, (time.time())
     except:
         return None
 
-# ================== 基础模板 ==================
+# ================== 模板 ==================
 def base_config():
     return {
         "log": {"level": "warn"},
@@ -68,19 +61,12 @@ def base_config():
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
                 {"tag": "dns_local", "address": "https://223.5.5.5/dns-query", "detour": "direct"},
                 {"tag": "dns_block", "address": "rcode://success"},
-                {"tag": "dns_fakeip", "address": "fakeip"},
+                {"tag": "dns_fakeip", "address": "fakeip"}
             ],
             "rules": [
                 {"rule_set": ["geosite-ads", "adblock"], "server": "dns_block"},
-                {
-                    "domain_suffix": [
-                        "youtube.com","googlevideo.com","ytimg.com","ggpht.com",
-                        "tiktok.com","tiktokcdn.com","byteoversea.com","ibytedtos.com"
-                    ],
-                    "server": "dns_proxy"
-                },
                 {"rule_set": "geosite-cn", "server": "dns_local"},
-                {"query_type": ["A","AAAA"], "server": "dns_fakeip"},
+                {"query_type": ["A","AAAA"], "server": "dns_fakeip"}
             ],
             "final": "dns_proxy",
             "fakeip": {"enabled": True}
@@ -98,48 +84,25 @@ def base_config():
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
                 {"ip_is_private": True, "outbound": "direct"},
-                {"domain_suffix": ["openai.com","chatgpt.com"], "outbound": "US"},
-                {
-                    "domain_suffix": [
-                        "tiktok.com","tiktokcdn.com","byteoversea.com","ibytedtos.com"
-                    ],
-                    "outbound": TIKTOK_OUTBOUND
-                },
-                {"domain_suffix": ["youtube.com","googlevideo.com"], "outbound": "HK"},
-                {"rule_set": ["geosite-ads","adblock"], "action": "reject"},
-                {"rule_set": ["geoip-cn","geosite-cn"], "outbound": "direct"}
+                {"domain_suffix": ["tiktok.com","tiktokcdn.com"], "outbound": TIKTOK_OUTBOUND},
+                {"rule_set": ["geoip-cn","geosite-cn"], "outbound": "direct"},
+                {"rule_set": ["geosite-ads","adblock"], "action": "reject"}
             ],
             "final": "proxy",
             "rule_set": [
-                {
-                    "tag": "adblock",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-                },
-                {
-                    "tag": "geosite-ads",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
-                },
-                {
-                    "tag": "geosite-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
-                },
-                {
-                    "tag": "geoip-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-                }
+                {"tag": "adblock", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/217heidai/adblockfilters/main/rules/adblocksingbox.srs"},
+                {"tag": "geosite-ads", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"},
+                {"tag": "geosite-cn", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-cn.srs"},
+                {"tag": "geoip-cn", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/SagerNet/sing-geoip/rule-set/geoip-cn.srs"}
             ]
         },
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto","US","HK","JP","SG"]},
-            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
+            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "https://www.gstatic.com/generate_204"},
             {"type": "selector", "tag": "US", "outbounds": []},
             {"type": "selector", "tag": "HK", "outbounds": []},
             {"type": "selector", "tag": "JP", "outbounds": []},
@@ -150,40 +113,37 @@ def base_config():
         ]
     }
 
-# ================== 主流程 ==================
+# ================== 主逻辑 ==================
 def main():
-    print("🚀 构建 sing-box 终极配置中...")
+    print("🚀 生成 sing-box 终极配置")
 
-    raw_links = []
-    for src in SOURCES:
+    raw = []
+    for s in SOURCES:
         try:
-            r = requests.get(src, timeout=10)
-            text = r.text
-            decoded = safe_decode(text)
-            if "://" in decoded:
-                text = decoded
-            raw_links += re.findall(r"(?:vless|trojan)://[^\s]+", text)
+            t = requests.get(s, timeout=10).text
+            d = safe_decode(t)
+            raw += re.findall(r"(?:vless|trojan)://[^\s]+", d if "://" in d else t)
         except:
             pass
 
-    raw_links = list(set(raw_links))
-    print(f"📥 获取节点数：{len(raw_links)}")
+    raw = list(set(raw))
 
-    with concurrent.futures.ThreadPoolExecutor(60) as ex:
-        tested = [r for r in ex.map(speed_test, raw_links) if r]
+    with concurrent.futures.ThreadPoolExecutor(50) as ex:
+        alive = [r[0] for r in ex.map(speed_test, raw) if r]
 
-    tested.sort(key=lambda x: x[1])
-    fast_links = [x[0] for x in tested[:MAX_KEEP_NODES]]
-
-    print(f"⚡ 保留高速节点：{len(fast_links)}")
-
+    alive = alive[:MAX_KEEP_NODES]
     cfg = base_config()
 
-    for link in fast_links:
+    tag_counter = {}
+
+    for i, link in enumerate(alive):
         u = urlparse(link)
         q = parse_qs(u.query)
         country = detect_country(link)
-        tag = f"{country}-{u.hostname}"
+
+        base = f"{country}-{u.hostname}"
+        tag_counter[base] = tag_counter.get(base, 0) + 1
+        tag = f"{base}-{tag_counter[base]:02d}"
 
         node = {
             "type": u.scheme,
@@ -199,7 +159,7 @@ def main():
                 "packet_encoding": "xudp",
                 "tls": {
                     "enabled": True,
-                    "server_name": q.get("sni", [u.hostname])[0],
+                    "server_name": q.get("sni",[u.hostname])[0],
                     "utls": {"enabled": True, "fingerprint": "chrome"}
                 }
             })
@@ -213,7 +173,7 @@ def main():
         if u.scheme == "trojan":
             node.update({
                 "password": u.username,
-                "tls": {"enabled": True, "server_name": q.get("sni",[u.hostname])[0]}
+                "tls": {"enabled": True}
             })
 
         cfg["outbounds"].append(node)
@@ -225,7 +185,7 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
 
-    print(f"✅ config.json 生成完成（节点 {len(fast_links)} 个）")
+    print(f"✅ 完成：有效节点 {len(alive)} 个")
 
 if __name__ == "__main__":
     main()
