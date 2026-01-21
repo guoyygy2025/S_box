@@ -18,7 +18,7 @@ SOURCES = [
 
 AD_BLOCK_SRS = "https://gh-proxy.org/https://raw.githubusercontent.com/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
 
-MAX_KEEP_NODES = 50
+MAX_KEEP_NODES = 100
 TIMEOUT = 0.5
 DOWNLOAD_DOMAINS = ["gh-proxy.org", "gh-proxy.com", "jsdelivr.net"]
 
