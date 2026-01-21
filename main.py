@@ -15,7 +15,7 @@ SOURCES = [
 ]
 
 RULE_PROXY = "https://gh-proxy.org/https://raw.githubusercontent.com"
-MAX_KEEP_NODES = 40
+MAX_KEEP_NODES = 50
 CONNECT_TIMEOUT = 3
 MAX_RTT = 2000
 TIKTOK_OUTBOUND = "JP"
@@ -74,7 +74,7 @@ def base_config():
             "fakeip":{"enabled":True}
         },
         "inbounds":[{
-            "type":"mixed",  # 避免 TUN 权限问题
+            "type":"mixed",
             "tag":"mixed-in",
             "listen":"127.0.0.1",
             "listen_port":7890,
@@ -119,7 +119,7 @@ def base_config():
 
 # ================== 主流程 ==================
 def main():
-    print("🚀 构建 sing-box 配置中...")
+    print("🚀 构建 sing-box 终极配置中...")
 
     # 1️⃣ 获取订阅
     raw_links = []
@@ -148,8 +148,9 @@ def main():
         u = urlparse(link)
         q = parse_qs(u.query)
         country = detect_country(link)
+        if country not in ("US","HK","JP","SG"):
+            country = "US"
 
-        # 保证 tag 唯一
         base_tag = f"{country}-{u.hostname}"
         tag_counter[base_tag] = tag_counter.get(base_tag,0)+1
         tag = f"{base_tag}-{tag_counter[base_tag]:02d}"
@@ -166,8 +167,11 @@ def main():
                 "uuid": u.username,
                 "flow":"xtls-rprx-vision",
                 "packet_encoding":"xudp",
-                "tls":{"enabled":True,"server_name":q.get("sni",[u.hostname])[0],
-                       "utls":{"enabled":True,"fingerprint":"chrome"}}
+                "tls":{
+                    "enabled":True,
+                    "server_name":q.get("sni",[u.hostname])[0],
+                    "utls":{"enabled":True,"fingerprint":"chrome"}
+                }
             })
             if "pbk" in q:
                 node["tls"]["reality"] = {
@@ -184,12 +188,15 @@ def main():
 
         cfg["outbounds"].append(node)
 
-        # 添加到 selector
+        # 5️⃣ 添加到 selector，保证不为空
         for o in cfg["outbounds"]:
-            if o.get("tag") in ("auto",country):
+            tag_name = o.get("tag")
+            if tag_name in ("auto", country):
+                o["outbounds"].append(tag)
+            elif tag_name == "proxy":
                 o["outbounds"].append(tag)
 
-    # 5️⃣ 写入 config.json
+    # 6️⃣ 写入 config.json
     with open("config.json","w",encoding="utf-8") as f:
         json.dump(cfg,f,indent=2,ensure_ascii=False)
 
