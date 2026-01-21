@@ -14,7 +14,8 @@ SOURCES = [
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
 ]
 
-RULE_PROXY = "https://gh-proxy.org/https://raw.githubusercontent.com"
+# 使用 jsdelivr 加速规则
+RULE_PROXY = "https://cdn.jsdelivr.net/gh"
 
 MAX_KEEP_NODES = 50
 CONNECT_TIMEOUT = 3
@@ -106,7 +107,7 @@ def base_config():
 
 # ================== 主流程 ==================
 def main():
-    print("🚀 构建 sing-box 配置（全远程 rule_set 版）...")
+    print("🚀 构建 sing-box 配置（远程 rule_set + jsdelivr 加速）...")
 
     raw_links = []
     for s in SOURCES:
@@ -191,7 +192,7 @@ def main():
         json.dump(cfg,f,indent=2,ensure_ascii=False)
 
     print(f"✅ config.json 生成完成（有效节点 {len(alive_links)} 个）")
-    print("✅ rule_set 通过远程 URL 加载，无需本地文件")
+    print("✅ rule_set 通过 jsdelivr CDN 远程加载")
 
 if __name__=="__main__":
     main()
