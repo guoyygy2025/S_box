@@ -90,13 +90,13 @@ def base_config():
                     "tag": "geosite-cn",
                     "type": "remote",
                     "format": "binary",
-                    "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
+                    "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
                 },
                 {
                     "tag": "geoip-cn",
                     "type": "remote",
                     "format": "binary",
-                    "url": "https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+                    "url": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
                 }
             ]
         }
