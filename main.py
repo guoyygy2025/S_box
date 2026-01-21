@@ -6,7 +6,6 @@ import json
 import re
 import time
 from urllib.parse import urlparse, parse_qs
-import os
 
 # ================== 配置参数 ==================
 SOURCES = [
@@ -15,16 +14,7 @@ SOURCES = [
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
 ]
 
-# 本地 rule_set 目录
-RULESET_DIR = os.path.abspath("./rules")
-os.makedirs(RULESET_DIR, exist_ok=True)
-
-LOCAL_RULES = {
-    "adblock": os.path.join(RULESET_DIR, "adblocksingbox.srs"),
-    "geosite-ads": os.path.join(RULESET_DIR, "geosite-ads.srs"),
-    "geosite-cn": os.path.join(RULESET_DIR, "geosite-cn.srs"),
-    "geoip-cn": os.path.join(RULESET_DIR, "geoip-cn.srs")
-}
+RULE_PROXY = "https://gh-proxy.org/https://raw.githubusercontent.com"
 
 MAX_KEEP_NODES = 50
 CONNECT_TIMEOUT = 3
@@ -77,7 +67,7 @@ def base_config():
                 {"tag":"dns_fakeip","address":"fakeip"}
             ],
             "rules":[
-                {"rule_set":["geosite-ads","adblock"],"server":"dns_block","disable_cache":True},
+                {"rule_set":["geosite-ads","adblock-extra"],"server":"dns_block","disable_cache":True},
                 {"rule_set":"geosite-cn","server":"dns_local"},
                 {"query_type":["A","AAAA"],"server":"dns_fakeip","disable_cache":True}
             ],
@@ -102,21 +92,21 @@ def base_config():
                 {"ip_is_private":True,"outbound":"direct"},
                 {"domain_suffix":["tiktok.com","tiktokcdn.com"],"outbound":TIKTOK_OUTBOUND},
                 {"rule_set":["geoip-cn","geosite-cn"],"outbound":"direct"},
-                {"rule_set":["geosite-ads","adblock"],"action":"reject"}
+                {"rule_set":["geosite-ads","adblock-extra"],"action":"reject"}
             ],
             "final":"proxy",
             "rule_set":[
-                {"tag":"adblock","type":"remote","format":"binary","url":"file:///"+LOCAL_RULES["adblock"].replace("\\","/")},
-                {"tag":"geosite-ads","type":"remote","format":"binary","url":"file:///"+LOCAL_RULES["geosite-ads"].replace("\\","/")},
-                {"tag":"geosite-cn","type":"remote","format":"binary","url":"file:///"+LOCAL_RULES["geosite-cn"].replace("\\","/")},
-                {"tag":"geoip-cn","type":"remote","format":"binary","url":"file:///"+LOCAL_RULES["geoip-cn"].replace("\\","/")}
+                {"tag":"adblock-extra","type":"remote","format":"binary","url":f"{RULE_PROXY}/217heidai/adblockfilters/main/rules/adblocksingbox.srs"},
+                {"tag":"geosite-ads","type":"remote","format":"binary","url":f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"},
+                {"tag":"geosite-cn","type":"remote","format":"binary","url":f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-cn.srs"},
+                {"tag":"geoip-cn","type":"remote","format":"binary","url":f"{RULE_PROXY}/SagerNet/sing-geoip/rule-set/geoip-cn.srs"}
             ]
         }
     }
 
 # ================== 主流程 ==================
 def main():
-    print("🚀 构建 sing-box 配置（本地 rule_set 版）...")
+    print("🚀 构建 sing-box 配置（全远程 rule_set 版）...")
 
     raw_links = []
     for s in SOURCES:
@@ -191,15 +181,17 @@ def main():
                     o["outbounds"].append(tag)
             elif t in ("US","HK","JP","SG"):
                 if t == country:
-                    o["outbounds"].append(tag)
+                    if tag not in o["outbounds"]:
+                        o["outbounds"].append(tag)
                 if not o["outbounds"]:
                     o["outbounds"].append(tag)
 
+    # 写入 config.json
     with open("config.json","w",encoding="utf-8") as f:
         json.dump(cfg,f,indent=2,ensure_ascii=False)
 
     print(f"✅ config.json 生成完成（有效节点 {len(alive_links)} 个）")
-    print(f"✅ rule_set 文件请放在 {RULESET_DIR} 目录中")
+    print("✅ rule_set 通过远程 URL 加载，无需本地文件")
 
 if __name__=="__main__":
     main()
