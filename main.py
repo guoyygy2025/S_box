@@ -71,18 +71,11 @@ def base_config():
                 {"tag": "dns_fakeip", "address": "fakeip"}
             ],
             "rules": [
-                {
-                    "rule_set": ["geosite-ads", "adblock"],
-                    "server": "dns_block",
-                    "disable_cache": True
-                },
-                {
-                    "domain_suffix": [
-                        "youtube.com","googlevideo.com","ytimg.com","ggpht.com",
-                        "tiktok.com","tiktokcdn.com","byteoversea.com","ibytedtos.com"
-                    ],
-                    "server": "dns_proxy"
-                },
+                {"rule_set": ["geosite-ads", "adblock"], "server": "dns_block", "disable_cache": True},
+                {"domain_suffix": [
+                    "youtube.com","googlevideo.com","ytimg.com","ggpht.com",
+                    "tiktok.com","tiktokcdn.com","byteoversea.com","ibytedtos.com"
+                ], "server": "dns_proxy"},
                 {"rule_set": "geosite-cn", "server": "dns_local"},
                 {"query_type": ["A","AAAA"], "server": "dns_fakeip"}
             ],
@@ -102,50 +95,28 @@ def base_config():
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
                 {"ip_is_private": True, "outbound": "direct"},
-
                 {"domain_suffix": ["openai.com","chatgpt.com"], "outbound": "US"},
-                {
-                    "domain_suffix": [
-                        "tiktok.com","tiktokcdn.com","byteoversea.com","ibytedtos.com"
-                    ],
-                    "outbound": TIKTOK_OUTBOUND
-                },
+                {"domain_suffix": ["tiktok.com","tiktokcdn.com","byteoversea.com","ibytedtos.com"], "outbound": TIKTOK_OUTBOUND},
                 {"domain_suffix": ["youtube.com","googlevideo.com"], "outbound": "HK"},
-
                 {"rule_set": ["geosite-ads","adblock"], "action": "reject"},
                 {"rule_set": ["geoip-cn","geosite-cn"], "outbound": "direct"}
             ],
             "final": "proxy",
             "rule_set": [
-                {
-                    "tag": "adblock",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/217heidai/adblockfilters/main/rules/adblocksingbox.srs"
-                },
-                {
-                    "tag": "geosite-ads",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
-                },
-                {
-                    "tag": "geosite-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-cn.srs"
-                },
-                {
-                    "tag": "geoip-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": f"{RULE_PROXY}/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
-                }
+                {"tag": "adblock", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/217heidai/adblockfilters/main/rules/adblocksingbox.srs"},
+                {"tag": "geosite-ads", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"},
+                {"tag": "geosite-cn", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-cn.srs"},
+                {"tag": "geoip-cn", "type": "remote", "format": "binary",
+                 "url": f"{RULE_PROXY}/SagerNet/sing-geoip/rule-set/geoip-cn.srs"}
             ]
         },
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto","US","HK","JP","SG"]},
-            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
+            # 初始 urltest outbound 不能空
+            {"type": "urltest", "tag": "auto", "outbounds": ["proxy"], "url": "https://www.gstatic.com/generate_204", "interval": "10m"},
             {"type": "selector", "tag": "US", "outbounds": []},
             {"type": "selector", "tag": "HK", "outbounds": []},
             {"type": "selector", "tag": "JP", "outbounds": []},
@@ -173,26 +144,26 @@ def main():
 
     raw_links = list(set(raw_links))
 
+    # 并发测速
     with concurrent.futures.ThreadPoolExecutor(60) as ex:
         tested = [r for r in ex.map(speed_test, raw_links) if r]
 
+    # 按 RTT 排序，保留最快节点
     tested.sort(key=lambda x: x[1])
     fast_links = [x[0] for x in tested[:MAX_KEEP_NODES]]
 
     cfg = base_config()
+    fast_tags = []
 
+    # 生成节点
     for link in fast_links:
         u = urlparse(link)
         q = parse_qs(u.query)
         country = detect_country(link)
         tag = f"{country}-{u.hostname}"
+        fast_tags.append(tag)
 
-        node = {
-            "type": u.scheme,
-            "tag": tag,
-            "server": u.hostname,
-            "server_port": u.port or 443
-        }
+        node = {"type": u.scheme, "tag": tag, "server": u.hostname, "server_port": u.port or 443}
 
         if u.scheme == "vless":
             node.update({
@@ -221,16 +192,21 @@ def main():
 
         cfg["outbounds"].append(node)
 
+        # 添加到国家 selector
         for o in cfg["outbounds"]:
             if o.get("tag") == country:
                 o["outbounds"].append(tag)
-            if o.get("tag") == "auto":
-                o["outbounds"].append(tag)
 
+    # 更新 urltest 的 outbounds 列表
+    for o in cfg["outbounds"]:
+        if o.get("tag") == "auto":
+            o["outbounds"] = fast_tags.copy()
+
+    # 写入文件
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
 
-    print("✅ config.json 生成完成（终极版）")
+    print(f"✅ config.json 生成完成（节点 {len(fast_tags)} 个）")
 
 if __name__ == "__main__":
     main()
