@@ -6,6 +6,7 @@ import json
 import re
 import time
 from urllib.parse import urlparse, parse_qs
+import os
 
 # ================== 配置参数 ==================
 SOURCES = [
@@ -14,7 +15,17 @@ SOURCES = [
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
 ]
 
-RULE_PROXY = "https://gh-proxy.org/https://raw.githubusercontent.com"
+# 本地 rule_set 目录（提前下载以下文件到这个目录）
+RULESET_DIR = "./rules"
+os.makedirs(RULESET_DIR, exist_ok=True)
+
+LOCAL_RULES = {
+    "adblock": os.path.join(RULESET_DIR, "adblocksingbox.srs"),
+    "geosite-ads": os.path.join(RULESET_DIR, "geosite-ads.srs"),
+    "geosite-cn": os.path.join(RULESET_DIR, "geosite-cn.srs"),
+    "geoip-cn": os.path.join(RULESET_DIR, "geoip-cn.srs")
+}
+
 MAX_KEEP_NODES = 50
 CONNECT_TIMEOUT = 3
 MAX_RTT = 2000
@@ -95,25 +106,17 @@ def base_config():
             ],
             "final":"proxy",
             "rule_set":[
-                {"tag":"adblock","type":"remote","format":"binary",
-                 "url":f"{RULE_PROXY}/217heidai/adblockfilters/main/rules/adblocksingbox.srs",
-                 "download_detour":"direct"},
-                {"tag":"geosite-ads","type":"remote","format":"binary",
-                 "url":f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-                 "download_detour":"direct"},
-                {"tag":"geosite-cn","type":"remote","format":"binary",
-                 "url":f"{RULE_PROXY}/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-                 "download_detour":"direct"},
-                {"tag":"geoip-cn","type":"remote","format":"binary",
-                 "url":f"{RULE_PROXY}/SagerNet/sing-geoip/rule-set/geoip-cn.srs",
-                 "download_detour":"direct"}
+                {"tag":"adblock","type":"file","format":"binary","path":LOCAL_RULES["adblock"]},
+                {"tag":"geosite-ads","type":"file","format":"binary","path":LOCAL_RULES["geosite-ads"]},
+                {"tag":"geosite-cn","type":"file","format":"binary","path":LOCAL_RULES["geosite-cn"]},
+                {"tag":"geoip-cn","type":"file","format":"binary","path":LOCAL_RULES["geoip-cn"]}
             ]
         }
     }
 
 # ================== 主流程 ==================
 def main():
-    print("🚀 构建 sing-box 终极配置中...")
+    print("🚀 构建 sing-box 本地 rule_set 配置中...")
 
     raw_links = []
     for s in SOURCES:
@@ -189,7 +192,6 @@ def main():
             elif t in ("US","HK","JP","SG"):
                 if t == country:
                     o["outbounds"].append(tag)
-                # fallback：至少有一个节点
                 if not o["outbounds"]:
                     o["outbounds"].append(tag)
 
@@ -198,6 +200,7 @@ def main():
         json.dump(cfg,f,indent=2,ensure_ascii=False)
 
     print(f"✅ config.json 生成完成（有效节点 {len(alive_links)} 个）")
+    print(f"✅ rule_set 文件请提前下载到 {RULESET_DIR} 目录中")
 
 if __name__=="__main__":
     main()
