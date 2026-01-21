@@ -18,7 +18,7 @@ RULE_PROXY = "https://gh-proxy.org/https://raw.githubusercontent.com"
 MAX_KEEP_NODES = 50
 CONNECT_TIMEOUT = 3
 MAX_RTT = 2000
-TIKTOK_OUTBOUND = "JP"
+TIKTOK_OUTBOUND = "JP"  # TikTok 强制解锁国家 JP 或 SG
 
 COUNTRY_KEYWORDS = {
     "US": ["us", "united"],
@@ -60,10 +60,10 @@ def base_config():
         "log": {"level": "warn"},
         "dns": {
             "servers": [
-                {"tag": "dns_proxy","address":"https://1.1.1.1/dns-query","detour":"proxy"},
-                {"tag": "dns_local","address":"https://223.5.5.5/dns-query","detour":"direct"},
-                {"tag": "dns_block","address":"rcode://success"},
-                {"tag": "dns_fakeip","address":"fakeip"}
+                {"tag":"dns_proxy","address":"https://1.1.1.1/dns-query","detour":"proxy"},
+                {"tag":"dns_local","address":"https://223.5.5.5/dns-query","detour":"direct"},
+                {"tag":"dns_block","address":"rcode://success"},
+                {"tag":"dns_fakeip","address":"fakeip"}
             ],
             "rules":[
                 {"rule_set":["geosite-ads","adblock"],"server":"dns_block","disable_cache":True},
@@ -73,13 +73,7 @@ def base_config():
             "final":"dns_proxy",
             "fakeip":{"enabled":True}
         },
-        "inbounds":[{
-            "type":"mixed",
-            "tag":"mixed-in",
-            "listen":"127.0.0.1",
-            "listen_port":7890,
-            "sniff":True
-        }],
+        "inbounds":[{"type":"mixed","tag":"mixed-in","listen":"127.0.0.1","listen_port":7890,"sniff":True}],
         "outbounds":[
             {"type":"selector","tag":"proxy","outbounds":["auto","US","HK","JP","SG"]},
             {"type":"urltest","tag":"auto","outbounds":[],"url":"https://www.gstatic.com/generate_204","interval":"10m"},
@@ -121,29 +115,27 @@ def base_config():
 def main():
     print("🚀 构建 sing-box 终极配置中...")
 
-    # 1️⃣ 获取订阅
     raw_links = []
     for s in SOURCES:
         try:
             r = requests.get(s, timeout=10).text
             data = safe_decode(r) if "://" not in r else r
-            raw_links += re.findall(r"(?:vless|trojan)://[^\s]+", data)
+            raw_links += re.findall(r"(?:vless|trojan)://[^\s#]+", data)
         except:
             continue
 
     raw_links = list(set(raw_links))
 
-    # 2️⃣ 测速淘汰慢节点
+    # 测速淘汰慢节点
     with concurrent.futures.ThreadPoolExecutor(50) as ex:
         alive_nodes = [r for r in ex.map(speed_test, raw_links) if r]
     alive_nodes.sort(key=lambda x: x[1])
     alive_links = [x[0] for x in alive_nodes[:MAX_KEEP_NODES]]
 
-    # 3️⃣ 初始化 config
     cfg = base_config()
     tag_counter = {}
 
-    # 4️⃣ 添加节点
+    # 添加节点
     for link in alive_links:
         u = urlparse(link)
         q = parse_qs(u.query)
@@ -188,15 +180,20 @@ def main():
 
         cfg["outbounds"].append(node)
 
-        # 5️⃣ 添加到 selector，保证不为空
+        # 添加到 selector，保证不为空
         for o in cfg["outbounds"]:
-            tag_name = o.get("tag")
-            if tag_name in ("auto", country):
-                o["outbounds"].append(tag)
-            elif tag_name == "proxy":
-                o["outbounds"].append(tag)
+            t = o.get("tag")
+            if t in ("auto","proxy"):
+                if tag not in o["outbounds"]:
+                    o["outbounds"].append(tag)
+            elif t in ("US","HK","JP","SG"):
+                if t == country:
+                    o["outbounds"].append(tag)
+                # fallback：至少有一个节点
+                if not o["outbounds"]:
+                    o["outbounds"].append(tag)
 
-    # 6️⃣ 写入 config.json
+    # 写入 config.json
     with open("config.json","w",encoding="utf-8") as f:
         json.dump(cfg,f,indent=2,ensure_ascii=False)
 
