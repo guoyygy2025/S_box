@@ -5,7 +5,7 @@ import concurrent.futures
 import json
 import re
 import time
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, unquote
 
 # ===================== 核心配置 =====================
 SOURCES = [
@@ -22,23 +22,69 @@ RULE_PATHS = {
     "geoip_cn": "SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 }
 
+# ⚡ 参数微调：云端运行建议稍微放宽超时
 MAX_THREADS = 40        
-MAX_KEEP_NODES = 50     
-CONNECT_TIMEOUT = 3.0   # 🔴 修改：增加超时时间，防止云端运行全军覆没
+MAX_KEEP_NODES = 80     
+CONNECT_TIMEOUT = 3.0   
 
-# ===================== 工具函数 =====================
-def safe_decode(text):
-    """增强型解码，处理各种奇怪格式"""
-    # 移除空白符
-    text = text.replace(' ', '').replace('\n', '').replace('\r', '')
-    # 补全 padding
-    padding = len(text) % 4
-    if padding:
-        text += '=' * (4 - padding)
+# ===================== 核心工具 =====================
+def get_content(url):
+    """下载并智能解码内容"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
     try:
-        return base64.b64decode(text).decode("utf-8", "ignore")
-    except:
+        resp = requests.get(url, headers=headers, timeout=10)
+        resp.encoding = 'utf-8'
+        text = resp.text.strip()
+        
+        # 1. 如果内容包含明显的协议头，说明是明文，不需要解码
+        if "vless://" in text or "vmess://" in text or "trojan://" in text:
+            return text
+            
+        # 2. 尝试 Base64 解码
+        try:
+            # 处理 URL Safe Base64
+            text_safe = text.replace('-', '+').replace('_', '/')
+            # 补全 padding
+            padding = len(text_safe) % 4
+            if padding:
+                text_safe += '=' * (4 - padding)
+            decoded = base64.b64decode(text_safe).decode('utf-8', 'ignore')
+            # 只有当解码后包含协议头时，才认为解码成功
+            if "://" in decoded:
+                return decoded
+        except:
+            pass
+            
+        # 3. 如果解码失败，返回原始文本（可能是混杂模式）
         return text
+    except Exception as e:
+        print(f"⚠️ 下载失败 {url}: {e}")
+        return ""
+
+def extract_links(content):
+    """稳健的链接提取：按行处理 + 正则补充"""
+    links = []
+    lines = content.splitlines()
+    
+    # 策略 A: 按行扫描 (最稳健)
+    for line in lines:
+        line = line.strip()
+        if not line: continue
+        # 提取协议开头的字符串
+        match = re.search(r'(vless|trojan|hysteria2|hy2)://.*', line)
+        if match:
+            # 去掉末尾可能的注释（从空格或#开始截断）
+            clean_link = re.split(r'[\s|#]', match.group(0))[0]
+            links.append(clean_link)
+
+    # 策略 B: 只有当按行没找到时，尝试全文正则 (应对挤在一起的情况)
+    if not links:
+        found = re.findall(r"(vless|trojan|hysteria2|hy2)://[a-zA-Z0-9%\-\._~:/?#\[\]@!$&'()*+,;=]+", content)
+        links.extend(found)
+        
+    return links
 
 def check_node(link):
     """TCP 握手测速"""
@@ -47,9 +93,8 @@ def check_node(link):
         host = u.hostname
         port = u.port or 443
         if not host: return None
-
-        # 排除无效 IP
-        if host.startswith('127.') or host == 'localhost': return None
+        # 过滤本地回环
+        if "127.0.0.1" in host or "localhost" in host: return None
 
         start_time = time.time()
         with socket.create_connection((host, port), timeout=CONNECT_TIMEOUT):
@@ -58,7 +103,7 @@ def check_node(link):
     except:
         return None
 
-# ===================== 解析逻辑 =====================
+# ===================== 解析器 =====================
 def parse_vless(u, q, tag):
     node = {
         "type": "vless", "tag": tag, "server": u.hostname, "server_port": u.port or 443,
@@ -73,17 +118,17 @@ def parse_vless(u, q, tag):
         node["tls"]["reality"] = {
             "enabled": True, "public_key": q.get("pbk", [""])[0], "short_id": q.get("sid", [""])[0]
         }
+    if q.get("type", ["tcp"])[0] == "ws":
+        node["transport"] = {"type": "ws", "path": q.get("path", ["/"])[0], "headers": {"Host": q.get("host", [u.hostname])[0]}}
+    elif q.get("type", ["tcp"])[0] == "grpc":
+        node["transport"] = {"type": "grpc", "service_name": q.get("serviceName", [""])[0]}
     return node
 
 def parse_hysteria2(u, q, tag):
     node = {
         "type": "hysteria2", "tag": tag, "server": u.hostname, "server_port": u.port or 443,
         "password": u.username,
-        "tls": {
-            "enabled": True, "server_name": q.get("sni", [u.hostname])[0],
-            "insecure": q.get("insecure", ["0"])[0] == "1",
-            "alpn": ["h3"]
-        }
+        "tls": {"enabled": True, "server_name": q.get("sni", [u.hostname])[0], "insecure": q.get("insecure", ["0"])[0] == "1", "alpn": ["h3"]}
     }
     if "obfs" in q:
         node["obfs"] = {"type": "salamander", "password": q.get("obfs-password", [""])[0]}
@@ -98,62 +143,55 @@ def parse_trojan(u, q, tag):
 
 # ===================== 主程序 =====================
 def main():
-    print("🚀 启动 Sing-box 配置生成器...")
+    print("🚀 启动 Sing-box 配置生成器 (V3.0 修复版)...")
     
+    # 1. 获取并提取链接
     all_links = []
     for src in SOURCES:
-        try:
-            print(f"📥 下载: {src}")
-            r = requests.get(src, timeout=10)
-            if r.status_code == 200:
-                # 尝试解码两次，防止二次 base64
-                content = safe_decode(r.text)
-                if "://" not in content[:100]: content = safe_decode(content)
-                
-                found = re.findall(r"(vless|trojan|hysteria2|hy2)://[a-zA-Z0-9%\-\._~:/?#\[\]@!$&'()*+,;=]+", content)
-                all_links.extend(found)
-                print(f"   -> 解析出 {len(found)} 个链接")
-        except Exception as e:
-            print(f"   -> ⚠️ 失败: {e}")
+        content = get_content(src)
+        links = extract_links(content)
+        if links:
+            all_links.extend(links)
+            print(f"✅ {src} -> 提取到 {len(links)} 个链接")
+        else:
+            print(f"❌ {src} -> 未提取到链接 (可能格式不支持)")
 
     unique_links = list(set(all_links))
-    if not unique_links:
-        print("❌ 未获取到任何节点，终止运行。")
+    total_count = len(unique_links)
+    if total_count == 0:
+        print("🛑 致命错误：未找到任何有效链接，请检查网络或源地址。")
         return
 
-    print(f"⚡ 开始测速 {len(unique_links)} 个节点 (超时 {CONNECT_TIMEOUT}s)...")
+    print(f"⚡ 开始测速 {total_count} 个唯一节点 (超时 {CONNECT_TIMEOUT}s)...")
     
+    # 2. 并发测速
     valid_nodes = []
-    # 使用并发测速
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
         futures = {executor.submit(check_node, link): link for link in unique_links}
         for future in concurrent.futures.as_completed(futures):
             res = future.result()
-            if res:
-                valid_nodes.append(res)
+            if res: valid_nodes.append(res)
     
-    # 🔴 关键修复：检查列表是否为空
+    # 3. 结果处理（兜底逻辑）
     if not valid_nodes:
-        print("❌ 悲报：所有节点均测速失败（可能网络限制或节点已挂）。")
-        print("⚠️ 尝试启用兜底模式：强制保留所有格式正确的节点（不保证连通性）。")
-        # 兜底：如果没有通过测速的节点，则不过滤，直接使用所有解析成功的链接
+        print("⚠️ 警告：所有节点测速均失败！可能是网络环境限制。")
+        print("🛡️ 启用【强制保留模式】：不进行连通性检查，保留所有格式正确的节点。")
         for link in unique_links[:MAX_KEEP_NODES]:
-             # 伪造一个 latency 数据以便通过后续逻辑
-             try:
+            try:
                 u = urlparse(link)
                 if u.hostname:
                     valid_nodes.append({"link": link, "u": u, "latency": 9999})
-             except: pass
-        
-        if not valid_nodes:
-             print("❌ 兜底失败，无有效格式链接。")
-             return
+            except: pass
+    else:
+        valid_nodes.sort(key=lambda x: x['latency'])
+        print(f"✅ 测速完成，有效节点: {len(valid_nodes)} 个")
 
-    # 按延迟排序
-    valid_nodes.sort(key=lambda x: x['latency'])
-    print(f"✅ 最终选用 {len(valid_nodes)} 个节点")
+    if not valid_nodes:
+        print("🛑 最终失败：没有可生成的节点。")
+        return
 
-    # 生成配置
+    # 4. 生成配置
+    final_nodes = valid_nodes[:MAX_KEEP_NODES]
     cfg = {
         "log": {"level": "info"},
         "dns": {
@@ -161,25 +199,34 @@ def main():
             "rules": [{"rule_set": "geosite_cn", "server": "dns_local"}],
             "final": "dns_proxy"
         },
-        "inbounds": [{"type": "tun", "inet4_address": "172.19.0.1/30", "auto_route": True, "sniff": True}],
+        "inbounds": [{"type": "tun", "inet4_address": "172.19.0.1/30", "auto_route": True, "strict_route": True, "sniff": True}],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto"]},
-            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "http://cp.cloudflare.com", "interval": "10m"},
-            {"type": "direct", "tag": "direct"},
+            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "http://cp.cloudflare.com", "interval": "10m", "tolerance": 50},
+            {"type": "direct", "tag": "direct"}
         ],
         "route": {
-            "rules": [{"protocol": "dns", "outbound": "dns-out"},{"ip_is_private": True, "outbound": "direct"},{"rule_set": ["geoip_cn", "geosite_cn"], "outbound": "direct"}],
+            "rules": [{"protocol": "dns", "outbound": "dns-out"}, {"ip_is_private": True, "outbound": "direct"}, {"rule_set": ["geoip_cn", "geosite_cn"], "outbound": "direct"}],
             "final": "proxy",
             "rule_set": [{"tag": k, "type": "remote", "format": "binary", "url": f"{RULE_CDN}/{v}"} for k, v in RULE_PATHS.items()]
         }
     }
 
-    # 填入节点
-    for i, item in enumerate(valid_nodes[:MAX_KEEP_NODES]):
+    count = 0
+    for i, item in enumerate(final_nodes):
         u = item['u']
         q = parse_qs(u.query)
-        tag = f"Node-{i+1:02d} {u.scheme.upper()}"
+        # 处理节点命名：解码 URL 编码的备注 (如 #美国)
+        try:
+            remark = unquote(u.fragment) if u.fragment else f"Node-{i+1}"
+        except: remark = f"Node-{i+1}"
         
+        tag = f"{remark} [{item['latency']}ms]" if item['latency'] != 9999 else f"{remark} {i+1}"
+        
+        # 查重 tag，防止重复
+        if any(o['tag'] == tag for o in cfg['outbounds']):
+            tag = f"{tag}-{i}"
+
         try:
             node = None
             if u.scheme == "vless": node = parse_vless(u, q, tag)
@@ -190,12 +237,15 @@ def main():
                 cfg["outbounds"].append(node)
                 cfg["outbounds"][1]["outbounds"].append(tag)
                 cfg["outbounds"][0]["outbounds"].append(tag)
-        except: continue
+                count += 1
+        except Exception as e:
+            # print(f"解析节点出错: {e}")
+            continue
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
-    print("💾 config.json 生成完毕")
+    print(f"💾 成功生成 config.json，包含 {count} 个节点！")
 
 if __name__ == "__main__":
     main()
