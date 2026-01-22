@@ -17,13 +17,16 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# ✅ 使用 gh-proxy.com 加速 GitHub Raw
+# ===================== 规则配置（使用 gh-proxy.com）=====================
 GH_RAW_BASE = "https://raw.githubusercontent.com"
 CDN_HOST = "gh-proxy.com"
 RULE_URLS = {
     "geosite-cn": f"https://{CDN_HOST}/{GH_RAW_BASE}/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
     "category-ads-all": f"https://{CDN_HOST}/{GH_RAW_BASE}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
 }
+
+# ✅ 覆盖所有可能的 CNAME 后端域名（防环路关键！）
+CDN_DOMAIN_SUFFIXES = ["gh-proxy.com", "dabache.top"]
 
 MAX_THREADS = 100
 MAX_KEEP_NODES = 100
@@ -106,7 +109,7 @@ def check_node(link):
 # ===================== 主程序 =====================
 
 def main():
-    print("🚀 正在处理节点并构建使用 gh-proxy.com 的配置...")
+    print("🚀 正在处理节点并构建防环路配置（使用 gh-proxy.com）...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
     
@@ -126,18 +129,33 @@ def main():
     tested_nodes.sort(key=lambda x: x['latency'])
     top_nodes = tested_nodes[:MAX_KEEP_NODES]
 
-    # 构建配置
+    # 构建 Sing-box 配置
     cfg = {
-        "log": {"disabled": False, "level": "info", "timestamp": True},
+        "log": {
+            "disabled": False,
+            "level": "info",
+            "timestamp": True
+        },
         "dns": {
             "servers": [
-                {"tag": "remote", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
-                {"tag": "local", "address": ALIDNS},  # ⚠️ 无 detour！关键！
-                {"tag": "block", "address": "rcode://success"}
+                {
+                    "tag": "remote",
+                    "address": "https://1.1.1.1/dns-query",
+                    "detour": "proxy"
+                },
+                {
+                    "tag": "local",
+                    "address": ALIDNS
+                    # ⚠️ 关键：不要加 detour！避免被重定向到代理
+                },
+                {
+                    "tag": "block",
+                    "address": "rcode://success"
+                }
             ],
             "rules": [
-                # ✅ 关键：gh-proxy.com 强制走 local DNS（防环路）
-                {"domain": [CDN_HOST], "server": "local"},
+                # ✅ 防环路：强制 CDN 域名用干净 DNS
+                {"domain_suffix": CDN_DOMAIN_SUFFIXES, "server": "local"},
                 {"clash_mode": "Proxy", "server": "remote"},
                 {"clash_mode": "Direct", "server": "local"},
                 {"rule_set": ["geosite-cn"], "server": "local"},
@@ -164,8 +182,18 @@ def main():
             }
         ],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto", "direct"]},
-            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
+            {
+                "type": "selector",
+                "tag": "proxy",
+                "outbounds": ["auto", "direct"]
+            },
+            {
+                "type": "urltest",
+                "tag": "auto",
+                "outbounds": [],
+                "url": "http://cp.cloudflare.com/generate_204",
+                "interval": "3m"
+            },
             {"type": "direct", "tag": "direct"},
             {"type": "block", "tag": "block"},
             {"type": "dns", "tag": "dns-out"}
@@ -175,8 +203,8 @@ def main():
             "auto_detect_interface": True,
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                # ✅ 关键：gh-proxy.com 流量强制直连
-                {"domain": [CDN_HOST], "outbound": "direct"},
+                # ✅ 防环路：CDN 流量强制直连
+                {"domain_suffix": CDN_DOMAIN_SUFFIXES, "outbound": "direct"},
                 {"clash_mode": "Direct", "outbound": "direct"},
                 {"clash_mode": "Proxy", "outbound": "proxy"},
                 {"rule_set": ["geosite-cn"], "outbound": "direct"},
@@ -202,7 +230,7 @@ def main():
         }
     }
 
-    # 填充节点
+    # 填充有效节点
     valid_count = 0
     node_tags = []
     for i, item in enumerate(top_nodes):
@@ -240,6 +268,7 @@ def main():
         else:
             continue
 
+        # REALITY 支持
         if q.get("security", [""])[0] == "reality":
             pbk = q.get("pbk", [""])[0]
             if not pbk:
@@ -256,15 +285,18 @@ def main():
         node_tags.append(tag)
         valid_count += 1
 
+    # 更新 selector 和 urltest 的出站列表
     cfg["outbounds"][0]["outbounds"] = ["auto", "direct"] + node_tags
     cfg["outbounds"][1]["outbounds"] = node_tags
 
+    # 保存配置
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
     print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
-    print(f"🔗 规则通过 {CDN_HOST} 下载，已防环路。")
+    print(f"🔗 规则通过 {CDN_HOST} 下载，已覆盖 CNAME 后端（如 dabache.top），防止 DNS 环路。")
     print("💡 启动命令: sing-box run -c config.json")
+    print("🔌 混合代理端口: http://127.0.0.1:2333")
 
 if __name__ == "__main__":
     main()
