@@ -15,6 +15,7 @@ from typing import List, Dict, Optional
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+# 订阅源列表
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
@@ -23,6 +24,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
+# 规则集地址
 RULE_URLS = {
     "geosite-ads": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
     "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
@@ -59,7 +61,6 @@ def check_node(link: str) -> Optional[Dict]:
             pass
         latency = int((time.time() - start) * 1000)
         if latency > LATENCY_THRESHOLD_MS: return None
-        # UUID+Server+Port 唯一性校验
         fp = hashlib.md5(f"{u.username}{u.hostname}{u.port}".encode()).hexdigest()
         return {"link": link, "parsed": u, "latency": latency, "fingerprint": fp}
     except: return None
@@ -67,7 +68,6 @@ def check_node(link: str) -> Optional[Dict]:
 def generate_config(valid_nodes: List[Dict]) -> Dict:
     sorted_nodes = sorted(valid_nodes, key=lambda x: x['latency'])[:MAX_KEEP_NODES]
     
-    # 基础出站
     outbounds = [
         {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
         {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
@@ -82,8 +82,6 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
     for i, item in enumerate(sorted_nodes):
         u, q = item['parsed'], parse_qs(item['parsed'].query)
         base_name = unquote(u.fragment) if u.fragment else f"Node-{i+1}"
-        
-        # ✅ 修复重点：确保 Tag 唯一，防止重复报错
         tag = f"{base_name} | {item['latency']}ms"
         counter = 1
         while tag in used_tags:
@@ -99,7 +97,6 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
         if "vision" in q.get("flow", [""])[0]: node["flow"] = "xtls-rprx-vision"
         if q.get("security", [""])[0] == "reality":
             node["tls"]["reality"] = {"enabled": True, "public_key": q.get("pbk", [""])[0], "short_id": q.get("sid", [""])[0]}
-        
         outbounds.append(node)
         proxy_tags.append(tag)
 
@@ -119,10 +116,16 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
                 {"domain": GH_PROXY_HOSTS, "action": "route", "server": "dns_local"},
                 {"rule_set": "geosite-ads", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
+                # 只有 A/AAAA 记录才进入 fakeip
                 {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
             ],
             "final": "dns_proxy",
-            "strategy": "prefer_ipv4"
+            "strategy": "prefer_ipv4",
+            # ✅ 修复关键：显式定义 fakeip 的地址池
+            "fakeip": {
+                "enabled": True,
+                "inet4_range": "198.18.0.0/15"
+            }
         },
         "inbounds": [{
             "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
@@ -148,7 +151,7 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
     }
 
 def main():
-    logger.info("🚀 启动修复版生成器 (已添加 Tag 冲突自动解决机制)...")
+    logger.info("🚀 正在生成配置并修复 FakeIP 报错...")
     all_texts = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         futures = {executor.submit(get_content, url): url for url in SOURCES}
@@ -166,7 +169,7 @@ def main():
     config = generate_config(valid_nodes)
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    logger.info("🎉 生成成功！重复 Tag 已自动重命名。")
+    logger.info("🎉 生成成功！请重启客户端观察日志。")
 
 if __name__ == "__main__":
     main()
