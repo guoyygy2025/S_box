@@ -17,15 +17,13 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# ===================== 规则配置（使用 gh-proxy.com）=====================
-GH_RAW_BASE = "https://raw.githubusercontent.com"
-CDN_HOST = "gh-proxy.com"
+# ✅ 直接使用你指定的完整 URL（已修正拼写）
 RULE_URLS = {
-    "geosite-cn": f"https://{CDN_HOST}/{GH_RAW_BASE}/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-    "category-ads-all": f"https://{CDN_HOST}/{GH_RAW_BASE}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
+    "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+    "category-ads-all": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
 }
 
-# ✅ 覆盖所有可能的 CNAME 后端域名（防环路关键！）
+# ✅ 防环路关键：覆盖 gh-proxy.com 及其 CNAME 后端（如 v1.dabache.top）
 CDN_DOMAIN_SUFFIXES = ["gh-proxy.com", "dabache.top"]
 
 MAX_THREADS = 100
@@ -109,7 +107,7 @@ def check_node(link):
 # ===================== 主程序 =====================
 
 def main():
-    print("🚀 正在处理节点并构建防环路配置（使用 gh-proxy.com）...")
+    print("🚀 正在处理节点并构建配置（使用你指定的 gh-proxy.com 规则 URL）...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
     
@@ -146,7 +144,7 @@ def main():
                 {
                     "tag": "local",
                     "address": ALIDNS
-                    # ⚠️ 关键：不要加 detour！避免被重定向到代理
+                    # ⚠️ 关键：不要加 detour！避免 DNS 环路
                 },
                 {
                     "tag": "block",
@@ -154,7 +152,7 @@ def main():
                 }
             ],
             "rules": [
-                # ✅ 防环路：强制 CDN 域名用干净 DNS
+                # ✅ 强制 CDN 域名用干净 DNS（覆盖 CNAME 后端）
                 {"domain_suffix": CDN_DOMAIN_SUFFIXES, "server": "local"},
                 {"clash_mode": "Proxy", "server": "remote"},
                 {"clash_mode": "Direct", "server": "local"},
@@ -203,7 +201,7 @@ def main():
             "auto_detect_interface": True,
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                # ✅ 防环路：CDN 流量强制直连
+                # ✅ CDN 流量强制直连
                 {"domain_suffix": CDN_DOMAIN_SUFFIXES, "outbound": "direct"},
                 {"clash_mode": "Direct", "outbound": "direct"},
                 {"clash_mode": "Proxy", "outbound": "proxy"},
@@ -285,7 +283,7 @@ def main():
         node_tags.append(tag)
         valid_count += 1
 
-    # 更新 selector 和 urltest 的出站列表
+    # 更新出站列表
     cfg["outbounds"][0]["outbounds"] = ["auto", "direct"] + node_tags
     cfg["outbounds"][1]["outbounds"] = node_tags
 
@@ -294,7 +292,7 @@ def main():
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
     print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
-    print(f"🔗 规则通过 {CDN_HOST} 下载，已覆盖 CNAME 后端（如 dabache.top），防止 DNS 环路。")
+    print("🔗 规则 URL 已按你指定的方式设置，并防止 DNS 环路。")
     print("💡 启动命令: sing-box run -c config.json")
     print("🔌 混合代理端口: http://127.0.0.1:2333")
 
