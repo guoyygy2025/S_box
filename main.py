@@ -10,9 +10,11 @@ from urllib.parse import urlparse, parse_qs, unquote
 
 # ===================== 核心配置 =====================
 SOURCES = [
-    "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
-    "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/master/ConfigSub_list.txt",
-    "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
+        "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt", 
+        "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
+        "https://raw.githubusercontent.com/ermaozi/get_subscribe/refs/heads/main/subscribe/v2ray.txt",
+        "https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/v.txt",
+        "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
 CDN_HOST = "gh-proxy.org"
