@@ -25,7 +25,7 @@ RULE_PATHS = {
 # ⚡ 参数微调：云端运行建议稍微放宽超时
 MAX_THREADS = 40        
 MAX_KEEP_NODES = 80     
-CONNECT_TIMEOUT = 3.0   
+CONNECT_TIMEOUT = 1.0   
 
 # ===================== 核心工具 =====================
 def get_content(url):
