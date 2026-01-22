@@ -15,7 +15,6 @@ from typing import List, Dict, Optional
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-# 订阅源列表
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
@@ -24,7 +23,6 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 规则集地址
 RULE_URLS = {
     "geosite-ads": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
     "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
@@ -55,6 +53,7 @@ def check_node(link: str) -> Optional[Dict]:
     if not link.lower().startswith("vless://"): return None
     try:
         u = urlparse(link)
+        # 预先解析 IP 以防 DNS 阻塞测速
         ip = socket.gethostbyname(u.hostname)
         start = time.time()
         with socket.create_connection((ip, u.port or 443), timeout=2.5):
@@ -76,13 +75,14 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
         {"type": "dns", "tag": "dns-out"}
     ]
 
-    proxy_tags = []
     used_tags = set(["proxy", "auto-test", "direct", "block", "dns-out"])
+    proxy_tags = []
 
     for i, item in enumerate(sorted_nodes):
         u, q = item['parsed'], parse_qs(item['parsed'].query)
         base_name = unquote(u.fragment) if u.fragment else f"Node-{i+1}"
         tag = f"{base_name} | {item['latency']}ms"
+        
         counter = 1
         while tag in used_tags:
             tag = f"{base_name}_{counter} | {item['latency']}ms"
@@ -116,20 +116,23 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
                 {"domain": GH_PROXY_HOSTS, "action": "route", "server": "dns_local"},
                 {"rule_set": "geosite-ads", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
-                # 只有 A/AAAA 记录才进入 fakeip
                 {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
             ],
             "final": "dns_proxy",
-            "strategy": "prefer_ipv4",
-            # ✅ 修复关键：显式定义 fakeip 的地址池
+            "strategy": "ipv4_only", # 🟢 强制 IPv4 以减少超时报错
             "fakeip": {
                 "enabled": True,
-                "inet4_range": "198.18.0.0/15"
+                "inet4_range": "198.18.0.0/15" # ✅ 解决 missing fakeip 报错
             }
         },
         "inbounds": [{
-            "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
-            "auto_route": True, "strict_route": True, "stack": "system", "sniff": True
+            "type": "tun",
+            "tag": "tun-in",
+            "inet4_address": "172.19.0.1/30",
+            "auto_route": True,
+            "strict_route": True,
+            "stack": "gvisor", # 🟢 改用 gvisor 提升移动端兼容性
+            "sniff": True
         }],
         "outbounds": outbounds,
         "route": {
@@ -151,11 +154,12 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
     }
 
 def main():
-    logger.info("🚀 正在生成配置并修复 FakeIP 报错...")
+    logger.info("🚀 启动深度修正版 (修复 FakeIP 及接口识别问题)...")
     all_texts = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         futures = {executor.submit(get_content, url): url for url in SOURCES}
-        for f in concurrent.futures.as_completed(futures): all_texts.append(f.result())
+        for f in concurrent.futures.as_completed(futures):
+            all_texts.append(f.result())
 
     links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', "\n".join(all_texts), re.I)))
     valid_nodes = []
@@ -169,7 +173,7 @@ def main():
     config = generate_config(valid_nodes)
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    logger.info("🎉 生成成功！请重启客户端观察日志。")
+    logger.info(f"🎉 成功！已修复 FakeIP 范围。")
 
 if __name__ == "__main__":
     main()
