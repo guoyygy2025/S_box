@@ -19,12 +19,12 @@ SOURCES = [
 
 # ✅ 使用 mirror.ghproxy.com（更稳定，国内可直连）
 RULE_URLS = {
-    "geosite-cn": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-    "category-ads-all": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
+    "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+    "category-ads-all": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
 }
 
 # ✅ 覆盖所有可能的 CDN 域名（防 DNS 环路）
-CDN_DOMAIN_SUFFIXES = ["mirror.ghproxy.com", "ghproxy.com"]
+CDN_DOMAIN_SUFFIXES = ["gh-proxy.com"]
 
 MAX_THREADS = 100
 MAX_KEEP_NODES = 100
