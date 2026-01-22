@@ -17,19 +17,19 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 远程规则地址 (使用 gh-proxy.com 加速)
+# 远程规则地址 (使用 gh-proxy.org 加速)
 RULE_URLS = {
-    "geosite-category-ads-all": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-    "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-    "geoip-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
+    "geosite-category-ads-all": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+    "geosite-cn": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+    "geoip-cn": "https://gh-proxy.org/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 }
 
-CDN_DOMAIN_SUFFIXES = ["gh-proxy.com"]
+# ✅ 优化：仅使用纯 IP 223.5.5.5，不使用 DOH
+ALIDNS = "223.5.5.5"
 LATENCY_THRESHOLD = 500  # 仅保留 < 500ms 的节点
 MAX_THREADS = 100
 MAX_KEEP_NODES = 50
 TIMEOUT = 4.0
-ALIDNS = "https://223.5.5.5/dns-query"
 
 dns_cache = {}
 
@@ -48,6 +48,7 @@ def get_ip_country(hostname):
     try:
         ip = resolve_hostname(hostname)
         if not ip: return "[UN]"
+        # 使用本地 IP 解析服务获取国家简称
         resp = requests.get(f"http://ip-api.com/json/{ip}", timeout=3).json()
         return f"[{resp.get('countryCode', 'UN')}]" if resp.get("status") == "success" else "[UN]"
     except: return "[UN]"
@@ -88,8 +89,9 @@ def check_node(link):
 # ===================== 主程序 =====================
 
 def main():
-    print(f"🚀 正在过滤极速节点 (阈值: {LATENCY_THRESHOLD}ms)...")
+    print(f"🚀 开始提取节点并筛选延迟 < {LATENCY_THRESHOLD}ms 的 VLESS...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
+    # 提取 VLESS 链接
     links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', all_text)))
     
     valid_nodes = []
@@ -103,7 +105,7 @@ def main():
     valid_nodes.sort(key=lambda x: x['latency'])
     top_nodes = valid_nodes[:MAX_KEEP_NODES]
 
-    # 1. 构建你的 Fake-IP 模板结构
+    # 基于您的模板构建 JSON 结构
     cfg = {
         "log": {"level": "warn", "timestamp": True},
         "dns": {
@@ -114,7 +116,6 @@ def main():
                 {"tag": "fakeip_server", "address": "fakeip"}
             ],
             "rules": [
-                {"domain_suffix": CDN_DOMAIN_SUFFIXES, "action": "route", "server": "dns_local"},
                 {"rule_set": "geosite-category-ads-all", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
                 {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
@@ -129,7 +130,6 @@ def main():
             "strict_route": True, "stack": "gvisor", "sniff": True, "sniff_override_destination": True
         }],
         "outbounds": [
-            # 这里的 tag 'proxy' 是 selector，对应 route.final
             {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
             {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
             {"type": "direct", "tag": "direct"},
@@ -145,7 +145,6 @@ def main():
             ],
             "rules": [
                 {"protocol": "dns", "action": "route", "outbound": "dns-out"},
-                {"domain_suffix": CDN_DOMAIN_SUFFIXES, "action": "route", "outbound": "direct"},
                 {"rule_set": "geosite-category-ads-all", "action": "reject"},
                 {"ip_is_private": True, "action": "route", "outbound": "direct"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "direct"}
@@ -155,10 +154,11 @@ def main():
         }
     }
 
-    # 2. 填充 VLESS 节点
+    # 填充节点
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
         country = get_ip_country(u.hostname)
+        # 格式化 Tag: [国家] 节点名 | 延迟ms
         tag = f"{country} {unquote(u.fragment or f'VLESS-{i+1}')} | {item['latency']}ms"
         
         node = {
@@ -175,11 +175,10 @@ def main():
             }
         }
 
-        # XTLS Vision 流控
+        # 处理 Vision 和 Reality
         if "vision" in q.get("flow", [""])[0]:
             node["flow"] = "xtls-rprx-vision"
         
-        # Reality 安全
         if q.get("security", [""])[0] == "reality":
             node["tls"]["reality"] = {
                 "enabled": True,
@@ -194,7 +193,7 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ 完成! 成功筛选出 {len(top_nodes)} 个 500ms 内的节点。")
+    print(f"🎉 成功! config.json 已生成，共插入 {len(top_nodes)} 个节点。")
 
 if __name__ == "__main__":
     main()
