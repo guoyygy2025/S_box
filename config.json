@@ -1,42 +1,23 @@
 {
   "log": {
-    "level": "info"
+    "level": "warn"
   },
   "dns": {
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://8.8.8.8/dns-query",
-        "detour": "proxy"
+        "address": "https://8.8.8.8/dns-query"
       },
       {
         "tag": "dns_local",
         "address": "223.5.5.5",
         "detour": "direct"
-      },
-      {
-        "tag": "dns_block",
-        "address": "rcode://success"
       }
     ],
     "rules": [
       {
-        "rule_set": [
-          "adblock",
-          "geosite_ads"
-        ],
-        "server": "dns_block"
-      },
-      {
         "rule_set": "geosite_cn",
         "server": "dns_local"
-      },
-      {
-        "domain_suffix": [
-          "tiktok.com",
-          "googlevideo.com"
-        ],
-        "server": "dns_proxy"
       }
     ],
     "final": "dns_proxy"
@@ -46,7 +27,6 @@
       "type": "tun",
       "inet4_address": "172.19.0.1/30",
       "auto_route": true,
-      "strict_route": true,
       "sniff": true
     }
   ],
@@ -66,10 +46,6 @@
     {
       "type": "direct",
       "tag": "direct"
-    },
-    {
-      "type": "block",
-      "tag": "block"
     }
   ],
   "route": {
@@ -80,23 +56,10 @@
       },
       {
         "rule_set": [
-          "adblock",
-          "geosite_ads"
-        ],
-        "action": "reject"
-      },
-      {
-        "rule_set": [
           "geoip_cn",
           "geosite_cn"
         ],
         "outbound": "direct"
-      },
-      {
-        "domain_suffix": [
-          "tiktok.com"
-        ],
-        "outbound": "JP"
       }
     ],
     "final": "proxy",
