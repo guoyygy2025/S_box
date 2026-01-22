@@ -24,9 +24,9 @@ RULE_PATHS = {
     "geoip_cn": "SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 }
 
-MAX_THREADS = 40        # 提高并发数加快测速
+MAX_THREADS = 80        # 提高并发数加快测速
 MAX_KEEP_NODES = 100     # 保留节点数量
-CONNECT_TIMEOUT = 1.2   # 连接超时时间(秒)
+CONNECT_TIMEOUT = 1.5   # 连接超时时间(秒)
 
 # ===================== 工具函数 =====================
 def safe_decode(text):
