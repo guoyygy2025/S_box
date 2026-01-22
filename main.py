@@ -17,7 +17,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-CDN_HOST = "gh-proxy.com"  # ✅ 统一使用 .com（更稳定）
+CDN_HOST = "gh-proxy.com" 
 GH_RAW_BASE = "https://raw.githubusercontent.com"
 RULE_CDN_PREFIX = f"https://{CDN_HOST}/{GH_RAW_BASE}"
 
@@ -28,8 +28,8 @@ RULE_PATHS = {
 }
 
 MAX_THREADS = 100 
-MAX_KEEP_NODES = 50
-TIMEOUT = 4.0  # Actions环境建议保持 4.0
+MAX_KEEP_NODES = 100 # 修改为保留100个
+TIMEOUT = 4.0 
 ALIDNS = "223.5.5.5"
 
 dns_cache = {}
@@ -37,57 +37,43 @@ dns_cache = {}
 # ===================== 工具函数 =====================
 
 def resolve_hostname(hostname):
-    """预解析域名并缓存，避免测速时产生额外的 DNS 耗时"""
-    if hostname in dns_cache:
-        return dns_cache[hostname]
-    if re.match(r"^\d{1,3}(\.\d{1,3}){3}$", hostname):
-        return hostname
+    if hostname in dns_cache: return dns_cache[hostname]
+    if re.match(r"^\d{1,3}(\.\d{1,3}){3}$", hostname): return hostname
     try:
         ip = socket.gethostbyname(hostname)
         dns_cache[hostname] = ip
         return ip
-    except:
-        return None
+    except: return None
 
 def get_ip_country(hostname):
     try:
         ip = resolve_hostname(hostname)
-        if not ip:
-            return "[UN]"
+        if not ip: return "[UN]"
         resp = requests.get(f"http://ip-api.com/json/{ip}", timeout=3).json()
         return f"[{resp.get('countryCode')}]" if resp.get("status") == "success" else "[UN]"
-    except:
-        return "[UN]"
+    except: return "[UN]"
 
 def decode_base64(data):
     try:
         missing_padding = len(data) % 4
-        if missing_padding:
-            data += '=' * (4 - missing_padding)
+        if missing_padding: data += '=' * (4 - missing_padding)
         return base64.b64decode(data).decode('utf-8', 'ignore')
-    except:
-        return data
+    except: return data
 
 def get_content(url):
     try:
         resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
         text = resp.text.strip()
-        if "://" not in text[:30]:
-            return decode_base64(text)
+        if "://" not in text[:30]: return decode_base64(text)
         return text
-    except:
-        return ""
+    except: return ""
 
 def check_node(link):
-    """测速核心逻辑：捕获 ConnectionResetError"""
     try:
         u = urlparse(link)
-        if not u.hostname or ":" in u.hostname:
-            return None 
-        
+        if not u.hostname or ":" in u.hostname: return None 
         ip = resolve_hostname(u.hostname)
-        if not ip:
-            return None
+        if not ip: return None
 
         start = time.time()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -95,85 +81,67 @@ def check_node(link):
             s.connect((ip, u.port or 443))
             latency = int((time.time() - start) * 1000)
         
+        # 节点唯一指纹去重（协议+地址+端口+UUID/密码）
         fp = hashlib.md5(f"{u.scheme}{u.hostname}{u.port}{u.username}".encode()).hexdigest()
         return {"link": link, "u": u, "latency": latency, "fp": fp}
-    except (socket.timeout, ConnectionRefusedError, ConnectionResetError):
-        return None
-    except:
-        return None
+    except: return None
 
-# ===================== 节点解析逻辑 =====================
+# ===================== 解析逻辑 (保留原始 SNI) =====================
 
 def get_tls_config(u, q):
-    # 优先从 sni 参数获取，其次 fallback 到 hostname
-    sni_candidates = q.get("sni", []) + q.get("host", []) + [u.hostname]
-    raw_sni = sni_candidates[0].lower() if sni_candidates else u.hostname
-
-    # URL 解码（处理 %2f 等）
-    decoded_sni = unquote(raw_sni)
-
-    # 移除路径、端口、查询参数，只保留主域名
-    clean_sni = decoded_sni.split("/")[0].split(":")[0].split("?")[0].strip()
-
-    # 基本校验：必须包含点且不含非法字符
-    if not clean_sni or "." not in clean_sni or any(c in clean_sni for c in " @#{}[]<>|\\"):
-        clean_sni = u.hostname  # fallback
+    # 核心：保留原始 SNI，不进行过滤截断
+    raw_sni = q.get("sni", [None])[0] or q.get("host", [None])[0] or u.hostname
+    final_sni = unquote(raw_sni).strip()
 
     return {
         "enabled": True,
-        "server_name": clean_sni,
-        "insecure": True,
+        "server_name": final_sni,
+        "insecure": True, # 提高公共节点兼容性
         "utls": {"enabled": True, "fingerprint": "chrome"}
     }
 
 def parse_vless(u, q, tag):
     node = {
-        "type": "vless",
-        "tag": tag,
-        "server": u.hostname,
-        "server_port": int(u.port or 443),
-        "uuid": u.username,
-        "packet_encoding": "xudp",
-        "tls": get_tls_config(u, q)
+        "type": "vless", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443),
+        "uuid": u.username, "packet_encoding": "xudp", "tls": get_tls_config(u, q)
     }
+    # Reality 协议支持
     if q.get("security", [""])[0] == "reality":
         reality_cfg = {
             "enabled": True,
             "public_key": q.get("pbk", [""])[0],
             "short_id": q.get("sid", [""])[0]
         }
-        if q.get("spx"):  # ✅ 正确提取 spx
-            reality_cfg["spider_x"] = q.get("spx")[0]  # ✅ 字段名是 spider_x
+        if q.get("spx"): reality_cfg["spider_x"] = q.get("spx")[0]
         node["tls"]["reality"] = reality_cfg
-
+    
     if "vision" in q.get("flow", [""])[0]:
         node["flow"] = "xtls-rprx-vision"
     return node
 
 def parse_trojan(u, q, tag):
     return {
-        "type": "trojan",
-        "tag": tag,
-        "server": u.hostname,
-        "server_port": int(u.port or 443),
-        "password": u.username,
-        "tls": get_tls_config(u, q)
+        "type": "trojan", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443),
+        "password": u.username, "tls": get_tls_config(u, q)
     }
 
 # ===================== 主程序 =====================
 def main():
-    print(f"🚀 开始更新 sing-box 配置 (阿里DNS: {ALIDNS})")
+    print(f"🚀 开始处理节点 (适配 sing-box 1.12.x)...")
     
+    # 1. 下载并初步合并所有源
     all_text = ""
     for s in SOURCES:
-        all_text += get_content(s) + "\n"
+        content = get_content(s)
+        all_text += content + "\n"
     
+    # 2. 提取并去重
     links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
-    print(f"解析到 {len(links)} 个潜在 IPv4 节点，开始并发测速...")
-
+    print(f"🔍 发现 {len(links)} 个节点，正在进行并发连通性测试...")
+    
+    # 3. 并发测速
     tested_nodes = []
     seen_fps = set()
-    
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
         results = list(executor.map(check_node, links))
         for res in results:
@@ -181,67 +149,43 @@ def main():
                 tested_nodes.append(res)
                 seen_fps.add(res["fp"])
 
-    print(f"测试完成，可用节点: {len(tested_nodes)}")
-
     if not tested_nodes:
-        print("❌ 所有节点连接重置或超时，停止更新。")
+        print("❌ 未发现可用节点，请检查源或网络。")
         return
 
-    # ✅ 可选：过滤弱密码 Trojan 节点
-    filtered_nodes = []
-    weak_passwords = {"123456", "trojan", "password", ""}
-    for item in tested_nodes:
-        u = item['u']
-        if u.scheme == "trojan":
-            pwd = u.username or ""
-            if pwd in weak_passwords:
-                continue
-        filtered_nodes.append(item)
-    
-    filtered_nodes.sort(key=lambda x: x['latency'])
-    top_nodes = filtered_nodes[:MAX_KEEP_NODES]
+    # 4. 按延迟排序并取前 100 个
+    tested_nodes.sort(key=lambda x: x['latency'])
+    top_nodes = tested_nodes[:MAX_KEEP_NODES]
+    print(f"✅ 测速通过: {len(tested_nodes)} 个，保留最快的前 {len(top_nodes)} 个节点。")
 
+    # 5. 构建 sing-box config.json 结构
     cfg = {
         "log": {"level": "warn", "timestamp": True},
         "dns": {
             "servers": [
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
                 {"tag": "dns_local", "address": ALIDNS, "detour": "direct"},
-                {"tag": "dns_block", "address": "rcode://success"}  # ✅ 补全 dns_block
+                {"tag": "dns_block", "address": "rcode://success"}
             ],
             "rules": [
-                {"rule_set": "ads", "server": "dns_block"},  # ✅ 广告拦截
+                {"rule_set": "ads", "server": "dns_block"},
                 {"domain": [CDN_HOST], "server": "dns_local"},
                 {"rule_set": "cn_site", "server": "dns_local"}
             ],
-            "final": "dns_proxy",
-            "strategy": "ipv4_only"
+            "final": "dns_proxy", "strategy": "ipv4_only"
         },
-        "inbounds": [{
-            "type": "tun", 
-            "inet4_address": "172.19.0.1/30", 
-            "mtu": 1400,  # ✅ 防重置
-            "auto_route": True, 
-            "strict_route": True, 
-            "sniff": True
-        }],
+        "inbounds": [{"type": "tun", "inet4_address": "172.19.0.1/30", "mtu": 1400, "auto_route": True, "strict_route": True, "sniff": True}],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
-            {
-                "type": "urltest", 
-                "tag": "auto-test", 
-                "outbounds": [], 
-                "url": "http://cp.cloudflare.com/generate_204",  # ✅ 更健壮的测速地址
-                "interval": "3m0s"
-            },
-            {"type": "direct", "tag": "direct"},
-            {"type": "dns", "tag": "dns-out"},
-            {"type": "block", "tag": "dns_block"}  # ✅ 补全出站
+            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m0s"},
+            {"type": "direct", "tag": "direct"}, 
+            {"type": "dns", "tag": "dns-out"}, 
+            {"type": "block", "tag": "dns_block"}
         ],
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                {"rule_set": "ads", "outbound": "dns_block"},  # ✅ 双重广告拦截
+                {"rule_set": "ads", "outbound": "dns_block"},
                 {"domain": [CDN_HOST], "outbound": "direct"},
                 {"rule_set": ["cn_site", "cn_ip"], "outbound": "direct"}
             ],
@@ -253,25 +197,24 @@ def main():
         }
     }
 
+    # 6. 将节点填入出站列表
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
         country = get_ip_country(u.hostname)
-        tag = f"{country} {unquote(u.fragment) or f'Node-{i}'} | {item['latency']}ms"
-        if u.scheme == "vless":
-            node = parse_vless(u, q, tag)
-        elif u.scheme == "trojan":
-            node = parse_trojan(u, q, tag)
-        else:
-            continue
+        node_name = unquote(u.fragment).strip() if u.fragment else f"Node-{i+1}"
+        tag = f"{country} {node_name} | {item['latency']}ms"
+        
+        node = parse_vless(u, q, tag) if u.scheme == "vless" else parse_trojan(u, q, tag)
         if node:
             cfg["outbounds"].append(node)
-            cfg["outbounds"][0]["outbounds"].append(tag)
-            cfg["outbounds"][1]["outbounds"].append(tag)
+            cfg["outbounds"][0]["outbounds"].append(tag) # 添加到 proxy 选择器
+            cfg["outbounds"][1]["outbounds"].append(tag) # 添加到 auto-test 组
 
+    # 7. 保存文件
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ 写入 {len(top_nodes)} 个节点到 config.json")
+    print(f"🎉 成功! 已将 100 个节点写入 config.json")
 
 if __name__ == "__main__":
     main()
