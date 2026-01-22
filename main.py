@@ -17,17 +17,16 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
+# 规则地址
 RULE_URLS = {
-    "geosite-category-ads-all": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
+    "geosite-ads": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
     "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
     "geoip-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geoip/rule-set/geoip-cn.srs"
 }
 
 ALIDNS = "223.5.5.5"
 LATENCY_THRESHOLD = 500
-MAX_THREADS = 100
 MAX_KEEP_NODES = 50
-TIMEOUT = 4.0
 
 # ===================== 工具函数 =====================
 
@@ -37,8 +36,8 @@ def get_content(url):
         text = resp.text.strip()
         if "://" not in text[:50]:
             try:
-                missing_padding = len(text) % 4
-                if missing_padding: text += '=' * (4 - missing_padding)
+                padding = len(text) % 4
+                if padding: text += '=' * (4 - padding)
                 return base64.b64decode(text).decode('utf-8', 'ignore')
             except: return text
         return text
@@ -48,10 +47,11 @@ def check_node(link):
     if not link.startswith("vless://"): return None
     try:
         u = urlparse(link)
+        # 1.12.x 建议直接在测速阶段完成 IP 解析以防阻塞
         ip = socket.gethostbyname(u.hostname)
         start = time.time()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(TIMEOUT)
+            s.settimeout(3.0)
             s.connect((ip, u.port or 443))
             latency = int((time.time() - start) * 1000)
         if latency >= LATENCY_THRESHOLD: return None
@@ -62,13 +62,13 @@ def check_node(link):
 # ===================== 主程序 =====================
 
 def main():
-    print("🚀 正在构建防环路配置...")
+    print(f"🚀 正在适配 sing-box 1.12.17 核心配置...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', all_text)))
     
     valid_nodes = []
     seen_fps = set()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
         results = list(executor.map(check_node, links))
         for res in results:
             if res and res["fp"] not in seen_fps:
@@ -87,23 +87,26 @@ def main():
                 {"tag": "fakeip_server", "address": "fakeip"}
             ],
             "rules": [
-                # 🟢 关键：强制让下载规则相关的域名走 dns_local
                 {"domain": ["gh-proxy.com"], "server": "dns_local"},
-                {"rule_set": "geosite-category-ads-all", "action": "route", "server": "dns_block"},
+                {"rule_set": "geosite-ads", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
                 {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
             ],
             "final": "dns_proxy",
-            "strategy": "prefer_ipv4",
-            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18"},
-            # 🟢 终极方案：静态 DNS 记录，彻底防止下载规则时查 DNS 产生环路
-            "static_hosts": {
-                "gh-proxy.com": ["104.21.64.137", "172.67.183.248"]
+            "independent_proxy": True, # 🟢 1.12.x 特性：防止 DNS 流量死循环
+            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"},
+            "hosts": {
+                "gh-proxy.com": ["104.21.64.137", "172.67.183.248"] # 🟢 静态解析：彻底解决下载规则时的 loopback
             }
         },
         "inbounds": [{
-            "type": "tun", "tag": "tun-in", "inet4_address": ["172.19.0.1/30"],
-            "auto_route": True, "strict_route": True, "stack": "system", "sniff": True
+            "type": "tun",
+            "tag": "tun-in",
+            "inet4_address": "172.19.0.1/30",
+            "auto_route": True,
+            "strict_route": True,
+            "stack": "system", # 🟢 1.12.x system 栈配合 auto_route 性能已非常稳定
+            "sniff": True
         }],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
@@ -113,17 +116,15 @@ def main():
             {"type": "dns", "tag": "dns-out"}
         ],
         "route": {
-            "default_domain_resolver": "dns_local",
             "rule_set": [
-                {"type": "remote", "tag": "geosite-category-ads-all", "format": "binary", "url": RULE_URLS["geosite-category-ads-all"], "download_detour": "direct"},
+                {"type": "remote", "tag": "geosite-ads", "format": "binary", "url": RULE_URLS["geosite-ads"], "download_detour": "direct"},
                 {"type": "remote", "tag": "geosite-cn", "format": "binary", "url": RULE_URLS["geosite-cn"], "download_detour": "direct"},
                 {"type": "remote", "tag": "geoip-cn", "format": "binary", "url": RULE_URLS["geoip-cn"], "download_detour": "direct"}
             ],
             "rules": [
                 {"protocol": "dns", "action": "route", "outbound": "dns-out"},
-                # 🟢 关键：规则下载域名强制直连，不走代理
                 {"domain": ["gh-proxy.com"], "action": "route", "outbound": "direct"},
-                {"rule_set": "geosite-category-ads-all", "action": "reject"},
+                {"rule_set": "geosite-ads", "action": "reject"},
                 {"ip_is_private": True, "action": "route", "outbound": "direct"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "direct"}
             ],
@@ -132,18 +133,31 @@ def main():
         }
     }
 
-    # 填充节点
+    # 填充 VLESS 节点
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
         tag = f"{unquote(u.fragment or f'Node-{i+1}')} | {item['latency']}ms"
+        
         node = {
-            "type": "vless", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443),
-            "uuid": u.username, "packet_encoding": "xudp",
-            "tls": {"enabled": True, "server_name": q.get("sni", [u.hostname])[0], "utls": {"enabled": True, "fingerprint": "chrome"}}
+            "type": "vless",
+            "tag": tag,
+            "server": u.hostname,
+            "server_port": int(u.port or 443),
+            "uuid": u.username,
+            "packet_encoding": "xudp",
+            "tls": {
+                "enabled": True,
+                "server_name": q.get("sni", [u.hostname])[0],
+                "utls": {"enabled": True, "fingerprint": "chrome"}
+            }
         }
         if "vision" in q.get("flow", [""])[0]: node["flow"] = "xtls-rprx-vision"
         if q.get("security", [""])[0] == "reality":
-            node["tls"]["reality"] = {"enabled": True, "public_key": q.get("pbk", [""])[0], "short_id": q.get("sid", [""])[0]}
+            node["tls"]["reality"] = {
+                "enabled": True, 
+                "public_key": q.get("pbk", [""])[0], 
+                "short_id": q.get("sid", [""])[0]
+            }
         
         cfg["outbounds"].append(node)
         cfg["outbounds"][0]["outbounds"].append(tag)
@@ -151,7 +165,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
-    print(f"🎉 修复版 config.json 已生成，包含 {len(top_nodes)} 个节点。")
+    print(f"✅ 已生成适配 1.12.17 的 config.json")
 
 if __name__ == "__main__":
     main()
