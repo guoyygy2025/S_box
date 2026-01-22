@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-sing-box vless config generator
-Optimized for sing-box 1.12.17 | DNS: 223.5.5.5 (Direct)
-"""
-
 import requests
 import base64
 import socket
@@ -14,10 +9,9 @@ import time
 import hashlib
 import logging
 from urllib.parse import urlparse, parse_qs, unquote
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Optional
 
 # ===================== 配置参数 =====================
-
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -46,53 +40,33 @@ GH_PROXY_HOSTS = ["gh-proxy.com", "mirror.ghproxy.com", "ghproxy.com"]
 def get_content(url: str) -> str:
     try:
         resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
-        resp.raise_for_status()
         text = resp.text.strip()
-        # 自动识别并处理 Base64 订阅
-        if not re.search(r'vless://', text, re.IGNORECASE):
+        if not re.search(r'vless://', text, re.I):
             try:
-                padding = len(text) % 4
-                if padding: text += '=' * (4 - padding)
+                p = len(text) % 4
+                if p: text += '=' * (4 - p)
                 return base64.b64decode(text).decode('utf-8', 'ignore')
             except: pass
         return text
-    except Exception as e:
-        logger.error(f"无法获取 {url}: {e}")
-        return ""
+    except: return ""
 
 def check_node(link: str) -> Optional[Dict]:
     if not link.lower().startswith("vless://"): return None
     try:
         u = urlparse(link)
-        hostname, port = u.hostname, u.port or 443
-        # TCP 握手测速
-        ip = socket.gethostbyname(hostname)
-        start_time = time.time()
-        with socket.create_connection((ip, port), timeout=3.0):
+        ip = socket.gethostbyname(u.hostname)
+        start = time.time()
+        with socket.create_connection((ip, u.port or 443), timeout=2.5):
             pass
-        latency = int((time.time() - start_time) * 1000)
-        
+        latency = int((time.time() - start) * 1000)
         if latency > LATENCY_THRESHOLD_MS: return None
-        
-        # 指纹去重 (UUID + Server + Port)
-        fp = hashlib.md5(f"{u.username}{hostname}{port}".encode()).hexdigest()
+        fp = hashlib.md5(f"{u.username}{u.hostname}{u.port}".encode()).hexdigest()
         return {"link": link, "parsed": u, "latency": latency, "fingerprint": fp}
-    except:
-        return None
+    except: return None
 
 def generate_config(valid_nodes: List[Dict]) -> Dict:
     sorted_nodes = sorted(valid_nodes, key=lambda x: x['latency'])[:MAX_KEEP_NODES]
     
-    # 构建静态 Hosts 以解决启动时的 DNS 环路
-    hosts_map = {}
-    for host in GH_PROXY_HOSTS:
-        try:
-            ips = list(set(socket.gethostbyname_ex(host)[2]))
-            hosts_map[host] = ips
-        except:
-            if "gh-proxy.com" in host: hosts_map[host] = ["104.21.64.137", "172.67.183.248"]
-
-    # 初始化出站列表
     outbounds = [
         {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
         {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
@@ -105,33 +79,22 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
     for i, item in enumerate(sorted_nodes):
         u, q = item['parsed'], parse_qs(item['parsed'].query)
         tag = f"{unquote(u.fragment or f'Node-{i+1}')} | {item['latency']}ms"
-        
         node = {
-            "type": "vless", "tag": tag,
-            "server": u.hostname, "server_port": int(u.port or 443),
+            "type": "vless", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443),
             "uuid": u.username, "packet_encoding": "xudp",
-            "tls": {
-                "enabled": True,
-                "server_name": q.get("sni", [u.hostname])[0],
-                "utls": {"enabled": True, "fingerprint": "chrome"}
-            }
+            "tls": {"enabled": True, "server_name": q.get("sni", [u.hostname])[0], "utls": {"enabled": True, "fingerprint": "chrome"}}
         }
-        # 处理 Reality 和 Vision
         if "vision" in q.get("flow", [""])[0]: node["flow"] = "xtls-rprx-vision"
         if q.get("security", [""])[0] == "reality":
-            node["tls"]["reality"] = {
-                "enabled": True, 
-                "public_key": q.get("pbk", [""])[0], 
-                "short_id": q.get("sid", [""])[0]
-            }
+            node["tls"]["reality"] = {"enabled": True, "public_key": q.get("pbk", [""])[0], "short_id": q.get("sid", [""])[0]}
         outbounds.append(node)
         proxy_tags.append(tag)
 
     outbounds[0]["outbounds"].extend(proxy_tags)
     outbounds[1]["outbounds"].extend(proxy_tags)
 
-    # 完整 1.12.17 配置结构
-    return {
+    # 🟢 修正后的配置结构
+    config = {
         "log": {"level": "warn", "timestamp": True},
         "dns": {
             "servers": [
@@ -141,15 +104,15 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
                 {"tag": "fakeip_server", "address": "fakeip"}
             ],
             "rules": [
+                # 针对下载域名的特殊处理
                 {"domain": GH_PROXY_HOSTS, "action": "route", "server": "dns_local"},
                 {"rule_set": "geosite-ads", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
                 {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
             ],
             "final": "dns_proxy",
-            "strategy": "prefer_ipv4",
-            "hosts": hosts_map,
-            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"}
+            "strategy": "prefer_ipv4"
+            # 🔴 如果 hosts 报错，这里完全移除 hosts 字段，依靠 dns_local 的直连规则
         },
         "inbounds": [{
             "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
@@ -164,7 +127,10 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
             ],
             "rules": [
                 {"protocol": "dns", "action": "route", "outbound": "dns-out"},
+                # 🔴 核心修复：强制让规则下载相关的 IP 直接从直连出站，跳过任何嗅探或代理逻辑
                 {"domain": GH_PROXY_HOSTS, "action": "route", "outbound": "direct"},
+                # 解决 223.5.5.5 可能被拦截的问题
+                {"ip_cidr": [f"{ALIDNS}/32"], "action": "route", "outbound": "direct"},
                 {"rule_set": "geosite-ads", "action": "reject"},
                 {"ip_is_private": True, "action": "route", "outbound": "direct"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "direct"}
@@ -173,40 +139,28 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
             "auto_detect_interface": True
         }
     }
-
-# ===================== 执行入口 =====================
+    return config
 
 def main():
-    logger.info("🚀 开始生成 sing-box 1.12.17 配置...")
-    
-    # 1. 多线程获取内容
+    logger.info("🚀 启动修正版生成器 (已移除 Hosts 字段以兼容)...")
     all_texts = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         futures = {executor.submit(get_content, url): url for url in SOURCES}
-        for f in concurrent.futures.as_completed(futures):
-            all_texts.append(f.result())
+        for f in concurrent.futures.as_completed(futures): all_texts.append(f.result())
 
-    # 2. 提取并去重
-    combined = "\n".join(all_texts)
-    links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', combined, re.I)))
-    logger.info(f"提取到 {len(links)} 个唯一节点，开始测速...")
-
-    # 3. 并发测速
+    links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', "\n".join(all_texts), re.I)))
     valid_nodes = []
     seen_fps = set()
     with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENT_WORKERS) as executor:
         results = list(executor.map(check_node, links))
         for res in results:
             if res and res["fingerprint"] not in seen_fps:
-                valid_nodes.append(res)
-                seen_fps.add(res["fingerprint"])
+                valid_nodes.append(res); seen_fps.add(res["fingerprint"])
 
-    # 4. 生成文件
     config = generate_config(valid_nodes)
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    
-    logger.info(f"🎉 成功生成 config.json! 包含 {len(config['outbounds'])-5} 个极速节点。")
+    logger.info("🎉 生成成功！请重启 sing-box 查看效果。")
 
 if __name__ == "__main__":
     main()
