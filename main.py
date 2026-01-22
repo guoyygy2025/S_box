@@ -8,6 +8,7 @@ import time
 import hashlib
 from urllib.parse import urlparse, parse_qs, unquote
 
+# ===================== 订阅源 =====================
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
@@ -16,9 +17,12 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
+# ✅ 使用 gh-proxy.com 加速 GitHub Raw
+GH_RAW_BASE = "https://raw.githubusercontent.com"
+CDN_HOST = "gh-proxy.com"
 RULE_URLS = {
-    "geosite-cn": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-cn.srs",
-    "category-ads-all": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-category-ads-all.srs"
+    "geosite-cn": f"https://{CDN_HOST}/{GH_RAW_BASE}/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+    "category-ads-all": f"https://{CDN_HOST}/{GH_RAW_BASE}/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
 }
 
 MAX_THREADS = 100
@@ -27,6 +31,8 @@ TIMEOUT = 5.0
 ALIDNS = "223.5.5.5"
 
 dns_cache = {}
+
+# ===================== 工具函数 =====================
 
 def resolve_hostname(hostname):
     if hostname in dns_cache:
@@ -97,8 +103,10 @@ def check_node(link):
     except:
         return None
 
+# ===================== 主程序 =====================
+
 def main():
-    print("🚀 正在处理节点并构建防环路配置...")
+    print("🚀 正在处理节点并构建使用 gh-proxy.com 的配置...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
     
@@ -118,17 +126,18 @@ def main():
     tested_nodes.sort(key=lambda x: x['latency'])
     top_nodes = tested_nodes[:MAX_KEEP_NODES]
 
+    # 构建配置
     cfg = {
         "log": {"disabled": False, "level": "info", "timestamp": True},
         "dns": {
             "servers": [
                 {"tag": "remote", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
-                {"tag": "local", "address": ALIDNS},  # ⚠️ 无 detour！
+                {"tag": "local", "address": ALIDNS},  # ⚠️ 无 detour！关键！
                 {"tag": "block", "address": "rcode://success"}
             ],
             "rules": [
-                # ✅ 防环路：CDN 域名强制走 local DNS
-                {"domain_suffix": [".jsdelivr.net", ".anguswen.top"], "server": "local"},
+                # ✅ 关键：gh-proxy.com 强制走 local DNS（防环路）
+                {"domain": [CDN_HOST], "server": "local"},
                 {"clash_mode": "Proxy", "server": "remote"},
                 {"clash_mode": "Direct", "server": "local"},
                 {"rule_set": ["geosite-cn"], "server": "local"},
@@ -166,8 +175,8 @@ def main():
             "auto_detect_interface": True,
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                # ✅ 防环路：CDN 域名流量直连
-                {"domain_suffix": [".jsdelivr.net", ".anguswen.top"], "outbound": "direct"},
+                # ✅ 关键：gh-proxy.com 流量强制直连
+                {"domain": [CDN_HOST], "outbound": "direct"},
                 {"clash_mode": "Direct", "outbound": "direct"},
                 {"clash_mode": "Proxy", "outbound": "proxy"},
                 {"rule_set": ["geosite-cn"], "outbound": "direct"},
@@ -175,12 +184,25 @@ def main():
                 {"rule_set": ["category-ads-all"], "outbound": "block"}
             ],
             "rule_set": [
-                {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": RULE_URLS["geosite-cn"], "download_detour": "direct"},
-                {"tag": "category-ads-all", "type": "remote", "format": "binary", "url": RULE_URLS["category-ads-all"], "download_detour": "direct"}
+                {
+                    "tag": "geosite-cn",
+                    "type": "remote",
+                    "format": "binary",
+                    "url": RULE_URLS["geosite-cn"],
+                    "download_detour": "direct"
+                },
+                {
+                    "tag": "category-ads-all",
+                    "type": "remote",
+                    "format": "binary",
+                    "url": RULE_URLS["category-ads-all"],
+                    "download_detour": "direct"
+                }
             ]
         }
     }
 
+    # 填充节点
     valid_count = 0
     node_tags = []
     for i, item in enumerate(top_nodes):
@@ -241,6 +263,7 @@ def main():
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
     print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
+    print(f"🔗 规则通过 {CDN_HOST} 下载，已防环路。")
     print("💡 启动命令: sing-box run -c config.json")
 
 if __name__ == "__main__":
