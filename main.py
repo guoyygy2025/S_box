@@ -17,14 +17,14 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# ✅ 直接使用你指定的完整 URL（已修正拼写）
+# ✅ 使用 mirror.ghproxy.com（更稳定，国内可直连）
 RULE_URLS = {
-    "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-    "category-ads-all": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
+    "geosite-cn": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
+    "category-ads-all": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs"
 }
 
-# ✅ 防环路关键：覆盖 gh-proxy.com 及其 CNAME 后端（如 v1.dabache.top）
-CDN_DOMAIN_SUFFIXES = ["gh-proxy.com", "dabache.top"]
+# ✅ 覆盖所有可能的 CDN 域名（防 DNS 环路）
+CDN_DOMAIN_SUFFIXES = ["mirror.ghproxy.com", "ghproxy.com"]
 
 MAX_THREADS = 100
 MAX_KEEP_NODES = 100
@@ -107,7 +107,7 @@ def check_node(link):
 # ===================== 主程序 =====================
 
 def main():
-    print("🚀 正在处理节点并构建配置（使用你指定的 gh-proxy.com 规则 URL）...")
+    print("🚀 正在处理节点并生成支持远程规则下载的配置...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
     
@@ -144,7 +144,7 @@ def main():
                 {
                     "tag": "local",
                     "address": ALIDNS
-                    # ⚠️ 关键：不要加 detour！避免 DNS 环路
+                    # ⚠️ 关键：不要加 detour！防止环路
                 },
                 {
                     "tag": "block",
@@ -152,7 +152,7 @@ def main():
                 }
             ],
             "rules": [
-                # ✅ 强制 CDN 域名用干净 DNS（覆盖 CNAME 后端）
+                # ✅ 强制 CDN 域名使用干净 DNS
                 {"domain_suffix": CDN_DOMAIN_SUFFIXES, "server": "local"},
                 {"clash_mode": "Proxy", "server": "remote"},
                 {"clash_mode": "Direct", "server": "local"},
@@ -215,14 +215,14 @@ def main():
                     "type": "remote",
                     "format": "binary",
                     "url": RULE_URLS["geosite-cn"],
-                    "download_detour": "direct"
+                    "download_detour": "direct"  # 👈 关键：用 direct 下载
                 },
                 {
                     "tag": "category-ads-all",
                     "type": "remote",
                     "format": "binary",
                     "url": RULE_URLS["category-ads-all"],
-                    "download_detour": "direct"
+                    "download_detour": "direct"  # 👈 关键
                 }
             ]
         }
@@ -292,7 +292,7 @@ def main():
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
     print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
-    print("🔗 规则 URL 已按你指定的方式设置，并防止 DNS 环路。")
+    print("🔗 规则将在 sing-box 启动后通过 direct 出站远程下载。")
     print("💡 启动命令: sing-box run -c config.json")
     print("🔌 混合代理端口: http://127.0.0.1:2333")
 
