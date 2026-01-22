@@ -25,7 +25,7 @@ RULE_PATHS = {
 }
 
 MAX_THREADS = 40        # 提高并发数加快测速
-MAX_KEEP_NODES = 60     # 保留节点数量
+MAX_KEEP_NODES = 100     # 保留节点数量
 CONNECT_TIMEOUT = 1.2   # 连接超时时间(秒)
 
 # ===================== 工具函数 =====================
