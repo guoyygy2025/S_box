@@ -28,8 +28,8 @@ RULE_PATHS = {
 }
 
 MAX_THREADS = 100
-MAX_KEEP_NODES = 100  # 保留前 100 个最快节点
-TIMEOUT = 4.0
+MAX_KEEP_NODES = 100
+TIMEOUT = 5.0  # 略微放宽，适应弱网络
 ALIDNS = "223.5.5.5"
 
 dns_cache = {}
@@ -93,20 +93,12 @@ def is_valid_sni(s):
     return True
 
 def get_tls_config(u, q):
-    # 优先级: sni > host > u.hostname
     raw_sni = q.get("sni", [None])[0] or q.get("host", [None])[0] or u.hostname
     if not raw_sni:
         raw_sni = u.hostname
-
-    # URL 解码
     decoded = unquote(str(raw_sni)).strip()
-
-    # 清洗：移除路径、端口、查询、片段
     clean_sni = decoded.split("/")[0].split(":")[0].split("?")[0].split("#")[0].strip()
-
-    # 校验并 fallback
     final_sni = clean_sni if is_valid_sni(clean_sni) else u.hostname
-
     return {
         "enabled": True,
         "server_name": final_sni,
@@ -124,13 +116,11 @@ def check_node(link):
         ip = resolve_hostname(u.hostname)
         if not ip:
             return None
-
         start = time.time()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.settimeout(TIMEOUT)
             s.connect((ip, u.port or 443))
             latency = int((time.time() - start) * 1000)
-
         fp = hashlib.md5(f"{u.scheme}{u.hostname}{u.port}{u.username}".encode()).hexdigest()
         return {"link": link, "u": u, "latency": latency, "fp": fp}
     except:
@@ -139,10 +129,8 @@ def check_node(link):
 # ===================== 节点解析逻辑 =====================
 
 def parse_vless(u, q, tag):
-    # 跳过无 UUID 的 VLESS
     if not u.username:
         return None
-
     node = {
         "type": "vless",
         "tag": tag,
@@ -152,11 +140,9 @@ def parse_vless(u, q, tag):
         "packet_encoding": "xudp",
         "tls": get_tls_config(u, q)
     }
-
-    # REALITY 支持
     if q.get("security", [""])[0] == "reality":
         pbk = q.get("pbk", [""])[0]
-        if not pbk:  # 公钥为空则跳过
+        if not pbk:
             return None
         reality_cfg = {
             "enabled": True,
@@ -166,13 +152,12 @@ def parse_vless(u, q, tag):
         if q.get("spx"):
             reality_cfg["spider_x"] = q.get("spx")[0]
         node["tls"]["reality"] = reality_cfg
-
     if "vision" in q.get("flow", [""])[0]:
         node["flow"] = "xtls-rprx-vision"
     return node
 
 def parse_trojan(u, q, tag):
-    if not u.username:  # 跳过空密码
+    if not u.username:
         return None
     return {
         "type": "trojan",
@@ -185,7 +170,7 @@ def parse_trojan(u, q, tag):
 
 # ===================== 主程序 =====================
 def main():
-    print(f"🚀 开始处理节点 (适配 sing-box 1.12.x，保留前 {MAX_KEEP_NODES} 个最快节点)...")
+    print(f"🚀 开始构建 Sing-box 配置（自动访问外网 + 国内直连 + 广告过滤）...")
 
     # 1. 下载并合并所有源
     all_text = ""
@@ -211,14 +196,24 @@ def main():
         print("❌ 未发现任何可用节点，请检查网络或订阅源。")
         return
 
-    # 4. 按延迟排序，取前 N 个
+    # 4. 【新增】按 IP 去重，避免大量重复节点
+    unique_ips = set()
+    filtered_nodes = []
+    for node in tested_nodes:
+        ip = resolve_hostname(node['u'].hostname)
+        if ip and ip not in unique_ips:
+            unique_ips.add(ip)
+            filtered_nodes.append(node)
+    tested_nodes = filtered_nodes
+
+    # 5. 按延迟排序，取前 N 个
     tested_nodes.sort(key=lambda x: x['latency'])
     top_nodes = tested_nodes[:MAX_KEEP_NODES]
-    print(f"✅ 测速完成: {len(tested_nodes)} 个可用，保留最快的 {len(top_nodes)} 个。")
+    print(f"✅ 测速完成: {len(tested_nodes)} 个唯一节点，保留最快的 {len(top_nodes)} 个。")
 
-    # 5. 构建 sing-box 配置
+    # 6. 构建 Sing-box 配置（关键：确保可访问外网）
     cfg = {
-        "log": {"level": "warn", "timestamp": True},
+        "log": {"level": "info", "timestamp": True},  # 日志级别调高便于调试
         "dns": {
             "servers": [
                 {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
@@ -239,16 +234,24 @@ def main():
             "mtu": 1400,
             "auto_route": True,
             "strict_route": True,
-            "sniff": True
+            "sniff": True,
+            "stack": "system"  # 更兼容的 TUN 栈
         }],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
+            # ✅ 核心：proxy 是默认出口，必须放在首位且 tag 与 route.final 一致
+            {
+                "type": "selector",
+                "tag": "proxy",
+                "outbounds": ["auto-test", "direct"],
+                "default": "auto-test"
+            },
             {
                 "type": "urltest",
                 "tag": "auto-test",
                 "outbounds": [],
                 "url": "http://cp.cloudflare.com/generate_204",
-                "interval": "3m0s"
+                "interval": "3m",
+                "tolerance": 50
             },
             {"type": "direct", "tag": "direct"},
             {"type": "dns", "tag": "dns-out"},
@@ -257,7 +260,7 @@ def main():
         "route": {
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
-                {"rule_set": "ads", "outbound": "dns_block"},
+                {"rule_set": "ads", "outbound": "block"},
                 {"domain": [CDN_HOST], "outbound": "direct"},
                 {"rule_set": ["cn_site", "cn_ip"], "outbound": "direct"}
             ],
@@ -270,11 +273,11 @@ def main():
                     "download_detour": "direct"
                 } for k, v in RULE_PATHS.items()
             ],
-            "final": "proxy"
+            "final": "proxy"  # 所有未匹配流量走 proxy → 访问外网
         }
     }
 
-    # 6. 填充节点到配置
+    # 7. 填充节点
     valid_nodes = 0
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
@@ -295,11 +298,14 @@ def main():
             cfg["outbounds"][1]["outbounds"].append(tag)
             valid_nodes += 1
 
-    # 7. 保存配置
+    # 8. 保存配置
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
 
-    print(f"🎉 成功! 写入 {valid_nodes} 个有效节点到 config.json")
+    print(f"🎉 成功! config.json 已生成，包含 {valid_nodes} 个节点。")
+    print("💡 使用方法：")
+    print("   sing-box run -c config.json")
+    print("   或通过 systemd / Docker 启动")
 
 if __name__ == "__main__":
     main()
