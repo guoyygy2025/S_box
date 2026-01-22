@@ -27,7 +27,7 @@ RULE_PATHS = {
 }
 
 MAX_THREADS = 50
-MAX_KEEP_NODES = 50
+MAX_KEEP_NODES = 100
 SAMPLE_COUNT = 2
 
 # ===================== 工具函数 =====================
