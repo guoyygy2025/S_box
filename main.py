@@ -17,7 +17,7 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-CDN_HOST = "gh-proxy.com"  # ✅ 正确的 CDN 域名
+CDN_HOST = "gh-proxy.com"  # 用于加速 GitHub Raw
 GH_RAW_BASE = "https://raw.githubusercontent.com"
 RULE_CDN_PREFIX = f"https://{CDN_HOST}/{GH_RAW_BASE}"
 
@@ -30,7 +30,7 @@ RULE_PATHS = {
 MAX_THREADS = 100
 MAX_KEEP_NODES = 100
 TIMEOUT = 5.0
-ALIDNS = "223.5.5.5"  # ✅ 纯 IP，Do53 DNS
+ALIDNS = "223.5.5.5"  # 阿里 DNS (Do53)
 
 dns_cache = {}
 
@@ -58,7 +58,6 @@ def get_ip_country(hostname):
     except:
         return "[UN]"
 
-# ✅ 补全缺失的 get_content 函数
 def get_content(url):
     try:
         resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
@@ -82,7 +81,7 @@ def get_tls_config(u, q):
     return {
         "enabled": True,
         "server_name": final_sni,
-        "insecure": True,  # 提高兼容性
+        "insecure": True,
         "utls": {"enabled": True, "fingerprint": "chrome"}
     }
 
@@ -129,7 +128,7 @@ def main():
     tested_nodes.sort(key=lambda x: x['latency'])
     top_nodes = tested_nodes[:MAX_KEEP_NODES]
 
-    # 构建 Sing-box 配置（无 FakeIP，稳定性优先）
+    # 构建 Sing-box 配置
     cfg = {
         "log": {"level": "info", "timestamp": True},
         "dns": {
@@ -139,6 +138,8 @@ def main():
                 {"tag": "dns_block", "address": "rcode://success"}
             ],
             "rules": [
+                # ✅ 关键修复1: CDN 域名强制直连 DNS
+                {"domain": [CDN_HOST], "server": "dns_local"},
                 {"rule_set": "geosite-category-ads-all", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "server": "dns_local"}
             ],
@@ -152,7 +153,7 @@ def main():
             "mtu": 1400,
             "auto_route": True,
             "strict_route": True,
-            "stack": "system",  # 兼容性更好
+            "stack": "system",
             "sniff": True,
             "sniff_override_destination": True
         }],
@@ -177,11 +178,13 @@ def main():
                     "tag": k,
                     "format": "binary",
                     "url": f"{RULE_CDN_PREFIX}/{v}",
-                    "download_detour": "direct"
+                    "download_detour": "direct"  # 规则下载走 direct
                 } for k, v in RULE_PATHS.items()
             ],
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
+                # ✅ 关键修复2: CDN 域名流量也直连
+                {"domain": [CDN_HOST], "outbound": "direct"},
                 {"rule_set": "geosite-category-ads-all", "outbound": "block"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "outbound": "direct"}
             ],
@@ -245,12 +248,12 @@ def main():
         cfg["outbounds"][1]["outbounds"].append(tag)
         valid_count += 1
 
-    # 保存配置文件
+    # 保存配置
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
     print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
-    print("💡 使用命令启动: sing-box run -c config.json")
+    print("💡 启动命令: sing-box run -c config.json")
 
 if __name__ == "__main__":
     main()
