@@ -32,7 +32,6 @@ RULE_URLS = {
 ALIDNS = "223.5.5.5"
 LATENCY_THRESHOLD_MS = 500
 MAX_KEEP_NODES = 50
-CONCURRENT_WORKERS = 100
 GH_PROXY_HOSTS = ["gh-proxy.com", "mirror.ghproxy.com", "ghproxy.com"]
 
 # ===================== 工具函数 =====================
@@ -60,6 +59,7 @@ def check_node(link: str) -> Optional[Dict]:
             pass
         latency = int((time.time() - start) * 1000)
         if latency > LATENCY_THRESHOLD_MS: return None
+        # UUID+Server+Port 唯一性校验
         fp = hashlib.md5(f"{u.username}{u.hostname}{u.port}".encode()).hexdigest()
         return {"link": link, "parsed": u, "latency": latency, "fingerprint": fp}
     except: return None
@@ -67,6 +67,7 @@ def check_node(link: str) -> Optional[Dict]:
 def generate_config(valid_nodes: List[Dict]) -> Dict:
     sorted_nodes = sorted(valid_nodes, key=lambda x: x['latency'])[:MAX_KEEP_NODES]
     
+    # 基础出站
     outbounds = [
         {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
         {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
@@ -76,9 +77,20 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
     ]
 
     proxy_tags = []
+    used_tags = set(["proxy", "auto-test", "direct", "block", "dns-out"])
+
     for i, item in enumerate(sorted_nodes):
         u, q = item['parsed'], parse_qs(item['parsed'].query)
-        tag = f"{unquote(u.fragment or f'Node-{i+1}')} | {item['latency']}ms"
+        base_name = unquote(u.fragment) if u.fragment else f"Node-{i+1}"
+        
+        # ✅ 修复重点：确保 Tag 唯一，防止重复报错
+        tag = f"{base_name} | {item['latency']}ms"
+        counter = 1
+        while tag in used_tags:
+            tag = f"{base_name}_{counter} | {item['latency']}ms"
+            counter += 1
+        used_tags.add(tag)
+        
         node = {
             "type": "vless", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443),
             "uuid": u.username, "packet_encoding": "xudp",
@@ -87,14 +99,14 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
         if "vision" in q.get("flow", [""])[0]: node["flow"] = "xtls-rprx-vision"
         if q.get("security", [""])[0] == "reality":
             node["tls"]["reality"] = {"enabled": True, "public_key": q.get("pbk", [""])[0], "short_id": q.get("sid", [""])[0]}
+        
         outbounds.append(node)
         proxy_tags.append(tag)
 
     outbounds[0]["outbounds"].extend(proxy_tags)
     outbounds[1]["outbounds"].extend(proxy_tags)
 
-    # 🟢 修正后的配置结构
-    config = {
+    return {
         "log": {"level": "warn", "timestamp": True},
         "dns": {
             "servers": [
@@ -104,7 +116,6 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
                 {"tag": "fakeip_server", "address": "fakeip"}
             ],
             "rules": [
-                # 针对下载域名的特殊处理
                 {"domain": GH_PROXY_HOSTS, "action": "route", "server": "dns_local"},
                 {"rule_set": "geosite-ads", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
@@ -112,7 +123,6 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
             ],
             "final": "dns_proxy",
             "strategy": "prefer_ipv4"
-            # 🔴 如果 hosts 报错，这里完全移除 hosts 字段，依靠 dns_local 的直连规则
         },
         "inbounds": [{
             "type": "tun", "tag": "tun-in", "inet4_address": "172.19.0.1/30",
@@ -127,10 +137,7 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
             ],
             "rules": [
                 {"protocol": "dns", "action": "route", "outbound": "dns-out"},
-                # 🔴 核心修复：强制让规则下载相关的 IP 直接从直连出站，跳过任何嗅探或代理逻辑
                 {"domain": GH_PROXY_HOSTS, "action": "route", "outbound": "direct"},
-                # 解决 223.5.5.5 可能被拦截的问题
-                {"ip_cidr": [f"{ALIDNS}/32"], "action": "route", "outbound": "direct"},
                 {"rule_set": "geosite-ads", "action": "reject"},
                 {"ip_is_private": True, "action": "route", "outbound": "direct"},
                 {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "direct"}
@@ -139,10 +146,9 @@ def generate_config(valid_nodes: List[Dict]) -> Dict:
             "auto_detect_interface": True
         }
     }
-    return config
 
 def main():
-    logger.info("🚀 启动修正版生成器 (已移除 Hosts 字段以兼容)...")
+    logger.info("🚀 启动修复版生成器 (已添加 Tag 冲突自动解决机制)...")
     all_texts = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
         futures = {executor.submit(get_content, url): url for url in SOURCES}
@@ -151,7 +157,7 @@ def main():
     links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', "\n".join(all_texts), re.I)))
     valid_nodes = []
     seen_fps = set()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENT_WORKERS) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
         results = list(executor.map(check_node, links))
         for res in results:
             if res and res["fingerprint"] not in seen_fps:
@@ -160,7 +166,7 @@ def main():
     config = generate_config(valid_nodes)
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(config, f, indent=2, ensure_ascii=False)
-    logger.info("🎉 生成成功！请重启 sing-box 查看效果。")
+    logger.info("🎉 生成成功！重复 Tag 已自动重命名。")
 
 if __name__ == "__main__":
     main()
