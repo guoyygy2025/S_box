@@ -15,9 +15,8 @@ SOURCES = [
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
 ]
 
-# 🔴 优化点 1：使用直连更稳定的高速镜像站 (可根据需求更换)
-# 备选：https://mirror.ghproxy.com , https://github.moeyy.xyz
-RULE_CDN_HOST = "gh-proxy.org/"
+# 🔴 优化点：去掉末尾斜杠，防止拼接后出现 // 导致的 404 或 TLS 错误
+RULE_CDN_HOST = "gh-proxy.org"
 RULE_CDN = f"https://{RULE_CDN_HOST}/https://raw.githubusercontent.com"
 
 RULE_PATHS = {
@@ -30,8 +29,7 @@ MAX_THREADS = 50
 MAX_KEEP_NODES = 50
 SAMPLE_COUNT = 2
 
-# ===================== 工具逻辑 (省略重复解析函数以保持简洁) =====================
-# ... [get_node_fingerprint, get_ip_country, get_content, check_node 保持不变] ...
+# ===================== 工具函数 (省略逻辑不变的函数) =====================
 def get_node_fingerprint(u):
     raw_str = f"{u.scheme}|{u.hostname}|{u.port}|{u.username}"
     return hashlib.md5(raw_str.encode()).hexdigest()
@@ -70,6 +68,7 @@ def check_node(link):
         return {"link": link, "u": u, "latency": sum(latencies) // len(latencies), "fp": get_node_fingerprint(u)}
     except: return None
 
+# ===================== 解析逻辑 =====================
 def get_tls_config(u, q):
     sni = q.get("sni", [u.hostname])[0].lower()
     insecure = q.get("allowInsecure", ["0"])[0] == "1" or q.get("insecure", ["0"])[0] == "1"
@@ -95,7 +94,7 @@ def parse_trojan(u, q, tag):
 
 # ===================== 主程序 =====================
 def main():
-    print(f"🚀 正在使用镜像 {RULE_CDN_HOST} 优化直连配置...")
+    print(f"🚀 正在配置直连下载规则 (镜像站: {RULE_CDN_HOST})...")
     
     raw_links = []
     for s in SOURCES:
@@ -127,8 +126,7 @@ def main():
             ],
             "rules": [
                 {"rule_set": "ads", "server": "dns_block"},
-                # 🔴 优化点 2：强制镜像站域名使用本地 DNS 解析，确保直连
-                {"domain": [RULE_CDN_HOST], "server": "dns_local"},
+                {"domain": [RULE_CDN_HOST], "server": "dns_local"}, # 确保镜像站域名本地解析
                 {"rule_set": "cn_site", "server": "dns_local"}
             ],
             "final": "dns_proxy"
@@ -145,15 +143,14 @@ def main():
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
                 {"rule_set": "ads", "outbound": "dns_block"},
-                # 🔴 优化点 3：镜像站流量强制走 direct 出站
-                {"domain": [RULE_CDN_HOST], "outbound": "direct"},
+                {"domain": [RULE_CDN_HOST], "outbound": "direct"}, # 镜像站流量强制走直连
                 {"rule_set": ["cn_site", "cn_ip"], "outbound": "direct"}
             ],
             "rule_set": [
                 {
                     "tag": k, "type": "remote", "format": "binary", 
-                    "url": f"{RULE_CDN}/{v}", 
-                    "download_detour": "direct" # 🔴 坚持直连下载
+                    "url": f"{RULE_CDN}/{v}",  # 🔴 这里自动处理为单斜杠拼接
+                    "download_detour": "direct"
                 } for k, v in RULE_PATHS.items()
             ],
             "final": "proxy"
@@ -176,7 +173,8 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ 成功! 写入 {len(top_nodes)} 个节点。规则下载通过 {RULE_CDN_HOST} 直连。")
+    print(f"✅ 成功! 写入 {len(top_nodes)} 个节点。")
+    print(f"检查 URL 示例: {RULE_CDN}/{list(RULE_PATHS.values())[1]}")
 
 if __name__ == "__main__":
     main()
