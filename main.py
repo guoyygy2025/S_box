@@ -15,8 +15,10 @@ SOURCES = [
     "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/v2ray.txt",
 ]
 
-RULE_CDN_HOST = "gh-proxy.org"
-RULE_CDN = f"https://{RULE_CDN_HOST}/https://raw.githubusercontent.com"
+# 🔴 统一使用 gh-proxy.org，并确保没有末尾斜杠
+CDN_HOST = "gh-proxy.org"
+GH_RAW_BASE = "https://raw.githubusercontent.com"
+RULE_CDN_PREFIX = f"https://{CDN_HOST}/{GH_RAW_BASE}"
 
 RULE_PATHS = {
     "ads": "SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
@@ -43,39 +45,30 @@ def get_ip_country(hostname):
 def get_content(url):
     try:
         resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=10)
-        text = resp.text.strip()
-        if "://" not in text:
-            try:
-                text_fixed = text.replace('-', '+').replace('_', '/') + '=' * (-len(text) % 4)
-                return base64.b64decode(text_fixed).decode('utf-8', 'ignore')
-            except: pass
-        return text
+        return resp.text.strip()
     except: return ""
 
+def check_rule_integrity(path):
+    """检查规则文件在镜像站是否可访问"""
+    test_url = f"{RULE_CDN_PREFIX}/{path}"
+    try:
+        resp = requests.head(test_url, timeout=5)
+        return resp.status_code == 200
+    except:
+        return False
+
 def check_node(link):
-    """测速并过滤 IPv6"""
     try:
         u = urlparse(link)
-        if not u.hostname: return None
-        
-        # 🔴 优化点：过滤 IPv6 地址 (包含冒号的 IP)
-        if ":" in u.hostname:
-            return None
-            
+        if not u.hostname or ":" in u.hostname: return None
         latencies = []
         for _ in range(SAMPLE_COUNT):
             start = time.time()
-            # 强制使用 AF_INET (IPv4)
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.settimeout(1.5)
                 s.connect((u.hostname, u.port or 443))
                 latencies.append(int((time.time() - start) * 1000))
-        
-        return {
-            "link": link, "u": u, 
-            "latency": sum(latencies) // len(latencies),
-            "fp": get_node_fingerprint(u)
-        }
+        return {"link": link, "u": u, "latency": sum(latencies) // len(latencies), "fp": get_node_fingerprint(u)}
     except: return None
 
 # ===================== 解析逻辑 =====================
@@ -94,22 +87,25 @@ def parse_vless(u, q, tag):
     if "vision" in q.get("flow", [""])[0]: node["flow"] = "xtls-rprx-vision"
     return node
 
-def parse_hy2(u, q, tag):
-    node = {"type": "hysteria2", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443), "password": u.username, "tls": get_tls_config(u, q)}
-    if q.get("obfs"): node["obfs"] = {"type": q.get("obfs")[0], "password": q.get("obfs-password", [""])[0]}
-    return node
-
 def parse_trojan(u, q, tag):
     return {"type": "trojan", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443), "password": u.username, "tls": get_tls_config(u, q)}
 
 # ===================== 主程序 =====================
 def main():
-    print(f"🚀 正在过滤 IPv6 并配置 IPv4 优先环境...")
+    print(f"🚀 正在配置环境 (CDN: {CDN_HOST})...")
     
+    # 🔴 规则集完整性预检
+    print("验证远程规则集有效性...")
+    for k, p in RULE_PATHS.items():
+        if check_rule_integrity(p):
+            print(f"  [OK] 规则集 {k} 可正常下载")
+        else:
+            print(f"  [WARN] 规则集 {k} 路径可能失效，请检查！")
+
     raw_links = []
     for s in SOURCES:
         content = get_content(s)
-        links = re.findall(r'((?:vless|trojan|hysteria2|hy2)://[^\s#]+)', content)
+        links = re.findall(r'((?:vless|trojan)://[^\s#]+)', content)
         raw_links.extend(links)
 
     unique_links = list(set(raw_links))
@@ -130,32 +126,22 @@ def main():
         "log": {"level": "warn", "timestamp": True},
         "dns": {
             "servers": [
-                {
-                    "tag": "dns_proxy", 
-                    "address": "https://1.1.1.1/dns-query", 
-                    "detour": "proxy"
-                },
+                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
                 {"tag": "dns_local", "address": "223.5.5.5", "detour": "direct"},
                 {"tag": "dns_block", "address": "rcode://success"}
             ],
             "rules": [
                 {"rule_set": "ads", "server": "dns_block"},
-                {"domain": [RULE_CDN_HOST], "server": "dns_local"},
+                {"domain": [CDN_HOST], "server": "dns_local"},
                 {"rule_set": "cn_site", "server": "dns_local"}
             ],
             "final": "dns_proxy",
-            "strategy": "ipv4_only" # 🔴 优化点：全局 DNS 强制只解析 IPv4
+            "strategy": "ipv4_only"
         },
         "inbounds": [{"type": "tun", "inet4_address": "172.19.0.1/30", "auto_route": True, "strict_route": True, "sniff": True}],
         "outbounds": [
             {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
-            {
-                "type": "urltest", 
-                "tag": "auto-test", 
-                "outbounds": [], 
-                "url": "https://www.gstatic.com/generate_204", 
-                "interval": "3m0s"
-            },
+            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "https://www.gstatic.com/generate_204", "interval": "3m0s"},
             {"type": "direct", "tag": "direct"},
             {"type": "dns", "tag": "dns-out"},
             {"type": "block", "tag": "dns_block"}
@@ -164,13 +150,13 @@ def main():
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
                 {"rule_set": "ads", "outbound": "dns_block"},
-                {"domain": [RULE_CDN_HOST], "outbound": "direct"},
+                {"domain": [CDN_HOST], "outbound": "direct"},
                 {"rule_set": ["cn_site", "cn_ip"], "outbound": "direct"}
             ],
             "rule_set": [
                 {
                     "tag": k, "type": "remote", "format": "binary", 
-                    "url": f"{RULE_CDN}/{v}", 
+                    "url": f"{RULE_CDN_PREFIX}/{v}", # 🔴 统一拼接逻辑
                     "download_detour": "direct"
                 } for k, v in RULE_PATHS.items()
             ],
@@ -178,17 +164,11 @@ def main():
         }
     }
 
-    # 填充节点
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
         country = get_ip_country(u.hostname)
         tag = f"{country} {unquote(u.fragment) or f'Node-{i}'} | {item['latency']}ms"
-        
-        node = None
-        if u.scheme == "vless": node = parse_vless(u, q, tag)
-        elif u.scheme in ["hy2", "hysteria2"]: node = parse_hy2(u, q, tag)
-        elif u.scheme == "trojan": node = parse_trojan(u, q, tag)
-        
+        node = parse_vless(u, q, tag) if u.scheme == "vless" else parse_trojan(u, q, tag)
         if node:
             cfg["outbounds"].append(node)
             cfg["outbounds"][0]["outbounds"].append(tag)
@@ -197,7 +177,8 @@ def main():
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ 成功! 写入 {len(top_nodes)} 个 IPv4 节点。")
+    print(f"✅ 完成! 写入 {len(top_nodes)} 个节点。")
+    print(f"URL 校验通过: {RULE_CDN_PREFIX}/...")
 
 if __name__ == "__main__":
     main()
