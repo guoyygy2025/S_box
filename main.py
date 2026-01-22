@@ -8,7 +8,7 @@ import time
 import hashlib
 from urllib.parse import urlparse, parse_qs, unquote
 
-# ===================== 核心配置 =====================
+# ===================== 订阅源与规则配置 =====================
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
@@ -17,60 +17,78 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
+# 使用 fastly.jsdelivr.net（国内可直连）
 RULE_URLS = {
     "geosite-cn": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-cn.srs",
-    "geoip-cn": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geoip@rule-set/geoip-cn.srs",
     "category-ads-all": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-category-ads-all.srs"
 }
 
-LATENCY_THRESHOLD = 500  # 🟢 严格过滤：仅保留 < 500ms 的节点
 MAX_THREADS = 100
-MAX_KEEP_NODES = 50
-TIMEOUT = 4.0
-ALIDNS = "https://223.5.5.5/dns-query"
+MAX_KEEP_NODES = 100
+TIMEOUT = 5.0
+ALIDNS = "223.5.5.5"
 
 dns_cache = {}
 
 # ===================== 工具函数 =====================
 
 def resolve_hostname(hostname):
-    if hostname in dns_cache: return dns_cache[hostname]
-    if re.match(r"^\d{1,3}(\.\d{1,3}){3}$", hostname): return hostname
+    if hostname in dns_cache:
+        return dns_cache[hostname]
+    if re.match(r"^\d{1,3}(\.\d{1,3}){3}$", hostname):
+        return hostname
     try:
         ip = socket.gethostbyname(hostname)
         dns_cache[hostname] = ip
         return ip
-    except: return None
+    except:
+        return None
 
 def get_ip_country(hostname):
     try:
         ip = resolve_hostname(hostname)
-        if not ip: return "[UN]"
+        if not ip:
+            return "[UN]"
         resp = requests.get(f"http://ip-api.com/json/{ip}", timeout=3).json()
         return f"[{resp.get('countryCode', 'UN')}]" if resp.get("status") == "success" else "[UN]"
-    except: return "[UN]"
+    except:
+        return "[UN]"
 
 def get_content(url):
     try:
         resp = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=15)
         text = resp.text.strip()
-        if "://" not in text[:50]:
+        if "://" not in text[:30]:
             try:
                 missing_padding = len(text) % 4
-                if missing_padding: text += '=' * (4 - missing_padding)
+                if missing_padding:
+                    text += '=' * (4 - missing_padding)
                 return base64.b64decode(text).decode('utf-8', 'ignore')
-            except: return text
+            except:
+                return text
         return text
-    except: return ""
+    except Exception as e:
+        print(f"⚠️ 获取 {url} 失败: {str(e)[:50]}")
+        return ""
+
+def get_tls_config(u, q):
+    raw_sni = q.get("sni", [None])[0] or q.get("host", [None])[0] or u.hostname
+    final_sni = unquote(str(raw_sni)).split("/")[0].split(":")[0].strip()
+    return {
+        "enabled": True,
+        "server_name": final_sni,
+        "insecure": True,
+        "utls": {"enabled": True, "fingerprint": "chrome"}
+    }
 
 def check_node(link):
-    """提取 VLESS 并测速，过滤高延迟"""
-    if not link.startswith("vless://"): return None
     try:
         u = urlparse(link)
-        if not u.hostname or not u.username: return None
+        if not u.hostname or not u.username:
+            return None
         ip = resolve_hostname(u.hostname)
-        if not ip: return None
+        if not ip:
+            return None
         
         start = time.time()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -78,119 +96,196 @@ def check_node(link):
             s.connect((ip, u.port or 443))
             latency = int((time.time() - start) * 1000)
             
-        # 🟢 关键：延迟过滤
-        if latency >= LATENCY_THRESHOLD: return None
-            
-        fp = hashlib.md5(f"{u.username}{u.hostname}{u.port}".encode()).hexdigest()
+        fp = hashlib.md5(f"{u.scheme}{u.hostname}{u.port}{u.username}".encode()).hexdigest()
         return {"link": link, "u": u, "latency": latency, "fp": fp}
-    except: return None
+    except:
+        return None
 
 # ===================== 主程序 =====================
 
 def main():
-    print(f"🚀 正在提取 VLESS 节点并过滤延迟 > {LATENCY_THRESHOLD}ms...")
+    print("🚀 正在处理节点并构建 Clash Mode 兼容配置...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
-    links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', all_text)))
+    links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
     
-    valid_nodes = []
+    tested_nodes = []
     seen_fps = set()
     with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_THREADS) as executor:
         results = list(executor.map(check_node, links))
         for res in results:
             if res and res["fp"] not in seen_fps:
-                valid_nodes.append(res); seen_fps.add(res["fp"])
+                tested_nodes.append(res)
+                seen_fps.add(res["fp"])
 
-    valid_nodes.sort(key=lambda x: x['latency'])
-    top_nodes = valid_nodes[:MAX_KEEP_NODES]
+    if not tested_nodes:
+        print("❌ 未发现任何可用节点，请检查网络或订阅源。")
+        return
 
-    # 构建基础 JSON 模板
+    tested_nodes.sort(key=lambda x: x['latency'])
+    top_nodes = tested_nodes[:MAX_KEEP_NODES]
+
+    # 构建符合你要求的配置结构
     cfg = {
-        "log": {"level": "warn", "timestamp": True},
+        "log": {
+            "disabled": False,
+            "level": "info",
+            "timestamp": True
+        },
         "dns": {
             "servers": [
-                {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
-                {"tag": "dns_local", "address": ALIDNS, "detour": "direct"},
-                {"tag": "dns_block", "address": "rcode://success"},
-                {"tag": "fakeip_server", "address": "fakeip"}
+                {
+                    "tag": "remote",
+                    "address": "https://1.1.1.1/dns-query",
+                    "detour": "proxy"
+                },
+                {
+                    "tag": "local",
+                    "address": ALIDNS
+                },
+                {
+                    "tag": "block",
+                    "address": "rcode://success"
+                }
             ],
             "rules": [
-                {"rule_set": "geosite-category-ads-all", "action": "route", "server": "dns_block"},
-                {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
-                {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
+                {"clash_mode": "Proxy", "server": "remote"},
+                {"clash_mode": "Direct", "server": "local"},
+                {"rule_set": ["geosite-cn"], "server": "local"},
+                {"rule_set": ["category-ads-all"], "server": "block"}
             ],
-            "final": "dns_proxy",
-            "strategy": "prefer_ipv4",
-            "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18"}
+            "strategy": "ipv4_only"
         },
-        "inbounds": [{
-            "type": "tun", "tag": "tun-in", "inet4_address": ["172.19.0.1/30"],
-            "inet6_address": ["fd00::1/126"], "mtu": 1280, "auto_route": True,
-            "strict_route": True, "stack": "gvisor", "sniff": True, "sniff_override_destination": True
-        }],
+        "inbounds": [
+            {
+                "type": "tun",
+                "inet4_address": "172.18.0.1/30",
+                "inet6_address": "fdfe:dcba:9876::1/126",
+                "auto_route": True,
+                "strict_route": True,
+                "stack": "system",
+                "sniff": True,
+                "sniff_override_destination": True
+            },
+            {
+                "type": "mixed",
+                "tag": "mixed-in",
+                "listen": "127.0.0.1",
+                "listen_port": 2333
+            }
+        ],
         "outbounds": [
-            {"type": "selector", "tag": "proxy", "outbounds": ["auto-test", "direct"]},
-            {"type": "urltest", "tag": "auto-test", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
+            {
+                "type": "selector",
+                "tag": "proxy",
+                "outbounds": ["auto", "direct"]
+            },
+            {
+                "type": "urltest",
+                "tag": "auto",
+                "outbounds": [],
+                "url": "http://cp.cloudflare.com/generate_204",
+                "interval": "3m"
+            },
             {"type": "direct", "tag": "direct"},
             {"type": "block", "tag": "block"},
             {"type": "dns", "tag": "dns-out"}
         ],
         "route": {
-            "default_domain_resolver": "dns_local",
-            "rule_set": [
-                {"type": "remote", "tag": "geosite-category-ads-all", "format": "binary", "url": RULE_URLS["category-ads-all"], "download_detour": "direct"},
-                {"type": "remote", "tag": "geosite-cn", "format": "binary", "url": RULE_URLS["geosite-cn"], "download_detour": "direct"},
-                {"type": "remote", "tag": "geoip-cn", "format": "binary", "url": RULE_URLS["geoip-cn"], "download_detour": "direct"}
-            ],
+            "default_domain_resolver": "local",
+            "auto_detect_interface": True,
             "rules": [
-                {"protocol": "dns", "action": "route", "outbound": "dns-out"},
-                {"rule_set": "geosite-category-ads-all", "action": "reject"},
-                {"ip_is_private": True, "action": "route", "outbound": "direct"},
-                {"rule_set": ["geoip-cn", "geosite-cn"], "action": "route", "outbound": "direct"}
+                {"protocol": "dns", "outbound": "dns-out"},
+                {"clash_mode": "Direct", "outbound": "direct"},
+                {"clash_mode": "Proxy", "outbound": "proxy"},
+                {"rule_set": ["geosite-cn"], "outbound": "direct"},
+                {"ip_is_private": True, "outbound": "direct"},
+                {"rule_set": ["category-ads-all"], "outbound": "block"}
             ],
-            "final": "proxy", "auto_detect_interface": True
+            "rule_set": [
+                {
+                    "tag": "geosite-cn",
+                    "type": "remote",
+                    "format": "binary",
+                    "url": RULE_URLS["geosite-cn"],
+                    "download_detour": "direct"
+                },
+                {
+                    "tag": "category-ads-all",
+                    "type": "remote",
+                    "format": "binary",
+                    "url": RULE_URLS["category-ads-all"],
+                    "download_detour": "direct"
+                }
+            ]
         }
     }
 
-    # 填充 VLESS 节点
+    # 填充有效节点
+    valid_count = 0
+    node_tags = []
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
         country = get_ip_country(u.hostname)
-        tag = f"{country} {unquote(u.fragment or f'VLESS-{i+1}')} | {item['latency']}ms"
+        tag = f"{country} {unquote(u.fragment or f'Node-{i+1}')} | {item['latency']}ms"
         
-        node = {
-            "type": "vless",
-            "tag": tag,
-            "server": u.hostname,
-            "server_port": int(u.port or 443),
-            "uuid": u.username,
-            "packet_encoding": "xudp",
-            "tls": {
-                "enabled": True,
-                "server_name": q.get("sni", [u.hostname])[0],
-                "utls": {"enabled": True, "fingerprint": "chrome"}
+        if u.scheme == "vless":
+            if not u.username:
+                continue
+            node = {
+                "type": "vless",
+                "tag": tag,
+                "server": u.hostname,
+                "server_port": int(u.port or 443),
+                "uuid": u.username,
+                "packet_encoding": "xudp",
+                "tls": get_tls_config(u, q)
             }
-        }
+            flow_val = q.get("flow", [""])[0]
+            if "vision" in flow_val:
+                node["flow"] = "xtls-rprx-vision"
+                
+        elif u.scheme == "trojan":
+            if not u.username:
+                continue
+            node = {
+                "type": "trojan",
+                "tag": tag,
+                "server": u.hostname,
+                "server_port": int(u.port or 443),
+                "password": u.username,
+                "tls": get_tls_config(u, q)
+            }
+        else:
+            continue
 
-        # XTLS Vision 支持
-        if "vision" in q.get("flow", [""])[0]:
-            node["flow"] = "xtls-rprx-vision"
-        
         # Reality 支持
         if q.get("security", [""])[0] == "reality":
+            pbk = q.get("pbk", [""])[0]
+            if not pbk:
+                continue
             node["tls"]["reality"] = {
                 "enabled": True,
-                "public_key": q.get("pbk", [""])[0],
+                "public_key": pbk,
                 "short_id": q.get("sid", [""])[0]
             }
+            if q.get("spx"):
+                node["tls"]["reality"]["spider_x"] = q.get("spx")[0]
 
         cfg["outbounds"].append(node)
-        cfg["outbounds"][0]["outbounds"].append(tag)
-        cfg["outbounds"][1]["outbounds"].append(tag)
+        node_tags.append(tag)
+        valid_count += 1
 
+    # 更新 selector 和 urltest 的出站列表
+    cfg["outbounds"][0]["outbounds"] = ["auto", "direct"] + node_tags
+    cfg["outbounds"][1]["outbounds"] = node_tags
+
+    # 保存配置
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
-    print(f"🎉 完成! 共插入 {len(top_nodes)} 个极速节点。")
+    print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
+    print("💡 启动命令: sing-box run -c config.json")
+    print("🔌 混合代理端口: http://127.0.0.1:2333")
 
 if __name__ == "__main__":
     main()
