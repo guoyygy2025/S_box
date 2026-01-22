@@ -17,7 +17,6 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 规则地址
 RULE_URLS = {
     "geosite-ads": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
     "geosite-cn": "https://gh-proxy.com/https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
@@ -47,7 +46,6 @@ def check_node(link):
     if not link.startswith("vless://"): return None
     try:
         u = urlparse(link)
-        # 1.12.x 建议直接在测速阶段完成 IP 解析以防阻塞
         ip = socket.gethostbyname(u.hostname)
         start = time.time()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -62,7 +60,7 @@ def check_node(link):
 # ===================== 主程序 =====================
 
 def main():
-    print(f"🚀 正在适配 sing-box 1.12.17 核心配置...")
+    print(f"🚀 正在生成 sing-box 1.12.17 兼容配置 (修复 DNS 字段)...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'vless://[^\s#]+(?:#[^\s]*)?', all_text)))
     
@@ -87,16 +85,18 @@ def main():
                 {"tag": "fakeip_server", "address": "fakeip"}
             ],
             "rules": [
-                {"domain": ["gh-proxy.com"], "server": "dns_local"},
+                # 优先处理规则下载域名，防止其进入 fakeip 逻辑
+                {"domain": ["gh-proxy.com"], "action": "route", "server": "dns_local"},
                 {"rule_set": "geosite-ads", "action": "route", "server": "dns_block"},
                 {"rule_set": "geosite-cn", "action": "route", "server": "dns_local"},
                 {"query_type": ["A", "AAAA"], "action": "route", "server": "fakeip_server"}
             ],
             "final": "dns_proxy",
-            "independent_proxy": True, # 🟢 1.12.x 特性：防止 DNS 流量死循环
+            "strategy": "prefer_ipv4",
             "fakeip": {"enabled": True, "inet4_range": "198.18.0.0/15"},
             "hosts": {
-                "gh-proxy.com": ["104.21.64.137", "172.67.183.248"] # 🟢 静态解析：彻底解决下载规则时的 loopback
+                # ✅ 彻底解决环路的核心：静态解析
+                "gh-proxy.com": ["104.21.64.137", "172.67.183.248"]
             }
         },
         "inbounds": [{
@@ -105,7 +105,7 @@ def main():
             "inet4_address": "172.19.0.1/30",
             "auto_route": True,
             "strict_route": True,
-            "stack": "system", # 🟢 1.12.x system 栈配合 auto_route 性能已非常稳定
+            "stack": "system",
             "sniff": True
         }],
         "outbounds": [
@@ -123,6 +123,7 @@ def main():
             ],
             "rules": [
                 {"protocol": "dns", "action": "route", "outbound": "dns-out"},
+                # ✅ 路由层面的防环路：强制 direct
                 {"domain": ["gh-proxy.com"], "action": "route", "outbound": "direct"},
                 {"rule_set": "geosite-ads", "action": "reject"},
                 {"ip_is_private": True, "action": "route", "outbound": "direct"},
@@ -133,31 +134,18 @@ def main():
         }
     }
 
-    # 填充 VLESS 节点
+    # 填充节点
     for i, item in enumerate(top_nodes):
         u, q = item['u'], parse_qs(item['u'].query)
         tag = f"{unquote(u.fragment or f'Node-{i+1}')} | {item['latency']}ms"
-        
         node = {
-            "type": "vless",
-            "tag": tag,
-            "server": u.hostname,
-            "server_port": int(u.port or 443),
-            "uuid": u.username,
-            "packet_encoding": "xudp",
-            "tls": {
-                "enabled": True,
-                "server_name": q.get("sni", [u.hostname])[0],
-                "utls": {"enabled": True, "fingerprint": "chrome"}
-            }
+            "type": "vless", "tag": tag, "server": u.hostname, "server_port": int(u.port or 443),
+            "uuid": u.username, "packet_encoding": "xudp",
+            "tls": {"enabled": True, "server_name": q.get("sni", [u.hostname])[0], "utls": {"enabled": True, "fingerprint": "chrome"}}
         }
         if "vision" in q.get("flow", [""])[0]: node["flow"] = "xtls-rprx-vision"
         if q.get("security", [""])[0] == "reality":
-            node["tls"]["reality"] = {
-                "enabled": True, 
-                "public_key": q.get("pbk", [""])[0], 
-                "short_id": q.get("sid", [""])[0]
-            }
+            node["tls"]["reality"] = {"enabled": True, "public_key": q.get("pbk", [""])[0], "short_id": q.get("sid", [""])[0]}
         
         cfg["outbounds"].append(node)
         cfg["outbounds"][0]["outbounds"].append(tag)
@@ -165,7 +153,7 @@ def main():
 
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
-    print(f"✅ 已生成适配 1.12.17 的 config.json")
+    print(f"🎉 适配完成！已移除错误字段，config.json 可直接运行。")
 
 if __name__ == "__main__":
     main()
