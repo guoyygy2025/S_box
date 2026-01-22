@@ -8,7 +8,6 @@ import time
 import hashlib
 from urllib.parse import urlparse, parse_qs, unquote
 
-# ===================== 订阅源与规则配置 =====================
 SOURCES = [
     "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.txt",
     "https://raw.githubusercontent.com/WLget/V2Ray_configs_64/refs/heads/master/ConfigSub_list.txt",
@@ -17,7 +16,6 @@ SOURCES = [
     "https://gist.githubusercontent.com/shuaidaoya/9e5cf2749c0ce79932dd9229d9b4162b/raw/base64.txt"
 ]
 
-# 使用 fastly.jsdelivr.net（国内可直连）
 RULE_URLS = {
     "geosite-cn": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-cn.srs",
     "category-ads-all": "https://fastly.jsdelivr.net/gh/SagerNet/sing-geosite@rule-set/geosite-category-ads-all.srs"
@@ -29,8 +27,6 @@ TIMEOUT = 5.0
 ALIDNS = "223.5.5.5"
 
 dns_cache = {}
-
-# ===================== 工具函数 =====================
 
 def resolve_hostname(hostname):
     if hostname in dns_cache:
@@ -101,10 +97,8 @@ def check_node(link):
     except:
         return None
 
-# ===================== 主程序 =====================
-
 def main():
-    print("🚀 正在处理节点并构建 Clash Mode 兼容配置...")
+    print("🚀 正在处理节点并构建防环路配置...")
     all_text = "\n".join([get_content(s) for s in SOURCES])
     links = list(set(re.findall(r'((?:vless|trojan)://[^\s#]+)', all_text)))
     
@@ -124,30 +118,17 @@ def main():
     tested_nodes.sort(key=lambda x: x['latency'])
     top_nodes = tested_nodes[:MAX_KEEP_NODES]
 
-    # 构建符合你要求的配置结构
     cfg = {
-        "log": {
-            "disabled": False,
-            "level": "info",
-            "timestamp": True
-        },
+        "log": {"disabled": False, "level": "info", "timestamp": True},
         "dns": {
             "servers": [
-                {
-                    "tag": "remote",
-                    "address": "https://1.1.1.1/dns-query",
-                    "detour": "proxy"
-                },
-                {
-                    "tag": "local",
-                    "address": ALIDNS
-                },
-                {
-                    "tag": "block",
-                    "address": "rcode://success"
-                }
+                {"tag": "remote", "address": "https://1.1.1.1/dns-query", "detour": "proxy"},
+                {"tag": "local", "address": ALIDNS},  # ⚠️ 无 detour！
+                {"tag": "block", "address": "rcode://success"}
             ],
             "rules": [
+                # ✅ 防环路：CDN 域名强制走 local DNS
+                {"domain_suffix": [".jsdelivr.net", ".anguswen.top"], "server": "local"},
                 {"clash_mode": "Proxy", "server": "remote"},
                 {"clash_mode": "Direct", "server": "local"},
                 {"rule_set": ["geosite-cn"], "server": "local"},
@@ -174,18 +155,8 @@ def main():
             }
         ],
         "outbounds": [
-            {
-                "type": "selector",
-                "tag": "proxy",
-                "outbounds": ["auto", "direct"]
-            },
-            {
-                "type": "urltest",
-                "tag": "auto",
-                "outbounds": [],
-                "url": "http://cp.cloudflare.com/generate_204",
-                "interval": "3m"
-            },
+            {"type": "selector", "tag": "proxy", "outbounds": ["auto", "direct"]},
+            {"type": "urltest", "tag": "auto", "outbounds": [], "url": "http://cp.cloudflare.com/generate_204", "interval": "3m"},
             {"type": "direct", "tag": "direct"},
             {"type": "block", "tag": "block"},
             {"type": "dns", "tag": "dns-out"}
@@ -195,6 +166,8 @@ def main():
             "auto_detect_interface": True,
             "rules": [
                 {"protocol": "dns", "outbound": "dns-out"},
+                # ✅ 防环路：CDN 域名流量直连
+                {"domain_suffix": [".jsdelivr.net", ".anguswen.top"], "outbound": "direct"},
                 {"clash_mode": "Direct", "outbound": "direct"},
                 {"clash_mode": "Proxy", "outbound": "proxy"},
                 {"rule_set": ["geosite-cn"], "outbound": "direct"},
@@ -202,25 +175,12 @@ def main():
                 {"rule_set": ["category-ads-all"], "outbound": "block"}
             ],
             "rule_set": [
-                {
-                    "tag": "geosite-cn",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": RULE_URLS["geosite-cn"],
-                    "download_detour": "direct"
-                },
-                {
-                    "tag": "category-ads-all",
-                    "type": "remote",
-                    "format": "binary",
-                    "url": RULE_URLS["category-ads-all"],
-                    "download_detour": "direct"
-                }
+                {"tag": "geosite-cn", "type": "remote", "format": "binary", "url": RULE_URLS["geosite-cn"], "download_detour": "direct"},
+                {"tag": "category-ads-all", "type": "remote", "format": "binary", "url": RULE_URLS["category-ads-all"], "download_detour": "direct"}
             ]
         }
     }
 
-    # 填充有效节点
     valid_count = 0
     node_tags = []
     for i, item in enumerate(top_nodes):
@@ -258,7 +218,6 @@ def main():
         else:
             continue
 
-        # Reality 支持
         if q.get("security", [""])[0] == "reality":
             pbk = q.get("pbk", [""])[0]
             if not pbk:
@@ -275,17 +234,14 @@ def main():
         node_tags.append(tag)
         valid_count += 1
 
-    # 更新 selector 和 urltest 的出站列表
     cfg["outbounds"][0]["outbounds"] = ["auto", "direct"] + node_tags
     cfg["outbounds"][1]["outbounds"] = node_tags
 
-    # 保存配置
     with open("config.json", "w", encoding="utf-8") as f:
         json.dump(cfg, f, indent=2, ensure_ascii=False)
     
     print(f"🎉 成功! config.json 已生成，包含 {valid_count} 个有效节点。")
     print("💡 启动命令: sing-box run -c config.json")
-    print("🔌 混合代理端口: http://127.0.0.1:2333")
 
 if __name__ == "__main__":
     main()
