@@ -76,112 +76,112 @@
       "outbounds": [
         "auto-test",
         "direct",
-        "🇫🇮FI_2|1.1MB/s|GPT⁺ | 1ms",
-        "🇫🇮FI_4|2.1MB/s|GPT⁺|NF | 1ms",
-        "🇩🇪DE_4|2.4MB/s | 1ms",
-        "🇩🇪DE_2|2.7MB/s | 1ms",
-        "🇹🇼TW_4|1.3MB/s|YT-TW|D+|GM|0% | 1ms",
-        "🇹🇼TW_7|2.4MB/s|YT-TW|D+|GM | 1ms",
-        "🇳🇱NL_2|1.1MB/s|GPT⁺|D+|9% | 1ms",
-        "🇹🇼TW_1|1.1MB/s|YT-TW|D+|GM | 2ms",
-        "🇹🇼TW_5|2.8MB/s|GPT⁺|YT-TW|NF|D+|GM|0% | 2ms",
-        "🇫🇮FI_1|1.1MB/s|GPT⁺ | 2ms",
-        "🇫🇮FI_2|2.7MB/s | 2ms",
-        "🇩🇪DE_5|2.1MB/s|GPT⁺|NF | 2ms",
-        "🇺🇸US_3|2.3MB/s|YT-HK|NF|D+|0% | 2ms",
-        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 2ms",
-        "🇹🇼TW_6|2.7MB/s|YT-TW|NF|D+|GM | 2ms",
-        "🇩🇪DE_6|1.7MB/s|GPT⁺ | 2ms",
-        "🇯🇵JP_2|1.5MB/s|GPT⁺|YT-JP|D+|GM|2% | 2ms",
-        "🇩🇪DE_7|1.2MB/s|GPT⁺ | 2ms",
-        "🇩🇪DE_3|2.5MB/s | 2ms",
-        "🇫🇮FI_3|1.5MB/s|GPT⁺ | 2ms",
-        "🇹🇼TW_3|1.6MB/s|YT-TW|D+|GM | 2ms",
-        "🇫🇮FI_5|1.6MB/s|GPT⁺ | 2ms",
-        "🇹🇼TW_2|1.3MB/s|YT-TW|D+|GM | 2ms",
-        "🇩🇪DE_8|2.8MB/s | 2ms",
-        "🇫🇮FI_6|1.2MB/s|GPT⁺ | 2ms",
-        "美国 | 2ms",
-        "US_speednode_0062 | 2ms",
-        "🇩🇪DE_10|1.9MB/s | 3ms",
-        "🇩🇪DE_4|2.2MB/s|GPT⁺|NF | 4ms",
+        "🇩🇪DE_1|2.4MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_6|2.3MB/s|GPT⁺ | 5ms",
+        "美国 | 5ms",
+        "🇩🇪DE_8|2.5MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_3|2.5MB/s | 5ms",
+        "🇩🇪DE_4|2.3MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_2|2.3MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_7|2.3MB/s|GPT⁺|NF | 5ms",
+        "🇺🇸US_1|3.1MB/s|GPT|YT-US|NF|D+|GM|13% | 5ms",
+        "🇸🇬SG_1|4.9MB/s|GPT⁺|NF|D+|GM | 6ms",
+        "🇺🇸US_4|1.1MB/s|GPT⁺|YT-US|NF|D+|GM|13% | 6ms",
+        "🇫🇮FI_2|2.7MB/s | 6ms",
+        "🇩🇪DE_3|2.3MB/s|GPT⁺|NF | 6ms",
+        "美国 | 6ms",
+        "加拿大 | 6ms",
+        "🇩🇪DE_4|2.4MB/s | 6ms",
+        "🇺🇸US_9|2.7MB/s|YT-US|NF|D+|GM|13% | 6ms",
+        "🇺🇸US_6|2.8MB/s|GPT⁺|YT-US|NF|D+|GM | 6ms",
+        "US_speednode_0062 | 6ms",
+        "🇩🇪DE_10|1.9MB/s | 6ms",
+        "美国_1 | 6ms",
+        "德国 | 6ms",
+        "美国_2 | 6ms",
+        "🇫🇷FR_1|1.0MB/s|GPT⁺|NF|54% | 6ms",
+        "🇳🇱NL_2|1.3MB/s|GPT⁺|NF|D+|0% | 6ms",
+        "美国_3 | 6ms",
+        "🇺🇸US_8|1.3MB/s|YT-US|NF|D+|GM | 6ms",
+        "🇺🇸US_7|3.2MB/s|GPT|YT-US|NF|D+|GM | 6ms",
+        "🇺🇸US_5|2.0MB/s|YT-US|NF|D+|GM | 6ms",
+        "🇩🇪DE_8|2.8MB/s | 6ms",
+        "🇺🇸US_3|1.2MB/s|GPT|YT-US|NF|D+|GM|100% | 7ms",
+        "美国 | 7ms",
+        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 7ms",
+        "🇩🇪DE_2|2.7MB/s | 7ms",
+        "刚果(金) | 8ms",
+        "美国 | 57ms",
+        "美国_1 | 57ms",
+        "美国_2 | 57ms",
+        "美国_3 | 57ms",
+        "美国_4 | 57ms",
+        "美国_5 | 57ms",
+        "美国_6 | 57ms",
+        "美国_7 | 57ms",
         "美国 | 58ms",
+        "美国_1 | 58ms",
+        "美国_2 | 58ms",
         "美国 | 59ms",
-        "🇺🇸US_4|2.9MB/s | 63ms",
-        "🇺🇸US_5|1.1MB/s | 66ms",
-        "美国 | 75ms",
-        "美国_1 | 75ms",
-        "美国 | 82ms",
-        "🇮🇷_IR_伊朗 | 82ms",
-        "美国 | 83ms",
-        "俄罗斯 | 83ms",
-        "比利时 | 85ms",
-        "🇧🇪BE_1|1.4MB/s|GPT⁺|YT-RU|0% | 85ms",
-        "🇳🇱NL_1|3.3MB/s | 85ms",
-        "🇫🇷FR_1|1.0MB/s|GPT⁺|54% | 87ms",
-        "🇬🇧GB_3|1.6MB/s | 87ms",
-        "伊朗 | 87ms",
-        "🇺🇸US_4|2.1MB/s|GPT⁺|YT-US|0% | 87ms",
-        "🇩🇪DE_6|2.5MB/s | 87ms",
-        "🇳🇱NL_3|2.8MB/s | 87ms",
-        "🇺🇸US_9|2.4MB/s | 88ms",
-        "美国 | 88ms"
+        "美国_1 | 59ms",
+        "美国 | 60ms",
+        "美国 | 61ms"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto-test",
       "outbounds": [
-        "🇫🇮FI_2|1.1MB/s|GPT⁺ | 1ms",
-        "🇫🇮FI_4|2.1MB/s|GPT⁺|NF | 1ms",
-        "🇩🇪DE_4|2.4MB/s | 1ms",
-        "🇩🇪DE_2|2.7MB/s | 1ms",
-        "🇹🇼TW_4|1.3MB/s|YT-TW|D+|GM|0% | 1ms",
-        "🇹🇼TW_7|2.4MB/s|YT-TW|D+|GM | 1ms",
-        "🇳🇱NL_2|1.1MB/s|GPT⁺|D+|9% | 1ms",
-        "🇹🇼TW_1|1.1MB/s|YT-TW|D+|GM | 2ms",
-        "🇹🇼TW_5|2.8MB/s|GPT⁺|YT-TW|NF|D+|GM|0% | 2ms",
-        "🇫🇮FI_1|1.1MB/s|GPT⁺ | 2ms",
-        "🇫🇮FI_2|2.7MB/s | 2ms",
-        "🇩🇪DE_5|2.1MB/s|GPT⁺|NF | 2ms",
-        "🇺🇸US_3|2.3MB/s|YT-HK|NF|D+|0% | 2ms",
-        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 2ms",
-        "🇹🇼TW_6|2.7MB/s|YT-TW|NF|D+|GM | 2ms",
-        "🇩🇪DE_6|1.7MB/s|GPT⁺ | 2ms",
-        "🇯🇵JP_2|1.5MB/s|GPT⁺|YT-JP|D+|GM|2% | 2ms",
-        "🇩🇪DE_7|1.2MB/s|GPT⁺ | 2ms",
-        "🇩🇪DE_3|2.5MB/s | 2ms",
-        "🇫🇮FI_3|1.5MB/s|GPT⁺ | 2ms",
-        "🇹🇼TW_3|1.6MB/s|YT-TW|D+|GM | 2ms",
-        "🇫🇮FI_5|1.6MB/s|GPT⁺ | 2ms",
-        "🇹🇼TW_2|1.3MB/s|YT-TW|D+|GM | 2ms",
-        "🇩🇪DE_8|2.8MB/s | 2ms",
-        "🇫🇮FI_6|1.2MB/s|GPT⁺ | 2ms",
-        "美国 | 2ms",
-        "US_speednode_0062 | 2ms",
-        "🇩🇪DE_10|1.9MB/s | 3ms",
-        "🇩🇪DE_4|2.2MB/s|GPT⁺|NF | 4ms",
+        "🇩🇪DE_1|2.4MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_6|2.3MB/s|GPT⁺ | 5ms",
+        "美国 | 5ms",
+        "🇩🇪DE_8|2.5MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_3|2.5MB/s | 5ms",
+        "🇩🇪DE_4|2.3MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_2|2.3MB/s|GPT⁺|NF | 5ms",
+        "🇩🇪DE_7|2.3MB/s|GPT⁺|NF | 5ms",
+        "🇺🇸US_1|3.1MB/s|GPT|YT-US|NF|D+|GM|13% | 5ms",
+        "🇸🇬SG_1|4.9MB/s|GPT⁺|NF|D+|GM | 6ms",
+        "🇺🇸US_4|1.1MB/s|GPT⁺|YT-US|NF|D+|GM|13% | 6ms",
+        "🇫🇮FI_2|2.7MB/s | 6ms",
+        "🇩🇪DE_3|2.3MB/s|GPT⁺|NF | 6ms",
+        "美国 | 6ms",
+        "加拿大 | 6ms",
+        "🇩🇪DE_4|2.4MB/s | 6ms",
+        "🇺🇸US_9|2.7MB/s|YT-US|NF|D+|GM|13% | 6ms",
+        "🇺🇸US_6|2.8MB/s|GPT⁺|YT-US|NF|D+|GM | 6ms",
+        "US_speednode_0062 | 6ms",
+        "🇩🇪DE_10|1.9MB/s | 6ms",
+        "美国_1 | 6ms",
+        "德国 | 6ms",
+        "美国_2 | 6ms",
+        "🇫🇷FR_1|1.0MB/s|GPT⁺|NF|54% | 6ms",
+        "🇳🇱NL_2|1.3MB/s|GPT⁺|NF|D+|0% | 6ms",
+        "美国_3 | 6ms",
+        "🇺🇸US_8|1.3MB/s|YT-US|NF|D+|GM | 6ms",
+        "🇺🇸US_7|3.2MB/s|GPT|YT-US|NF|D+|GM | 6ms",
+        "🇺🇸US_5|2.0MB/s|YT-US|NF|D+|GM | 6ms",
+        "🇩🇪DE_8|2.8MB/s | 6ms",
+        "🇺🇸US_3|1.2MB/s|GPT|YT-US|NF|D+|GM|100% | 7ms",
+        "美国 | 7ms",
+        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 7ms",
+        "🇩🇪DE_2|2.7MB/s | 7ms",
+        "刚果(金) | 8ms",
+        "美国 | 57ms",
+        "美国_1 | 57ms",
+        "美国_2 | 57ms",
+        "美国_3 | 57ms",
+        "美国_4 | 57ms",
+        "美国_5 | 57ms",
+        "美国_6 | 57ms",
+        "美国_7 | 57ms",
         "美国 | 58ms",
+        "美国_1 | 58ms",
+        "美国_2 | 58ms",
         "美国 | 59ms",
-        "🇺🇸US_4|2.9MB/s | 63ms",
-        "🇺🇸US_5|1.1MB/s | 66ms",
-        "美国 | 75ms",
-        "美国_1 | 75ms",
-        "美国 | 82ms",
-        "🇮🇷_IR_伊朗 | 82ms",
-        "美国 | 83ms",
-        "俄罗斯 | 83ms",
-        "比利时 | 85ms",
-        "🇧🇪BE_1|1.4MB/s|GPT⁺|YT-RU|0% | 85ms",
-        "🇳🇱NL_1|3.3MB/s | 85ms",
-        "🇫🇷FR_1|1.0MB/s|GPT⁺|54% | 87ms",
-        "🇬🇧GB_3|1.6MB/s | 87ms",
-        "伊朗 | 87ms",
-        "🇺🇸US_4|2.1MB/s|GPT⁺|YT-US|0% | 87ms",
-        "🇩🇪DE_6|2.5MB/s | 87ms",
-        "🇳🇱NL_3|2.8MB/s | 87ms",
-        "🇺🇸US_9|2.4MB/s | 88ms",
-        "美国 | 88ms"
+        "美国_1 | 59ms",
+        "美国 | 60ms",
+        "美国 | 61ms"
       ],
       "url": "http://cp.cloudflare.com/generate_204",
       "interval": "3m"
@@ -200,190 +200,14 @@
     },
     {
       "type": "vless",
-      "tag": "🇫🇮FI_2|1.1MB/s|GPT⁺ | 1ms",
-      "server": "172.66.47.45",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI_4|2.1MB/s|GPT⁺|NF | 1ms",
-      "server": "104.21.23.131",
-      "server_port": 80,
-      "uuid": "e84064cc-617f-4ba8-aa6f-13e920fd2610",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "104.21.23.131",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_4|2.4MB/s | 1ms",
-      "server": "167.82.0.1",
-      "server_port": 80,
-      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "167.82.0.1",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_2|2.7MB/s | 1ms",
-      "server": "104.18.154.43",
-      "server_port": 2053,
-      "uuid": "3e8c601a-9cd1-4670-a146-2696c5d9f111",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rana.bardo-chronos.online",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_4|1.3MB/s|YT-TW|D+|GM|0% | 1ms",
-      "server": "216.24.57.6",
-      "server_port": 8443,
-      "uuid": "d9f20a29-239e-46ab-82bb-fa0d69e480f9",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "kakoolnews.geg4a3ydsf.workers.dev",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_7|2.4MB/s|YT-TW|D+|GM | 1ms",
-      "server": "104.19.215.97",
-      "server_port": 443,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱NL_2|1.1MB/s|GPT⁺|D+|9% | 1ms",
-      "server": "104.24.7.239",
-      "server_port": 2096,
-      "uuid": "e42eb18a-6620-49b2-a578-820da4adcee8",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cD.rXtEaMoNbToP.qZz.iO",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_1|1.1MB/s|YT-TW|D+|GM | 2ms",
-      "server": "172.64.52.175",
-      "server_port": 2087,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_5|2.8MB/s|GPT⁺|YT-TW|NF|D+|GM|0% | 2ms",
-      "server": "104.16.150.246",
-      "server_port": 2087,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI_1|1.1MB/s|GPT⁺ | 2ms",
-      "server": "188.114.98.0",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI_2|2.7MB/s | 2ms",
-      "server": "188.114.97.6",
-      "server_port": 2087,
-      "uuid": "6cbd4c69-91f9-4237-af2c-122989356886",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "8ccaf29de35a349f.monopoligame.ir",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_5|2.1MB/s|GPT⁺|NF | 2ms",
-      "server": "151.101.0.1",
+      "tag": "🇩🇪DE_1|2.4MB/s|GPT⁺|NF | 5ms",
+      "server": "151.101.194.219",
       "server_port": 80,
       "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "151.101.0.1",
+        "server_name": "151.101.194.219",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -392,263 +216,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇺🇸US_3|2.3MB/s|YT-HK|NF|D+|0% | 2ms",
-      "server": "188.114.97.6",
-      "server_port": 443,
-      "uuid": "ed88c6b2-4881-4919-b9b0-b2189ec3bda7",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "amin.ferrarikingfr.ir",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 2ms",
-      "server": "208.103.161.170",
-      "server_port": 443,
-      "uuid": "2dc797c8-9588-48a6-bc4a-265c23d87cd6",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ava.game.naver.com.cyylr.eu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_6|2.7MB/s|YT-TW|NF|D+|GM | 2ms",
-      "server": "172.64.53.42",
-      "server_port": 2087,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_6|1.7MB/s|GPT⁺ | 2ms",
-      "server": "104.16.0.0",
-      "server_port": 8080,
-      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "104.16.0.0",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇯🇵JP_2|1.5MB/s|GPT⁺|YT-JP|D+|GM|2% | 2ms",
-      "server": "188.114.97.6",
-      "server_port": 443,
-      "uuid": "4311bd3f-4f66-4538-a624-221b87690b2c",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "mjtbknetmkhremge.ordak.qzz.io",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_7|1.2MB/s|GPT⁺ | 2ms",
-      "server": "108.162.192.75",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_3|2.5MB/s | 2ms",
-      "server": "188.114.97.6",
-      "server_port": 2096,
-      "uuid": "7069c973-9593-404d-a54c-18529e09a62b",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdn.nooshindns.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI_3|1.5MB/s|GPT⁺ | 2ms",
-      "server": "66.81.247.155",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_3|1.6MB/s|YT-TW|D+|GM | 2ms",
-      "server": "104.18.38.47",
-      "server_port": 2087,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI_5|1.6MB/s|GPT⁺ | 2ms",
-      "server": "188.114.97.3",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇹🇼TW_2|1.3MB/s|YT-TW|D+|GM | 2ms",
-      "server": "104.16.150.130",
-      "server_port": 2087,
-      "uuid": "77777777-8a3e-6666-b6d1-a9c5f0e8b3a2",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fgnix832fx.fx6hsv0.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_8|2.8MB/s | 2ms",
-      "server": "108.165.216.191",
-      "server_port": 8443,
-      "uuid": "3e8c601a-9cd1-4670-a146-2696c5d9f111",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "rana.bardo-chronos.online",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇮FI_6|1.2MB/s|GPT⁺ | 2ms",
-      "server": "162.159.193.138",
-      "server_port": 443,
-      "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "octopusss4.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国 | 2ms",
-      "server": "mfa.gov.ua",
-      "server_port": 443,
-      "uuid": "00000000-0000-4000-8000-000000000000",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "nn9jdg-k7yewrrk.acg.xx.kg",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "US_speednode_0062 | 2ms",
-      "server": "172.67.195.79",
-      "server_port": 443,
-      "uuid": "30980fc4-8789-42df-80d1-0c8e5cd26881",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "cdn.veilvpn.fans",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_10|1.9MB/s | 3ms",
-      "server": "151.101.0.1",
-      "server_port": 80,
-      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "151.101.0.1",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_4|2.2MB/s|GPT⁺|NF | 4ms",
+      "tag": "🇩🇪DE_6|2.3MB/s|GPT⁺ | 5ms",
       "server": "199.232.197.131",
       "server_port": 80,
       "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
@@ -664,7 +232,631 @@
     },
     {
       "type": "vless",
-      "tag": "美国 | 58ms",
+      "tag": "美国 | 5ms",
+      "server": "www.ntu.edu.sg",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_8|2.5MB/s|GPT⁺|NF | 5ms",
+      "server": "151.101.66.219",
+      "server_port": 80,
+      "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "151.101.66.219",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_3|2.5MB/s | 5ms",
+      "server": "188.114.97.6",
+      "server_port": 2096,
+      "uuid": "7069c973-9593-404d-a54c-18529e09a62b",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdn.nooshindns.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_4|2.3MB/s|GPT⁺|NF | 5ms",
+      "server": "151.101.66.219",
+      "server_port": 80,
+      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "151.101.66.219",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_2|2.3MB/s|GPT⁺|NF | 5ms",
+      "server": "speedtest.net",
+      "server_port": 80,
+      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "speedtest.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_7|2.3MB/s|GPT⁺|NF | 5ms",
+      "server": "151.101.2.219",
+      "server_port": 80,
+      "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "151.101.2.219",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_1|3.1MB/s|GPT|YT-US|NF|D+|GM|13% | 5ms",
+      "server": "45.40.149.50",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "45.40.149.50",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇬SG_1|4.9MB/s|GPT⁺|NF|D+|GM | 6ms",
+      "server": "198.41.222.191",
+      "server_port": 80,
+      "uuid": "e388fffb-03b0-4227-ac2c-2b5cec1f5c34",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "198.41.222.191",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_4|1.1MB/s|GPT⁺|YT-US|NF|D+|GM|13% | 6ms",
+      "server": "45.135.235.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "45.135.235.30",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇮FI_2|2.7MB/s | 6ms",
+      "server": "188.114.97.6",
+      "server_port": 2087,
+      "uuid": "6cbd4c69-91f9-4237-af2c-122989356886",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "8ccaf29de35a349f.monopoligame.ir",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_3|2.3MB/s|GPT⁺|NF | 6ms",
+      "server": "151.101.0.1",
+      "server_port": 80,
+      "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "151.101.0.1",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 6ms",
+      "server": "www.shopify.com",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大 | 6ms",
+      "server": "p.nooshindns.com",
+      "server_port": 8443,
+      "uuid": "b9e32788-348d-4b38-ab6f-e999a8443dfd",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "p.nooshindns.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_4|2.4MB/s | 6ms",
+      "server": "167.82.0.1",
+      "server_port": 80,
+      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "167.82.0.1",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_9|2.7MB/s|YT-US|NF|D+|GM|13% | 6ms",
+      "server": "185.170.166.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "185.170.166.30",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_6|2.8MB/s|GPT⁺|YT-US|NF|D+|GM | 6ms",
+      "server": "130.250.137.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "130.250.137.30",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "US_speednode_0062 | 6ms",
+      "server": "172.67.195.79",
+      "server_port": 443,
+      "uuid": "30980fc4-8789-42df-80d1-0c8e5cd26881",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "cdn.veilvpn.fans",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_10|1.9MB/s | 6ms",
+      "server": "151.101.0.1",
+      "server_port": 80,
+      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "151.101.0.1",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_1 | 6ms",
+      "server": "mfa.gov.ua",
+      "server_port": 443,
+      "uuid": "00000000-0000-4000-8000-000000000000",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "nn9jdg-k7yewrrk.acg.xx.kg",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "德国 | 6ms",
+      "server": "cloudflare-ip.mofashi.ltd",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_2 | 6ms",
+      "server": "31.185.108.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "31.185.108.30",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇫🇷FR_1|1.0MB/s|GPT⁺|NF|54% | 6ms",
+      "server": "188.95.12.110",
+      "server_port": 8080,
+      "uuid": "65c705a4-0b2e-468d-bbfe-9428ccb4aa7b",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "188.95.12.110",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱NL_2|1.3MB/s|GPT⁺|NF|D+|0% | 6ms",
+      "server": "personal.sabteahval.qzz.io",
+      "server_port": 2083,
+      "uuid": "8ea46bde-de0a-4864-96f0-af5c6ac9da36",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "PersOnAL.sAbTeAHVAL.Qzz.iO",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_3 | 6ms",
+      "server": "yx.cloudflare.182682.xyz",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_8|1.3MB/s|YT-US|NF|D+|GM | 6ms",
+      "server": "89.116.46.50",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "89.116.46.50",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_7|3.2MB/s|GPT|YT-US|NF|D+|GM | 6ms",
+      "server": "173.245.49.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "173.245.49.30",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_5|2.0MB/s|YT-US|NF|D+|GM | 6ms",
+      "server": "198.71.232.30",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "198.71.232.30",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_8|2.8MB/s | 6ms",
+      "server": "108.165.216.191",
+      "server_port": 8443,
+      "uuid": "3e8c601a-9cd1-4670-a146-2696c5d9f111",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rana.bardo-chronos.online",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸US_3|1.2MB/s|GPT|YT-US|NF|D+|GM|100% | 7ms",
+      "server": "80.93.202.40",
+      "server_port": 8880,
+      "uuid": "6202b230-417c-4d8e-b624-0f71afa9c75d",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "80.93.202.40",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 7ms",
+      "server": "cf.877774.xyz",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 7ms",
+      "server": "208.103.161.170",
+      "server_port": 443,
+      "uuid": "2dc797c8-9588-48a6-bc4a-265c23d87cd6",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ava.game.naver.com.cyylr.eu.cc",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇩🇪DE_2|2.7MB/s | 7ms",
+      "server": "104.18.154.43",
+      "server_port": 2053,
+      "uuid": "3e8c601a-9cd1-4670-a146-2696c5d9f111",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "rana.bardo-chronos.online",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "刚果(金) | 8ms",
+      "server": "cf.008500.xyz",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 57ms",
+      "server": "64.186.228.41",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_1 | 57ms",
+      "server": "64.186.230.172",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_2 | 57ms",
+      "server": "64.186.232.60",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_3 | 57ms",
+      "server": "174.136.205.24",
+      "server_port": 8443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_4 | 57ms",
+      "server": "64.186.235.57",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_5 | 57ms",
+      "server": "154.17.225.54",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_6 | 57ms",
       "server": "69.63.218.168",
       "server_port": 10101,
       "uuid": "00000000-0000-4000-8000-000000000000",
@@ -680,7 +872,103 @@
     },
     {
       "type": "vless",
+      "tag": "美国_7 | 57ms",
+      "server": "154.17.2.59",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 58ms",
+      "server": "64.186.229.189",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_1 | 58ms",
+      "server": "154.17.9.145",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_2 | 58ms",
+      "server": "64.186.225.82",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
       "tag": "美国 | 59ms",
+      "server": "154.17.26.200",
+      "server_port": 443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_1 | 59ms",
+      "server": "154.17.25.156",
+      "server_port": 8443,
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "qsiim.jfpct.sbs",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 60ms",
       "server": "93.179.99.130",
       "server_port": 777,
       "uuid": "00000000-0000-4000-8000-000000000000",
@@ -696,313 +984,14 @@
     },
     {
       "type": "vless",
-      "tag": "🇺🇸US_4|2.9MB/s | 63ms",
-      "server": "23.158.136.33",
+      "tag": "美国 | 61ms",
+      "server": "64.186.232.121",
       "server_port": 443,
-      "uuid": "9bc87bd9-0d37-4ba6-9601-408b22902fff",
+      "uuid": "6bff4694-7f3a-4062-81c6-ea224fd86078",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "5post-gate.x5.ru",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US_5|1.1MB/s | 66ms",
-      "server": "154.12.38.221",
-      "server_port": 443,
-      "uuid": "9bc87bd9-0d37-4ba6-9601-408b22902fff",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "5post-gate.x5.ru",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国 | 75ms",
-      "server": "91.149.203.13",
-      "server_port": 15429,
-      "uuid": "00000000-0000-4000-8000-000000000000",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "nn9jdg-k7yewrrk.acg.xx.kg",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国_1 | 75ms",
-      "server": "166.88.167.206",
-      "server_port": 30715,
-      "uuid": "00000000-0000-4000-8000-000000000000",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "nn9jdg-k7yewrrk.acg.xx.kg",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国 | 82ms",
-      "server": "34.213.172.16",
-      "server_port": 22189,
-      "uuid": "4889ee33-74e5-4819-86d8-b2a1a5bc8f46",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.tesla.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        },
-        "reality": {
-          "enabled": true,
-          "public_key": "5tUZskKOCKpjz3j7hmuYaQHNfE1QRtZI9P62qvSs1GY",
-          "short_id": "47b6d14ff477fe59"
-        }
-      },
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "type": "vless",
-      "tag": "🇮🇷_IR_伊朗 | 82ms",
-      "server": "185.143.233.122",
-      "server_port": 80,
-      "uuid": "661f5954-7f13-4c5f-add8-a7c0b250aabd",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "185.143.233.122",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国 | 83ms",
-      "server": "85.234.114.53",
-      "server_port": 22231,
-      "uuid": "afcac633-0e1a-46c3-bef2-cc01cc0097c8",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "r1.mizulina.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "type": "vless",
-      "tag": "俄罗斯 | 83ms",
-      "server": "r1.mizulina.top",
-      "server_port": 22231,
-      "uuid": "afcac633-0e1a-46c3-bef2-cc01cc0097c8",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "r1.mizulina.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "type": "vless",
-      "tag": "比利时 | 85ms",
-      "server": "104.155.124.198",
-      "server_port": 443,
-      "uuid": "36af4874-d6a3-4f7c-82a7-1cb724961b52",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "linek.perry.us.kg",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇧🇪BE_1|1.4MB/s|GPT⁺|YT-RU|0% | 85ms",
-      "server": "79.127.224.12",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "bru-be-01.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱NL_1|3.3MB/s | 85ms",
-      "server": "ams1.fromblancwithlove.com",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇫🇷FR_1|1.0MB/s|GPT⁺|54% | 87ms",
-      "server": "149.202.58.99",
-      "server_port": 443,
-      "uuid": "b585dc5e-55bf-4a8b-913a-27c9ccac05c3",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "bab-6.site",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇬🇧GB_3|1.6MB/s | 87ms",
-      "server": "195.184.247.138",
-      "server_port": 443,
-      "uuid": "8bbf020e-653f-4a82-9900-1214e4e37dab",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "www.microsoft.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "type": "vless",
-      "tag": "伊朗 | 87ms",
-      "server": "31.57.190.22",
-      "server_port": 443,
-      "uuid": "36af4874-d6a3-4f7c-82a7-1cb724961b52",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "linek.perry.us.kg",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US_4|2.1MB/s|GPT⁺|YT-US|0% | 87ms",
-      "server": "72.56.59.223",
-      "server_port": 443,
-      "uuid": "afcac633-0e1a-46c3-bef2-cc01cc0097c8",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "r1.mizulina.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_6|2.5MB/s | 87ms",
-      "server": "de1.gamelistak.com",
-      "server_port": 443,
-      "uuid": "fe783fbf-2380-4a25-a6a5-629ac356ccca",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "de1.gamelistak.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱NL_3|2.8MB/s | 87ms",
-      "server": "85.17.244.114",
-      "server_port": 443,
-      "uuid": "9bc87bd9-0d37-4ba6-9601-408b22902fff",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "5post-gate.x5.ru",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸US_9|2.4MB/s | 88ms",
-      "server": "85.234.114.53",
-      "server_port": 443,
-      "uuid": "afcac633-0e1a-46c3-bef2-cc01cc0097c8",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "r1.mizulina.top",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      },
-      "flow": "xtls-rprx-vision"
-    },
-    {
-      "type": "vless",
-      "tag": "美国 | 88ms",
-      "server": "45.83.20.29",
-      "server_port": 443,
-      "uuid": "36af4874-d6a3-4f7c-82a7-1cb724961b52",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "linek.perry.us.kg",
+        "server_name": "qsiim.jfpct.sbs",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
