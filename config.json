@@ -76,112 +76,112 @@
       "outbounds": [
         "auto-test",
         "direct",
-        "加拿大 | 5ms",
-        "法国 | 5ms",
-        "加拿大_1 | 5ms",
-        "法国_1 | 5ms",
-        "US_speednode_0049 | 5ms",
-        "🇩🇪DE_3|2.3MB/s | 5ms",
-        "US_speednode_0052 | 5ms",
-        "加拿大 | 6ms",
-        "美国 | 6ms",
-        "加拿大_1 | 6ms",
-        "加拿大_2 | 6ms",
-        "US_speednode_0050 | 6ms",
-        "🇩🇪DE_3|1.6MB/s|GPT⁺ | 6ms",
-        "法国 | 6ms",
-        "法国_1 | 6ms",
-        "法国_2 | 6ms",
-        "法国_3 | 6ms",
-        "美国_1 | 6ms",
-        "法国_4 | 6ms",
-        "美国_2 | 6ms",
-        "🇸🇬SG_1|1.1MB/s | 6ms",
-        "法国_5 | 6ms",
-        "加拿大_3 | 6ms",
-        "加拿大_4 | 6ms",
-        "美国_3 | 6ms",
-        "法国_6 | 6ms",
-        "美国_4 | 6ms",
-        "加拿大 | 7ms",
-        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 7ms",
-        "美国 | 7ms",
-        "法国 | 7ms",
-        "US_speednode_0051 | 8ms",
-        "🇮🇷_IR_伊朗 | 80ms",
-        "🇳🇱NL_1|1.6MB/s | 86ms",
-        "NL_speednode_0005 | 87ms",
-        "🇬🇧_GB_英国->🇬🇪_GE_格鲁吉亚 | 88ms",
-        "荷兰 | 89ms",
-        "荷兰_1 | 89ms",
-        "荷兰_2 | 89ms",
-        "🇳🇱NL_9|1.7MB/s|GPT⁺|YT-RU|NF|0% | 89ms",
-        "荷兰_3 | 89ms",
-        "荷兰_4 | 89ms",
-        "🇳🇱NL_10|1.4MB/s|GPT⁺|YT-RU|NF|0% | 89ms",
-        "荷兰_5 | 89ms",
-        "荷兰_6 | 89ms",
-        "荷兰_7 | 89ms",
-        "荷兰_8 | 89ms",
-        "荷兰_9 | 89ms",
-        "荷兰 | 90ms",
-        "荷兰_1 | 90ms"
+        "🇩🇪DE_3|2.3MB/s | 1ms",
+        "加拿大 | 1ms",
+        "法国 | 1ms",
+        "美国 | 1ms",
+        "US_speednode_0052 | 1ms",
+        "法国_1 | 1ms",
+        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 1ms",
+        "法国_2 | 1ms",
+        "美国_1 | 1ms",
+        "加拿大 | 2ms",
+        "法国 | 2ms",
+        "美国 | 2ms",
+        "美国_1 | 2ms",
+        "加拿大_1 | 2ms",
+        "加拿大_2 | 2ms",
+        "🇸🇬SG_1|1.1MB/s | 2ms",
+        "法国_1 | 2ms",
+        "US_speednode_0050 | 2ms",
+        "加拿大_3 | 2ms",
+        "加拿大_4 | 2ms",
+        "法国_2 | 2ms",
+        "US_speednode_0049 | 2ms",
+        "法国_3 | 2ms",
+        "加拿大_5 | 2ms",
+        "美国_2 | 2ms",
+        "法国_4 | 2ms",
+        "加拿大_6 | 2ms",
+        "法国_5 | 2ms",
+        "法国 | 3ms",
+        "美国 | 3ms",
+        "US_speednode_0051 | 3ms",
+        "🇳🇱NL_1|1.6MB/s | 81ms",
+        "NL_speednode_0005 | 81ms",
+        "🇬🇧_GB_英国->🇬🇪_GE_格鲁吉亚 | 82ms",
+        "🇮🇷_IR_伊朗 | 83ms",
+        "荷兰 | 84ms",
+        "荷兰_1 | 84ms",
+        "荷兰_2 | 84ms",
+        "🇳🇱NL_6|1.6MB/s|GPT⁺|YT-RU|NF|0% | 84ms",
+        "🇳🇱NL_5|2.2MB/s|GPT⁺|YT-RU|NF|0% | 84ms",
+        "荷兰_3 | 84ms",
+        "荷兰_4 | 84ms",
+        "荷兰_5 | 84ms",
+        "荷兰_6 | 84ms",
+        "GB_speednode_0002 | 84ms",
+        "荷兰_7 | 84ms",
+        "荷兰_8 | 84ms",
+        "荷兰 | 85ms",
+        "荷兰_1 | 85ms",
+        "荷兰_2 | 85ms"
       ]
     },
     {
       "type": "urltest",
       "tag": "auto-test",
       "outbounds": [
-        "加拿大 | 5ms",
-        "法国 | 5ms",
-        "加拿大_1 | 5ms",
-        "法国_1 | 5ms",
-        "US_speednode_0049 | 5ms",
-        "🇩🇪DE_3|2.3MB/s | 5ms",
-        "US_speednode_0052 | 5ms",
-        "加拿大 | 6ms",
-        "美国 | 6ms",
-        "加拿大_1 | 6ms",
-        "加拿大_2 | 6ms",
-        "US_speednode_0050 | 6ms",
-        "🇩🇪DE_3|1.6MB/s|GPT⁺ | 6ms",
-        "法国 | 6ms",
-        "法国_1 | 6ms",
-        "法国_2 | 6ms",
-        "法国_3 | 6ms",
-        "美国_1 | 6ms",
-        "法国_4 | 6ms",
-        "美国_2 | 6ms",
-        "🇸🇬SG_1|1.1MB/s | 6ms",
-        "法国_5 | 6ms",
-        "加拿大_3 | 6ms",
-        "加拿大_4 | 6ms",
-        "美国_3 | 6ms",
-        "法国_6 | 6ms",
-        "美国_4 | 6ms",
-        "加拿大 | 7ms",
-        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 7ms",
-        "美国 | 7ms",
-        "法国 | 7ms",
-        "US_speednode_0051 | 8ms",
-        "🇮🇷_IR_伊朗 | 80ms",
-        "🇳🇱NL_1|1.6MB/s | 86ms",
-        "NL_speednode_0005 | 87ms",
-        "🇬🇧_GB_英国->🇬🇪_GE_格鲁吉亚 | 88ms",
-        "荷兰 | 89ms",
-        "荷兰_1 | 89ms",
-        "荷兰_2 | 89ms",
-        "🇳🇱NL_9|1.7MB/s|GPT⁺|YT-RU|NF|0% | 89ms",
-        "荷兰_3 | 89ms",
-        "荷兰_4 | 89ms",
-        "🇳🇱NL_10|1.4MB/s|GPT⁺|YT-RU|NF|0% | 89ms",
-        "荷兰_5 | 89ms",
-        "荷兰_6 | 89ms",
-        "荷兰_7 | 89ms",
-        "荷兰_8 | 89ms",
-        "荷兰_9 | 89ms",
-        "荷兰 | 90ms",
-        "荷兰_1 | 90ms"
+        "🇩🇪DE_3|2.3MB/s | 1ms",
+        "加拿大 | 1ms",
+        "法国 | 1ms",
+        "美国 | 1ms",
+        "US_speednode_0052 | 1ms",
+        "法国_1 | 1ms",
+        "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 1ms",
+        "法国_2 | 1ms",
+        "美国_1 | 1ms",
+        "加拿大 | 2ms",
+        "法国 | 2ms",
+        "美国 | 2ms",
+        "美国_1 | 2ms",
+        "加拿大_1 | 2ms",
+        "加拿大_2 | 2ms",
+        "🇸🇬SG_1|1.1MB/s | 2ms",
+        "法国_1 | 2ms",
+        "US_speednode_0050 | 2ms",
+        "加拿大_3 | 2ms",
+        "加拿大_4 | 2ms",
+        "法国_2 | 2ms",
+        "US_speednode_0049 | 2ms",
+        "法国_3 | 2ms",
+        "加拿大_5 | 2ms",
+        "美国_2 | 2ms",
+        "法国_4 | 2ms",
+        "加拿大_6 | 2ms",
+        "法国_5 | 2ms",
+        "法国 | 3ms",
+        "美国 | 3ms",
+        "US_speednode_0051 | 3ms",
+        "🇳🇱NL_1|1.6MB/s | 81ms",
+        "NL_speednode_0005 | 81ms",
+        "🇬🇧_GB_英国->🇬🇪_GE_格鲁吉亚 | 82ms",
+        "🇮🇷_IR_伊朗 | 83ms",
+        "荷兰 | 84ms",
+        "荷兰_1 | 84ms",
+        "荷兰_2 | 84ms",
+        "🇳🇱NL_6|1.6MB/s|GPT⁺|YT-RU|NF|0% | 84ms",
+        "🇳🇱NL_5|2.2MB/s|GPT⁺|YT-RU|NF|0% | 84ms",
+        "荷兰_3 | 84ms",
+        "荷兰_4 | 84ms",
+        "荷兰_5 | 84ms",
+        "荷兰_6 | 84ms",
+        "GB_speednode_0002 | 84ms",
+        "荷兰_7 | 84ms",
+        "荷兰_8 | 84ms",
+        "荷兰 | 85ms",
+        "荷兰_1 | 85ms",
+        "荷兰_2 | 85ms"
       ],
       "url": "http://cp.cloudflare.com/generate_204",
       "interval": "3m"
@@ -200,87 +200,7 @@
     },
     {
       "type": "vless",
-      "tag": "加拿大 | 5ms",
-      "server": "ser10.fredomiran.com",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国 | 5ms",
-      "server": "cloudflare-ip.mofashi.ltd",
-      "server_port": 443,
-      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "t1s1.rittbo.kdns.fr",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "加拿大_1 | 5ms",
-      "server": "ser2.fredomiran.com",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国_1 | 5ms",
-      "server": "cf.877774.xyz",
-      "server_port": 443,
-      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "t1s1.rittbo.kdns.fr",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "US_speednode_0049 | 5ms",
-      "server": "199.232.197.131",
-      "server_port": 80,
-      "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max-gb1.global.ssl.fastly.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_3|2.3MB/s | 5ms",
+      "tag": "🇩🇪DE_3|2.3MB/s | 1ms",
       "server": "betty.ns.cloudflare.com",
       "server_port": 443,
       "uuid": "b2f6aa3a-2550-4a1c-b2c0-1c94b1207217",
@@ -296,71 +216,7 @@
     },
     {
       "type": "vless",
-      "tag": "US_speednode_0052 | 5ms",
-      "server": "151.101.0.1",
-      "server_port": 80,
-      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max-gb1.global.ssl.fastly.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "加拿大 | 6ms",
-      "server": "ser4.fredomiran.com",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国 | 6ms",
-      "server": "162.159.44.100",
-      "server_port": 2087,
-      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fu.baiproxy.us.ci",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "加拿大_1 | 6ms",
-      "server": "ser6.fredomiran.com",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "加拿大_2 | 6ms",
+      "tag": "加拿大 | 1ms",
       "server": "104.17.121.79",
       "server_port": 443,
       "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
@@ -376,55 +232,7 @@
     },
     {
       "type": "vless",
-      "tag": "US_speednode_0050 | 6ms",
-      "server": "199.232.197.131",
-      "server_port": 80,
-      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "max-gb1.global.ssl.fastly.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇩🇪DE_3|1.6MB/s|GPT⁺ | 6ms",
-      "server": "192.0.63.61",
-      "server_port": 2083,
-      "uuid": "@V2ConfigPro",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "twotwoirvz.dpdns.org",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国 | 6ms",
-      "server": "cf.130519.xyz",
-      "server_port": 443,
-      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "t1s1.rittbo.kdns.fr",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国_1 | 6ms",
+      "tag": "法国 | 1ms",
       "server": "store.ubi.com",
       "server_port": 443,
       "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
@@ -440,39 +248,7 @@
     },
     {
       "type": "vless",
-      "tag": "法国_2 | 6ms",
-      "server": "162.159.49.145",
-      "server_port": 443,
-      "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ld.223350.xyz",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国_3 | 6ms",
-      "server": "mfa.gov.ua",
-      "server_port": 443,
-      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "t1s1.rittbo.kdns.fr",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国_1 | 6ms",
+      "tag": "美国 | 1ms",
       "server": "89.116.46.8",
       "server_port": 443,
       "uuid": "fc965ad9-bdd7-4815-ad71-b39ec5972dc1",
@@ -488,14 +264,14 @@
     },
     {
       "type": "vless",
-      "tag": "法国_4 | 6ms",
-      "server": "104.24.9.6",
-      "server_port": 443,
-      "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
+      "tag": "US_speednode_0052 | 1ms",
+      "server": "151.101.0.1",
+      "server_port": 80,
+      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
       "packet_encoding": "xudp",
       "tls": {
         "enabled": true,
-        "server_name": "ld.223350.xyz",
+        "server_name": "max-gb1.global.ssl.fastly.net",
         "utls": {
           "enabled": true,
           "fingerprint": "chrome"
@@ -504,40 +280,8 @@
     },
     {
       "type": "vless",
-      "tag": "美国_2 | 6ms",
-      "server": "104.19.47.188",
-      "server_port": 8443,
-      "uuid": "56e4896e-90a9-4fe0-8480-90d3d68b9928",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "go.iranfree.de5.net",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇸🇬SG_1|1.1MB/s | 6ms",
-      "server": "another-cf.dnsyes.kawaii520.icu",
-      "server_port": 443,
-      "uuid": "f1c742c5-f44c-481d-9fbf-2a2ceebd8ab9",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "djkrei5f4jb9941fd6v8sg.another-appleid.ccwu.cc",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国_5 | 6ms",
-      "server": "yx.cloudflare.182682.xyz",
+      "tag": "法国_1 | 1ms",
+      "server": "cf.877774.xyz",
       "server_port": 443,
       "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
       "packet_encoding": "xudp",
@@ -552,103 +296,7 @@
     },
     {
       "type": "vless",
-      "tag": "加拿大_3 | 6ms",
-      "server": "ser1.fredomiran.com",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "加拿大_4 | 6ms",
-      "server": "104.16.7.70",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国_3 | 6ms",
-      "server": "cf.090227.xyz",
-      "server_port": 443,
-      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "t1s1.rittbo.kdns.fr",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "法国_6 | 6ms",
-      "server": "104.19.87.194",
-      "server_port": 443,
-      "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ld.223350.xyz",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "美国_4 | 6ms",
-      "server": "162.159.45.175",
-      "server_port": 2053,
-      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "fu.baiproxy.us.ci",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "加拿大 | 7ms",
-      "server": "ser5.fredomiran.com",
-      "server_port": 443,
-      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "panel.fredomiran.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 7ms",
+      "tag": "🇺🇸_US_美国->🇮🇩_ID_印度尼西亚 | 1ms",
       "server": "208.103.161.170",
       "server_port": 443,
       "uuid": "2dc797c8-9588-48a6-bc4a-265c23d87cd6",
@@ -664,9 +312,89 @@
     },
     {
       "type": "vless",
-      "tag": "美国 | 7ms",
-      "server": "8.35.211.101",
-      "server_port": 2083,
+      "tag": "法国_2 | 1ms",
+      "server": "cloudflare-ip.mofashi.ltd",
+      "server_port": 443,
+      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "t1s1.rittbo.kdns.fr",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_1 | 1ms",
+      "server": "cf.090227.xyz",
+      "server_port": 443,
+      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "t1s1.rittbo.kdns.fr",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大 | 2ms",
+      "server": "ser1.fredomiran.com",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国 | 2ms",
+      "server": "cf.130519.xyz",
+      "server_port": 443,
+      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "t1s1.rittbo.kdns.fr",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 2ms",
+      "server": "162.159.45.175",
+      "server_port": 2053,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "fu.baiproxy.us.ci",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_1 | 2ms",
+      "server": "104.19.47.188",
+      "server_port": 8443,
       "uuid": "56e4896e-90a9-4fe0-8480-90d3d68b9928",
       "packet_encoding": "xudp",
       "tls": {
@@ -680,7 +408,55 @@
     },
     {
       "type": "vless",
-      "tag": "法国 | 7ms",
+      "tag": "加拿大_1 | 2ms",
+      "server": "ser2.fredomiran.com",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大_2 | 2ms",
+      "server": "ser4.fredomiran.com",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇸🇬SG_1|1.1MB/s | 2ms",
+      "server": "another-cf.dnsyes.kawaii520.icu",
+      "server_port": 443,
+      "uuid": "f1c742c5-f44c-481d-9fbf-2a2ceebd8ab9",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "djkrei5f4jb9941fd6v8sg.another-appleid.ccwu.cc",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国_1 | 2ms",
       "server": "162.159.43.131",
       "server_port": 443,
       "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
@@ -696,7 +472,215 @@
     },
     {
       "type": "vless",
-      "tag": "US_speednode_0051 | 8ms",
+      "tag": "US_speednode_0050 | 2ms",
+      "server": "199.232.197.131",
+      "server_port": 80,
+      "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max-gb1.global.ssl.fastly.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大_3 | 2ms",
+      "server": "104.16.7.70",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大_4 | 2ms",
+      "server": "ser5.fredomiran.com",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国_2 | 2ms",
+      "server": "mfa.gov.ua",
+      "server_port": 443,
+      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "t1s1.rittbo.kdns.fr",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "US_speednode_0049 | 2ms",
+      "server": "199.232.197.131",
+      "server_port": 80,
+      "uuid": "0058c215-ab1e-400c-a403-b5b2fda7e846",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "max-gb1.global.ssl.fastly.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国_3 | 2ms",
+      "server": "104.24.9.6",
+      "server_port": 443,
+      "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ld.223350.xyz",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大_5 | 2ms",
+      "server": "ser10.fredomiran.com",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国_2 | 2ms",
+      "server": "162.159.44.100",
+      "server_port": 2087,
+      "uuid": "55d9ec38-1b8a-454b-981a-6acfe8f56d8c",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "fu.baiproxy.us.ci",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国_4 | 2ms",
+      "server": "104.19.87.194",
+      "server_port": 443,
+      "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ld.223350.xyz",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "加拿大_6 | 2ms",
+      "server": "ser6.fredomiran.com",
+      "server_port": 443,
+      "uuid": "44f7eb71-de22-4a9c-8d5a-64fb7115c82f",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "panel.fredomiran.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国_5 | 2ms",
+      "server": "162.159.49.145",
+      "server_port": 443,
+      "uuid": "407ecce0-dc85-465f-89f5-e520e9378baf",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ld.223350.xyz",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "法国 | 3ms",
+      "server": "yx.cloudflare.182682.xyz",
+      "server_port": 443,
+      "uuid": "eeb6823c-b926-4ea2-866a-5542edd26e59",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "t1s1.rittbo.kdns.fr",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "美国 | 3ms",
+      "server": "8.35.211.101",
+      "server_port": 2083,
+      "uuid": "56e4896e-90a9-4fe0-8480-90d3d68b9928",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "go.iranfree.de5.net",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "US_speednode_0051 | 3ms",
       "server": "151.101.2.219",
       "server_port": 80,
       "uuid": "cabbfe13-038b-4dbb-9c45-5079c829abfa",
@@ -712,23 +696,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇮🇷_IR_伊朗 | 80ms",
-      "server": "185.143.233.122",
-      "server_port": 80,
-      "uuid": "661f5954-7f13-4c5f-add8-a7c0b250aabd",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "185.143.233.122",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱NL_1|1.6MB/s | 86ms",
+      "tag": "🇳🇱NL_1|1.6MB/s | 81ms",
       "server": "bypass.nl01-cherry.online",
       "server_port": 8443,
       "uuid": "efe3901e-b309-43f3-843a-f4f871670cf3",
@@ -745,7 +713,7 @@
     },
     {
       "type": "vless",
-      "tag": "NL_speednode_0005 | 87ms",
+      "tag": "NL_speednode_0005 | 81ms",
       "server": "147.45.145.127",
       "server_port": 443,
       "uuid": "534cbbe2-cc36-4f2d-8fb0-90410e7148c9",
@@ -761,7 +729,7 @@
     },
     {
       "type": "vless",
-      "tag": "🇬🇧_GB_英国->🇬🇪_GE_格鲁吉亚 | 88ms",
+      "tag": "🇬🇧_GB_英国->🇬🇪_GE_格鲁吉亚 | 82ms",
       "server": "85.234.114.53",
       "server_port": 443,
       "uuid": "afcac633-0e1a-46c3-bef2-cc01cc0097c8",
@@ -778,8 +746,24 @@
     },
     {
       "type": "vless",
-      "tag": "荷兰 | 89ms",
-      "server": "185.229.191.58",
+      "tag": "🇮🇷_IR_伊朗 | 83ms",
+      "server": "185.143.233.122",
+      "server_port": 80,
+      "uuid": "661f5954-7f13-4c5f-add8-a7c0b250aabd",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "185.143.233.122",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰 | 84ms",
+      "server": "185.229.191.10",
       "server_port": 8443,
       "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
       "packet_encoding": "xudp",
@@ -794,135 +778,7 @@
     },
     {
       "type": "vless",
-      "tag": "荷兰_1 | 89ms",
-      "server": "185.229.191.186",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "荷兰_2 | 89ms",
-      "server": "185.229.191.46",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱NL_9|1.7MB/s|GPT⁺|YT-RU|NF|0% | 89ms",
-      "server": "185.229.191.180",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "荷兰_3 | 89ms",
-      "server": "185.229.191.57",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "荷兰_4 | 89ms",
-      "server": "185.229.191.108",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "🇳🇱NL_10|1.4MB/s|GPT⁺|YT-RU|NF|0% | 89ms",
-      "server": "185.229.191.12",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "荷兰_5 | 89ms",
-      "server": "185.229.191.168",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "荷兰_6 | 89ms",
-      "server": "185.229.191.107",
-      "server_port": 8443,
-      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
-      "packet_encoding": "xudp",
-      "tls": {
-        "enabled": true,
-        "server_name": "ams1.fromblancwithlove.com",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
-      "type": "vless",
-      "tag": "荷兰_7 | 89ms",
+      "tag": "荷兰_1 | 84ms",
       "server": "185.229.191.40",
       "server_port": 8443,
       "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
@@ -938,7 +794,39 @@
     },
     {
       "type": "vless",
-      "tag": "荷兰_8 | 89ms",
+      "tag": "荷兰_2 | 84ms",
+      "server": "185.229.191.108",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱NL_6|1.6MB/s|GPT⁺|YT-RU|NF|0% | 84ms",
+      "server": "185.229.191.109",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "🇳🇱NL_5|2.2MB/s|GPT⁺|YT-RU|NF|0% | 84ms",
       "server": "185.229.191.96",
       "server_port": 8443,
       "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
@@ -954,8 +842,8 @@
     },
     {
       "type": "vless",
-      "tag": "荷兰_9 | 89ms",
-      "server": "185.229.191.41",
+      "tag": "荷兰_3 | 84ms",
+      "server": "185.229.191.46",
       "server_port": 8443,
       "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
       "packet_encoding": "xudp",
@@ -970,8 +858,8 @@
     },
     {
       "type": "vless",
-      "tag": "荷兰 | 90ms",
-      "server": "185.229.191.88",
+      "tag": "荷兰_4 | 84ms",
+      "server": "185.229.191.57",
       "server_port": 8443,
       "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
       "packet_encoding": "xudp",
@@ -986,8 +874,121 @@
     },
     {
       "type": "vless",
-      "tag": "荷兰_1 | 90ms",
-      "server": "185.229.191.95",
+      "tag": "荷兰_5 | 84ms",
+      "server": "185.229.191.170",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰_6 | 84ms",
+      "server": "185.229.191.13",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "GB_speednode_0002 | 84ms",
+      "server": "82.40.60.172",
+      "server_port": 443,
+      "uuid": "bbaaff1e-c914-4817-9d33-58be35a3bee6",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "nl-1.liambo.ai",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      },
+      "flow": "xtls-rprx-vision"
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰_7 | 84ms",
+      "server": "185.229.191.38",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰_8 | 84ms",
+      "server": "185.229.191.112",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰 | 85ms",
+      "server": "185.229.191.42",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰_1 | 85ms",
+      "server": "185.229.191.12",
+      "server_port": 8443,
+      "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
+      "packet_encoding": "xudp",
+      "tls": {
+        "enabled": true,
+        "server_name": "ams1.fromblancwithlove.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "vless",
+      "tag": "荷兰_2 | 85ms",
+      "server": "185.229.191.145",
       "server_port": 8443,
       "uuid": "394f6981-a782-4779-9a85-e6cf22935d93",
       "packet_encoding": "xudp",
